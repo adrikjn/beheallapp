@@ -17,7 +17,7 @@ export const LandingPage = () => {
     <div className="landing-page">
       <div className="landing-page-style">
         <div className="logo">
-          <img src="/facture.png" alt="Logo" />
+          <img src="/Logo.svg" alt="Logo" />
         </div>
         <div className="brand">
           <h1>
