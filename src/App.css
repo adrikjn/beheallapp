@@ -1,38 +1,167 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #e9ebe9;
+  width: 393px;
+  height: 852px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.landing-page,
+.login-page {
+  width: 393px;
+  height: 852px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.landing-page-style {
+  width: 313px;
+  height: 769px;
+  flex-shrink: 0;
+  margin: auto;
+  transition: 300ms ease-out;
+}
+
+.logo {
+  text-align: end;
+  padding-top: 41px;
+  padding-bottom: 41px;
+}
+
+.brand {
   display: flex;
+  width: 312px;
+  height: 633px;
+  padding: 286px 55px 308px 55px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-shrink: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.brand h1 {
+  color: #434344;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 8.16px;
+  text-transform: uppercase;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.brand h1 span {
+  color: #434344;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: 8.16px;
+  margin-left: -8.16px;
+}
+
+.infos {
+  width: 313px;
+  flex-shrink: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 64px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin-top: 23px;
+}
+
+.login-part-one {
+  width: 393px;
+  height: 414px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-page h2 {
+  text-align: center;
+  margin-top: 59px;
+}
+
+.login-page h2 {
+  color: #434344;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 8.16px;
+  text-transform: uppercase;
+}
+
+.login-page h2 span {
+  color: #434344;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: 8.16px;
+  margin-left: -8.16px;
+}
+
+.login-facture-image {
+  margin-top: 15px;
+  margin-left: 117px;
+}
+
+.login-description {
+  margin-left: 36px;
+  margin-bottom: 25px;
+  margin-right: 127px;
+  color: #000;
+  font-family: Articulat CF;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+.login-border {
+  border: 0.5px solid #1b1b1b;
+}
+
+.login-part-two {
+  height: 438px;
+  flex-shrink: 0;
+  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-part-two h1{
+  color: #1b1b1b;
+  font-family: Articulat CF;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 5.1px;
+  text-transform: uppercase;
 }
