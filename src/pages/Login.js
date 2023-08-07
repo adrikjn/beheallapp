@@ -12,8 +12,9 @@ export const Login = () => {
         <div className="login-border"></div>
       </div>
       <div className="login-part-two">
-        <div className="login-space"></div>
-        <h1>Connexion</h1>
+        <div className="login-space">
+            <h1>Connexion</h1>
+        </div>      
       </div>
     </div>
   );
