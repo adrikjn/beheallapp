@@ -7,13 +7,13 @@ export const Register = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
+  const [plainPassword, setPlainPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
-      if (password !== confirmPassword) {
+      if (plainPassword !== confirmPassword) {
         console.error("Les mots de passe ne correspondent pas.");
         return;
       }
@@ -23,10 +23,9 @@ export const Register = () => {
         lastName,
         email,
         phoneNumber,
-        password,
+        plainPassword,
       });
 
-      // Vérifiez ici la réponse du serveur ou le statut de la requête avant de rediriger
       if (response.status === 201) {
         navigate("/dashboard");
       }
@@ -76,8 +75,8 @@ export const Register = () => {
         <input
           type="password"
           placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={plainPassword}
+          onChange={(e) => setPlainPassword(e.target.value)}
         />
         <input
           type="password"
