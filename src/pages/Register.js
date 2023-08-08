@@ -1,4 +1,40 @@
+import { Link, useNavigate } from "react-router-dom";
+import Axios from "axios";
+import React, { useState } from "react";
+
 export const Register = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleRegister = async () => {
+    try {
+      if (password !== confirmPassword) {
+        console.error("Les mots de passe ne correspondent pas.");
+        return;
+      }
+
+      const response = await Axios.post("http://localhost:8000/api/users", {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        password,
+      });
+
+      // Vérifiez ici la réponse du serveur ou le statut de la requête avant de rediriger
+      if (response.status === 201) {
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Erreur d'inscription :", error);
+    }
+  };
+
   return (
     <div className="login-page">
       <div className="register-part-one">
@@ -9,20 +45,50 @@ export const Register = () => {
           <img src="/facture.png" alt="facture" />
         </div>
       </div>
-        <h1 className="register-title">Inscription</h1>
+      <h1 className="register-title">Inscription</h1>
       <div className="register">
         <div className="name-inputs">
-          <input type="text" placeholder="Prenom" />
-          <input type="text" placeholder="Nom" />
+          <input
+            type="text"
+            placeholder="Prenom"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Nom"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
         </div>
-        <input type="email" placeholder="E-mail" />
-        <input type="number" placeholder="Numéro de téléphone" />
-        <input type="password" placeholder="Mot de passe" />
-        <input type="password" placeholder="Confirmation du mot de passe" />
+        <input
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Numéro de téléphone"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Confirmation du mot de passe"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
       </div>
-      <div className='align-btn'>
-            <button>S'inscrire</button>
-          </div>  
+      <div className="align-btn">
+        <button onClick={handleRegister}>S'inscrire</button>
+      </div>
     </div>
   );
 };
