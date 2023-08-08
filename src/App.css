@@ -13,7 +13,8 @@ body {
 }
 
 .landing-page,
-.login-page {
+.login-page,
+.register-page {
   width: 393px;
   height: 852px;
 }
@@ -95,11 +96,6 @@ body {
 }
 
 .login-page h2 {
-  text-align: center;
-  margin-top: 59px;
-}
-
-.login-page h2 {
   color: #434344;
   text-align: center;
   font-family: Montserrat;
@@ -109,6 +105,8 @@ body {
   line-height: normal;
   letter-spacing: 8.16px;
   text-transform: uppercase;
+  text-align: center;
+  margin-top: 59px;
 }
 
 .login-page h2 span {
@@ -149,14 +147,12 @@ body {
 .login-part-two {
   height: 438px;
   flex-shrink: 0;
-  background-color: pink;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .login-part-two .login-space {
-  background-color: green;
   display: inline-flex;
   height: 183px;
   flex-direction: column;
@@ -176,4 +172,104 @@ body {
   line-height: normal;
   letter-spacing: 5.1px;
   text-transform: uppercase;
+}
+
+.login-part-two .login-space input {
+  width: 100%;
+  border-radius: 2px;
+  border: 0.5px solid #1b1b1b;
+  background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  padding: 10px 23px;
+  align-items: center;
+  gap: 15px;
+  color: #434344;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: 1.4px;
+}
+
+.login-part-two .login-space p {
+  color: #1b1b1b;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+}
+
+.login-part-two .login-space p .register-link {
+  color: #1b1b1b;
+  font-family: Roboto;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  text-decoration-line: underline;
+}
+
+.center-btn {
+  width: 100%;
+}
+
+.login-part-two .login-space button {
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: #1b1b1b;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  margin: auto;
+}
+
+.login-page .register {
+  margin-left: 32px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.login-page .register h1 {
+  width: 185px;
+  height: 35px;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  background: #1b1b1b;
+  text-transform: uppercase;
+  padding: 10px 0 10px 13px;
+}
+
+.login-page .register input {
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
+  gap: 12px;
+  flex: 1 0 0;
+  border-radius: 2px;
+  border: 1px solid #a2aebb;
+  background: rgba(255, 255, 255, 0.3);
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  width: 100%;
 }

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const Login = () => {
   return (
     <div className="login-page">
@@ -13,8 +15,14 @@ export const Login = () => {
       </div>
       <div className="login-part-two">
         <div className="login-space">
-            <h1>Connexion</h1>
-        </div>      
+          <h1>Connexion</h1>
+          <input type="text" placeholder="E-MAIL" />
+          <input type="password" placeholder="MOT DE PASSE" />
+          <p>Vous n'avez pas de compte ? <Link to="/register" className="register-link">S'inscrire</Link></p>
+          <div className='center-btn'>
+            <button>Se connecter</button>
+          </div>  
+        </div>
       </div>
     </div>
   );
