@@ -233,15 +233,9 @@ body {
   margin: auto;
 }
 
-.login-page .register {
-  margin-left: 32px;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
-}
+/** Register part */
 
-.login-page .register h1 {
+.register-title {
   width: 185px;
   height: 35px;
   flex-shrink: 0;
@@ -254,6 +248,16 @@ body {
   background: #1b1b1b;
   text-transform: uppercase;
   padding: 10px 0 10px 13px;
+  margin-left: 32px;
+  margin-bottom: 16px;
+}
+
+.login-page .register {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  margin: 0 32px;
 }
 
 .login-page .register input {
@@ -272,4 +276,38 @@ body {
   font-weight: 300;
   line-height: normal;
   width: 100%;
+}
+
+.login-page .register .name-inputs {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.login-page .register .name-inputs input {
+  width: 50%;
+}
+
+.align-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 21%;
+  width: 100%;
+}
+
+.align-btn button {
+  width: 377px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: #1b1b1b;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
 }
