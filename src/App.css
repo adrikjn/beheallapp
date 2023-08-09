@@ -160,6 +160,10 @@ body {
 }
 
 /** Register part */
+.register-facture-image {
+  margin: 15px 0 0 117px;
+  margin-left: 117px;
+}
 
 .register-title {
   width: 185px;
