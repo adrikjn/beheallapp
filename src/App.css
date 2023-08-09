@@ -8,10 +8,8 @@
 
 body {
   background-color: #e9ebe9;
-  width: 393px;
-  height: 852px;
 }
-
+/*? SETTINGS FOR ALL PAGES */
 .landing-page,
 .login-page,
 .register-page {
@@ -19,29 +17,21 @@ body {
   height: 852px;
 }
 
+/*? LANDING PAGE */
 .landing-page-style {
   width: 313px;
   height: 769px;
   flex-shrink: 0;
   margin: auto;
-  transition: 300ms ease-out;
 }
 
 .logo {
   text-align: end;
-  padding-top: 41px;
-  padding-bottom: 41px;
+  padding: 41px 0;
 }
 
 .brand {
-  display: flex;
-  width: 312px;
-  height: 633px;
   padding: 286px 55px 308px 55px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
 .brand h1 {
@@ -49,60 +39,34 @@ body {
   text-align: center;
   font-family: Montserrat;
   font-size: 32px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
   letter-spacing: 8.16px;
   text-transform: uppercase;
 }
 
 .brand h1 span {
-  color: #434344;
-  text-align: center;
-  font-family: Montserrat;
-  font-size: 32px;
-  font-style: normal;
   font-weight: 300;
-  line-height: normal;
-  letter-spacing: 8.16px;
   margin-left: -8.16px;
 }
 
 .infos {
   width: 313px;
-  flex-shrink: 0;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 64px;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.2);
-  text-align: center;
   font-family: Articulat CF;
   font-size: 18px;
-  font-style: normal;
   font-weight: 300;
-  line-height: normal;
   margin-top: 23px;
 }
 
-.login-part-one {
-  width: 393px;
-  height: 414px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
+/*? LOGIN PART */
 .login-page h2 {
   color: #434344;
-  text-align: center;
   font-family: Montserrat;
   font-size: 32px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
   letter-spacing: 8.16px;
   text-transform: uppercase;
   text-align: center;
@@ -110,14 +74,7 @@ body {
 }
 
 .login-page h2 span {
-  color: #434344;
-  text-align: center;
-  font-family: Montserrat;
-  font-size: 32px;
-  font-style: normal;
   font-weight: 300;
-  line-height: normal;
-  letter-spacing: 8.16px;
   margin-left: -8.16px;
 }
 
@@ -127,15 +84,9 @@ body {
 }
 
 .login-description {
-  margin-left: 36px;
-  margin-bottom: 25px;
-  margin-right: 127px;
-  color: #000;
-  font-family: Articulat CF;
+  margin: 0 127px 25px 36px;
   font-size: 24px;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
   letter-spacing: 6px;
   text-transform: uppercase;
 }
@@ -146,30 +97,23 @@ body {
 
 .login-part-two {
   height: 438px;
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .login-part-two .login-space {
-  display: inline-flex;
-  height: 183px;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   gap: 28px;
-  flex-shrink: 0;
   margin: 0 35px;
 }
 
 .login-part-two .login-space h1 {
   color: #1b1b1b;
-  font-family: Articulat CF;
   font-size: 20px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
   letter-spacing: 5.1px;
   text-transform: uppercase;
 }
@@ -179,37 +123,24 @@ body {
   border-radius: 2px;
   border: 0.5px solid #1b1b1b;
   background: rgba(255, 255, 255, 0.3);
-  display: flex;
   padding: 10px 23px;
-  align-items: center;
-  gap: 15px;
   color: #434344;
   font-family: Montserrat;
   font-size: 14px;
-  font-style: normal;
   font-weight: 300;
-  line-height: normal;
   letter-spacing: 1.4px;
 }
 
 .login-part-two .login-space p {
   color: #1b1b1b;
-  text-align: center;
   font-family: Roboto;
   font-size: 15px;
-  font-style: normal;
   font-weight: 200;
-  line-height: normal;
 }
 
 .login-part-two .login-space p .register-link {
   color: #1b1b1b;
-  font-family: Roboto;
   font-size: 15px;
-  font-style: normal;
-  font-weight: 200;
-  line-height: normal;
-  text-decoration-line: underline;
 }
 
 .center-btn {
@@ -218,7 +149,6 @@ body {
 
 .login-part-two .login-space button {
   height: 72px;
-  flex-shrink: 0;
   border-radius: 2px;
   background: #1b1b1b;
   color: #fff;
@@ -226,24 +156,16 @@ body {
   font-family: Articulat CF;
   font-size: 18px;
   width: 100%;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
   text-transform: uppercase;
-  margin: auto;
 }
 
 /** Register part */
 
 .register-title {
   width: 185px;
-  height: 35px;
-  flex-shrink: 0;
   color: #fff;
   font-family: Roboto;
   font-size: 13px;
-  font-style: normal;
-  font-weight: 700;
   line-height: normal;
   background: #1b1b1b;
   text-transform: uppercase;
@@ -253,35 +175,26 @@ body {
 }
 
 .login-page .register {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 15px;
   margin: 0 32px;
 }
 
 .login-page .register input {
-  display: flex;
   padding: 10px 20px;
-  align-items: center;
-  gap: 12px;
-  flex: 1 0 0;
   border-radius: 2px;
   border: 1px solid #a2aebb;
   background: rgba(255, 255, 255, 0.3);
   color: rgba(0, 0, 0, 0.5);
   font-family: Montserrat;
   font-size: 18px;
-  font-style: normal;
   font-weight: 300;
-  line-height: normal;
-  width: 100%;
 }
 
 .login-page .register .name-inputs {
   display: flex;
   gap: 15px;
-  width: 100%;
 }
 
 .login-page .register .name-inputs input {
@@ -292,22 +205,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 21%;
+  height: 27%;
   width: 100%;
 }
 
 .align-btn button {
   width: 377px;
   height: 72px;
-  flex-shrink: 0;
   border-radius: 2px;
   background: #1b1b1b;
   color: #fff;
-  text-align: center;
   font-family: Articulat CF;
   font-size: 18px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
   text-transform: uppercase;
 }

@@ -1,29 +1,25 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import Logo from "../components/Logo";
+import Brand from "../components/Brand";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const redirectTimeout = setTimeout(() => {
-      navigate("/login");
-    }, 3000);
+  //useEffect(() => {
+   // const redirectTimeout = setTimeout(() => {
+   //   navigate("/login");
+    //}, 3000);
 
-    return () => clearTimeout(redirectTimeout);
-  }, [navigate]);
+  //  return () => clearTimeout(redirectTimeout);
+  //}, [navigate]);
 
   return (
     <div className="landing-page">
       <div className="landing-page-style">
-        <div className="logo">
-          <img src="/Logo.svg" alt="Logo" />
-        </div>
-        <div className="brand">
-          <h1>
-            Be<span>heall</span>
-          </h1>
-        </div>
+        <Logo />
+        <Brand />
         <div className="infos">
           <p>scale</p>
           <p>accurate</p>
