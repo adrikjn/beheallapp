@@ -17,8 +17,8 @@ export const Login = () => {
         }
       );
 
-      // const token = response.data.token; 
-      // console.log("JWT Token:", token);
+      const token = response.data.token; 
+      console.log("JWT Token:", token);
       navigate('/dashboard');
     } catch (error) {
       console.error("Erreur de connexion :", error);
