@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
+
+
 const LoginForm = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -17,18 +19,16 @@ const LoginForm = () => {
         }
       );
 
-      const token = response.data.token;
-      console.log("JWT Token:", token);
+      console.log(response.data.token)
 
-      // Enregistrer l'état de connexion dans le stockage local
-      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem('Token', response.data.token)
+      
+      navigate('/dashboard')
 
-      // Enregistrer le jeton JWT dans le stockage local
-      localStorage.setItem("token", token);
-
-      navigate('/dashboard', { state: { email: email } });
     } catch (error) {
       console.error("Erreur de connexion :", error);
+
+      //Afficher une erreur propre sur la vue (alert box) suite a l'erreur de connexion
     }
   };
 
