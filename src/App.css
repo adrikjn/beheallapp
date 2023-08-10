@@ -12,8 +12,7 @@ body {
 /*? SETTINGS FOR ALL PAGES */
 .landing-page,
 .login-page,
-.register-page
-.dashboard-page {
+.register-page .dashboard-page {
   width: 393px;
   height: 852px;
 }
@@ -224,4 +223,31 @@ body {
   font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
+}
+
+/*? DASHBOARD PAGE */
+
+.dashboard-page{
+  width: 85vw;
+  margin: 0 auto;
+}
+.welcome-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 82px;
+  border-bottom: 1px solid black;
+}
+
+.invoice-table {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  border-bottom: 1px solid black;
+  padding-bottom: 8px;
+}
+
+.invoice-table > p:nth-child(2){
+  margin-right: 20px;
 }

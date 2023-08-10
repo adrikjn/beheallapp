@@ -11,10 +11,20 @@ export const Dashboard = () => {
     }
   }, [token, navigate]);
 
+  //<div>
+  //{token ? <p>Vous êtes connecté !</p> : <p>Vous n'êtes pas connecté.</p>}
+  // </div>
+
   return (
     <div className="dashboard-page">
-      <div>
-        {token ? <p>Vous êtes connecté !</p> : <p>Vous n'êtes pas connecté.</p>}
+      <div className="welcome-user">
+        <h1>Welcome</h1>
+        <img src="/profil-icon.svg" alt="facture" />
+      </div>
+
+      <div className="invoice-table">
+        <p className="invoice-table-title">Factures envoyé</p>
+        <p>Status</p>
       </div>
     </div>
   );
