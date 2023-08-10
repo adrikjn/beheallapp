@@ -26,6 +26,12 @@ const RegisterForm = () => {
         plainPassword,
       });
 
+      console.log(response.data.token)
+
+
+      localStorage.setItem('Token', response.data.token)
+
+
       if (response.status === 201) {
         navigate("/dashboard");
       }
