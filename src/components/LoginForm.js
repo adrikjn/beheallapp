@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
-
-
 const LoginForm = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -22,8 +20,10 @@ const LoginForm = () => {
       console.log(response.data.token)
 
       localStorage.setItem('Token', response.data.token)
+
       
       navigate('/dashboard')
+      
 
     } catch (error) {
       console.error("Erreur de connexion :", error);
