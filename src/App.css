@@ -10,6 +10,10 @@ body {
   background-color: #e9ebe9;
 }
 
+ul li {
+  list-style-type: none;
+}
+
 /*? SETTINGS FOR ALL PAGES */
 .landing-page,
 .dashboard-page {
@@ -266,7 +270,7 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-top: 82px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
   padding-bottom: 19px;
 }
 
@@ -278,25 +282,156 @@ body {
   text-transform: uppercase;
 }
 
-.invoice-table {
+.invoice-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
   padding-bottom: 8px;
   font-family: Roboto;
 }
 
-.invoice-table > p:nth-child(1) {
+.invoice-title > p:nth-child(1) {
   font-size: 15px;
   font-weight: 700;
 }
 
-.invoice-table > p:nth-child(2) {
+.invoice-title > p:nth-child(2) {
   margin-right: 20px;
   font-size: 14px;
   font-weight: 400;
 }
 
+.invoice-customers,
+.invoice-customers-2 {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 13px;
+}
 
+.invoice-customers p:nth-child(2) {
+  display: flex;
+  padding: 5px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #e14848;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.invoice-customers-2 p:nth-child(2) {
+  display: flex;
+  padding: 5px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #4f9e65;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.line {
+  width: 100%;
+  height: 0.5px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.revenue-party h2 {
+  margin-top: 23px;
+  color: #000;
+  font-family: Roboto;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 7px;
+}
+
+.revenue {
+  border-radius: 10px;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0);
+  padding: 12px 17px;
+}
+.revenue-title-date {
+  display: flex;
+  justify-content: space-between;
+}
+
+.revenue-title-date p:nth-child(1) {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 3.75px;
+  text-transform: uppercase;
+}
+
+.revenue-title-date p:nth-child(2) {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.revenue-title-date p:nth-child(2) span {
+  font-weight: 700;
+}
+
+.revenue .revenue-amount {
+  margin-top: 110px;
+  color: #000;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.revenue .revenue-evolution {
+  color: #4f9e65;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.view-more-revenue {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 107px;
+}
+
+.view-more-revenue .link-see-more {
+  color: #000;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 15px;
+}
+
+.btn-invoice {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-invoice button {
+  margin-top: 18px;
+  border-radius: 5px;
+  padding: 24px 68px;
+  background: #4f9e65;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}

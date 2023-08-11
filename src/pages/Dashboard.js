@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
@@ -22,15 +22,43 @@ export const Dashboard = () => {
         <img src="/profil-icon.svg" alt="facture" />
       </div>
 
-      <div className="invoice-table">
+      <div className="invoice-title">
         <p>Factures envoyées</p>
         <p>statut</p>
       </div>
       <div className="invoice-list">
-      <ul>
-          <li>Parella Group</li>
-          <li>Parella Group</li>
-        </ul>
+        <div className="invoice-customers">
+          <p>Parella group</p>
+          <p>Payé</p>
+        </div>
+        <div className="line"></div>
+        <div className="invoice-customers-2">
+          <p>Elyes Voisin</p>
+          <p>Non payé</p>
+        </div>
+        <div className="line"></div>
+      </div>
+      <div className="revenue-party">
+        <h2>Evolution du CA</h2>
+        <div className="revenue">
+          <div className="revenue-title-date">
+            <p>ca :</p>
+            <p>
+              Juin <span>2023</span>
+            </p>
+          </div>
+          <p className="revenue-amount">123.34 €</p>
+          <p className="revenue-evolution">+67%</p>
+          <div className="view-more-revenue">
+            <img src="/arrow.svg" alt="facture" />
+            <Link to="/dashboard" className="link-see-more">
+              Voir plus
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="btn-invoice">
+        <button>Créer une facture</button>
       </div>
     </div>
   );
