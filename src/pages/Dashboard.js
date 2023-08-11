@@ -23,8 +23,14 @@ export const Dashboard = () => {
       </div>
 
       <div className="invoice-table">
-        <p className="invoice-table-title">Factures envoyé</p>
-        <p>Status</p>
+        <p>Factures envoyées</p>
+        <p>statut</p>
+      </div>
+      <div className="invoice-list">
+      <ul>
+          <li>Parella Group</li>
+          <li>Parella Group</li>
+        </ul>
       </div>
     </div>
   );
