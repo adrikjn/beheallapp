@@ -42,6 +42,7 @@ const RegisterForm = () => {
 
   return (
     <div className="register">
+      <div className="register-marge">
       <div className="name-inputs">
         <input
           type="text"
@@ -80,6 +81,8 @@ const RegisterForm = () => {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
+      </div>
+      
       <div className="align-btn">
         <button onClick={handleRegister}>S'inscrire</button>
       </div>

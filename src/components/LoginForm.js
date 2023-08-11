@@ -35,7 +35,8 @@ const LoginForm = () => {
   return (
     <div className="login-space">
       <h1>Connexion</h1>
-      <input
+      <div className="padding-form">
+        <input
         type="text"
         placeholder="E-MAIL"
         value={email}
@@ -53,6 +54,7 @@ const LoginForm = () => {
           S'inscrire
         </Link>
       </p>
+      </div>
       <div className="center-btn">
         <button onClick={handleLogin}>Se connecter</button>
       </div>
