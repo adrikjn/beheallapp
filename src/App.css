@@ -424,7 +424,7 @@ ul li {
 .btn-invoice button {
   margin-top: 18px;
   border-radius: 5px;
-  padding: 24px 68px;
+  padding: 24px 67px;
   background: #4f9e65;
   color: #fff;
   text-align: center;
@@ -434,4 +434,68 @@ ul li {
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
+  border: 0;
+}
+
+/* Ajoutez ces styles à votre fichier CSS existant */
+
+.align-toggle {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toggle-button {
+  position: relative;
+  margin-top: 20px;
+  width: 249px;
+  height: 63px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: #1b1b1b;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.toggle-button .toggle-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.toggle-button.open {
+  border: 1px solid #333;
+  border-bottom: none;
+}
+
+.toggle-icon .line1, .line2{
+  width: 20px;
+  height: 2px;
+  background-color: #fff;
+}
+
+.links {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 10px;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.toggle-button.open .links {
+  display: block;
 }

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
+  const [isLinksVisible, setIsLinksVisible] = useState(false);
 
   useEffect(() => {
     if (!token) {
@@ -11,9 +12,9 @@ export const Dashboard = () => {
     }
   }, [token, navigate]);
 
-  //<div>
-  //{token ? <p>Vous êtes connecté !</p> : <p>Vous n'êtes pas connecté.</p>}
-  // </div>
+  const handleToggleLinks = () => {
+    setIsLinksVisible(!isLinksVisible);
+  };
 
   return (
     <div className="dashboard-page">
@@ -60,6 +61,24 @@ export const Dashboard = () => {
       <div className="btn-invoice">
         <button>Créer une facture</button>
       </div>
+      <div className="align-toggle">
+      <div className={`toggle-button ${isLinksVisible ? "open" : ""}`} onClick={handleToggleLinks}>Home
+        <div className="toggle-icon">
+          <div className="line1"></div>
+          <div className="line2"></div>
+        </div>
+        
+        <div className="links">
+          <ul>
+            <li><Link to="/parametres">Paramètres</Link></li>
+            <li><Link to="/factures">Factures</Link></li>
+            <li><Link to="/devis">Devis</Link></li>
+            <li><Link to="/clients">Clients</Link></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      
     </div>
   );
 };
