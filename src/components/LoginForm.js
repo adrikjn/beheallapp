@@ -33,7 +33,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="login-space">
+      <div className="login-space">
       <h1>Connexion</h1>
       <div className="padding-form">
         <input
