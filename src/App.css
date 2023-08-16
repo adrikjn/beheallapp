@@ -564,14 +564,14 @@ ul li {
   background-repeat: no-repeat;
 }
 
-.add-company-part {
+.add-company-exp {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 34px;
 }
 
-.add-company-part h2 {
+.add-company-exp h2 {
   padding: 8px 0;
   background: #1b1b1b;
   color: #fff;
@@ -585,23 +585,47 @@ ul li {
   padding: 8px 34px;
 }
 
-.add-company-part h2::before,
-.add-company-part h2::after {
+.add-company-exp h2::before,
+.add-company-exp h2::after {
   content: "";
   position: absolute;
   top: 50%;
   width: 100px;
-  background: rgba(0, 0, 0, 0.50);
+  background: rgba(0, 0, 0, 0.5);
   height: 0.5px;
 }
 
-.add-company-part h2::before {
+.add-company-exp h2::before {
   left: -74px;
   transform: translateY(-50%);
 }
 
-.add-company-part h2::after {
+.add-company-exp h2::after {
   right: -74px;
   transform: translateY(-50%);
 }
 
+.add-company {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.add-company input {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  background-color: #e9ebe9;
+  padding-bottom: 11px;
+}
+
+.add-company .align-form-company {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+}

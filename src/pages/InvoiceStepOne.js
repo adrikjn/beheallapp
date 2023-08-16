@@ -16,8 +16,21 @@ export const InvoiceStepOne = () => {
       <select>
         <option>Oxynum</option>
       </select>
-      <div className="add-company-part">
+      <div className="add-company-exp">
         <h2>new expéditaire</h2>
+      </div>
+      <div className="add-company">
+        <div className="align-form-company">
+          <input type="text" id="nom" placeholder="Nom" />
+          <input type="text" id="prenom" placeholder="Prénom" />
+        </div>
+        <input type="text" id="entreprise" placeholder="Entreprise" />
+        <input type="text" id="address" placeholder="Adresse" />
+        <input type="email" id="email" placeholder="E-mail" />
+        <input type="tel" id="tel" placeholder="Téléphone" />
+   
+        <label for="imageUpload">Logo</label>
+        <input type="file" id="imageUpload"accept="image/*" />
       </div>
     </div>
   );
