@@ -4,6 +4,8 @@ import { LandingPage } from "./pages/LandingPage";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Dashboard } from "./pages/Dashboard";
+import { InvoiceStepOne } from "./pages/InvoiceStepOne";
+
 
 
 function App() {
@@ -12,6 +14,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/invoice-step-one" element={<InvoiceStepOne />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

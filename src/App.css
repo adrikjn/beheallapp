@@ -16,7 +16,8 @@ ul li {
 
 /*? SETTINGS FOR ALL PAGES */
 .landing-page,
-.dashboard-page {
+.dashboard-page,
+.invoice-step-one-page {
   width: 85vw;
   margin: 0 auto;
 }
@@ -437,6 +438,7 @@ ul li {
   border: 0;
 }
 
+/*? COMPONENT NAV */
 .align-toggle {
   display: flex;
   justify-content: flex-end;
@@ -492,20 +494,20 @@ ul li {
   top: 83.8%;
   background-color: #252525;
   z-index: 1;
-  padding:17px 36px;
+  padding: 17px 36px;
   border-radius: 7px;
   width: 249px;
 }
 
-.links-open{
+.links-open {
   display: block;
 }
 
 .nav-links li {
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
 }
 
-.nav-links li:nth-child(4){
+.nav-links li:nth-child(4) {
   margin: 0;
 }
 
@@ -520,7 +522,19 @@ ul li {
   line-height: normal;
 }
 
+/*? INVOICE STEP ONE PAGE  */
+.invoice-step-one-title {
+  display: flex;
+  justify-content: space-between;
+  font-family: Roboto;
+  margin-top: 21px;
+}
 
+.invoice-step-one-title h2:nth-child(1) {
+  font-size: 15px;
+}
 
-
-
+.invoice-step-one-title h2:nth-child(2) {
+  font-size: 14px;
+  font-weight: 400;
+}
