@@ -538,3 +538,70 @@ ul li {
   font-size: 14px;
   font-weight: 400;
 }
+
+.invoice-step-one-p {
+  margin-top: 9px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.invoice-step-one-page select {
+  margin-top: 25px;
+  padding: 9px 20px;
+  border-radius: 5px;
+  background: #d9d9d9;
+  width: 100%;
+  color: rgba(27, 27, 27, 0.5);
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("../public/polygon-1.svg");
+  background-position: right 20px center;
+  background-repeat: no-repeat;
+}
+
+.add-company-part {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 34px;
+}
+
+.add-company-part h2 {
+  padding: 8px 0;
+  background: #1b1b1b;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+  position: relative;
+  padding: 8px 34px;
+}
+
+.add-company-part h2::before,
+.add-company-part h2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 100px;
+  background: rgba(0, 0, 0, 0.50);
+  height: 0.5px;
+}
+
+.add-company-part h2::before {
+  left: -74px;
+  transform: translateY(-50%);
+}
+
+.add-company-part h2::after {
+  right: -74px;
+  transform: translateY(-50%);
+}
+
