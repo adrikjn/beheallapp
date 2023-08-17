@@ -15,7 +15,7 @@ export const InvoiceStepOne = () => {
         <h2>N°1</h2>
       </div>
       <p className="invoice-step-one-p">Sélectionné un expéditaire</p>
-      <select>
+      <select className="select-company">
         <option>Oxynum</option>
       </select>
       <div className="add-company-exp">
@@ -35,6 +35,17 @@ export const InvoiceStepOne = () => {
           <input type="text" id="postalcode" placeholder="Code postal" />
         </div>
         <input type="text" id="country" placeholder="Country" />
+        <input type="text" id="siret" placeholder="SIREN/SIRET" />
+
+        <label htmlFor="legalForm">Forme Juridique :</label>
+        <select id="legalForm" name="legalForm" className="select-legal-form">
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+          <option value="option4">Option 4</option>
+          <option value="option5">Option 5</option>
+        </select>
+
         <label htmlFor="billingIsDifferent">Billing is Different :</label>
         <div className="iphone-switch">
           <input
