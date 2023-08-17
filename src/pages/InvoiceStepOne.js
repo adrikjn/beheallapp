@@ -46,6 +46,23 @@ export const InvoiceStepOne = () => {
           <option value="option5">Option 5</option>
         </select>
 
+        <input type="text" id="shareCapital" placeholder="Capital" />
+        <input
+          type="text"
+          id="cityRegistration"
+          placeholder="Ville de régistration"
+        />
+        <input type="text" id="idTva" placeholder="Numéro de TVA Intracommunautaire"/>
+        <input type="text" id="website" placeholder="Site web" />
+        <textarea id="workDescription" placeholder="Work description.."></textarea>
+
+        <textarea id="workDescription"  placeholder="Work description"></textarea>
+
+        <div className="input-row">
+          <input type="text" id="rmNumber" placeholder="RM Number" />
+          <input type="text" id="rcsNumber" placeholder="RCS Number" />
+        </div>
+
         <label htmlFor="billingIsDifferent">Billing is Different :</label>
         <div className="iphone-switch">
           <input
