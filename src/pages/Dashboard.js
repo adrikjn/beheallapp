@@ -55,9 +55,11 @@ export const Dashboard = () => {
         </div>
       </div>
       <div className="btn-invoice">
-        <button>Créer une facture</button>
+        <Link to="/invoice-step-one">
+          <button>Créer une facture</button>
+        </Link>
       </div>
-      <AccordionNav/>
+      <AccordionNav />
     </div>
   );
 };

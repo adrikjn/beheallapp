@@ -425,7 +425,7 @@ ul li {
 .btn-invoice button {
   margin-top: 18px;
   border-radius: 5px;
-  padding: 24px 67px;
+  padding: 24px 64px;
   background: #4f9e65;
   color: #fff;
   text-align: center;
@@ -611,11 +611,23 @@ ul li {
   gap: 22px;
 }
 
+.add-company textarea {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 400;
+  resize: none;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  height: 50px;
+  background-color:#e9ebe9;
+  padding: 9px 20px;
+}
+
 .add-company label {
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
 }
 
@@ -643,7 +655,6 @@ ul li {
   width: 40px;
   height: 20px;
   margin-left: 10px;
-  margin: auto;
 }
 
 .switch-label {
@@ -700,7 +711,6 @@ ul li {
   padding: 6px 20px;
   border-radius: 5px;
   background: #d9d9d9;
-  margin: auto;
   width: 85%;
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
@@ -713,4 +723,48 @@ ul li {
   background-repeat: no-repeat;
   border: none;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+
+.btn-invoice-2 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-invoice-2 button {
+  margin-top: 18px;
+  border-radius: 5px;
+  padding: 24px 43px;
+  background: #4f9e65;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border: 0;
+}
+
+.custom-file-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 20px;
+  border-radius: 5px;
+  background: #d9d9d9;
+  width: 60%;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+
+.custom-file-input {
+  display: none;
 }

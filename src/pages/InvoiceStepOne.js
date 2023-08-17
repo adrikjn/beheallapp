@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
+import AccordionNav from "../components/AccordionNav";
 
 export const InvoiceStepOne = () => {
+  const token = localStorage.getItem("Token");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token, navigate]);
   const [billingIsDifferent, setBillingIsDifferent] = useState(false);
 
   return (
@@ -31,37 +41,16 @@ export const InvoiceStepOne = () => {
         <input type="email" id="email" placeholder="E-mail" />
         <input type="tel" id="tel" placeholder="Téléphone" />
         <div className="input-row">
-          <input type="text" id="city" placeholder="City" />
+          <input type="text" id="city" placeholder="Ville" />
           <input type="text" id="postalcode" placeholder="Code postal" />
         </div>
-        <input type="text" id="country" placeholder="Country" />
+        <input type="text" id="country" placeholder="Pays" />
         <input type="text" id="siret" placeholder="SIREN/SIRET" />
-
-        <label htmlFor="legalForm">Forme Juridique :</label>
-        <select id="legalForm" name="legalForm" className="select-legal-form">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-          <option value="option4">Option 4</option>
-          <option value="option5">Option 5</option>
-        </select>
-
-        <input type="text" id="shareCapital" placeholder="Capital" />
         <input
           type="text"
-          id="cityRegistration"
-          placeholder="Ville de régistration"
+          id="idTva"
+          placeholder="Numéro de TVA Intracommunautaire"
         />
-        <input type="text" id="idTva" placeholder="Numéro de TVA Intracommunautaire"/>
-        <input type="text" id="website" placeholder="Site web" />
-        <textarea id="workDescription" placeholder="Work description.."></textarea>
-
-        <textarea id="workDescription"  placeholder="Work description"></textarea>
-
-        <div className="input-row">
-          <input type="text" id="rmNumber" placeholder="RM Number" />
-          <input type="text" id="rcsNumber" placeholder="RCS Number" />
-        </div>
 
         <label htmlFor="billingIsDifferent">Billing is Different :</label>
         <div className="iphone-switch">
@@ -97,9 +86,70 @@ export const InvoiceStepOne = () => {
           </div>
         )}
 
-        <label for="imageUpload">Logo</label>
-        <input type="file" id="imageUpload" accept="image/*" />
+        <label htmlFor="legalForm">Forme juridique :</label>
+        <select id="legalForm" name="legalForm" className="select-legal-form">
+          <option value="option1">Entreprise individuelle (EI)</option>
+          <option value="option2">
+            Entreprise unipersonnelle à responsabilité limitée (EURL)
+          </option>
+          <option value="option3">
+            Société à responsabilité limitée (SARL)
+          </option>
+          <option value="option4">Société anonyme (SA)</option>
+          <option value="option6">
+            Société par actions simplifiée (SAS) ou société par actions
+            simplifiée unipersonnelle (SASU)
+          </option>
+          <option value="option7">Société en nom collectif (SNC)</option>
+          <option value="option8">
+            Société coopérative de production (Scop)
+          </option>
+          <option value="option9">
+            Société en commandite par actions (SCA) et société en commandite
+            simple (SCS)
+          </option>
+        </select>
+
+        <div className="input-row">
+          <input type="text" id="rmNumber" placeholder="RM Number" />
+          <input type="text" id="rcsNumber" placeholder="RCS Number" />
+        </div>
+
+        <input type="text" id="shareCapital" placeholder="Capital" />
+        <input
+          type="text"
+          id="cityRegistration"
+          placeholder="Ville de régistration"
+        />
+
+        <input type="text" id="website" placeholder="Site web" />
+
+        <textarea
+          id="workDescription"
+          placeholder="Work description.."
+        ></textarea>
+
+        <textarea
+          id="gcs"
+          placeholder="Conditions générales de ventes.."
+        ></textarea>
+
+        <label htmlFor="imageUpload" className="custom-file-label">
+          Télécharger votre logo
+          <img src="/download.svg" alt="download-icon" />
+        </label>
+        <input
+          type="file"
+          id="imageUpload"
+          accept="image/*"
+          className="custom-file-input"
+        />
       </div>
+      <div className="btn-invoice-2">
+        <button>Ajouter un expéditaire</button>
+      </div>
+
+      <AccordionNav />
     </div>
   );
 };
