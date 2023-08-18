@@ -83,8 +83,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-// get users (where email = email)
-// Créer la route du filter
-// Utilisation du use state
-// email exact

@@ -7,17 +7,17 @@ import AccordionNav from "../components/AccordionNav";
 export const InvoiceStepOne = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
+  const userId = localStorage.getItem("UserId");
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
     }
   }, [token, navigate]);
-  const [billingIsDifferent, setBillingIsDifferent] = useState(false);
   
+  const [billingIsDifferent, setBillingIsDifferent] = useState(false);
 
   const [formData, setFormData] = useState({
-    /*  */
     name: "",
     logo: "",
     address: "",
@@ -26,7 +26,7 @@ export const InvoiceStepOne = () => {
     city: "",
     postalCode: "",
     country: "",
-    billingIsDifferent: "",
+    billingIsDifferent: false,
     billingAddress: "",
     billingCity: "",
     billingPostalCode: "",
@@ -43,6 +43,32 @@ export const InvoiceStepOne = () => {
     gcs: "",
   });
 
+  let JSON = {
+    "user": "/api/users/1319",
+    "name": "Oxynum",
+    "logo": "string",
+    "address": "string",
+    "email": "user@example.com",
+    "phoneNumber": "+9976792761095515765",
+    "city": "string",
+    "postalCode": "75364",
+    "country": "string",
+    "billingIsDifferent": true,
+    "billingAddress": "string",
+    "billingCity": "string",
+    "billingPostalCode": "31167",
+    "billingCountry": "string",
+    "sirenSiret": "123456789",
+    "legalForm": "string",
+    "rmNumber": "stringstri",
+    "rcsNumber": "stringstr",
+    "shareCapital": "620688060015552149412239596173292071316191476278501704158177405559943877800057247254815",
+    "cityRegistration": "string",
+    "vatId": "FR12345678901",
+    "website": "",
+    "descriptionWork": "string",
+    "gcs": "string"
+  }
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -55,10 +81,21 @@ export const InvoiceStepOne = () => {
     event.preventDefault();
 
     try {
-      const response = await Axios.post(
-        "http://localhost:8000/api/companies",
-        formData
-      );
+      
+      const config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:8000/api/companies',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${token}`,
+        },
+      };
+      const response = await Axios.post(config.url, {
+        ...formData,
+        user: userId,
+      }, config);
+  
 
       if (response.status === 201) {
         navigate("/dashboard");
@@ -218,7 +255,6 @@ export const InvoiceStepOne = () => {
               </div>
             </div>
           )}
-
           <label htmlFor="legalForm">Forme juridique :</label>
           <select
             id="legalForm"
