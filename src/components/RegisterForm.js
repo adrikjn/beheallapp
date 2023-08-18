@@ -28,6 +28,25 @@ const RegisterForm = () => {
 
       console.log(response.data.token)
 
+      const userResponse = await Axios.get(
+        `http://localhost:8000/api/users?email=${email}`
+      );
+
+      const user = userResponse.data[0];
+
+      if (user) {
+        const userData = {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          companies: user.companies,
+        };
+
+        localStorage.setItem("UserData", JSON.stringify(userData));
+      }
+
 
       localStorage.setItem('Token', response.data.token)
 
