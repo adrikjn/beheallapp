@@ -18,17 +18,33 @@ const LoginForm = () => {
         }
       );
 
-      console.log(response.data.token)
+      console.log(response.data.token);
 
-      localStorage.setItem('Token', response.data.token)
+      const userResponse = await Axios.get(
+        `http://localhost:8000/api/users?email=${email}`
+      );
+
+      const user = userResponse.data[0];
+
+      if (user) {
+        const userData = {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          companies: user.companies,
+        };
+
+        localStorage.setItem("UserData", JSON.stringify(userData));
+      }
+
+      localStorage.setItem("Token", response.data.token);
 
       const decodedToken = jwtDecode(response.data.token);
       console.log("Decoded Token:", decodedToken);
 
-      
-      navigate('/dashboard')
-      
-
+      navigate("/dashboard");
     } catch (error) {
       console.error("Erreur de connexion :", error);
 
@@ -37,27 +53,27 @@ const LoginForm = () => {
   };
 
   return (
-      <div className="login-space">
+    <div className="login-space">
       <h1>Connexion</h1>
       <div className="padding-form">
         <input
-        type="text"
-        placeholder="E-MAIL"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="MOT DE PASSE"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <p>
-        Vous n'avez pas de compte ?{" "}
-        <Link to="/register" className="register-link">
-          S'inscrire
-        </Link>
-      </p>
+          type="text"
+          placeholder="E-MAIL"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="MOT DE PASSE"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p>
+          Vous n'avez pas de compte ?{" "}
+          <Link to="/register" className="register-link">
+            S'inscrire
+          </Link>
+        </p>
       </div>
       <div className="center-btn">
         <button onClick={handleLogin}>Se connecter</button>
@@ -68,9 +84,6 @@ const LoginForm = () => {
 
 export default LoginForm;
 
-
-
-// Filter user sur l'email (Importer)
 // get users (where email = email)
 // Créer la route du filter
 // Utilisation du use state
