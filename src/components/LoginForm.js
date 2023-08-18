@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
+import jwtDecode from "jwt-decode";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -20,6 +21,9 @@ const LoginForm = () => {
       console.log(response.data.token)
 
       localStorage.setItem('Token', response.data.token)
+
+      const decodedToken = jwtDecode(response.data.token);
+      console.log("Decoded Token:", decodedToken);
 
       
       navigate('/dashboard')
@@ -63,3 +67,11 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+
+
+// Filter user sur l'email (Importer)
+// get users (where email = email)
+// Créer la route du filter
+// Utilisation du use state
+// email exact
