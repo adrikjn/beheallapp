@@ -7,10 +7,17 @@ import AccordionNav from "../components/AccordionNav";
 export const InvoiceStepOne = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("UserData"));
-  const userId = userData.id;
+  const userId = localStorage.getItem("UserId");
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/dashboard");
+    }
+  }, [token, navigate]);
+
+  const [billingIsDifferent, setBillingIsDifferent] = useState(false);
+
   const [formData, setFormData] = useState({
-    user: `/api/users/${userId}`,
     name: "",
     logo: "",
     address: "",
@@ -36,40 +43,45 @@ export const InvoiceStepOne = () => {
     gcs: "",
   });
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/dashboard");
-    }
-  }, [token, navigate]);
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-
-
-    console.log(formData)
-
-    await Axios.post("http://localhost:8000/api/companies", JSON.stringify(formData), {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        console.log("Data submitted:", response.data);
-        // navigate("/invoice-step-two");
-      })
-      .catch((error) => {
-        console.error("Error submitting data:", error);
-      });
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "http://localhost:8000/api/companies",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await Axios.post(
+        config.url,
+        {
+          ...formData,
+          user: userId,
+        },
+        config
+      );
+
+      if (response.status === 201) {
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'envoi du formulaire :", error);
+    }
+  };
+
 
   return (
     <div className="invoice-step-one-page">
@@ -96,32 +108,32 @@ export const InvoiceStepOne = () => {
             id="name"
             name="name"
             placeholder="Entreprise"
-            value={formData.name}
             onChange={handleInputChange}
+            value={formData.name}
           />
           <input
             type="text"
             id="address"
             placeholder="Adresse"
             name="address"
-            value={formData.address}
             onChange={handleInputChange}
+            value={formData.address}
           />
           <input
             type="email"
             id="email"
             placeholder="E-mail"
             name="email"
-            value={formData.email}
             onChange={handleInputChange}
+            value={formData.email}
           />
           <input
             type="tel"
             id="tel"
             placeholder="Téléphone"
             name="phoneNumber"
-            value={formData.phoneNumber}
             onChange={handleInputChange}
+            value={formData.phoneNumber}
           />
           <div className="input-row">
             <input
@@ -129,16 +141,16 @@ export const InvoiceStepOne = () => {
               id="city"
               placeholder="Ville"
               name="city"
-              value={formData.city}
               onChange={handleInputChange}
+              value={formData.city}
             />
             <input
               type="text"
               id="postalcode"
               placeholder="Code postal"
               name="postalCode"
-              value={formData.postalCode}
               onChange={handleInputChange}
+              value={formData.postalCode}
             />
           </div>
           <input
@@ -146,24 +158,24 @@ export const InvoiceStepOne = () => {
             id="country"
             placeholder="Pays"
             name="country"
-            value={formData.country}
             onChange={handleInputChange}
+            value={formData.country}
           />
           <input
             type="text"
             id="siret"
             placeholder="SIREN/SIRET"
             name="sirenSiret"
-            value={formData.sirenSiret}
             onChange={handleInputChange}
+            value={formData.sirenSiret}
           />
           <input
             type="text"
-            id="vatId"
+            id="idTva"
             placeholder="Numéro de TVA Intracommunautaire"
             name="vatId"
-            value={formData.vatId}
             onChange={handleInputChange}
+            value={formData.vatId}
           />
 
           <label htmlFor="billingIsDifferent">
@@ -174,57 +186,59 @@ export const InvoiceStepOne = () => {
               type="checkbox"
               id="billingIsDifferent"
               name="billingIsDifferent"
+              checked={billingIsDifferent}
               className="switch-input"
-              value={formData.billingIsDifferent}
-              onChange={handleInputChange}
+              onChange={() => setBillingIsDifferent(!billingIsDifferent)}
             />
+
             <label
               htmlFor="billingIsDifferent"
               className="switch-label"
             ></label>
           </div>
-          <div className="billing-is-different-input">
-            <input
-              type="text"
-              id="billingAddress"
-              placeholder="Adresse de facturation"
-              name="billingAddress"
-              value={formData.billingAddress}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              id="billingCountry"
-              placeholder="Pays de facturation"
-              name="billingCountry"
-              value={formData.billingCountry}
-              onChange={handleInputChange}
-            />
-            <div className="input-row">
+          {billingIsDifferent && (
+            <div className="billing-is-different-input">
               <input
                 type="text"
-                id="billingPostalCode"
-                placeholder="Code postal de facturation"
-                name="billingPostalCode"
-                value={formData.billingPostalCode}
+                id="billingAddress"
+                placeholder="Adresse de facturation"
+                name="billingAddress"
                 onChange={handleInputChange}
+                value={formData.billingAddress}
               />
               <input
                 type="text"
-                id="billingCity"
-                placeholder="Ville de facturation"
-                name="billingCity"
-                value={formData.billingCity}
+                id="billingCountry"
+                placeholder="Pays de facturation"
+                name="billingCountry"
                 onChange={handleInputChange}
+                value={formData.billingCountry}
               />
+              <div className="input-row">
+                <input
+                  type="text"
+                  id="billingPostalCode"
+                  placeholder="Code postal de facturation"
+                  name="billingPostalCode"
+                  onChange={handleInputChange}
+                  value={formData.billingPostalCode}
+                />
+                <input
+                  type="text"
+                  id="billingCity"
+                  placeholder="Ville de facturation"
+                  name="billingCity"
+                  onChange={handleInputChange}
+                  value={formData.billingCity}
+                />
+              </div>
             </div>
-          </div>
+          )}
           <label htmlFor="legalForm">Forme juridique :</label>
           <select
             id="legalForm"
             name="legalForm"
             className="select-legal-form"
-            value={formData.legalForm}
             onChange={handleInputChange}
           >
             <option value="option1">Entreprise individuelle (EI)</option>
@@ -255,16 +269,16 @@ export const InvoiceStepOne = () => {
               id="rmNumber"
               placeholder="RM Number"
               name="rmNumber"
-              value={formData.rmNumber}
               onChange={handleInputChange}
+              value={formData.rmNumber}
             />
             <input
               type="text"
               id="rcsNumber"
               placeholder="RCS Number"
               name="vatId"
-              value={formData.rcsNumber}
               onChange={handleInputChange}
+              value={formData.rcsNumber}
             />
           </div>
 
@@ -273,16 +287,16 @@ export const InvoiceStepOne = () => {
             id="shareCapital"
             placeholder="Capital"
             name="shareCapital"
-            value={formData.shareCapital}
             onChange={handleInputChange}
+            value={formData.shareCapital}
           />
           <input
             type="text"
             id="cityRegistration"
             placeholder="Ville de régistration"
             name="cityRegistration"
-            value={formData.cityRegistration}
             onChange={handleInputChange}
+            value={formData.cityRegistration}
           />
 
           <input
@@ -290,24 +304,24 @@ export const InvoiceStepOne = () => {
             id="website"
             placeholder="Site web"
             name="website"
-            value={formData.website}
             onChange={handleInputChange}
+            value={formData.website}
           />
 
           <textarea
             id="descriptionWork"
             placeholder="Work description.."
             name="descriptionWork"
-            value={formData.descriptionWork}
             onChange={handleInputChange}
+            value={formData.descriptionWork}
           ></textarea>
 
           <textarea
             id="gcs"
             placeholder="Conditions générales de ventes.."
             name="gcs"
-            value={formData.gcs}
             onChange={handleInputChange}
+            value={formData.gcs}
           ></textarea>
 
           <label htmlFor="imageUpload" className="custom-file-label">
@@ -320,8 +334,8 @@ export const InvoiceStepOne = () => {
             accept="image/*"
             className="custom-file-input"
             name="logo"
-            value={formData.logo}
             onChange={handleInputChange}
+            value={formData.logo}
           />
         </div>
         <div className="btn-invoice-2">
