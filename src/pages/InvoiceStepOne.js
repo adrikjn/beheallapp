@@ -59,6 +59,14 @@ export const InvoiceStepOne = () => {
     )
       .then((response) => {
         console.log("Data submitted:", response.data);
+
+        //FAIRE UNE REQUETE GET DU USER CONNECTER POUR ACTUALISER SES ENTREPRISE
+        //UTILISE LA REPONSE DE LA REQUEST POST COMPANIES QUE TU VIENS DE FAIRE ET ACTUALISER LA LISTE DES COMPANIE DANS LE LOCAL STORAGE
+
+        let user = localStorage.getItem('UserData')
+        user.companies.append(response.data)
+        localStorage.setItem('UserData', user)
+        
         navigate("/invoice-step-one");
       })
       .catch((error) => {
@@ -88,6 +96,7 @@ export const InvoiceStepOne = () => {
       </div>
       <p className="invoice-step-one-p">Sélectionné un expéditaire</p>
       <select className="select-company">
+        <option>Selectionner une entreprise</option>
         <option>Oxynum</option>
       </select>
       <div className="add-company-exp">
