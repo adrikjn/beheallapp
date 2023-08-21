@@ -5,6 +5,7 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Dashboard } from "./pages/Dashboard";
 import { InvoiceStepOne } from "./pages/InvoiceStepOne";
+import { InvoiceStepTwo } from "./pages/InvoiceStepTwo";
 
 
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/invoice-step-one" element={<InvoiceStepOne />} />
+          <Route path="/invoice-step-two" element={<InvoiceStepTwo />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

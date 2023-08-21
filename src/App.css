@@ -763,3 +763,28 @@ ul li {
 .custom-file-input {
   display: none;
 }
+
+/*? INVOICE STEP TWO PAGE */
+.btn-invoice-3 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-invoice-3 button {
+  margin-top: 18px;
+  border-radius: 5px;
+  padding: 24px 70px;
+  background: #4f9e65;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border: 0;
+}
