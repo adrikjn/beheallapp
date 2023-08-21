@@ -38,25 +38,28 @@ export const InvoiceStepOne = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate("/dashboard");
+      navigate("/invoice-step-one");
     }
   }, [token, navigate]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(formData);
 
-    console.log(formData)
-
-    await Axios.post("http://localhost:8000/api/companies", JSON.stringify(formData), {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
+    await Axios.post(
+      "http://localhost:8000/api/companies",
+      JSON.stringify(formData),
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => {
         console.log("Data submitted:", response.data);
-        // navigate("/invoice-step-two");
+        navigate("/invoice-step-one");
       })
       .catch((error) => {
         console.error("Error submitting data:", error);
@@ -64,10 +67,12 @@ export const InvoiceStepOne = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+    const newValue = type === "checkbox" ? e.target.checked : value;
+
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
@@ -175,7 +180,7 @@ export const InvoiceStepOne = () => {
               id="billingIsDifferent"
               name="billingIsDifferent"
               className="switch-input"
-              value={formData.billingIsDifferent}
+              checked={formData.billingIsDifferent}
               onChange={handleInputChange}
             />
             <label
@@ -183,42 +188,45 @@ export const InvoiceStepOne = () => {
               className="switch-label"
             ></label>
           </div>
-          <div className="billing-is-different-input">
-            <input
-              type="text"
-              id="billingAddress"
-              placeholder="Adresse de facturation"
-              name="billingAddress"
-              value={formData.billingAddress}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              id="billingCountry"
-              placeholder="Pays de facturation"
-              name="billingCountry"
-              value={formData.billingCountry}
-              onChange={handleInputChange}
-            />
-            <div className="input-row">
+          {formData.billingIsDifferent && (
+            <div className="billing-is-different-input">
               <input
                 type="text"
-                id="billingPostalCode"
-                placeholder="Code postal de facturation"
-                name="billingPostalCode"
-                value={formData.billingPostalCode}
+                id="billingAddress"
+                placeholder="Adresse de facturation"
+                name="billingAddress"
+                value={formData.billingAddress}
                 onChange={handleInputChange}
               />
               <input
                 type="text"
-                id="billingCity"
-                placeholder="Ville de facturation"
-                name="billingCity"
-                value={formData.billingCity}
+                id="billingCountry"
+                placeholder="Pays de facturation"
+                name="billingCountry"
+                value={formData.billingCountry}
                 onChange={handleInputChange}
               />
+              <div className="input-row">
+                <input
+                  type="text"
+                  id="billingPostalCode"
+                  placeholder="Code postal de facturation"
+                  name="billingPostalCode"
+                  value={formData.billingPostalCode}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  id="billingCity"
+                  placeholder="Ville de facturation"
+                  name="billingCity"
+                  value={formData.billingCity}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
-          </div>
+          )}
+
           <label htmlFor="legalForm">Forme juridique :</label>
           <select
             id="legalForm"
@@ -227,23 +235,28 @@ export const InvoiceStepOne = () => {
             value={formData.legalForm}
             onChange={handleInputChange}
           >
-            <option value="option1">Entreprise individuelle (EI)</option>
-            <option value="option2">
+            <option disabled>
+              Sélectionnez une forme juridique
+            </option>
+            <option value="Entreprise Individuelle">Entreprise individuelle (EI)</option>
+            <option value="Entreprise unipersonnelle à responsabilité limitée">
               Entreprise unipersonnelle à responsabilité limitée (EURL)
             </option>
-            <option value="option3">
+            <option value="Société à responsabilité limitée">
               Société à responsabilité limitée (SARL)
             </option>
-            <option value="option4">Société anonyme (SA)</option>
-            <option value="option6">
+            <option value="Société anonyme">Société anonyme (SA)</option>
+            <option value="Société par actions simplifiée (SAS) ou société par actions
+              simplifiée unipersonnelle">
               Société par actions simplifiée (SAS) ou société par actions
               simplifiée unipersonnelle (SASU)
             </option>
-            <option value="option7">Société en nom collectif (SNC)</option>
-            <option value="option8">
+            <option value="Société en nom collectif">Société en nom collectif (SNC)</option>
+            <option value="Société coopérative de production">
               Société coopérative de production (Scop)
             </option>
-            <option value="option9">
+            <option value="Société en commandite par actions (SCA) et société en commandite
+              simple">
               Société en commandite par actions (SCA) et société en commandite
               simple (SCS)
             </option>
@@ -262,7 +275,7 @@ export const InvoiceStepOne = () => {
               type="text"
               id="rcsNumber"
               placeholder="RCS Number"
-              name="vatId"
+              name="rcsNumber"
               value={formData.rcsNumber}
               onChange={handleInputChange}
             />
@@ -310,7 +323,7 @@ export const InvoiceStepOne = () => {
             onChange={handleInputChange}
           ></textarea>
 
-          <label htmlFor="imageUpload" className="custom-file-label">
+          <label htmlFor="logo" className="custom-file-label">
             Télécharger votre logo
             <img src="/download.svg" alt="download-icon" />
           </label>
