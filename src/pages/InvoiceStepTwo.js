@@ -9,6 +9,7 @@ export const InvoiceStepTwo = () => {
   const navigate = useNavigate();
 
   //? Il faudra récupérer l'id et le stocker dans le storage qu'on a déja crée à la fin. (2/4)
+  //? Ne pas oublier dans le symfony de faire la serialization pour récupérer les clients ou entreprise idk 
 
   useEffect(() => {
     if (!token) {
