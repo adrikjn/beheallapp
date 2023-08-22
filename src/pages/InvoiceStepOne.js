@@ -12,6 +12,7 @@ export const InvoiceStepOne = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("UserData"));
   const userId = userData.id;
+  const [selectedCompanie, setSelectedCompanie] = useState()
   const [userCompanies, setUserCompanies] = useState([]);
   const [formData, setFormData] = useState({
     user: `/api/users/${userId}`,
@@ -58,6 +59,13 @@ export const InvoiceStepOne = () => {
     }
   }, [token, navigate]);
 
+  useEffect(() => {
+    console.log(selectedCompanie)
+    if(selectedCompanie !== null){
+      document.getElementById('newCompanieForm').classList.toggle('display-none')
+    }
+  }, [selectedCompanie])
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -102,6 +110,10 @@ export const InvoiceStepOne = () => {
     }));
   };
 
+  const handleSelectChange = async (e) => {
+    setSelectedCompanie(e.target.value)
+  };
+
   const handleContinueClick = () => {
     // Navigate to "invoice-step-two"
     navigate("/invoice-step-two");
@@ -120,19 +132,17 @@ export const InvoiceStepOne = () => {
       <p className="invoice-step-one-p">Sélectionné un expéditaire</p>
       <select
         className="select-company"
-        value={formData.name}
-        onChange={handleInputChange}
+        onChange={handleSelectChange}
         name="name"
       >
-        <option value="">Sélectionner une entreprise</option>
+        <option defaultValue value="">Sélectionner une entreprise</option>
         {userCompanies.map((company) => (
-          <option key={company.id} value={company.id}>
+          <option key={company.id} value={company.id} onCg>
             {company.name}
           </option>
         ))}
       </select>
-      {formData.name === "" ? ( 
-        <div>
+        <div id="newCompanieForm" >
           <div className="add-company-exp">
             <h2>new expéditaire</h2>
           </div>
@@ -386,17 +396,18 @@ export const InvoiceStepOne = () => {
                 onChange={handleInputChange}
               />
             </div>
-            </form>
+            
             <div 
             className="btn-invoice-2">
             <button>Ajouter un expéditaire</button>
           </div>
+          </form>
         </div>
-      ) : (
+      
         <div className="btn-invoice-2">
           <button onClick={handleContinueClick}>Continuer</button>
         </div>
-      )}
+
       <AccordionNav />
     </div>
   );

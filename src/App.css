@@ -788,3 +788,7 @@ ul li {
   text-transform: uppercase;
   border: 0;
 }
+
+.display-none{
+  display: none;
+}
