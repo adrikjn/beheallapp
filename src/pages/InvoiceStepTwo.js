@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
+import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
+
 
 export const InvoiceStepTwo = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
+
+  //? Il faudra récupérer l'id et le stocker dans le storage qu'on a déja crée à la fin. (2/4)
 
   useEffect(() => {
     if (!token) {
