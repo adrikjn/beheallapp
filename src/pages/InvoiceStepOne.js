@@ -61,13 +61,11 @@ export const InvoiceStepOne = () => {
   useEffect(() => {
     console.log(selectedCompanie);
     if (selectedCompanie !== "undefined") {
+      document.getElementById("newCompanieForm").classList.add("display-none");
+    } else {
       document
         .getElementById("newCompanieForm")
-        .classList.add("display-none");
-    }else{
-      document
-        .getElementById("newCompanieForm")
-        .classList.remove("display-none")
+        .classList.remove("display-none");
     }
   }, [selectedCompanie]);
 
@@ -120,7 +118,15 @@ export const InvoiceStepOne = () => {
   };
 
   const handleContinueClick = () => {
-    navigate("/invoice-step-two");
+    if (selectedCompanie) {
+      const invoiceData = JSON.parse(localStorage.getItem("InvoiceData")) || {};
+      invoiceData.selectedCompanyId = selectedCompanie;
+      localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
+      navigate("/invoice-step-two");
+    } else {
+      // Gérer le cas où aucune entreprise n'est sélectionnée
+      console.log("Aucune entreprise sélectionnée.");
+    }
   };
 
   return (
@@ -410,7 +416,9 @@ export const InvoiceStepOne = () => {
       </div>
 
       <div className="btn-invoice-2">
-        <button onClick={handleContinueClick}>Continuer</button>
+        {selectedCompanie !== "undefined" && selectedCompanie !== null && (
+          <button onClick={handleContinueClick}>Continuer</button>
+        )}
       </div>
 
       <AccordionNav />
