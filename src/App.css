@@ -732,6 +732,7 @@ ul li {
   margin-top: 18px;
   border-radius: 5px;
   padding: 24px 43px;
+  width: 100%;
   background: #4f9e65;
   color: #fff;
   text-align: center;
@@ -764,6 +765,10 @@ ul li {
   display: none;
 }
 
+.display-none{
+  display: none;
+}
+
 /*? INVOICE STEP TWO PAGE */
 .btn-invoice-3 {
   display: flex;
@@ -789,6 +794,3 @@ ul li {
   border: 0;
 }
 
-.display-none{
-  display: none;
-}
