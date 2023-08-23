@@ -117,13 +117,36 @@ export const InvoiceStepOne = () => {
     setSelectedCompanie(e.target.value);
   };
 
-  const handleContinueClick = () => {
+  const handleContinueClick = async () => {
     if (selectedCompanie) {
-      const invoiceData = JSON.parse(localStorage.getItem("InvoiceData")) || {};
-      invoiceData.selectedCompanyId = selectedCompanie;
-      localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
-      navigate("/invoice-step-two");
+      try {
+        const response = await Axios.get(
+          `http://localhost:8000/api/companies/${selectedCompanie}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
+        const selectedCompanyDetails = response.data;
+  
+        // Stocker les détails de l'entreprise dans le localStorage
+        localStorage.setItem(
+          "SelectedCompanyDetails",
+          JSON.stringify(selectedCompanyDetails)
+        );
+  
+        const invoiceData = JSON.parse(localStorage.getItem("InvoiceData")) || {};
+        invoiceData.selectedCompanyId = selectedCompanie;
+        localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
+        
+        navigate("/invoice-step-two");
+      } catch (error) {
+        console.error("Error fetching company details:", error);
+      }
     } else {
+      // Gérer le cas où aucune entreprise n'est sélectionnée
       console.log("Aucune entreprise sélectionnée.");
     }
   };
