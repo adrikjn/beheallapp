@@ -55,7 +55,7 @@ export const InvoiceStepTwo = () => {
         }
       );
       console.log("Customer data submitted:", response.data);
-      navigate("/dashboard");
+      navigate("/invoice-step-two");
     } catch (error) {
       console.error("Error submitting customer data:", error);
     }
