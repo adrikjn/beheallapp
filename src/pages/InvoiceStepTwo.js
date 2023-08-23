@@ -9,6 +9,9 @@ export const InvoiceStepTwo = () => {
   const invoiceData = JSON.parse(localStorage.getItem("InvoiceData"));
   const selectedCompanyId = invoiceData.selectedCompanyId;
   console.log(selectedCompanyId);
+  const selectedCompanyDetails = JSON.parse(
+    localStorage.getItem("SelectedCompanyDetails")
+  );
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     lastName: "",
@@ -80,7 +83,14 @@ export const InvoiceStepTwo = () => {
       </div>
       <p className="invoice-step-one-p">Sélectionné un client</p>
       <select className="select-company">
-        <option>Parella</option>
+        <option value="" disabled>
+          Sélectionner une entreprise
+        </option>
+        {selectedCompanyDetails.customers.map((customer) => (
+          <option key={customer.id} value={customer.id}>
+            {customer.firstName} {customer.lastName} - {customer.companyName}
+          </option>
+        ))}
       </select>
       <div className="add-company-exp">
         <h2>new client</h2>
