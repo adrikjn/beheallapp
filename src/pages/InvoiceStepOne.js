@@ -124,7 +124,6 @@ export const InvoiceStepOne = () => {
       localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
       navigate("/invoice-step-two");
     } else {
-      // Gérer le cas où aucune entreprise n'est sélectionnée
       console.log("Aucune entreprise sélectionnée.");
     }
   };
