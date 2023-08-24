@@ -126,7 +126,7 @@ export const InvoiceStepOne = () => {
       setUserCompanies(updatedUserData.companies);
 
       const invoiceData = JSON.parse(localStorage.getItem("InvoiceData")) || {};
-      invoiceData.selectedCompanyId = response.data.id;
+      invoiceData.company = response.data.id;
       localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
 
       // Rediriger vers l'étape suivante
@@ -155,7 +155,7 @@ export const InvoiceStepOne = () => {
       try {
         const invoiceData =
           JSON.parse(localStorage.getItem("InvoiceData")) || {};
-        invoiceData.selectedCompanyId = selectedCompanie;
+        invoiceData.company = selectedCompanie;
         localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
 
         navigate("/invoice-step-two");

@@ -7,8 +7,7 @@ export const InvoiceStepTwo = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
   const invoiceData = JSON.parse(localStorage.getItem("InvoiceData"));
-  const selectedCompanyId = invoiceData.selectedCompanyId;
-  console.log(selectedCompanyId);
+  const selectedCompanyId = invoiceData.company;
   const [companyOptions, setCompanyOptions] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState("undefined");
   const [formData, setFormData] = useState({
@@ -92,6 +91,11 @@ export const InvoiceStepTwo = () => {
       );
       console.log("Customer data submitted:", response.data);
 
+      const newCustomerId = response.data.id; // Get the newly created customer's ID
+
+      invoiceData.customer = newCustomerId; // Store selectedCustomerId in invoiceData
+      localStorage.setItem("InvoiceData", JSON.stringify(invoiceData)); // Save updated invoiceData in localStorage
+
       Axios.get(`http://localhost:8000/api/companies/${selectedCompanyId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -135,11 +139,13 @@ export const InvoiceStepTwo = () => {
   };
 
   const handleContinueClick = async () => {
-    if (selectedCustomer) {
+    if (selectedCustomer !== "undefined" && selectedCustomer !== null) {
       try {
+        invoiceData.customer = selectedCustomer; // Store selectedCustomerId in invoiceData
+        localStorage.setItem("InvoiceData", JSON.stringify(invoiceData)); // Save updated invoiceData in localStorage
         navigate("/invoice-step-three");
       } catch (error) {
-        console.error("Error fetching company details:", error);
+        console.error("Error navigating:", error);
       }
     } else {
       console.log("Aucune entreprise sélectionnée.");
