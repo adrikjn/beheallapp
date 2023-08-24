@@ -129,7 +129,6 @@ export const InvoiceStepOne = () => {
       invoiceData.selectedCompanyId = response.data.id;
       localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
   
-  
       // Rediriger vers l'étape suivante
       navigate("/invoice-step-two");
     } catch (error) {
