@@ -99,7 +99,7 @@ export const InvoiceStepTwo = () => {
         .catch((error) => {
           console.error("Error fetching selected company details:", error);
         });
-      navigate("/invoice-step-two");
+      navigate("/invoice-step-three");
     } catch (error) {
       console.error("Error submitting customer data:", error);
     }
