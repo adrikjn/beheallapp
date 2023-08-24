@@ -10,6 +10,7 @@ export const InvoiceStepTwo = () => {
   const selectedCompanyId = invoiceData.selectedCompanyId;
   console.log(selectedCompanyId);
   const [companyOptions, setCompanyOptions] = useState([]);
+  const [selectedCustomer, setSelectedCustomer] = useState("undefined");
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     lastName: "",
@@ -30,13 +31,23 @@ export const InvoiceStepTwo = () => {
   });
 
   //? Il faudra récupérer l'id et le stocker dans le storage qu'on a déja crée à la fin. (2/4)
-  //? Ne pas oublier dans le symfony de faire la serialization pour récupérer les clients ou entreprise idk
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
     }
   }, [token, navigate]);
+
+  useEffect(() => {
+    console.log(selectedCustomer);
+    if (selectedCustomer !== "undefined") {
+      document.getElementById("newCompanieForm").classList.add("display-none");
+    } else {
+      document
+        .getElementById("newCompanieForm")
+        .classList.remove("display-none");
+    }
+  }, [selectedCustomer]);
 
   useEffect(() => {
     if (selectedCompanyId) {
@@ -48,12 +59,14 @@ export const InvoiceStepTwo = () => {
         .then((response) => {
           const selectedCompanyDetails = response.data;
 
-          const customerOptions = selectedCompanyDetails.customers.map((customer) => ({
-            id: customer.id,
-            firstName: customer.firstName,
-            lastName: customer.lastName,
-            companyName: customer.companyName,
-          }));
+          const customerOptions = selectedCompanyDetails.customers.map(
+            (customer) => ({
+              id: customer.id,
+              firstName: customer.firstName,
+              lastName: customer.lastName,
+              companyName: customer.companyName,
+            })
+          );
 
           setCompanyOptions(customerOptions);
         })
@@ -63,7 +76,6 @@ export const InvoiceStepTwo = () => {
     }
   }, [selectedCompanyId, token]);
 
-  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -79,6 +91,7 @@ export const InvoiceStepTwo = () => {
         }
       );
       console.log("Customer data submitted:", response.data);
+
       Axios.get(`http://localhost:8000/api/companies/${selectedCompanyId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -86,14 +99,16 @@ export const InvoiceStepTwo = () => {
       })
         .then((response) => {
           const selectedCompanyDetails = response.data;
-  
-          const customerOptions = selectedCompanyDetails.customers.map((customer) => ({
-            id: customer.id,
-            firstName: customer.firstName,
-            lastName: customer.lastName,
-            companyName: customer.companyName,
-          }));
-  
+
+          const customerOptions = selectedCompanyDetails.customers.map(
+            (customer) => ({
+              id: customer.id,
+              firstName: customer.firstName,
+              lastName: customer.lastName,
+              companyName: customer.companyName,
+            })
+          );
+
           setCompanyOptions(customerOptions);
         })
         .catch((error) => {
@@ -105,6 +120,10 @@ export const InvoiceStepTwo = () => {
     }
   };
 
+  const handleSelectChange = async (e) => {
+    setSelectedCustomer(e.target.value);
+  };
+
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
     const newValue = type === "checkbox" ? e.target.checked : value;
@@ -113,6 +132,18 @@ export const InvoiceStepTwo = () => {
       ...prevData,
       [name]: newValue,
     }));
+  };
+
+  const handleContinueClick = async () => {
+    if (selectedCustomer) {
+      try {
+        navigate("/invoice-step-three");
+      } catch (error) {
+        console.error("Error fetching company details:", error);
+      }
+    } else {
+      console.log("Aucune entreprise sélectionnée.");
+    }
   };
 
   return (
@@ -126,14 +157,20 @@ export const InvoiceStepTwo = () => {
         <h2>N°2</h2>
       </div>
       <p className="invoice-step-one-p">Sélectionné un destinaire</p>
-      <select className="select-company">
-        <option value="">Sélectionner un client</option>
+
+      <select
+        onChange={handleSelectChange}
+        name="name"
+        className="select-company"
+      >
+        <option defaultValue value="undefined">Sélectionner un client</option>
         {companyOptions.map((customer) => (
           <option key={customer.id} value={customer.id}>
             {customer.firstName} {customer.lastName} - {customer.companyName}
           </option>
         ))}
       </select>
+      <div id="newCompanieForm">
       <div className="add-company-exp">
         <h2>new client</h2>
       </div>
@@ -265,6 +302,13 @@ export const InvoiceStepTwo = () => {
           <button>Ajouter un client</button>
         </div>
       </form>
+      </div>
+
+      <div className="btn-invoice-2">
+        {selectedCustomer !== "undefined" && selectedCustomer !== null && (
+          <button onClick={handleContinueClick}>Continuer</button>
+        )}
+      </div>
       <AccordionNav />
     </div>
   );

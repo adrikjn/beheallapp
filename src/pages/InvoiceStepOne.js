@@ -54,7 +54,7 @@ export const InvoiceStepOne = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate("/invoice-step-one");
+      navigate("/login");
     }
   }, [token, navigate]);
 
