@@ -71,9 +71,9 @@ export const InvoiceStepOne = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-  
+
     console.log(formData);
-  
+
     try {
       const response = await Axios.post(
         "http://localhost:8000/api/companies",
@@ -85,9 +85,9 @@ export const InvoiceStepOne = () => {
           },
         }
       );
-  
+
       console.log("Data submitted:", response.data);
-  
+
       setFormData({
         user: `/api/users/${userId}`,
         name: "",
@@ -114,21 +114,21 @@ export const InvoiceStepOne = () => {
         descriptionWork: "",
         gcs: "",
       });
-  
+
       // Faire une requête GET pour actualiser les données utilisateur
-      const userResponse = await Axios.get(`http://localhost:8000/api/users/${userId}`);
-  
+      const userResponse = await Axios.get(
+        `http://localhost:8000/api/users/${userId}`
+      );
+
       // Mettre à jour les données utilisateur dans le localStorage
       const updatedUserData = userResponse.data;
       localStorage.setItem("UserData", JSON.stringify(updatedUserData));
       setUserCompanies(updatedUserData.companies);
 
-      localStorage.setItem("SelectedCompanyDetails", JSON.stringify(response.data));
-
       const invoiceData = JSON.parse(localStorage.getItem("InvoiceData")) || {};
       invoiceData.selectedCompanyId = response.data.id;
       localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
-  
+
       // Rediriger vers l'étape suivante
       navigate("/invoice-step-two");
     } catch (error) {
@@ -153,23 +153,6 @@ export const InvoiceStepOne = () => {
   const handleContinueClick = async () => {
     if (selectedCompanie) {
       try {
-        const response = await Axios.get(
-          `http://localhost:8000/api/companies/${selectedCompanie}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const selectedCompanyDetails = response.data;
-
-        // Stocker les détails de l'entreprise dans le localStorage
-        localStorage.setItem(
-          "SelectedCompanyDetails",
-          JSON.stringify(selectedCompanyDetails)
-        );
-
         const invoiceData =
           JSON.parse(localStorage.getItem("InvoiceData")) || {};
         invoiceData.selectedCompanyId = selectedCompanie;
@@ -206,7 +189,7 @@ export const InvoiceStepOne = () => {
         </option>
         {userCompanies.map((company) => (
           <option key={company.id} value={company.id}>
-            {company.name} 
+            {company.name}
           </option>
         ))}
       </select>

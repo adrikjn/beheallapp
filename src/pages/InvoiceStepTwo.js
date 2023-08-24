@@ -9,6 +9,7 @@ export const InvoiceStepTwo = () => {
   const invoiceData = JSON.parse(localStorage.getItem("InvoiceData"));
   const selectedCompanyId = invoiceData.selectedCompanyId;
   console.log(selectedCompanyId);
+  const [companyOptions, setCompanyOptions] = useState([]);
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     lastName: "",
@@ -37,6 +38,32 @@ export const InvoiceStepTwo = () => {
     }
   }, [token, navigate]);
 
+  useEffect(() => {
+    if (selectedCompanyId) {
+      Axios.get(`http://localhost:8000/api/companies/${selectedCompanyId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          const selectedCompanyDetails = response.data;
+
+          const customerOptions = selectedCompanyDetails.customers.map((customer) => ({
+            id: customer.id,
+            firstName: customer.firstName,
+            lastName: customer.lastName,
+            companyName: customer.companyName,
+          }));
+
+          setCompanyOptions(customerOptions);
+        })
+        .catch((error) => {
+          console.error("Error fetching selected company details:", error);
+        });
+    }
+  }, [selectedCompanyId, token]);
+
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -52,6 +79,26 @@ export const InvoiceStepTwo = () => {
         }
       );
       console.log("Customer data submitted:", response.data);
+      Axios.get(`http://localhost:8000/api/companies/${selectedCompanyId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          const selectedCompanyDetails = response.data;
+  
+          const customerOptions = selectedCompanyDetails.customers.map((customer) => ({
+            id: customer.id,
+            firstName: customer.firstName,
+            lastName: customer.lastName,
+            companyName: customer.companyName,
+          }));
+  
+          setCompanyOptions(customerOptions);
+        })
+        .catch((error) => {
+          console.error("Error fetching selected company details:", error);
+        });
       navigate("/invoice-step-two");
     } catch (error) {
       console.error("Error submitting customer data:", error);
@@ -78,9 +125,14 @@ export const InvoiceStepTwo = () => {
         <h2>Etape</h2>
         <h2>N°2</h2>
       </div>
-      <p className="invoice-step-one-p">Sélectionné un client</p>
+      <p className="invoice-step-one-p">Sélectionné un destinaire</p>
       <select className="select-company">
-        <option value="">Oxynum</option>
+        <option value="">Sélectionner un client</option>
+        {companyOptions.map((customer) => (
+          <option key={customer.id} value={customer.id}>
+            {customer.firstName} {customer.lastName} - {customer.companyName}
+          </option>
+        ))}
       </select>
       <div className="add-company-exp">
         <h2>new client</h2>
