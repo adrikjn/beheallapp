@@ -71,36 +71,70 @@ export const InvoiceStepOne = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+  
     console.log(formData);
-
-    await Axios.post(
-      "http://localhost:8000/api/companies",
-      JSON.stringify(formData),
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => {
-        console.log("Data submitted:", response.data);
-
-        //FAIRE UNE REQUETE GET DU USER CONNECTER POUR ACTUALISER SES ENTREPRISE
-        return Axios.get(`http://localhost:8000/api/users/${userId}`);
-
-        //UTILISE LA REPONSE DE LA REQUEST POST COMPANIES QUE TU VIENS DE FAIRE ET ACTUALISER LA LISTE DES COMPANIE DANS LE LOCAL STORAGE
-      })
-      .then((userResponse) => {
-        const updatedUserData = userResponse.data;
-        localStorage.setItem("UserData", JSON.stringify(updatedUserData));
-        setUserCompanies(updatedUserData.companies);
-        navigate("/invoice-step-one");
-      })
-      .catch((error) => {
-        console.error("Error submitting data:", error);
+  
+    try {
+      const response = await Axios.post(
+        "http://localhost:8000/api/companies",
+        JSON.stringify(formData),
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      console.log("Data submitted:", response.data);
+  
+      setFormData({
+        user: `/api/users/${userId}`,
+        name: "",
+        logo: "",
+        address: "",
+        email: "",
+        phoneNumber: "",
+        city: "",
+        postalCode: "",
+        country: "",
+        billingIsDifferent: false,
+        billingAddress: "",
+        billingCity: "",
+        billingPostalCode: "",
+        billingCountry: "",
+        sirenSiret: "",
+        legalForm: "",
+        rmNumber: "",
+        rcsNumber: "",
+        shareCapital: "",
+        cityRegistration: "",
+        vatId: "",
+        website: "",
+        descriptionWork: "",
+        gcs: "",
       });
+  
+      // Faire une requête GET pour actualiser les données utilisateur
+      const userResponse = await Axios.get(`http://localhost:8000/api/users/${userId}`);
+  
+      // Mettre à jour les données utilisateur dans le localStorage
+      const updatedUserData = userResponse.data;
+      localStorage.setItem("UserData", JSON.stringify(updatedUserData));
+      setUserCompanies(updatedUserData.companies);
+
+      localStorage.setItem("SelectedCompanyDetails", JSON.stringify(response.data));
+
+      const invoiceData = JSON.parse(localStorage.getItem("InvoiceData")) || {};
+      invoiceData.selectedCompanyId = response.data.id;
+      localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
+  
+  
+      // Rediriger vers l'étape suivante
+      navigate("/invoice-step-two");
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -128,19 +162,20 @@ export const InvoiceStepOne = () => {
             },
           }
         );
-  
+
         const selectedCompanyDetails = response.data;
-  
+
         // Stocker les détails de l'entreprise dans le localStorage
         localStorage.setItem(
           "SelectedCompanyDetails",
           JSON.stringify(selectedCompanyDetails)
         );
-  
-        const invoiceData = JSON.parse(localStorage.getItem("InvoiceData")) || {};
+
+        const invoiceData =
+          JSON.parse(localStorage.getItem("InvoiceData")) || {};
         invoiceData.selectedCompanyId = selectedCompanie;
         localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
-        
+
         navigate("/invoice-step-two");
       } catch (error) {
         console.error("Error fetching company details:", error);
@@ -172,7 +207,7 @@ export const InvoiceStepOne = () => {
         </option>
         {userCompanies.map((company) => (
           <option key={company.id} value={company.id}>
-            {company.name}
+            {company.name} 
           </option>
         ))}
       </select>
