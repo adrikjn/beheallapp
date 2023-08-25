@@ -98,6 +98,8 @@ export const InvoiceStepThree = () => {
   );
 };
 
+//? faire les labels des date
+
 //?Set le company depuis le local storage
 //?Set le customer depuis le local storage
 //? Set le numéro de la facture
@@ -109,3 +111,6 @@ export const InvoiceStepThree = () => {
 
 
 //? je vais faire un put pour changer les valeurs des choses a set 0 ou en attente etc
+
+
+//? lorsque le formulaire est envoyé stocker le invoiceId pour la partie service
