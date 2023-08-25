@@ -618,11 +618,10 @@ ul li {
   font-size: 13px;
   font-weight: 400;
   resize: none;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
+  border: none;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
   height: 50px;
   background-color: #e9ebe9;
-  padding: 9px 20px;
 }
 
 .add-company label {
@@ -798,17 +797,31 @@ ul li {
   margin-top: 35px;
   border-radius: 5px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+
+.invoice-create form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  padding: 0px 38px 35px 38px;
+}
+.checkbox-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
   gap: 11px;
-  padding: 42px 38px;
+}
+
+.checkbox-label {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  text-align: center;
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
 }
 
-.invoice-create p {
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
-  padding-bottom: 11px;
+.checkbox-label input[type="checkbox"] {
+  margin-bottom: 3px;
 }
