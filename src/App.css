@@ -808,7 +808,7 @@ ul li {
 .checkbox-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); 
-  gap: 11px;
+  gap: 5px;
 }
 
 .checkbox-label {

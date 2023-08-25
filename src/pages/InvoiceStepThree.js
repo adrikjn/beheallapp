@@ -27,7 +27,7 @@ export const InvoiceStepThree = () => {
             ></textarea>
             <input type="date" />
             <input type="date" />
-            <p>Sélectionner une durée de validité de la facture</p>
+            <label htmlFor="billValidityDuration">Sélectionner une durée de validité de la facture</label>
             <select
               id="billValidityDuration"
               name="billValidityDuration"
@@ -41,9 +41,9 @@ export const InvoiceStepThree = () => {
               <option value="45 jours">45 jours</option>
               <option value="60 jours">60 jours</option>
             </select>
-            <p>
+            <label htmlFor="paymentMethod">
               Sélectionner les moyens de méthode de paiement que vous acceptez
-            </p>
+            </label>
             <div className="checkbox-container">
               <div className="checkbox-label">
                 <input
@@ -90,8 +90,8 @@ export const InvoiceStepThree = () => {
                 <span>Autres</span>
               </div>
             </div>
-          </form>
           <input type="date" />
+          </form>
         </div>
       </div>
     </div>
