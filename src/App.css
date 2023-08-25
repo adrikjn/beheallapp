@@ -621,7 +621,7 @@ ul li {
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   height: 50px;
-  background-color:#e9ebe9;
+  background-color: #e9ebe9;
   padding: 9px 20px;
 }
 
@@ -688,7 +688,6 @@ ul li {
 .switch-input:checked + .switch-label::after {
   transform: translateX(20px);
 }
-
 
 .billing-is-different-input {
   display: flex;
@@ -765,7 +764,7 @@ ul li {
   display: none;
 }
 
-.display-none{
+.display-none {
   display: none;
 }
 
@@ -794,3 +793,22 @@ ul li {
   border: 0;
 }
 
+/*? INVOICE STEP THREE */
+.invoice-create {
+  margin-top: 35px;
+  border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 42px 38px;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.invoice-create p {
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  padding-bottom: 11px;
+}
