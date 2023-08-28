@@ -1,6 +1,88 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 
 export const InvoiceStepThree = () => {
+  const token = localStorage.getItem("Token");
+  const navigate = useNavigate();
+  const invoiceData = JSON.parse(localStorage.getItem("InvoiceData"));
+  const selectedCompanyId = invoiceData.company;
+  const selectedCustomerId = invoiceData.customer;
+  const [formData, setFormData] = useState({
+    company: `/api/companies/${selectedCompanyId}`,
+    customer: `/api/customers/${selectedCustomerId}`,
+    title: "",
+    description: "",
+    billNumber: "", // Ici l'autoincrémenté
+    fromDate: "",
+    deliveryDate: "",
+    totalPrice: 0,
+    vat: 0,
+    billValidityDuration: "",
+    status: "brouillon",
+    paymentMethod: "",
+    paymentDays: "0",
+    paymentDateLimit: "",
+  });
+
+  //? Il faudra récupérer l'id et le stocker dans le storage qu'on a déja crée à la fin. (2/4)
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token, navigate]);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Collect the data from formData and send it to the API
+      const response = await Axios.post(
+        "http://localhost:8000/api/invoices", // Replace with the actual API endpoint
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const invoiceId = response.data.invoiceId;
+      localStorage.setItem("CurrentInvoiceId", invoiceId);
+
+      navigate("/invoice-step-three");
+    } catch (error) {
+      console.error("Error submitting invoice data:", error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value, type } = e.target;
+    let newValue;
+  
+    if (type === "checkbox") {
+      newValue = e.target.checked;
+    } else if (type === "date") {
+      newValue = value; 
+    } else if (type === "radio") {
+      if (e.target.checked) {
+        newValue = value; 
+      } else {
+        newValue = ""; 
+      }
+    } else {
+      newValue = value;
+    }
+  
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: newValue,
+    }));
+  };
+  
+
   return (
     <div className="invoice-step-one-page">
       <div className="welcome-user">
@@ -13,7 +95,7 @@ export const InvoiceStepThree = () => {
       </div>
       <div className="invoice-create">
         <div className="add-company">
-          <form>
+          <form onSubmit={handleFormSubmit}>
             <input
               type="text"
               id="title"
@@ -25,9 +107,15 @@ export const InvoiceStepThree = () => {
               placeholder="Description"
               name="description"
             ></textarea>
-            <input type="date" />
-            <input type="date" />
-            <label htmlFor="billValidityDuration">Sélectionner une durée de validité de la facture</label>
+            <label htmlFor="fromDate">Date de début de l'opération</label>
+            <input type="date" id="fromDate" name="fromDate" />
+            <label htmlFor="deliveryDate">
+              Date de l'opération / date de fin de l'opération
+            </label>
+            <input type="date" id="deliveryDate" name="deliveryDate" />
+            <label htmlFor="billValidityDuration">
+              Sélectionner une durée de validité de la facture
+            </label>
             <select
               id="billValidityDuration"
               name="billValidityDuration"
@@ -90,7 +178,11 @@ export const InvoiceStepThree = () => {
                 <span>Autres</span>
               </div>
             </div>
-          <input type="date" />
+            <label htmlFor="paymentDateLimit">Date de limite de paiement</label>
+            <input type="date" id="paymentDateLimit" name="paymentDateLimit" />
+            <div className="btn-invoice-3">
+              <button type="submit">Continuer</button>
+            </div>
           </form>
         </div>
       </div>
@@ -105,12 +197,9 @@ export const InvoiceStepThree = () => {
 //? Set le numéro de la facture
 //? Set le total price sur 0
 //? Set la tva sur 0
-//? set le depositReduce sur 0
 //? Set le status sur en attente
 //? Set le paymentDays sur 0 pour l'instant (peut etre enlever) ça représente le jour restant avant le paymentDateLimit
 
-
 //? je vais faire un put pour changer les valeurs des choses a set 0 ou en attente etc
-
 
 //? lorsque le formulaire est envoyé stocker le invoiceId pour la partie service
