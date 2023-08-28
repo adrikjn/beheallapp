@@ -7,6 +7,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { InvoiceStepOne } from "./pages/InvoiceStepOne";
 import { InvoiceStepTwo } from "./pages/InvoiceStepTwo";
 import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
+import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/invoice-step-one" element={<InvoiceStepOne />} />
           <Route path="/invoice-step-two" element={<InvoiceStepTwo />} />
           <Route path="/invoice-step-three" element={<InvoiceStepThree />} />
+          <Route path="/invoice-step-four" element={<InvoiceStepFour />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

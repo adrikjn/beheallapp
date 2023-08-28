@@ -32,6 +32,13 @@ export const InvoiceStepThree = () => {
     }
   }, [token, navigate]);
 
+  /*useEffect(() => {
+    const invoiceData = localStorage.getItem("InvoiceData");
+    if (!invoiceData) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);*/
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,9 +57,10 @@ export const InvoiceStepThree = () => {
 
       const invoiceId = response.data.id;
       console.log(invoiceId)
-      localStorage.setItem("CurrentInvoiceId", invoiceId);
+      localStorage.setItem("invoice", invoiceId);
+      //localStorage.removeItem("InvoiceData");
 
-      navigate("/invoice-step-three");
+      navigate("/invoice-step-four");
     } catch (error) {
       console.error("Error submitting invoice data:", error);
     }
