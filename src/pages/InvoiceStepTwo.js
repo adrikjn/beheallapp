@@ -37,14 +37,6 @@ export const InvoiceStepTwo = () => {
     }
   }, [token, navigate]);
 
-  /*useEffect(() => {
-    const invoiceData = localStorage.getItem("InvoiceData");
-    if (!invoiceData) {
-      navigate("/dashboard");
-    }
-  }, [navigate]);*/
-
-
   useEffect(() => {
     console.log(selectedCustomer);
     if (selectedCustomer !== "undefined") {
