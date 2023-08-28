@@ -807,13 +807,13 @@ ul li {
 }
 .checkbox-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(2, 1fr);
   gap: 5px;
 }
 
 .checkbox-label {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   text-align: center;
   color: rgba(0, 0, 0, 0.5);
@@ -824,4 +824,35 @@ ul li {
 
 .checkbox-label input[type="checkbox"] {
   margin-bottom: 3px;
+}
+
+/*? INVOICE STEP FOUR */
+.add-product {
+  margin-top: 35px;
+  border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  
+}
+
+.product-list {
+  margin-top: 88px;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.product-header,
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 11px 0;
+}
+
+.center-plus {
+  text-align: center;
+  margin-top: 22px;
 }
