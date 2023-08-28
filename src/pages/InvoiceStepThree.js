@@ -20,12 +20,11 @@ export const InvoiceStepThree = () => {
     vat: 0,
     billValidityDuration: "",
     status: "brouillon",
-    paymentMethod: [],
+    paymentMethod: "",
     paymentDays: "0",
     paymentDateLimit: "",
   });
 
-  //? Il faudra récupérer l'id et le stocker dans le storage qu'on a déja crée à la fin. (2/4)
 
   useEffect(() => {
     if (!token) {
@@ -37,8 +36,9 @@ export const InvoiceStepThree = () => {
     e.preventDefault();
 
     try {
+      console.log("Form data before submission:", formData);
       const response = await Axios.post(
-        "http://localhost:8000/api/invoices", 
+        "http://localhost:8000/api/invoices",
         formData,
         {
           headers: {
@@ -48,7 +48,8 @@ export const InvoiceStepThree = () => {
         }
       );
 
-      const invoiceId = response.data.invoiceId;
+      const invoiceId = response.data.id;
+      console.log(invoiceId)
       localStorage.setItem("CurrentInvoiceId", invoiceId);
 
       navigate("/invoice-step-three");
@@ -61,22 +62,8 @@ export const InvoiceStepThree = () => {
     const { name, value, type } = e.target;
     let newValue;
   
-    if (type === "checkbox") {
-      const isChecked = e.target.checked;
-  
-      if (isChecked) {
-        newValue = [...formData.paymentMethod, value]; 
-      } else {
-        newValue = formData.paymentMethod.filter(method => method !== value);
-      }
-    } else if (type === "date") {
+    if (type === "date") {
       newValue = value;
-    } else if (type === "radio") {
-      if (e.target.checked) {
-        newValue = value;
-      } else {
-        newValue = "";
-      }
     } else {
       newValue = value;
     }
@@ -154,68 +141,25 @@ export const InvoiceStepThree = () => {
             <label htmlFor="paymentMethod">
               Sélectionner les moyens de méthode de paiement que vous acceptez
             </label>
-            <div className="checkbox-container">
-              <div className="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="paymentMethod"
-                  value="Cartes de paiement"
-                  checked={formData.paymentMethod.includes("Cartes de paiement")}
-                  onChange={handleInputChange}
-                />
-                <span>Cartes de paiement</span>
-              </div>
-              <div className="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="paymentMethod"
-                  value="Paiement en ligne"
-                  checked={formData.paymentMethod.includes("Paiement en ligne")}
-                  onChange={handleInputChange}
-                />
-                <span>Paiement en ligne</span>
-              </div>
-              <div className="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="paymentMethod"
-                  value="Transfert électroniques"
-                  checked={formData.paymentMethod.includes("Transfert électroniques")}
-                  onChange={handleInputChange}
-                />
-                <span>Transfert électroniques</span>
-              </div>
-              <div className="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="paymentMethod"
-                  value="Paiement mobiles"
-                  checked={formData.paymentMethod.includes("Paiement mobiles")}
-                  onChange={handleInputChange}
-                />
-                <span>Paiement mobiles</span>
-              </div>
-              <div className="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="paymentMethod"
-                  value="Méthodes traditionnelles"
-                  checked={formData.paymentMethod.includes("Méthodes traditionnelles")}
-                  onChange={handleInputChange}
-                />
-                <span>Méthodes traditionnelles</span>
-              </div>
-              <div className="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="paymentMethod"
-                  value="Autres"
-                  checked={formData.paymentMethod.includes("Autres")}
-                  onChange={handleInputChange}
-                />
-                <span>Autres</span>
-              </div>
-            </div>
+            <select
+              id="paymentMethod"
+              name="paymentMethod"
+              value={formData.paymentMethod}
+              onChange={handleInputChange}
+              className="select-legal-form"
+            >
+              <option disabled>Sélectionner un moyen de paiement</option>
+              <option value="Cartes de paiement">Cartes de paiement</option>
+              <option value="Paiement en ligne">Paiement en ligne</option>
+              <option value="Transfert électroniques">
+                Transfert électroniques
+              </option>
+              <option value="Paiement mobiles">Paiement mobiles</option>
+              <option value="Méthodes traditionnelles">
+                Méthodes traditionnelles
+              </option>
+              <option value="Autres">Autres</option>
+            </select>
             <label htmlFor="paymentDateLimit">Date de limite de paiement</label>
             <input
               type="date"
@@ -247,3 +191,6 @@ export const InvoiceStepThree = () => {
 //? je vais faire un put pour changer les valeurs des choses a set 0 ou en attente etc
 
 //? lorsque le formulaire est envoyé stocker le invoiceId pour la partie service
+
+
+//? a l'aide de la sérialization à partir du invoice je vais pouvoir récupérérer les infos de l'entreprise / customer / service 
