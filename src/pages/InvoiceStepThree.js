@@ -192,5 +192,4 @@ export const InvoiceStepThree = () => {
 
 //? lorsque le formulaire est envoyé stocker le invoiceId pour la partie service
 
-
 //? a l'aide de la sérialization à partir du invoice je vais pouvoir récupérérer les infos de l'entreprise / customer / service 
