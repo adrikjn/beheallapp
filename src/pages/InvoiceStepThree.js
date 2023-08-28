@@ -13,14 +13,14 @@ export const InvoiceStepThree = () => {
     customer: `/api/customers/${selectedCustomerId}`,
     title: "",
     description: "",
-    billNumber: "", // Ici l'autoincrémenté
+    billNumber: "10",
     fromDate: "",
     deliveryDate: "",
     totalPrice: 0,
     vat: 0,
     billValidityDuration: "",
     status: "brouillon",
-    paymentMethod: "",
+    paymentMethod: [],
     paymentDays: "0",
     paymentDateLimit: "",
   });
@@ -37,9 +37,8 @@ export const InvoiceStepThree = () => {
     e.preventDefault();
 
     try {
-      // Collect the data from formData and send it to the API
       const response = await Axios.post(
-        "http://localhost:8000/api/invoices", // Replace with the actual API endpoint
+        "http://localhost:8000/api/invoices", 
         formData,
         {
           headers: {
@@ -63,14 +62,20 @@ export const InvoiceStepThree = () => {
     let newValue;
   
     if (type === "checkbox") {
-      newValue = e.target.checked;
+      const isChecked = e.target.checked;
+  
+      if (isChecked) {
+        newValue = [...formData.paymentMethod, value]; 
+      } else {
+        newValue = formData.paymentMethod.filter(method => method !== value);
+      }
     } else if (type === "date") {
-      newValue = value; 
+      newValue = value;
     } else if (type === "radio") {
       if (e.target.checked) {
-        newValue = value; 
+        newValue = value;
       } else {
-        newValue = ""; 
+        newValue = "";
       }
     } else {
       newValue = value;
@@ -81,7 +86,6 @@ export const InvoiceStepThree = () => {
       [name]: newValue,
     }));
   };
-  
 
   return (
     <div className="invoice-step-one-page">
@@ -101,18 +105,34 @@ export const InvoiceStepThree = () => {
               id="title"
               name="title"
               placeholder="Titre de la facture"
+              value={formData.title}
+              onChange={handleInputChange}
             ></input>
             <textarea
               id="description"
               placeholder="Description"
               name="description"
+              value={formData.description}
+              onChange={handleInputChange}
             ></textarea>
             <label htmlFor="fromDate">Date de début de l'opération</label>
-            <input type="date" id="fromDate" name="fromDate" />
+            <input
+              type="date"
+              id="fromDate"
+              name="fromDate"
+              value={formData.fromDate}
+              onChange={handleInputChange}
+            />
             <label htmlFor="deliveryDate">
               Date de l'opération / date de fin de l'opération
             </label>
-            <input type="date" id="deliveryDate" name="deliveryDate" />
+            <input
+              type="date"
+              id="deliveryDate"
+              name="deliveryDate"
+              value={formData.deliveryDate}
+              onChange={handleInputChange}
+            />
             <label htmlFor="billValidityDuration">
               Sélectionner une durée de validité de la facture
             </label>
@@ -120,6 +140,8 @@ export const InvoiceStepThree = () => {
               id="billValidityDuration"
               name="billValidityDuration"
               className="select-legal-form"
+              value={formData.billValidityDuration}
+              onChange={handleInputChange}
             >
               <option disabled>
                 Sélectionner une durée de validité de la facture
@@ -138,6 +160,8 @@ export const InvoiceStepThree = () => {
                   type="checkbox"
                   name="paymentMethod"
                   value="Cartes de paiement"
+                  checked={formData.paymentMethod.includes("Cartes de paiement")}
+                  onChange={handleInputChange}
                 />
                 <span>Cartes de paiement</span>
               </div>
@@ -146,6 +170,8 @@ export const InvoiceStepThree = () => {
                   type="checkbox"
                   name="paymentMethod"
                   value="Paiement en ligne"
+                  checked={formData.paymentMethod.includes("Paiement en ligne")}
+                  onChange={handleInputChange}
                 />
                 <span>Paiement en ligne</span>
               </div>
@@ -154,6 +180,8 @@ export const InvoiceStepThree = () => {
                   type="checkbox"
                   name="paymentMethod"
                   value="Transfert électroniques"
+                  checked={formData.paymentMethod.includes("Transfert électroniques")}
+                  onChange={handleInputChange}
                 />
                 <span>Transfert électroniques</span>
               </div>
@@ -162,6 +190,8 @@ export const InvoiceStepThree = () => {
                   type="checkbox"
                   name="paymentMethod"
                   value="Paiement mobiles"
+                  checked={formData.paymentMethod.includes("Paiement mobiles")}
+                  onChange={handleInputChange}
                 />
                 <span>Paiement mobiles</span>
               </div>
@@ -170,16 +200,30 @@ export const InvoiceStepThree = () => {
                   type="checkbox"
                   name="paymentMethod"
                   value="Méthodes traditionnelles"
+                  checked={formData.paymentMethod.includes("Méthodes traditionnelles")}
+                  onChange={handleInputChange}
                 />
                 <span>Méthodes traditionnelles</span>
               </div>
               <div className="checkbox-label">
-                <input type="checkbox" name="paymentMethod" value="Autres" />
+                <input
+                  type="checkbox"
+                  name="paymentMethod"
+                  value="Autres"
+                  checked={formData.paymentMethod.includes("Autres")}
+                  onChange={handleInputChange}
+                />
                 <span>Autres</span>
               </div>
             </div>
             <label htmlFor="paymentDateLimit">Date de limite de paiement</label>
-            <input type="date" id="paymentDateLimit" name="paymentDateLimit" />
+            <input
+              type="date"
+              id="paymentDateLimit"
+              name="paymentDateLimit"
+              value={formData.paymentDateLimit}
+              onChange={handleInputChange}
+            />
             <div className="btn-invoice-3">
               <button type="submit">Continuer</button>
             </div>
