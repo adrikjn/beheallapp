@@ -100,7 +100,7 @@ export const InvoiceStepFour = () => {
                   name="unitCost"
                   id="unitCost"
                   placeholder="Prix unitaires"
-                  
+                  value={formData.unitCost}
                 onChange={handleInputChange}
                 />
                 <input
@@ -108,7 +108,7 @@ export const InvoiceStepFour = () => {
                   name="quantity"
                   id="quantity"
                   placeholder="Quantité"
-                  
+                  value={formData.quantity}
                 onChange={handleInputChange}
                 />
                 <input
@@ -116,7 +116,7 @@ export const InvoiceStepFour = () => {
                   name="totalPrice"
                   id="totalPrice"
                   placeholder="Prix HT"
-                  
+                  value={formData.totalPrice}
                 onChange={handleInputChange}
                 />
                 <div className="btn-invoice-4">
