@@ -55,6 +55,16 @@ export const InvoiceStepFour = () => {
       newValue = e.target.checked;
     } else if (type === "number") {
       newValue = parseFloat(value); // Convert to float
+      if (name === "quantity" || name === "unitCost") {
+        newValue = isNaN(newValue) ? 0 : newValue;
+        const updatedTotalPrice = newValue * formData.unitCost;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: newValue,
+          totalPrice: updatedTotalPrice,
+        }));
+        return;
+      }
     } else {
       newValue = value;
     }
@@ -124,6 +134,7 @@ export const InvoiceStepFour = () => {
                   id="totalPrice"
                   placeholder="Prix HT"
                   onChange={handleInputChange}
+                  value={formData.totalPrice}
                 />
                 <input
                   type="number"
