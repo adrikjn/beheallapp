@@ -14,6 +14,7 @@ export const InvoiceStepFour = () => {
     quantity: 0,
     unitCost: 0,
     totalPrice: 0,
+    vat: 0,
     invoice: `/api/invoices/${invoiceId}`,
   });
 
@@ -48,7 +49,15 @@ export const InvoiceStepFour = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
-    const newValue = type === "checkbox" ? e.target.checked : value;
+    let newValue;
+
+    if (type === "checkbox") {
+      newValue = e.target.checked;
+    } else if (type === "number") {
+      newValue = parseFloat(value); // Convert to float
+    } else {
+      newValue = value;
+    }
 
     setFormData((prevData) => ({
       ...prevData,
@@ -100,7 +109,6 @@ export const InvoiceStepFour = () => {
                   name="unitCost"
                   id="unitCost"
                   placeholder="Prix unitaires"
-                  value={formData.unitCost}
                   onChange={handleInputChange}
                 />
                 <input
@@ -108,15 +116,20 @@ export const InvoiceStepFour = () => {
                   name="quantity"
                   id="quantity"
                   placeholder="Quantité"
-                  value={formData.quantity}
                   onChange={handleInputChange}
                 />
                 <input
-                  type="text"
+                  type="number"
                   name="totalPrice"
                   id="totalPrice"
                   placeholder="Prix HT"
-                  value={formData.totalPrice}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="number"
+                  name="vat"
+                  id="vat"
+                  placeholder="TVA"
                   onChange={handleInputChange}
                 />
                 <div className="btn-invoice-4">
