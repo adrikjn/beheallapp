@@ -5,8 +5,6 @@ import Axios from "axios";
 export const InvoiceStepFour = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
-  const [invoiceCreateVisible, setInvoiceCreateVisible] = useState(false);
-  const [productListVisible, setProductListVisible] = useState(true);
   const invoiceId = localStorage.getItem("invoice");
   const [formData, setFormData] = useState({
     title: "",
@@ -40,6 +38,7 @@ export const InvoiceStepFour = () => {
         }
       );
       console.log(response);
+      //Je refait le toggle ici
 
       navigate("/invoice-step-four");
     } catch (error) {
@@ -54,7 +53,7 @@ export const InvoiceStepFour = () => {
     if (type === "checkbox") {
       newValue = e.target.checked;
     } else if (type === "number") {
-      newValue = parseFloat(value); // Convert to float
+      newValue = parseFloat(value);
       if (name === "quantity" || name === "unitCost") {
         newValue = isNaN(newValue) ? 0 : newValue;
         const updatedTotalPrice = newValue * formData.unitCost;
@@ -75,11 +74,6 @@ export const InvoiceStepFour = () => {
     }));
   };
 
-  const handleToggleInvoiceCreate = () => {
-    setInvoiceCreateVisible(!invoiceCreateVisible);
-    setProductListVisible(false);
-  };
-
   return (
     <div className="invoice-step-one-page">
       <div className="welcome-user">
@@ -91,102 +85,86 @@ export const InvoiceStepFour = () => {
         <h2>N°4</h2>
       </div>
       <div>
-        <div
-          className={`invoice-create ${
-            invoiceCreateVisible ? "" : "display-none"
-          }`}
-        >
-          {invoiceCreateVisible && (
-            <div className="add-company">
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  placeholder="Nom de votre produit"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                ></input>
-                <textarea
-                  id="description"
-                  placeholder="Descriptif"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                ></textarea>
-                <input
-                  type="number"
-                  name="unitCost"
-                  id="unitCost"
-                  placeholder="Prix unitaires"
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="number"
-                  name="quantity"
-                  id="quantity"
-                  placeholder="Quantité"
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="number"
-                  name="totalPrice"
-                  id="totalPrice"
-                  placeholder="Prix HT"
-                  onChange={handleInputChange}
-                  value={formData.totalPrice}
-                />
-                <input
-                  type="number"
-                  name="vat"
-                  id="vat"
-                  placeholder="TVA"
-                  onChange={handleInputChange}
-                />
-                <div className="btn-invoice-4">
-                  <button type="submit">Ajouter le produit</button>
-                </div>
-              </form>
-            </div>
-          )}
+        <div className={"invoice-create"}>
+          <div className="add-company">
+            <form onSubmit={handleFormSubmit}>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Nom de votre produit"
+                value={formData.title}
+                onChange={handleInputChange}
+              ></input>
+              <textarea
+                id="description"
+                placeholder="Descriptif"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+              ></textarea>
+              <input
+                type="number"
+                name="unitCost"
+                id="unitCost"
+                placeholder="Prix unitaires"
+                onChange={handleInputChange}
+              />
+              <input
+                type="number"
+                name="quantity"
+                id="quantity"
+                placeholder="Quantité"
+                onChange={handleInputChange}
+              />
+              <input
+                type="number"
+                name="totalPrice"
+                id="totalPrice"
+                placeholder="Prix HT"
+                onChange={handleInputChange}
+                value={formData.totalPrice}
+              />
+              <input
+                type="number"
+                name="vat"
+                id="vat"
+                placeholder="TVA"
+                onChange={handleInputChange}
+              />
+              <div className="btn-invoice-4">
+                <button type="submit">Ajouter le produit</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 
       <div className="product-list">
-        {productListVisible && (
-          <React.Fragment>
-            <ul className="product-header">
-              <li>Produits</li>
-              <li>Quantité</li>
-              <li>Prix unitaires</li>
-              <li>TVA</li>
-              <li>Prix HT</li>
-            </ul>
-            <ul className="product-item">
-              <li>Test</li>
-              <li>Test</li>
-              <li>Test</li>
-              <li>Test</li>
-              <li>Test</li>
-            </ul>
-            <div className="center-plus">
-              <img
-                src="/plus.svg"
-                alt="add-products"
-                onClick={handleToggleInvoiceCreate}
-              />
-            </div>
-            <div className="total-price">
-              <p>Total ttc: 00.00€</p>
-            </div>
-          </React.Fragment>
-        )}
+        <ul className="product-header">
+          <li>Produits</li>
+          <li>Quantité</li>
+          <li>Prix unitaires</li>
+          <li>TVA</li>
+          <li>Prix HT</li>
+        </ul>
+        <ul className="product-item">
+          <li>Test</li>
+          <li>Test</li>
+          <li>Test</li>
+          <li>Test</li>
+          <li>Test</li>
+        </ul>
+        <div className="center-plus">
+          <img src="/plus.svg" alt="add-products" />
+        </div>
+        <div className="total-price">
+          <p>Total ttc: 00.00€</p>
+        </div>
       </div>
 
       <div className="btn-invoice-2">
-        {productListVisible && (
           <button type="submit">Créer votre facture</button>
-        )}
       </div>
     </div>
   );
