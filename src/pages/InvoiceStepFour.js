@@ -38,7 +38,7 @@ export const InvoiceStepFour = () => {
           },
         }
       );
-      console.log(response)
+      console.log(response);
 
       navigate("/invoice-step-four");
     } catch (error) {
@@ -86,14 +86,14 @@ export const InvoiceStepFour = () => {
                   name="title"
                   placeholder="Nom de votre produit"
                   value={formData.title}
-                onChange={handleInputChange}
+                  onChange={handleInputChange}
                 ></input>
                 <textarea
                   id="description"
                   placeholder="Descriptif"
                   name="description"
                   value={formData.description}
-                onChange={handleInputChange}
+                  onChange={handleInputChange}
                 ></textarea>
                 <input
                   type="number"
@@ -101,7 +101,7 @@ export const InvoiceStepFour = () => {
                   id="unitCost"
                   placeholder="Prix unitaires"
                   value={formData.unitCost}
-                onChange={handleInputChange}
+                  onChange={handleInputChange}
                 />
                 <input
                   type="number"
@@ -109,7 +109,7 @@ export const InvoiceStepFour = () => {
                   id="quantity"
                   placeholder="Quantité"
                   value={formData.quantity}
-                onChange={handleInputChange}
+                  onChange={handleInputChange}
                 />
                 <input
                   type="text"
@@ -117,7 +117,7 @@ export const InvoiceStepFour = () => {
                   id="totalPrice"
                   placeholder="Prix HT"
                   value={formData.totalPrice}
-                onChange={handleInputChange}
+                  onChange={handleInputChange}
                 />
                 <div className="btn-invoice-4">
                   <button type="submit">Ajouter le produit</button>
