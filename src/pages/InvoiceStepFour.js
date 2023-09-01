@@ -50,26 +50,23 @@ export const InvoiceStepFour = () => {
     fetchProducts();
   }, [token, navigate, invoiceId]);
 
- 
-
   useEffect(() => {
     // Fonction pour calculer le total TTC
     const calculateTotalTTC = () => {
       let total = 0;
-  
+
       // Parcourez la liste des produits et ajoutez le prix total de chaque produit au total
       productList.forEach((product) => {
         total += product.totalPrice + (product.totalPrice * product.vat) / 100;
       });
-  
+
       return total;
     };
-  
+
     // Après le chargement initial des produits, calculez le total TTC
     const initialTotalTTC = calculateTotalTTC();
     setTotalTTC(initialTotalTTC);
   }, [productList]);
-  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -109,7 +106,7 @@ export const InvoiceStepFour = () => {
             title: service.title,
             quantity: service.quantity,
             unitCost: service.unitCost,
-            vat: formData.vat, // Utilisez la TVA saisie dans le formulaire
+            vat: service.vat, // Utilisez la TVA saisie dans le formulaire
             totalPrice: service.totalPrice,
           },
         ]);
@@ -122,6 +119,28 @@ export const InvoiceStepFour = () => {
       navigate("/invoice-step-four");
     } catch (error) {
       console.error("Error submitting invoice data:", error);
+    }
+  };
+
+  const handleCreateInvoice = async () => {
+    try {
+      // Envoyer la valeur de totalTTC à l'API pour mettre à jour le champ totalPrice de l'Invoice
+      await Axios.put(
+        `http://localhost:8000/api/invoices/${invoiceId}`,
+        { totalPrice: totalTTC }, // Envoyer la nouvelle valeur de totalPrice
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // Rediriger l'utilisateur vers une page de confirmation ou de récapitulatif
+      navigate("/invoice-step-five");
+    } catch (error) {
+      console.error("Error updating invoice data:", error);
+      // Gestion des erreurs ici (affichage d'un message à l'utilisateur, etc.)
     }
   };
 
@@ -255,10 +274,12 @@ export const InvoiceStepFour = () => {
           <img src="/plus.svg" alt="add-products" onClick={handleToggle} />
         </div>
         <div className="total-price">
-        <p>Total TTC: {totalTTC.toFixed(2)}€</p>
+          <p>Total TTC: {totalTTC.toFixed(2)}€</p>
         </div>
         <div className="btn-invoice-2">
-          <button type="submit">Créer votre facture</button>
+          <button type="submit" onClick={handleCreateInvoice}>
+            Créer votre facture
+          </button>
         </div>
       </div>
     </div>
