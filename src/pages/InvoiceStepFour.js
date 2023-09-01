@@ -7,6 +7,7 @@ export const InvoiceStepFour = () => {
   const navigate = useNavigate();
   const invoiceId = localStorage.getItem("invoice");
   const [productList, setProductList] = useState([]);
+  const [totalTTC, setTotalTTC] = useState(0);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -49,6 +50,27 @@ export const InvoiceStepFour = () => {
     fetchProducts();
   }, [token, navigate, invoiceId]);
 
+ 
+
+  useEffect(() => {
+    // Fonction pour calculer le total TTC
+    const calculateTotalTTC = () => {
+      let total = 0;
+  
+      // Parcourez la liste des produits et ajoutez le prix total de chaque produit au total
+      productList.forEach((product) => {
+        total += product.totalPrice + (product.totalPrice * product.vat) / 100;
+      });
+  
+      return total;
+    };
+  
+    // Après le chargement initial des produits, calculez le total TTC
+    const initialTotalTTC = calculateTotalTTC();
+    setTotalTTC(initialTotalTTC);
+  }, [productList]);
+  
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -87,7 +109,7 @@ export const InvoiceStepFour = () => {
             title: service.title,
             quantity: service.quantity,
             unitCost: service.unitCost,
-            vat: service.totalPrice * (service.vat / 100),
+            vat: formData.vat, // Utilisez la TVA saisie dans le formulaire
             totalPrice: service.totalPrice,
           },
         ]);
@@ -224,16 +246,16 @@ export const InvoiceStepFour = () => {
           <ul className="product-item" key={index}>
             <li>{product.title}</li>
             <li>{product.quantity}</li>
-            <li>{product.unitCost}</li>
-            <li>{typeof product.vat === "number" ? product.vat : "N/A"}</li>
-            <li>{product.totalPrice}</li>
+            <li>{product.unitCost}€</li>
+            <li>{product.vat}%</li>
+            <li>{product.totalPrice}€</li>
           </ul>
         ))}
         <div className="center-plus">
           <img src="/plus.svg" alt="add-products" onClick={handleToggle} />
         </div>
         <div className="total-price">
-          <p>Total ttc: 00.00€</p>
+        <p>Total TTC: {totalTTC.toFixed(2)}€</p>
         </div>
         <div className="btn-invoice-2">
           <button type="submit">Créer votre facture</button>
