@@ -851,6 +851,12 @@ ul li {
   padding: 11px 0;
 }
 
+.product-header li,
+.product-item li {
+  width: 20%; 
+  text-align: center; 
+}
+
 .center-plus {
   text-align: center;
   margin-top: 22px;

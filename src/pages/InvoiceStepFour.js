@@ -6,6 +6,7 @@ export const InvoiceStepFour = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
   const invoiceId = localStorage.getItem("invoice");
+  const [productList, setProductList] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -15,7 +16,7 @@ export const InvoiceStepFour = () => {
     vat: 0,
     invoice: `/api/invoices/${invoiceId}`,
   });
-  
+
   const [isInvoiceCreateVisible, setIsInvoiceCreateVisible] = useState(false);
   const [isProductListVisible, setIsProductListVisible] = useState(true);
 
@@ -23,7 +24,30 @@ export const InvoiceStepFour = () => {
     if (!token) {
       navigate("/login");
     }
-  }, [token, navigate]);
+
+    // Effectuer la requête GET pour obtenir la liste des produits
+    const fetchProducts = async () => {
+      try {
+        const invoiceResponse = await Axios.get(
+          `http://localhost:8000/api/invoices/${invoiceId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const updatedServices = invoiceResponse.data.services;
+        // Mettre à jour la liste des produits dans l'état
+        setProductList(updatedServices);
+      } catch (error) {
+        console.error("Error fetching invoice data:", error);
+      }
+    };
+
+    // Charger les produits lorsque le composant est monté
+    fetchProducts();
+  }, [token, navigate, invoiceId]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +66,33 @@ export const InvoiceStepFour = () => {
       );
       console.log(response);
 
+      const invoiceResponse = await Axios.get(
+        `http://localhost:8000/api/invoices/${invoiceId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Assurez-vous que token contient le jeton d'accès valide
+          },
+        }
+      );
+
+      // Mettre à jour la liste des produits dans l'interface utilisateur
+      const updatedServices = invoiceResponse.data.services;
+      // Supprimez les éléments actuels de la liste (remplacez par la nouvelle liste)
+      setProductList([]);
+      // Ajoutez les services mis à jour à la liste
+      updatedServices.forEach((service) => {
+        setProductList((prevList) => [
+          ...prevList,
+          {
+            title: service.title,
+            quantity: service.quantity,
+            unitCost: service.unitCost,
+            vat: service.totalPrice * (service.vat / 100),
+            totalPrice: service.totalPrice,
+          },
+        ]);
+      });
+
       // Toggle visibility after form submission
       setIsInvoiceCreateVisible(!isInvoiceCreateVisible);
       setIsProductListVisible(!isProductListVisible);
@@ -56,7 +107,6 @@ export const InvoiceStepFour = () => {
     setIsInvoiceCreateVisible(!isInvoiceCreateVisible);
     setIsProductListVisible(!isProductListVisible);
   };
-
 
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
@@ -97,7 +147,13 @@ export const InvoiceStepFour = () => {
         <h2>N°4</h2>
       </div>
       <div>
-      <div className={isInvoiceCreateVisible ? "invoice-create" : "invoice-create display-none"}>
+        <div
+          className={
+            isInvoiceCreateVisible
+              ? "invoice-create"
+              : "invoice-create display-none"
+          }
+        >
           <div className="add-company">
             <form onSubmit={handleFormSubmit}>
               <input
@@ -152,7 +208,11 @@ export const InvoiceStepFour = () => {
         </div>
       </div>
 
-      <div className={isProductListVisible ? "product-list" : "product-list display-none"}>
+      <div
+        className={
+          isProductListVisible ? "product-list" : "product-list display-none"
+        }
+      >
         <ul className="product-header">
           <li>Produits</li>
           <li>Quantité</li>
@@ -160,23 +220,24 @@ export const InvoiceStepFour = () => {
           <li>TVA</li>
           <li>Prix HT</li>
         </ul>
-        <ul className="product-item">
-          <li>Test</li>
-          <li>Test</li>
-          <li>Test</li>
-          <li>Test</li>
-          <li>Test</li>
-        </ul>
+        {productList.map((product, index) => (
+          <ul className="product-item" key={index}>
+            <li>{product.title}</li>
+            <li>{product.quantity}</li>
+            <li>{product.unitCost}</li>
+            <li>{typeof product.vat === "number" ? product.vat : "N/A"}</li>
+            <li>{product.totalPrice}</li>
+          </ul>
+        ))}
         <div className="center-plus">
-        <img src="/plus.svg" alt="add-products" onClick={handleToggle} />
+          <img src="/plus.svg" alt="add-products" onClick={handleToggle} />
         </div>
         <div className="total-price">
           <p>Total ttc: 00.00€</p>
         </div>
-      </div>
-
-      <div className="btn-invoice-2">
+        <div className="btn-invoice-2">
           <button type="submit">Créer votre facture</button>
+        </div>
       </div>
     </div>
   );
@@ -184,5 +245,4 @@ export const InvoiceStepFour = () => {
 
 // Le total TTC je vais faire avec du pure js le calculture de tout le prix ht avec la quantité tva etc SANS BACKEND et l'afficher dans le total TTC. Et a partir de ce total TTC je vais envoyer la valeure dans la BDD avec un put sur la facture.
 
-
-// Je vais faire un get id a partir du invoice et récupéré toute les données sur les  services à l'aide e la serialization.
+// Je vais faire un get id a partir du invoice et récupéré toute les données sur les  services à l'aide de la serialization.
