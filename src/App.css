@@ -853,8 +853,8 @@ ul li {
 
 .product-header li,
 .product-item li {
-  width: 20%; 
-  text-align: center; 
+  width: 20%;
+  text-align: center;
 }
 
 .center-plus {
@@ -906,10 +906,81 @@ ul li {
   font-size: 12px;
   font-weight: 600;
   margin: 12px 0 12px 4px;
-
 }
 
-.summary .company-summary-part, .customer-summary-part, .product-summary-part  {
+.summary .company-summary-part,
+.customer-summary-part,
+.product-summary-part {
   border: 0.5px solid #000;
   background: rgba(225, 226, 225, 0.5);
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 300;
+}
+
+.company-info-1,
+.customer-info-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 21px 0 31px 18px;
+  gap: 10px;
+}
+
+.company-info-2,
+.customer-info-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 27px 18px 25px 0px;
+  gap: 10px;
+}
+
+.customer-info-1 {
+  margin: 32px 0 40px 18px;
+}
+
+.customer-info-2 {
+  margin: 32px 18px 40px 0;
+}
+
+.product-summary-part {
+  flex-direction: column;
+  padding: 17px 17px;
+  font-size: 10px;
+  font-weight: 300;
+  gap: 10px;
+}
+
+.product-summary-header,
+.product-summary-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-summary-header li,
+.product-summary-item li {
+  width: 20%;
+  text-align: center;
+}
+
+.product-summary-item li p {
+  font-size: 9px;
+  margin-top: 5px;
+}
+
+.summary-details {
+  margin-top: 15px;
+  color: #000;
+  font-family: Articulat CF;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.summary-details .summary-total {
+  display: flex;
+  justify-content: space-between;
 }
