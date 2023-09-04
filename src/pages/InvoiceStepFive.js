@@ -135,6 +135,11 @@ export const InvoiceStepFive = () => {
             <p>Numéro de facture : {invoiceData?.billNumber.toUpperCase()}</p>
             <p>Date : {formatDate(invoiceData?.createdAt)}</p>
           </div>
+          <div className="btn-invoice-2">
+          <button>
+            Envoyer
+          </button>
+        </div>
         </div>
       </div>
     </div>
