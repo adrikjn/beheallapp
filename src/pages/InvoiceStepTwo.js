@@ -304,13 +304,13 @@ export const InvoiceStepTwo = () => {
             onChange={handleInputChange}
           ></textarea>
         </div>
-        <div className="btn-invoice-3">
+        <div className="btn-invoice-2">
           <button>Ajouter un client</button>
         </div>
       </form>
       </div>
 
-      <div className="btn-invoice-2">
+      <div className="btn-invoice-2 fixed-btn">
         {selectedCustomer !== "undefined" && selectedCustomer !== null && (
           <button onClick={handleContinueClick}>Continuer</button>
         )}

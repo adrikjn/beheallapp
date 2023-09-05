@@ -168,7 +168,7 @@ export const InvoiceStepThree = () => {
               value={formData.paymentDateLimit}
               onChange={handleInputChange}
             />
-            <div className="btn-invoice-3">
+            <div className="btn-invoice-2">
               <button type="submit">Continuer</button>
             </div>
           </form>

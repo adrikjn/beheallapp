@@ -197,7 +197,6 @@ export const InvoiceStepOne = () => {
         <div className="add-company-exp">
           <h2>new expéditaire</h2>
         </div>
-
         <form onSubmit={handleFormSubmit}>
           <div className="add-company">
             <input
@@ -454,7 +453,7 @@ export const InvoiceStepOne = () => {
         </form>
       </div>
 
-      <div className="btn-invoice-2">
+      <div className="btn-invoice-2 fixed-btn">
         {selectedCompanie !== "undefined" && selectedCompanie !== null && (
           <button onClick={handleContinueClick}>Continuer</button>
         )}

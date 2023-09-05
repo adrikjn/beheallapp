@@ -414,28 +414,18 @@ ul li {
   margin-left: 15px;
 }
 
-.btn-invoice {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
 .btn-invoice button {
   margin-top: 18px;
   border-radius: 5px;
   padding: 24px 64px;
   background: #4f9e65;
   color: #fff;
-  text-align: center;
   font-family: Articulat CF;
   font-size: 18px;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
   text-transform: uppercase;
   border: 0;
+  width: 100%;
 }
 
 /*? COMPONENT NAV */
@@ -562,6 +552,7 @@ ul li {
   background-image: url("../public/polygon-1.svg");
   background-position: right 20px center;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .add-company-exp {
@@ -585,25 +576,7 @@ ul li {
   padding: 8px 34px;
 }
 
-.add-company-exp h2::before,
-.add-company-exp h2::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 100px;
-  background: rgba(0, 0, 0, 0.5);
-  height: 0.5px;
-}
 
-.add-company-exp h2::before {
-  left: -74px;
-  transform: translateY(-50%);
-}
-
-.add-company-exp h2::after {
-  right: -74px;
-  transform: translateY(-50%);
-}
 
 .add-company {
   display: flex;
@@ -635,9 +608,7 @@ ul li {
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   border: none;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
   background-color: #e9ebe9;
@@ -693,11 +664,17 @@ ul li {
   flex-direction: column;
   gap: 19px;
   margin: auto;
+  width: 100%;
 }
 
 .input-row {
   display: flex;
-  gap: 40px;
+  justify-content: space-between;
+  gap: 43px;
+}
+
+.input-row input {
+  width:  80%;
 }
 
 .select-legal-form {
@@ -716,6 +693,7 @@ ul li {
   background-repeat: no-repeat;
   border: none;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 .btn-invoice-2 {
@@ -724,6 +702,7 @@ ul li {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  position: relative;
 }
 
 .btn-invoice-2 button {
@@ -741,6 +720,16 @@ ul li {
   line-height: normal;
   text-transform: uppercase;
   border: 0;
+  cursor: pointer;
+}
+
+.btn-invoice-2.fixed-btn {
+  width: 85%;
+  position: fixed;
+  bottom: 13%; /* Ajustez la valeur en fonction de votre préférence */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
 }
 
 .custom-file-label {
@@ -765,31 +754,6 @@ ul li {
 
 .display-none {
   display: none;
-}
-
-/*? INVOICE STEP TWO PAGE */
-.btn-invoice-3 {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn-invoice-3 button {
-  margin-top: 18px;
-  border-radius: 5px;
-  padding: 24px 70px;
-  background: #4f9e65;
-  color: #fff;
-  text-align: center;
-  font-family: Articulat CF;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  text-transform: uppercase;
-  border: 0;
 }
 
 /*? INVOICE STEP THREE */
@@ -869,7 +833,7 @@ ul li {
   font-family: Articulat CF;
   font-size: 18px;
   font-weight: 700;
-  margin-top: 238px;
+  margin-top: 100px;
 }
 
 .btn-invoice-4 {
