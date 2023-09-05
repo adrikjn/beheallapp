@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import AccordionNav from "../components/AccordionNav";
+
 
 export const InvoiceStepFive = () => {
   const token = localStorage.getItem("Token");
@@ -135,13 +137,15 @@ export const InvoiceStepFive = () => {
             <p>Numéro de facture : {invoiceData?.billNumber.toUpperCase()}</p>
             <p>Date : {formatDate(invoiceData?.createdAt)}</p>
           </div>
-          <div className="btn-invoice-2">
+          <div className="btn-invoice-2 fixed-btn">
           <button>
             Envoyer
           </button>
         </div>
         </div>
       </div>
+      <AccordionNav />
+
     </div>
   );
 };

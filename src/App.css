@@ -426,6 +426,7 @@ ul li {
   text-transform: uppercase;
   border: 0;
   width: 100%;
+  cursor: pointer;
 }
 
 /*? COMPONENT NAV */
@@ -833,7 +834,7 @@ ul li {
   font-family: Articulat CF;
   font-size: 18px;
   font-weight: 700;
-  margin-top: 100px;
+  margin-top: 240px;
 }
 
 .btn-invoice-4 {
@@ -858,6 +859,7 @@ ul li {
   line-height: normal;
   text-transform: uppercase;
   border: 0;
+  cursor: pointer;
 }
 
 /*? INVOICE STEP FIVE SUMMARY */

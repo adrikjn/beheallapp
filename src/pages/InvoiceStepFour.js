@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import AccordionNav from "../components/AccordionNav";
 
 export const InvoiceStepFour = () => {
   const token = localStorage.getItem("Token");
@@ -241,7 +242,7 @@ export const InvoiceStepFour = () => {
                 placeholder="TVA"
                 onChange={handleInputChange}
               />
-              <div className="btn-invoice-4">
+              <div className="btn-invoice-4 ">
                 <button type="submit">Ajouter le produit</button>
               </div>
             </form>
@@ -276,12 +277,13 @@ export const InvoiceStepFour = () => {
         <div className="total-price">
           <p>Total TTC: {totalTTC.toFixed(2)}€</p>
         </div>
-        <div className="btn-invoice-2 ">
+        <div className="btn-invoice-2 fixed-btn">
           <button type="submit" onClick={handleCreateInvoice}>
             Créer votre facture
           </button>
         </div>
       </div>
+      <AccordionNav />
     </div>
   );
 };
