@@ -9,7 +9,7 @@ const AccordionNav = () => {
   };
 
   return (
-    <div className="align-toggle">
+    <div className="accordion-nav">
       <div className={`toggle-button ${isLinksVisible ? "open" : ""}`} onClick={handleToggleLinks}>
         <span>Home</span>
         <div className="toggle-lines">

@@ -1,127 +1,83 @@
-import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
+/*? COMPONENT NAV */
+.align-toggle {
+  display: flex;
+  justify-content: flex-end;
+}
 
-export const InvoiceStepFour = () => {
-  const token = localStorage.getItem("Token");
-  const navigate = useNavigate();
-  const [invoiceCreateVisible, setInvoiceCreateVisible] = useState(false);
-  const [productListVisible, setProductListVisible] = useState(true);
+.toggle-button {
+  position: relative;
+  margin-top: 20px;
+  width: 100%; /* Utilisez 100% pour s'adapter à la largeur de l'écran */
+  height: 63px;
+  border-radius: 7px;
+  background: #1b1b1b;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
 
+.toggle-button span {
+  margin-left: 31px;
+}
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }
-  }, [token, navigate]);
+.toggle-lines {
+  display: flex;
+  flex-direction: column;
+  margin-right: 32.5px;
+  transition: transform 0.3s ease-in-out;
+  margin-top: 5px;
+}
 
-  
+.toggle-lines img {
+  width: 20px;
+  height: 2px;
+  background-color: #fff;
+  margin-bottom: 3.25px;
+}
 
-  const handleToggleInvoiceCreate = () => {
-    setInvoiceCreateVisible(!invoiceCreateVisible);
-    setProductListVisible(false);
-  };
+.toggle-button.open .toggle-lines {
+  transform: rotate(45deg);
+}
 
-  return (
-    <div className="invoice-step-one-page">
-      <div className="welcome-user">
-        <h1>creation factures</h1>
-        <img src="/profil-icon.svg" alt="profil" />
-      </div>
-      <div className="invoice-step-one-title">
-        <h2>Etape</h2>
-        <h2>N°4</h2>
-      </div>
-      <div>
-        <div
-          className={`invoice-create ${
-            invoiceCreateVisible ? "" : "display-none"
-          }`}
-        >
-          {invoiceCreateVisible && (
-            <div className="add-company">
-              <form >
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  placeholder="Nom de votre produit"
-             
-                ></input>
-                <textarea
-                  id="description"
-                  placeholder="Descriptif"
-                  name="description"
-             
-                ></textarea>
-                <input
-                  type="number"
-                  name="unitCost"
-                  id="unitCost"
-                  placeholder="Prix unitaires"
-              
-                />
-                <input
-                  type="number"
-                  name="quantity"
-                  id="quantity"
-                  placeholder="Quantité"
-          
-                />
-                <input
-                  type="text"
-                  name="totalPrice"
-                  id="totalPrice"
-                  placeholder="Prix HT"
-                 
-                />
-                <div className="btn-invoice-4">
-                  <button type="submit">Ajouter le produit</button>
-                </div>
-              </form>
-            </div>
-          )}
-        </div>
-      </div>
+.toggle-button.open .toggle-lines img:nth-child(1) {
+  margin-bottom: 0;
+  transform: rotate(90deg) translateX(2px);
+}
 
-      <div className="product-list">
-        {productListVisible && (
-          <React.Fragment>
-            <ul className="product-header">
-              <li>Produits</li>
-              <li>Quantité</li>
-              <li>Prix unitaires</li>
-              <li>TVA</li>
-              <li>Prix HT</li>
-            </ul>
-            <ul className="product-item">
-              <li>Test</li>
-              <li>Test</li>
-              <li>Test</li>
-              <li>Test</li>
-              <li>Test</li>
-            </ul>
-            <div className="center-plus">
-              <img
-                src="/plus.svg"
-                alt="add-products"
-                onClick={handleToggleInvoiceCreate}
-              />
-            </div>
-            <div className="total-price">
-              <p>Total ttc: 00.00€</p>
-            </div>
-          </React.Fragment>
-        )}
-      </div>
+.nav-links {
+  display: none;
+  position: absolute;
+  top: 83.8%;
+  background-color: #252525;
+  z-index: 1;
+  padding: 17px 36px;
+  border-radius: 7px;
+  width: 249px;
+}
 
-      <div className="btn-invoice-2">
-        {productListVisible && (
-          <button type="submit">Créer votre facture</button>
-        )}
-      </div>
-    </div>
-  );
-};
+.links-open {
+  display: block;
+}
 
-// Le total TTC je vais faire avec du pure js le calculture de tout le prix ht avec la quantité tva etc SANS BACKEND et l'afficher dans le total TTC. Et a partir de ce total TTC je vais envoyer la valeure dans la BDD avec un put sur la facture.
+.nav-links li {
+  margin-bottom: 15px;
+}
+
+.nav-links li:nth-child(4) {
+  margin: 0;
+}
+
+.nav-links .links-style {
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

@@ -482,7 +482,6 @@ ul li {
 .nav-links {
   display: none;
   position: absolute;
-  top: 83.8%;
   background-color: #252525;
   z-index: 1;
   padding: 17px 36px;
