@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
+import Account from "../components/Account";
 
 export const InvoiceStepTwo = () => {
   const token = localStorage.getItem("Token");
@@ -156,7 +157,8 @@ export const InvoiceStepTwo = () => {
     <div className="invoice-step-one-page">
       <div className="welcome-user">
         <h1>creation factures</h1>
-        <img src="/profil-icon.svg" alt="facture" />
+        <Account />
+
       </div>
       <div className="invoice-step-one-title">
         <h2>Etape</h2>

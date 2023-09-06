@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
+import Account from "../components/Account";
 
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
@@ -16,7 +17,7 @@ export const Dashboard = () => {
     <div className="dashboard-page">
       <div className="welcome-user">
         <h1>Welcome</h1>
-        <img src="/profil-icon.svg" alt="facture" />
+        <Account />
       </div>
 
       <div className="invoice-title">

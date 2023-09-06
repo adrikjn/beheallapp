@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import AccordionNav from "../components/AccordionNav";
+import Account from "../components/Account";
 
 
 export const InvoiceStepFive = () => {
@@ -61,7 +62,7 @@ export const InvoiceStepFive = () => {
     <div className="invoice-step-one-page">
       <div className="welcome-user">
         <h1>Recapitulatif</h1>
-        <img src="/profil-icon.svg" alt="profil" />
+        <Account />
       </div>
       <div className="summary">
         <div className="company-summary">
@@ -137,7 +138,7 @@ export const InvoiceStepFive = () => {
             <p>Numéro de facture : {invoiceData?.billNumber.toUpperCase()}</p>
             <p>Date : {formatDate(invoiceData?.createdAt)}</p>
           </div>
-          <div className="btn-invoice-2 fixed-btn">
+          <div className="btn-invoice-2">
           <button>
             Envoyer
           </button>

@@ -3,6 +3,8 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
+import Account from "../components/Account";
+
 
 // quand je selectionne une entreprise je cache le formulaire
 // lorsqu'il y'a une entreprise je récupère l'id de l'entreprise et je le met en localstorage et si il crée une nouvelle id je met l'id de la response en local storage
@@ -172,7 +174,7 @@ export const InvoiceStepOne = () => {
     <div className="invoice-step-one-page">
       <div className="welcome-user">
         <h1>creation factures</h1>
-        <img src="/profil-icon.svg" alt="facture" />
+        <Account />
       </div>
       <div className="invoice-step-one-title">
         <h2>Etape</h2>
