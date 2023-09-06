@@ -17,7 +17,7 @@ ul li {
 /*? SETTINGS FOR ALL PAGES */
 .landing-page,
 .dashboard-page,
-.invoice-step-one-page {
+.invoice-step-one-page{
   width: 85vw;
   margin: 0 auto;
 }
@@ -430,14 +430,18 @@ ul li {
 }
 
 /*? COMPONENT NAV */
-.align-toggle {
+
+.accordion-nav {
+  right: 7.5%;
+  top: 90%;
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
 .toggle-button {
-  position: relative;
-  margin-top: 20px;
+  position: relative; /* Ajoutez la position fixe ici */
   width: 249px;
   height: 63px;
   border-radius: 7px;
@@ -482,15 +486,18 @@ ul li {
 .nav-links {
   display: none;
   position: absolute;
-  background-color: #252525;
-  z-index: 1;
-  padding: 17px 36px;
-  border-radius: 7px;
-  width: 249px;
+  bottom: 90%;
 }
 
 .links-open {
   display: block;
+  position: absolute;
+  padding: 17px 36px;
+  text-align: left; /* Alignez le contenu à gauche */
+  width: 249px;
+  z-index: 100000;
+  border-radius: 7px;
+  background-color: #252525;
 }
 
 .nav-links li {
@@ -507,10 +514,9 @@ ul li {
   text-align: center;
   font-family: Articulat CF;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 }
+
 
 /*? INVOICE STEP ONE PAGE  */
 .invoice-step-one-title {
