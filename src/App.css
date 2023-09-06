@@ -14,7 +14,7 @@ ul li {
   list-style-type: none;
 }
 
-/*? SETTINGS FOR ALL PAGES */
+/*? SETTINGS FOR SOME PAGES */
 .landing-page,
 .dashboard-page,
 .invoice-step-one-page{
@@ -77,10 +77,6 @@ ul li {
 }
 
 /*? LOGIN PART */
-.login-page {
-  width: 100vw;
-  margin: 0 auto;
-}
 
 .login-page h2 {
   color: #434344;
@@ -102,7 +98,7 @@ ul li {
 }
 
 .login-description {
-  margin: 0 120px 25px 36px;
+  margin: 0 68px 25px 36px;
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 6px;
@@ -111,6 +107,7 @@ ul li {
 
 .login-border {
   border: 0.5px solid #1b1b1b;
+  width: 100%;
 }
 
 .login-part-two {
@@ -189,16 +186,14 @@ ul li {
   font-size: 18px;
   width: 100%;
   text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 65px;
 }
 
 /** Register part */
-.login-page {
-  width: 100vw;
-  margin: 0 auto;
-}
-
 .register-facture-image {
-  margin: 15px 0 0 117px;
+  margin: 15px 0 0 0;
+  text-align: center;
 }
 
 .register-title {
@@ -263,6 +258,8 @@ ul li {
   font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 65px;
 }
 
 /*? DASHBOARD PAGE */
@@ -729,12 +726,13 @@ ul li {
   text-transform: uppercase;
   border: 0;
   cursor: pointer;
+  margin-bottom: 95px;
 }
 
 .btn-invoice-2.fixed-btn {
   width: 85%;
   position: fixed;
-  bottom: 13%; /* Ajustez la valeur en fonction de votre préférence */
+  bottom: 0%; /* Ajustez la valeur en fonction de votre préférence */
   left: 50%;
   transform: translateX(-50%);
   z-index: 0.9;
@@ -841,7 +839,7 @@ ul li {
   font-family: Articulat CF;
   font-size: 18px;
   font-weight: 700;
-  margin-top: 240px;
+  margin-top: 230px;
 }
 
 .btn-invoice-4 {
