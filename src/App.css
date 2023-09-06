@@ -506,7 +506,7 @@ ul li {
   margin-bottom: 15px;
 }
 
-.nav-links li:nth-child() {
+.nav-links li:nth-child(5) {
   margin: 0;
 }
 
