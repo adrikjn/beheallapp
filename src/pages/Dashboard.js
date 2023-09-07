@@ -15,12 +15,12 @@ export const Dashboard = () => {
     } else if (userData && userData.companies) {
       // Extract company IDs from userData
       const companyIds = userData.companies.map((company) => company.id);
-  
+
       // Create an authorization header with the Bearer Token
       const headers = {
         Authorization: `Bearer ${token}`, // Replace "token" with your actual token
       };
-  
+
       // Make API calls to fetch company data with the authorization header
       Promise.all(
         companyIds.map(async (companyId) => {
@@ -59,16 +59,23 @@ export const Dashboard = () => {
       </div>
 
       <div className="invoice-list">
-        {userCompanies.map((company) =>
-          company.invoices.map((invoice) => (
-            <div key={invoice.id} className="invoice-customers">
-              <p>Nom du client: {invoice.customer.companyName} par {company.name}</p>
-              <p>Statut: {invoice.status}</p>
-            </div>
-          ))
-        )}
-      </div>
+        {userCompanies.map((company) => {
+          const sortedInvoices = [...company.invoices].sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+          );
+          const lastTwoInvoices = sortedInvoices.slice(0, 1);
 
+          return lastTwoInvoices.map((invoice) => (
+            <div key={invoice.id} className="invoice-customers">
+              <p>
+               {invoice.customer.companyName} (
+                {invoice.customer.lastName} {invoice.customer.firstName})
+              </p>
+              <p>{invoice.status}</p>
+            </div>
+          ));
+        })}
+      </div>
       <div className="revenue-party">
         <h2>Evolution du CA</h2>
         <div className="revenue">

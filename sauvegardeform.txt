@@ -6,52 +6,43 @@ import Account from "../components/Account";
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(null);
-  const [userCompanyId, setUserCompanyId] = useState(null);
+  const [userCompanies, setUserCompanies] = useState([]);
+  const userData = JSON.parse(localStorage.getItem("UserData"));
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
+    if (!token) {
+      navigate("/login");
+    } else if (userData && userData.companies) {
+      // Extract company IDs from userData
+      const companyIds = userData.companies.map((company) => company.id);
 
-      // Récupérer les données UserData depuis le localStorage
-      const storedUserData = JSON.parse(localStorage.getItem("UserData"));
-      setUserData(storedUserData);
+      // Create an authorization header with the Bearer Token
+      const headers = {
+        Authorization: `Bearer ${token}`, // Replace "token" with your actual token
+      };
 
-      if (storedUserData) {
-        // Récupérer l'ID de l'utilisateur
-        const userId = storedUserData.id;
-
-        // Définir l'en-tête Authorization avec le Bearer Token
-        const headers = {
-          Authorization: `Bearer ${token}`,
-        };
-
-        try {
-          // Appeler l'API pour obtenir les entreprises avec l'en-tête
-          const response = await fetch("http://localhost:8000/api/companies", {
-            headers,
-          });
-          const data = await response.json();
-
-          // Trouver l'entreprise qui correspond à l'utilisateur
-          const matchingCompany = data.find(
-            (company) => company.user.id === userId
+      // Make API calls to fetch company data with the authorization header
+      Promise.all(
+        companyIds.map(async (companyId) => {
+          const response = await fetch(
+            `http://localhost:8000/api/companies/${companyId}`,
+            {
+              method: "GET",
+              headers: headers,
+            }
           );
-
-          if (matchingCompany) {
-            setUserCompanyId(matchingCompany.id);
-          }
-        } catch (error) {
-          console.error("Error fetching companies:", error);
-        }
-      }
-    };
-
-    fetchData();
-  }, [token, navigate]);
+          const companyData = await response.json();
+          return companyData;
+        })
+      )
+        .then((companies) => {
+          setUserCompanies(companies);
+        })
+        .catch((error) => {
+          console.error("Error fetching company data:", error);
+        });
+    }
+  }, [token, navigate, userData]);
 
   return (
     <div className="dashboard-page">
@@ -61,36 +52,35 @@ export const Dashboard = () => {
           <Account />
         </div>
       )}
-      {userCompanyId && (
-        <div>
-          <div className="invoice-title">
-            <p>Factures envoyées</p>
-            <p>Statut</p>
-          </div>
-          {userData &&
-            userData.companies &&
-            userData.companies.map((company) => {
-              if (company.id === userCompanyId) {
-                return company.invoices.map((invoice) => (
-                  <div key={invoice.id} className="invoice-list">
-                    <div className="invoice-customers">
-                      <p>{invoice.customer.companyName}</p>
-                      <p>{invoice.status}</p>
-                    </div>
-                    <div className="line"></div>
-                  </div>
-                ));
-              }
-              return null;
-            })}
-        </div>
-      )}
 
+      <div className="invoice-title">
+        <p>Factures envoyées</p>
+        <p>Statut</p>
+      </div>
+
+      <div className="invoice-list">
+        {userCompanies.map((company) => {
+          const sortedInvoices = [...company.invoices].sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+          );
+          const lastTwoInvoices = sortedInvoices.slice(0, 1);
+
+          return lastTwoInvoices.map((invoice) => (
+            <div key={invoice.id} className="invoice-customers">
+              <p>
+               {invoice.customer.companyName} (
+                {invoice.customer.lastName} {invoice.customer.firstName})
+              </p>
+              <p>{invoice.status}</p>
+            </div>
+          ));
+        })}
+      </div>
       <div className="revenue-party">
         <h2>Evolution du CA</h2>
         <div className="revenue">
           <div className="revenue-title-date">
-            <p>ca :</p>
+            <p>CA :</p>
             <p>
               Juin <span>2023</span>
             </p>
@@ -105,16 +95,14 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
+
       <div className="btn-invoice">
         <Link to="/invoice-step-one">
           <button>Créer une facture</button>
         </Link>
       </div>
+
       <AccordionNav />
     </div>
   );
 };
-
-// Get UserData sur l'id, ça va donné la/les companies
-// Get de cette/ces companies
-// sérialiser company:read sur Invoice pour récupérer les informations
