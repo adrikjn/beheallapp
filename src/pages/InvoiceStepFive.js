@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 
-
 export const InvoiceStepFive = () => {
   const token = localStorage.getItem("Token");
   const invoiceId = localStorage.getItem("invoice");
@@ -17,7 +16,7 @@ export const InvoiceStepFive = () => {
     const day = date.getDate().toString().padStart(2, "0");
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const year = date.getFullYear();
-  
+
     return `${day}/${month}/${year}`;
   }
 
@@ -45,7 +44,7 @@ export const InvoiceStepFive = () => {
           const data = await response.json();
           setInvoiceData(data);
         } else {
-          navigate("/error");
+          navigate("/invoice-step-one");
         }
       } catch (error) {
         console.error(
@@ -165,12 +164,11 @@ export const InvoiceStepFive = () => {
             <p>Date : {formatDate(invoiceData?.createdAt)}</p>
           </div>
           <div className="btn-invoice-2">
-          <button onClick={sendInvoice}>Envoyer</button>
-        </div>
+            <button onClick={sendInvoice}>Envoyer</button>
+          </div>
         </div>
       </div>
       <AccordionNav />
-
     </div>
   );
 };

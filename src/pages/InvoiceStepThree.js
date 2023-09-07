@@ -8,8 +8,8 @@ export const InvoiceStepThree = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
   const invoiceData = JSON.parse(localStorage.getItem("InvoiceData"));
-  const selectedCompanyId = invoiceData.company;
-  const selectedCustomerId = invoiceData.customer;
+  const selectedCompanyId = invoiceData ? invoiceData.company : null;
+  const selectedCustomerId = invoiceData ? invoiceData.customer : null;
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     customer: `/api/customers/${selectedCustomerId}`,
@@ -31,8 +31,10 @@ export const InvoiceStepThree = () => {
   useEffect(() => {
     if (!token) {
       navigate("/login");
+    } else if (!invoiceData) {
+      navigate("/invoice-step-two");
     }
-  }, [token, navigate]);
+  }, [token, navigate, invoiceData]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();

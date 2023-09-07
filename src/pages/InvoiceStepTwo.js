@@ -8,7 +8,7 @@ export const InvoiceStepTwo = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
   const invoiceData = JSON.parse(localStorage.getItem("InvoiceData"));
-  const selectedCompanyId = invoiceData.company;
+  const selectedCompanyId = invoiceData ? invoiceData.company : null;
   const [companyOptions, setCompanyOptions] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState("undefined");
   const [formData, setFormData] = useState({
@@ -35,8 +35,16 @@ export const InvoiceStepTwo = () => {
   useEffect(() => {
     if (!token) {
       navigate("/login");
+      return;
     }
-  }, [token, navigate]);
+
+    if (!invoiceData) {
+      navigate("/invoice-step-one");
+      return;
+    }
+
+    // Le reste de votre code pour traiter les données de facture
+  }, [token, navigate, invoiceData]); // Assurez-vous que les dépendances sont correctement spécifiées
 
   useEffect(() => {
     console.log(selectedCustomer);

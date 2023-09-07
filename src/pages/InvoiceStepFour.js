@@ -141,6 +141,7 @@ export const InvoiceStepFour = () => {
       // Rediriger l'utilisateur vers une page de confirmation ou de récapitulatif
       navigate("/invoice-step-five");
     } catch (error) {
+
       console.error("Error updating invoice data:", error);
       // Gestion des erreurs ici (affichage d'un message à l'utilisateur, etc.)
     }
