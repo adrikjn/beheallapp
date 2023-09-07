@@ -78,7 +78,7 @@ export const Dashboard = () => {
   const displayTotalThisMonth =
     totalThisMonth <= 99999999
       ? `${formattedTotalThisMonth} €`
-      : "99.999.999 € +";
+      : "Supérieur à 99.999.999€ ";
 
   return (
     <div className="dashboard-page">
