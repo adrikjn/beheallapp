@@ -280,14 +280,37 @@ ul li {
   text-transform: uppercase;
 }
 
+.draft-button {
+  text-align: center;
+  width: 100%;
+}
+
+.draft-button button {
+  background-color:#252525;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.draft-button button:hover {
+  background-color:#434344;
+}
+
+
 .invoice-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
   padding-bottom: 8px;
   font-family: Roboto;
+  margin-top: 15px;
 }
 
 .invoice-title > p:nth-child(1) {
@@ -346,6 +369,7 @@ ul li {
   background: #4f9e65;
   width: 25%;
 }
+
 
 .line {
   width: 100%;

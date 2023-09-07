@@ -80,6 +80,10 @@ export const Dashboard = () => {
       ? `${formattedTotalThisMonth} €`
       : "Supérieur à 99.999.999€ ";
 
+  const hasDraftInvoice = lastTwoInvoices.some(
+    (invoice) => invoice.status === "brouillon"
+  );
+
   return (
     <div className="dashboard-page">
       {userData && (
@@ -88,9 +92,15 @@ export const Dashboard = () => {
           <Account />
         </div>
       )}
-
+      <div className="draft-button">
+        {hasDraftInvoice && (
+          <Link to="/invoice-step-four">
+            <button>Finaliser le brouillon</button>
+          </Link>
+        )}
+      </div>
       <div className="invoice-title">
-        <p>Dernières factures envoyées</p>
+        <p>Dernières factures</p>
         <p>Statut</p>
       </div>
 
