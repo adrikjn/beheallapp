@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 
+
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
   const [userCompanies, setUserCompanies] = useState([]);
   const userData = JSON.parse(localStorage.getItem("UserData"));
+  const currentDate = new Date(); // Obtenir la date actuelle
 
   useEffect(() => {
     if (!token) {
@@ -54,6 +56,23 @@ export const Dashboard = () => {
   // Get the first two invoices (the two most recent)
   const lastTwoInvoices = sortedInvoices.slice(0, 2);
 
+  const currentMonth = currentDate.toLocaleString("default", { month: "long" });
+  const currentYear = currentDate.getFullYear();
+  const formattedCurrentDate = `${currentMonth} ${currentYear}`;
+
+  const invoicesThisMonth = allInvoices.filter((invoice) => {
+    const invoiceDate = new Date(invoice.createdAt);
+    const invoiceMonth = invoiceDate.toLocaleString("default", { month: "long" });
+    return invoiceMonth.toLowerCase() === currentMonth.toLowerCase();
+  });
+
+  // Calculer le total des prix des factures de ce mois
+  const totalThisMonth = invoicesThisMonth.reduce((total, invoice) => {
+    return total + invoice.totalPrice;
+  }, 0);
+
+  const formattedTotalThisMonth = totalThisMonth.toFixed(2);
+
   return (
     <div className="dashboard-page">
       {userData && (
@@ -64,7 +83,7 @@ export const Dashboard = () => {
       )}
 
       <div className="invoice-title">
-        <p>Factures envoyées</p>
+        <p>Dernières factures envoyées</p>
         <p>Statut</p>
       </div>
 
@@ -84,16 +103,15 @@ export const Dashboard = () => {
       </div>
 
       <div className="revenue-party">
-        <h2>Evolution du CA</h2>
+        <h2>Chiffre d'affaires du mois</h2>
         <div className="revenue">
           <div className="revenue-title-date">
             <p>CA :</p>
             <p>
-              Juin <span>2023</span>
+              {formattedCurrentDate} 
             </p>
           </div>
-          <p className="revenue-amount">123.34 €</p>
-          <p className="revenue-evolution">+67%</p>
+          <p className="revenue-amount">{formattedTotalThisMonth} €</p>
           <div className="view-more-revenue">
             <img src="/arrow.svg" alt="facture" />
             <Link to="/dashboard" className="link-see-more">

@@ -377,11 +377,8 @@ ul li {
 .revenue-title-date p:nth-child(2) {
   font-family: Roboto;
   font-size: 13px;
-  font-weight: 300;
-}
-
-.revenue-title-date p:nth-child(2) span {
-  font-weight: 700;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .revenue .revenue-amount {
@@ -391,12 +388,6 @@ ul li {
   font-weight: 700;
 }
 
-.revenue .revenue-evolution {
-  color: #4f9e65;
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
-}
 
 .view-more-revenue {
   display: flex;
@@ -831,6 +822,10 @@ ul li {
 .center-plus {
   text-align: center;
   margin-top: 22px;
+}
+
+.center-plus img{
+  cursor: pointer;
 }
 
 .total-price {
