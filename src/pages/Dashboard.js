@@ -18,7 +18,7 @@ export const Dashboard = () => {
 
       // Create an authorization header with the Bearer Token
       const headers = {
-        Authorization: `Bearer ${token}`, // Replace "token" with your actual token
+        Authorization: `Bearer ${token}`,
       };
 
       // Make API calls to fetch company data with the authorization header
@@ -44,6 +44,16 @@ export const Dashboard = () => {
     }
   }, [token, navigate, userData]);
 
+  const allInvoices = userCompanies.flatMap((company) => company.invoices);
+
+  // Sort all invoices by createdAt in descending order
+  const sortedInvoices = allInvoices.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+  
+  // Get the first two invoices (the two most recent)
+  const lastTwoInvoices = sortedInvoices.slice(0,2);
+
   return (
     <div className="dashboard-page">
       {userData && (
@@ -59,23 +69,14 @@ export const Dashboard = () => {
       </div>
 
       <div className="invoice-list">
-        {userCompanies.map((company) => {
-          const sortedInvoices = [...company.invoices].sort(
-            (a, b) => new Date(b.date) - new Date(a.date)
-          );
-          const lastTwoInvoices = sortedInvoices.slice(0, 1);
-
-          return lastTwoInvoices.map((invoice) => (
-            <div key={invoice.id} className="invoice-customers">
-              <p>
-               {invoice.customer.companyName} (
-                {invoice.customer.lastName} {invoice.customer.firstName})
-              </p>
-              <p>{invoice.status}</p>
-            </div>
-          ));
-        })}
+        {lastTwoInvoices.map((invoice) => (
+          <div key={invoice.id} className="invoice-customers">
+            <p>Nom du client: {invoice.customer.lastName}</p>
+            <p>Statut: {invoice.status}</p>
+          </div>
+        ))}
       </div>
+
       <div className="revenue-party">
         <h2>Evolution du CA</h2>
         <div className="revenue">
