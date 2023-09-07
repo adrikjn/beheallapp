@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 
-
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
@@ -62,7 +61,9 @@ export const Dashboard = () => {
 
   const invoicesThisMonth = allInvoices.filter((invoice) => {
     const invoiceDate = new Date(invoice.createdAt);
-    const invoiceMonth = invoiceDate.toLocaleString("default", { month: "long" });
+    const invoiceMonth = invoiceDate.toLocaleString("default", {
+      month: "long",
+    });
     return invoiceMonth.toLowerCase() === currentMonth.toLowerCase();
   });
 
@@ -97,7 +98,13 @@ export const Dashboard = () => {
                 invoice.customer.firstName.slice(1)}
               )
             </p>
-            <p>{invoice.status}</p>
+            <p
+              className={
+                invoice.status === "brouillon" ? "status-draft" : "status-sent"
+              }
+            >
+              {invoice.status}
+            </p>
           </div>
         ))}
       </div>
@@ -107,9 +114,7 @@ export const Dashboard = () => {
         <div className="revenue">
           <div className="revenue-title-date">
             <p>CA :</p>
-            <p>
-              {formattedCurrentDate} 
-            </p>
+            <p>{formattedCurrentDate}</p>
           </div>
           <p className="revenue-amount">{formattedTotalThisMonth} €</p>
           <div className="view-more-revenue">

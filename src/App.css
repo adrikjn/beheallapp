@@ -315,7 +315,6 @@ ul li {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background: #e14848;
   color: #fff;
   font-family: Roboto;
   font-size: 11px;
@@ -330,13 +329,22 @@ ul li {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background: #4f9e65;
   color: #fff;
   font-family: Roboto;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.status-draft {
+  background: #e14848;
+  width: 25%;
+}
+
+.status-sent {
+  background: #4f9e65;
+  width: 25%;
 }
 
 .line {
