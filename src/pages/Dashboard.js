@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
@@ -6,41 +6,74 @@ import Account from "../components/Account";
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
+  const [userCompanies, setUserCompanies] = useState([]);
+  const userData = JSON.parse(localStorage.getItem("UserData"));
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
+    } else if (userData && userData.companies) {
+      // Extract company IDs from userData
+      const companyIds = userData.companies.map((company) => company.id);
+  
+      // Create an authorization header with the Bearer Token
+      const headers = {
+        Authorization: `Bearer ${token}`, // Replace "token" with your actual token
+      };
+  
+      // Make API calls to fetch company data with the authorization header
+      Promise.all(
+        companyIds.map(async (companyId) => {
+          const response = await fetch(
+            `http://localhost:8000/api/companies/${companyId}`,
+            {
+              method: "GET",
+              headers: headers,
+            }
+          );
+          const companyData = await response.json();
+          return companyData;
+        })
+      )
+        .then((companies) => {
+          setUserCompanies(companies);
+        })
+        .catch((error) => {
+          console.error("Error fetching company data:", error);
+        });
     }
-  }, [token, navigate]);
+  }, [token, navigate, userData]);
 
   return (
     <div className="dashboard-page">
-      <div className="welcome-user">
-        <h1>Welcome</h1>
-        <Account />
-      </div>
+      {userData && (
+        <div className="welcome-user">
+          <h1>Welcome, {userData.firstName}</h1>
+          <Account />
+        </div>
+      )}
 
       <div className="invoice-title">
         <p>Factures envoyées</p>
-        <p>statut</p>
+        <p>Statut</p>
       </div>
+
       <div className="invoice-list">
-        <div className="invoice-customers">
-          <p>Parella group</p>
-          <p>Payé</p>
-        </div>
-        <div className="line"></div>
-        <div className="invoice-customers-2">
-          <p>Elyes Voisin</p>
-          <p>Non payé</p>
-        </div>
-        <div className="line"></div>
+        {userCompanies.map((company) =>
+          company.invoices.map((invoice) => (
+            <div key={invoice.id} className="invoice-customers">
+              <p>Nom du client: {invoice.customer.companyName} par {company.name}</p>
+              <p>Statut: {invoice.status}</p>
+            </div>
+          ))
+        )}
       </div>
+
       <div className="revenue-party">
         <h2>Evolution du CA</h2>
         <div className="revenue">
           <div className="revenue-title-date">
-            <p>ca :</p>
+            <p>CA :</p>
             <p>
               Juin <span>2023</span>
             </p>
@@ -55,11 +88,13 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
+
       <div className="btn-invoice">
         <Link to="/invoice-step-one">
           <button>Créer une facture</button>
         </Link>
       </div>
+
       <AccordionNav />
     </div>
   );

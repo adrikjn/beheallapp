@@ -1,83 +1,120 @@
-/*? COMPONENT NAV */
-.align-toggle {
-  display: flex;
-  justify-content: flex-end;
-}
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import AccordionNav from "../components/AccordionNav";
+import Account from "../components/Account";
 
-.toggle-button {
-  position: relative;
-  margin-top: 20px;
-  width: 100%; /* Utilisez 100% pour s'adapter à la largeur de l'écran */
-  height: 63px;
-  border-radius: 7px;
-  background: #1b1b1b;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-}
+export const Dashboard = () => {
+  const token = localStorage.getItem("Token");
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+  const [userCompanyId, setUserCompanyId] = useState(null);
 
-.toggle-button span {
-  margin-left: 31px;
-}
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!token) {
+        navigate("/login");
+        return;
+      }
 
-.toggle-lines {
-  display: flex;
-  flex-direction: column;
-  margin-right: 32.5px;
-  transition: transform 0.3s ease-in-out;
-  margin-top: 5px;
-}
+      // Récupérer les données UserData depuis le localStorage
+      const storedUserData = JSON.parse(localStorage.getItem("UserData"));
+      setUserData(storedUserData);
 
-.toggle-lines img {
-  width: 20px;
-  height: 2px;
-  background-color: #fff;
-  margin-bottom: 3.25px;
-}
+      if (storedUserData) {
+        // Récupérer l'ID de l'utilisateur
+        const userId = storedUserData.id;
 
-.toggle-button.open .toggle-lines {
-  transform: rotate(45deg);
-}
+        // Définir l'en-tête Authorization avec le Bearer Token
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
 
-.toggle-button.open .toggle-lines img:nth-child(1) {
-  margin-bottom: 0;
-  transform: rotate(90deg) translateX(2px);
-}
+        try {
+          // Appeler l'API pour obtenir les entreprises avec l'en-tête
+          const response = await fetch("http://localhost:8000/api/companies", {
+            headers,
+          });
+          const data = await response.json();
 
-.nav-links {
-  display: none;
-  position: absolute;
-  top: 83.8%;
-  background-color: #252525;
-  z-index: 1;
-  padding: 17px 36px;
-  border-radius: 7px;
-  width: 249px;
-}
+          // Trouver l'entreprise qui correspond à l'utilisateur
+          const matchingCompany = data.find(
+            (company) => company.user.id === userId
+          );
 
-.links-open {
-  display: block;
-}
+          if (matchingCompany) {
+            setUserCompanyId(matchingCompany.id);
+          }
+        } catch (error) {
+          console.error("Error fetching companies:", error);
+        }
+      }
+    };
 
-.nav-links li {
-  margin-bottom: 15px;
-}
+    fetchData();
+  }, [token, navigate]);
 
-.nav-links li:nth-child(4) {
-  margin: 0;
-}
+  return (
+    <div className="dashboard-page">
+      {userData && (
+        <div className="welcome-user">
+          <h1>Welcome, {userData.firstName}</h1>
+          <Account />
+        </div>
+      )}
+      {userCompanyId && (
+        <div>
+          <div className="invoice-title">
+            <p>Factures envoyées</p>
+            <p>Statut</p>
+          </div>
+          {userData &&
+            userData.companies &&
+            userData.companies.map((company) => {
+              if (company.id === userCompanyId) {
+                return company.invoices.map((invoice) => (
+                  <div key={invoice.id} className="invoice-list">
+                    <div className="invoice-customers">
+                      <p>{invoice.customer.companyName}</p>
+                      <p>{invoice.status}</p>
+                    </div>
+                    <div className="line"></div>
+                  </div>
+                ));
+              }
+              return null;
+            })}
+        </div>
+      )}
 
-.nav-links .links-style {
-  text-decoration: none;
-  color: #fff;
-  text-align: center;
-  font-family: Articulat CF;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
+      <div className="revenue-party">
+        <h2>Evolution du CA</h2>
+        <div className="revenue">
+          <div className="revenue-title-date">
+            <p>ca :</p>
+            <p>
+              Juin <span>2023</span>
+            </p>
+          </div>
+          <p className="revenue-amount">123.34 €</p>
+          <p className="revenue-evolution">+67%</p>
+          <div className="view-more-revenue">
+            <img src="/arrow.svg" alt="facture" />
+            <Link to="/dashboard" className="link-see-more">
+              Voir plus
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="btn-invoice">
+        <Link to="/invoice-step-one">
+          <button>Créer une facture</button>
+        </Link>
+      </div>
+      <AccordionNav />
+    </div>
+  );
+};
+
+// Get UserData sur l'id, ça va donné la/les companies
+// Get de cette/ces companies
+// sérialiser company:read sur Invoice pour récupérer les informations
