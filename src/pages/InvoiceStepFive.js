@@ -58,6 +58,32 @@ export const InvoiceStepFive = () => {
     fetchData();
   }, [invoiceId, navigate, token]);
 
+  const sendInvoice = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/invoices/${invoiceId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: "envoyé" }), // Mettez à jour le statut ici
+        }
+      );
+
+      if (response.ok) {
+        localStorage.removeItem("invoice");
+        localStorage.removeItem("InvoiceData");
+        navigate("/dashboard");
+      } else {
+        navigate("/error");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'envoi de la facture : ", error);
+    }
+  };
+
   return (
     <div className="invoice-step-one-page">
       <div className="welcome-user">
@@ -139,9 +165,7 @@ export const InvoiceStepFive = () => {
             <p>Date : {formatDate(invoiceData?.createdAt)}</p>
           </div>
           <div className="btn-invoice-2">
-          <button>
-            Envoyer
-          </button>
+          <button onClick={sendInvoice}>Envoyer</button>
         </div>
         </div>
       </div>
