@@ -50,9 +50,9 @@ export const Dashboard = () => {
   const sortedInvoices = allInvoices.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
-  
+
   // Get the first two invoices (the two most recent)
-  const lastTwoInvoices = sortedInvoices.slice(0,2);
+  const lastTwoInvoices = sortedInvoices.slice(0, 2);
 
   return (
     <div className="dashboard-page">
@@ -71,8 +71,11 @@ export const Dashboard = () => {
       <div className="invoice-list">
         {lastTwoInvoices.map((invoice) => (
           <div key={invoice.id} className="invoice-customers">
-            <p>Nom du client: {invoice.customer.lastName}</p>
-            <p>Statut: {invoice.status}</p>
+            <p>
+              {invoice.customer.companyName} ({invoice.customer.lastName}{" "}
+              {invoice.customer.firstName})
+            </p>
+            <p>{invoice.status}</p>
           </div>
         ))}
       </div>
