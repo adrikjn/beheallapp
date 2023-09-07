@@ -72,8 +72,11 @@ export const Dashboard = () => {
         {lastTwoInvoices.map((invoice) => (
           <div key={invoice.id} className="invoice-customers">
             <p>
-              {invoice.customer.companyName} ({invoice.customer.lastName}{" "}
-              {invoice.customer.firstName})
+              {invoice.customer.companyName.toUpperCase()} - (
+              {invoice.customer.lastName.toUpperCase()}{" "}
+              {invoice.customer.firstName.charAt(0).toUpperCase() +
+                invoice.customer.firstName.slice(1)}
+              )
             </p>
             <p>{invoice.status}</p>
           </div>
