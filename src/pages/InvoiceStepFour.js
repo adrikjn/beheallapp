@@ -26,6 +26,8 @@ export const InvoiceStepFour = () => {
   useEffect(() => {
     if (!token) {
       navigate("/login");
+    } else if (!invoiceId) {
+      navigate("/invoice-step-one");
     }
 
     // Effectuer la requête GET pour obtenir la liste des produits
@@ -141,7 +143,6 @@ export const InvoiceStepFour = () => {
       // Rediriger l'utilisateur vers une page de confirmation ou de récapitulatif
       navigate("/invoice-step-five");
     } catch (error) {
-
       console.error("Error updating invoice data:", error);
       // Gestion des erreurs ici (affichage d'un message à l'utilisateur, etc.)
     }

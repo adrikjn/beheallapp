@@ -55,7 +55,7 @@ export const InvoiceStepThree = () => {
       const invoiceId = response.data.id;
       console.log(invoiceId)
       localStorage.setItem("invoice", invoiceId);
-
+      localStorage.removeItem("InvoiceData");
       navigate("/invoice-step-four");
     } catch (error) {
       console.error("Error submitting invoice data:", error);
