@@ -74,6 +74,12 @@ export const Dashboard = () => {
 
   const formattedTotalThisMonth = totalThisMonth.toFixed(2);
 
+  // Gérer l'affichage du montant ou du message
+  const displayTotalThisMonth =
+    totalThisMonth <= 99999999
+      ? `${formattedTotalThisMonth} €`
+      : "99.999.999 € +";
+
   return (
     <div className="dashboard-page">
       {userData && (
@@ -116,7 +122,7 @@ export const Dashboard = () => {
             <p>CA :</p>
             <p>{formattedCurrentDate}</p>
           </div>
-          <p className="revenue-amount">{formattedTotalThisMonth} €</p>
+          <p className="revenue-amount">{displayTotalThisMonth}</p>
           <div className="view-more-revenue">
             <img src="/arrow.svg" alt="facture" />
             <Link to="/dashboard" className="link-see-more">
