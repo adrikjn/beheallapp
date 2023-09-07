@@ -23,8 +23,10 @@ export const InvoiceStepFive = () => {
   useEffect(() => {
     if (!token) {
       navigate("/login");
+    } else if (!invoiceId) {
+      navigate("/invoice-step-one"); // Redirection vers invoice-step-one si invoiceId est nul
     }
-  }, [token, navigate]);
+  }, [token, navigate, invoiceId]);
 
   useEffect(() => {
     const fetchData = async () => {
