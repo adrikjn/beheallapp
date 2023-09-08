@@ -102,7 +102,6 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
   storeDraftInvoiceIdLocally();
 }
 
-
   return (
     <div className="dashboard-page">
       {userData && (
