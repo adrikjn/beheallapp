@@ -1060,3 +1060,69 @@ ul li {
     opacity: 1;
   }
 }
+
+/*? ERROR MESSAGE ALERT */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.alert {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f2dede; /* Couleur rouge clair */
+  color: #a94442; /* Texte plus sombre */
+  padding: 10px 15px;
+  text-align: center;
+  z-index: 9999; /* Placez l'alerte au-dessus de tout le contenu */
+  border: 2px solid #ebccd1; /* Bordure légèrement plus claire */
+  border-radius: 5px;
+  width: 85%;
+  max-width: 400px; /* Largeur maximale */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Légère ombre */
+}
+
+.close-alert {
+  color: #fff; /* Texte blanc pour une meilleure visibilité */
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 28px; /* Taille de police plus grande */
+  cursor: pointer;
+  background-color: #d9534f; /* Couleur de fond de la croix plus distincte */
+  padding: 6px 10px; /* Plus grand padding pour une meilleure visibilité */
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out; /* Animation de transition */
+}
+
+.close-alert:hover {
+  background-color: #c9302c; /* Couleur de fond au survol, légèrement plus foncée */
+}
+
+.close-alert {
+  color: #a94442; /* Texte plus sombre */
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  font-size: 24px;
+  cursor: pointer;
+  background-color: #ebccd1; /* Couleur de fond de la croix légèrement plus claire */
+  padding: 2px 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out; /* Animation de transition */
+}
+
+.close-alert:hover {
+  background-color: #d9534f; /* Couleur de fond au survol, légèrement plus foncée */
+  color: #fff;
+}
