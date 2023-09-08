@@ -27,7 +27,8 @@ const RegisterForm = () => {
       });
 
       if (response.status === 201) {
-        navigate("/login");
+        // Redirigez l'utilisateur vers la page de connexion avec un paramètre "registrationSuccess"
+        navigate("/login", { state: { registrationSuccess: true } });
       }
     } catch (error) {
       console.error("Erreur d'inscription :", error);

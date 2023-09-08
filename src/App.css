@@ -77,6 +77,28 @@ ul li {
 }
 
 /*? LOGIN PART */
+.login-part-two .login-space .success-message {
+  background-color: #4caf50; 
+  color: #fff;
+  padding: 10px 15px; 
+  border-radius: 5px; 
+  text-align: center; 
+  width: 82%;
+  margin: auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Ombre douce */
+  animation: fadeInOut 0.2s ease-in-out; /* Animation de fondu */
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0; /* Commencez complètement transparent */
+  }
+  100% {
+    opacity: 1; /* Devenez opaque rapidement */
+  }
+}
+
+
 
 .login-page h2 {
   color: #434344;
