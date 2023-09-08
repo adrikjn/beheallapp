@@ -83,6 +83,25 @@ export const Dashboard = () => {
   const hasDraftInvoice = lastTwoInvoices.some(
     (invoice) => invoice.status === "brouillon"
   );
+  // Fonction pour stocker l'ID du dernier brouillon en local storage
+const storeDraftInvoiceIdLocally = () => {
+  const lastDraftInvoice = lastTwoInvoices.find(
+    (invoice) => invoice.status === "brouillon"
+  );
+
+  if (lastDraftInvoice) {
+    localStorage.setItem("invoice", lastDraftInvoice.id);
+  }
+};
+
+// Vérifier si un brouillon existe en local storage
+const storedDraftInvoiceId = localStorage.getItem("invoice");
+
+// Si aucun brouillon en local storage, stockez l'ID du dernier brouillon
+if (!storedDraftInvoiceId && hasDraftInvoice) {
+  storeDraftInvoiceIdLocally();
+}
+
 
   return (
     <div className="dashboard-page">
@@ -93,12 +112,12 @@ export const Dashboard = () => {
         </div>
       )}
       <div className="draft-button">
-        {hasDraftInvoice && (
-          <Link to="/invoice-step-four">
-            <button>Finaliser le brouillon</button>
-          </Link>
-        )}
-      </div>
+      {storedDraftInvoiceId && (
+        <Link to={`/invoice-step-four`}>
+          <button>Finaliser le brouillon</button>
+        </Link>
+      )}
+    </div>
       <div className="invoice-title">
         <p>Dernières factures</p>
         <p>Statut</p>

@@ -76,6 +76,7 @@ export const InvoiceStepFive = () => {
       if (response.ok) {
         localStorage.removeItem("invoice");
         localStorage.removeItem("InvoiceData");
+        localStorage.removeItem("DraftInvoice");
         navigate("/dashboard");
       } else {
         navigate("/error");
