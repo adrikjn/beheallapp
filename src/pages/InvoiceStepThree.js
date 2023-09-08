@@ -15,7 +15,7 @@ export const InvoiceStepThree = () => {
     customer: `/api/customers/${selectedCustomerId}`,
     title: "",
     description: "",
-    billNumber: "10",
+    billNumber: "", // Mettez à jour le billNumber avec le numéro généré
     fromDate: "",
     deliveryDate: "",
     totalPrice: 0,
@@ -27,7 +27,6 @@ export const InvoiceStepThree = () => {
     paymentDateLimit: "",
   });
 
-
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -35,6 +34,61 @@ export const InvoiceStepThree = () => {
       navigate("/invoice-step-two");
     }
   }, [token, navigate, invoiceData]);
+
+  useEffect(() => {
+    if (selectedCompanyId) {
+      const apiUrl = `http://localhost:8000/api/companies/${selectedCompanyId}`;
+
+      Axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          const companyData = response.data;
+          const invoices = companyData.invoices;
+
+          // Triez les factures par date pour obtenir la dernière facture
+          const sortedInvoices = invoices.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+
+          // Obtenez le dernier numéro de facture
+          if (sortedInvoices.length > 0) {
+            const lastInvoice = sortedInvoices[0];
+            const lastBillNumber = lastInvoice.billNumber;
+
+            // Extraire la partie numérique du dernier numéro de facture
+            const lastBillNumberNumeric = parseInt(
+              lastBillNumber.split("-")[0].substring(1)
+            );
+
+            // Incrémenter la partie numérique
+            const nextBillNumberNumeric = lastBillNumberNumeric + 1;
+
+            // Obtenir l'année actuelle
+            const currentYear = new Date().getFullYear();
+
+            // Formater le prochain numéro de facture
+            const nextBillNumber = `F${nextBillNumberNumeric
+              .toString()
+              .padStart(2, "0")}-${currentYear}`;
+
+            // Mettre à jour le champ billNumber du formulaire
+            setFormData((prevData) => ({
+              ...prevData,
+              billNumber: nextBillNumber,
+            }));
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "Erreur lors de la récupération du dernier bill :",
+            error
+          );
+        });
+    }
+  }, [selectedCompanyId, token]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +107,7 @@ export const InvoiceStepThree = () => {
       );
 
       const invoiceId = response.data.id;
-      console.log(invoiceId)
+      console.log(invoiceId);
       localStorage.setItem("invoice", invoiceId);
       localStorage.removeItem("InvoiceData");
       navigate("/invoice-step-four");
@@ -65,13 +119,13 @@ export const InvoiceStepThree = () => {
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
     let newValue;
-  
+
     if (type === "date") {
       newValue = value;
     } else {
       newValue = value;
     }
-  
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: newValue,
@@ -91,6 +145,14 @@ export const InvoiceStepThree = () => {
       <div className="invoice-create">
         <div className="add-company">
           <form onSubmit={handleFormSubmit}>
+            <label htmlFor="billNumber">Numéro de facture</label>
+            <input
+              type="text"
+              id="billNumber"
+              name="billNumber"
+              value={formData.billNumber}
+              readOnly // Pour empêcher la modification manuelle du numéro de facture
+            />
             <input
               type="text"
               id="title"
@@ -197,4 +259,4 @@ export const InvoiceStepThree = () => {
 
 //? lorsque le formulaire est envoyé stocker le invoiceId pour la partie service
 
-//? a l'aide de la sérialization à partir du invoice je vais pouvoir récupérérer les infos de l'entreprise / customer / service 
+//? a l'aide de la sérialization à partir du invoice je vais pouvoir récupérérer les infos de l'entreprise / customer / service
