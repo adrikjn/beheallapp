@@ -199,10 +199,10 @@ export const InvoiceStepThree = () => {
               <option disabled>
                 Sélectionner une durée de validité de la facture
               </option>
-              <option value="15 jours">15 jours</option>
               <option value="30 jours">30 jours</option>
-              <option value="45 jours">45 jours</option>
               <option value="60 jours">60 jours</option>
+              <option value="90 jours">90 jours</option>
+              <option value="120 jours">120 jours</option>
             </select>
             <label htmlFor="paymentMethod">
               Sélectionner les moyens de méthode de paiement que vous acceptez
