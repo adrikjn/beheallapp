@@ -12,6 +12,7 @@ export const InvoiceStepTwo = () => {
   const [companyOptions, setCompanyOptions] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState("undefined");
   const [globalErrors, setGlobalErrors] = useState([]);
+  const [showAdditionalFields, setShowAdditionalFields] = useState(false);
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     lastName: "",
@@ -25,9 +26,9 @@ export const InvoiceStepTwo = () => {
     postalCode: "",
     website: "",
     country: "",
-    billingAddress: "",
     phoneNumber: "",
     notes: "",
+    sirenSiret: "",
   });
 
   // const addGlobalError = (error) => {
@@ -244,7 +245,7 @@ export const InvoiceStepTwo = () => {
             <input
               type="text"
               id="companyName"
-              placeholder="Nom de l'entreprise"
+              placeholder="Entreprise (laissez le champ vite si indépendent)"
               name="companyName"
               value={formData.companyName}
               onChange={handleInputChange}
@@ -267,75 +268,92 @@ export const InvoiceStepTwo = () => {
             />
             <input
               type="text"
-              id="vatId"
-              placeholder="Numéro de TVA Intracommunautaire"
-              name="vatId"
-              value={formData.vatId}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              id="activity"
-              placeholder="Activité"
-              name="activity"
-              value={formData.activity}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
               id="address"
-              placeholder="Adresse"
+              placeholder="Adresse de facturation"
               name="address"
               value={formData.address}
               onChange={handleInputChange}
             />
-            <input
-              type="text"
-              id="billingAddress"
-              placeholder="Adresse de facturation"
-              name="billingAddress"
-              value={formData.billingAddress}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              id="city"
-              placeholder="Ville"
-              name="city"
-              value={formData.city}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              id="postalCode"
-              placeholder="Code postal"
-              name="postalCode"
-              value={formData.postalCode}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              id="website"
-              placeholder="Site web"
-              name="website"
-              value={formData.website}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              id="country"
-              placeholder="Pays"
-              name="country"
-              value={formData.country}
-              onChange={handleInputChange}
-            />
-            <textarea
-              id="notes"
-              placeholder="Notes"
-              name="notes"
-              value={formData.notes}
-              onChange={handleInputChange}
-            ></textarea>
+            <div className="input-row">
+              <input
+                type="text"
+                id="city"
+                placeholder="Ville"
+                name="city"
+                value={formData.city}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                id="postalCode"
+                placeholder="Code postal"
+                name="postalCode"
+                value={formData.postalCode}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="switch-container">
+              <label htmlFor="showAdditionalFields">
+                Afficher les champs facultatifs :
+              </label>
+              <input
+                type="checkbox"
+                id="showAdditionalFields"
+                checked={showAdditionalFields}
+                onChange={() => setShowAdditionalFields(!showAdditionalFields)}
+              />
+            </div>
+            {showAdditionalFields && (
+              <>
+                <input
+                  type="text"
+                  id="siret"
+                  placeholder="SIREN/SIRET"
+                  name="sirenSiret"
+                  value={formData.sirenSiret}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  id="vatId"
+                  placeholder="Numéro de TVA Intracommunautaire"
+                  name="vatId"
+                  value={formData.vatId}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  id="activity"
+                  placeholder="Activité"
+                  name="activity"
+                  value={formData.activity}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  id="website"
+                  placeholder="Site web"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  id="country"
+                  placeholder="Pays"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleInputChange}
+                />
+                <textarea
+                  id="notes"
+                  placeholder="Notes"
+                  name="notes"
+                  value={formData.notes}
+                  onChange={handleInputChange}
+                ></textarea>
+              </>
+            )}
           </div>
           <div className="btn-invoice-2">
             <button>Ajouter un client</button>

@@ -422,7 +422,7 @@ export const InvoiceStepOne = () => {
               </>
             )}
 
-            {/* ... Vos autres champs de formulaire existants ... */}
+          
           </div>
 
           <div className="btn-invoice-2">
