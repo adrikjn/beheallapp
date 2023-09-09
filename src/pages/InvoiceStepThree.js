@@ -16,15 +16,13 @@ export const InvoiceStepThree = () => {
     customer: `/api/customers/${selectedCustomerId}`,
     title: "",
     description: "",
-    billNumber: "F01-2023", //? j'ai ajouté ça idk
+    billNumber: "", //? j'ai ajouté ça idk
     fromDate: "",
     deliveryDate: "",
     totalPrice: 0,
-    vat: 0,
     billValidityDuration: "",
     status: "brouillon",
     paymentMethod: "",
-    paymentDays: "0",
     paymentDateLimit: "",
   });
 
@@ -156,7 +154,6 @@ export const InvoiceStepThree = () => {
     setGlobalErrors([]);
   };
 
-
   return (
     <div className="invoice-step-one-page">
       {globalErrors.length > 0 && <div className="overlay"></div>}
@@ -170,16 +167,16 @@ export const InvoiceStepThree = () => {
       </div>
       <div className="invoice-create">
         <div className="add-company">
-        {globalErrors.length > 0 && (
-              <div className="alert">
-                <span onClick={closeAlert} className="close-alert">
-                  &times;
-                </span>
-                {globalErrors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
+          {globalErrors.length > 0 && (
+            <div className="alert">
+              <span onClick={closeAlert} className="close-alert">
+                &times;
+              </span>
+              {globalErrors.map((error, index) => (
+                <p key={index}>{error}</p>
+              ))}
+            </div>
+          )}
           <form onSubmit={handleFormSubmit}>
             <label htmlFor="billNumber">Numéro de facture</label>
             <input
@@ -187,7 +184,7 @@ export const InvoiceStepThree = () => {
               id="billNumber"
               name="billNumber"
               value={formData.billNumber}
-              readOnly // Pour empêcher la modification manuelle du numéro de facture
+              readOnly 
             />
             <input
               type="text"
@@ -222,24 +219,7 @@ export const InvoiceStepThree = () => {
               value={formData.deliveryDate}
               onChange={handleInputChange}
             />
-            <label htmlFor="billValidityDuration">
-              Sélectionner une durée de validité de la facture
-            </label>
-            <select
-              id="billValidityDuration"
-              name="billValidityDuration"
-              className="select-legal-form"
-              value={formData.billValidityDuration}
-              onChange={handleInputChange}
-            >
-              <option>
-                Sélectionner une durée de validité de la facture
-              </option>
-              <option value="30 jours">30 jours</option>
-              <option value="60 jours">60 jours</option>
-              <option value="90 jours">90 jours</option>
-              <option value="120 jours">120 jours</option>
-            </select>
+
             <label htmlFor="paymentMethod">
               Sélectionner les moyens de méthode de paiement que vous acceptez
             </label>
@@ -250,7 +230,7 @@ export const InvoiceStepThree = () => {
               onChange={handleInputChange}
               className="select-legal-form"
             >
-              <option disabled>Sélectionner un moyen de paiement</option>
+              <option selected>Sélectionner un moyen de paiement</option>
               <option value="Cartes de paiement">Cartes de paiement</option>
               <option value="Paiement en ligne">Paiement en ligne</option>
               <option value="Transfert électroniques">
@@ -262,7 +242,25 @@ export const InvoiceStepThree = () => {
               </option>
               <option value="Autres">Autres</option>
             </select>
-            <label htmlFor="paymentDateLimit">Date de limite de paiement</label>
+            
+              <label htmlFor="billValidityDuration">
+              Sélectionner une durée de validité de la facture
+              </label>
+              <select
+                id="billValidityDuration"
+                name="billValidityDuration"
+                value={formData.billValidityDuration}
+                onChange={handleInputChange}
+                className="select-legal-form"
+              >
+              <option>Sélectionner une durée de validité de la facture</option>
+              <option value="30 jours">30 jours</option>
+              <option value="60 jours">60 jours</option>
+              <option value="90 jours">90 jours</option>
+              <option value="120 jours">120 jours</option>
+            </select>
+
+            <label htmlFor="paymentDateLimit">Date limite de paiement</label>
             <input
               type="date"
               id="paymentDateLimit"
