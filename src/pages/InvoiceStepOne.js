@@ -100,11 +100,6 @@ export const InvoiceStepOne = () => {
         city: "",
         postalCode: "",
         country: "",
-        billingIsDifferent: false,
-        billingAddress: "",
-        billingCity: "",
-        billingPostalCode: "",
-        billingCountry: "",
         sirenSiret: "",
         legalForm: "",
         rmNumber: "",
@@ -275,62 +270,6 @@ export const InvoiceStepOne = () => {
               value={formData.vatId}
               onChange={handleInputChange}
             />
-
-            <label htmlFor="billingIsDifferent">
-              Si, l'adresse de facturation est différente :
-            </label>
-            <div className="iphone-switch">
-              <input
-                type="checkbox"
-                id="billingIsDifferent"
-                name="billingIsDifferent"
-                className="switch-input"
-                checked={formData.billingIsDifferent}
-                onChange={handleInputChange}
-              />
-              <label
-                htmlFor="billingIsDifferent"
-                className="switch-label"
-              ></label>
-            </div>
-            {formData.billingIsDifferent && (
-              <div className="billing-is-different-input">
-                <input
-                  type="text"
-                  id="billingAddress"
-                  placeholder="Adresse de facturation"
-                  name="billingAddress"
-                  value={formData.billingAddress}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  id="billingCountry"
-                  placeholder="Pays de facturation"
-                  name="billingCountry"
-                  value={formData.billingCountry}
-                  onChange={handleInputChange}
-                />
-                <div className="input-row">
-                  <input
-                    type="text"
-                    id="billingPostalCode"
-                    placeholder="Code postal de facturation"
-                    name="billingPostalCode"
-                    value={formData.billingPostalCode}
-                    onChange={handleInputChange}
-                  />
-                  <input
-                    type="text"
-                    id="billingCity"
-                    placeholder="Ville de facturation"
-                    name="billingCity"
-                    value={formData.billingCity}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-            )}
 
             <label htmlFor="legalForm">Forme juridique :</label>
             <select
