@@ -222,21 +222,12 @@ export const InvoiceStepOne = () => {
                 ))}
               </div>
             )}
-
             <input
               type="text"
               id="name"
               name="name"
-              placeholder="Entreprise"
+              placeholder="Entreprise (NOM Prénom si indépendant)"
               value={formData.name}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              id="address"
-              placeholder="Adresse"
-              name="address"
-              value={formData.address}
               onChange={handleInputChange}
             />
             <input
@@ -253,6 +244,14 @@ export const InvoiceStepOne = () => {
               placeholder="Téléphone"
               name="phoneNumber"
               value={formData.phoneNumber}
+              onChange={handleInputChange}
+            />
+             <input
+              type="text"
+              id="address"
+              placeholder="Adresse"
+              name="address"
+              value={formData.address}
               onChange={handleInputChange}
             />
             <div className="input-row">
@@ -305,7 +304,7 @@ export const InvoiceStepOne = () => {
               value={formData.legalForm}
               onChange={handleInputChange}
             >
-              <option disabled>Sélectionnez une forme juridique</option>
+              <option selected>Sélectionnez une forme juridique</option>
               <option value="Entreprise Individuelle">
                 Entreprise individuelle (EI)
               </option>
