@@ -5,10 +5,6 @@ import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 
-
-// quand je selectionne une entreprise je cache le formulaire
-// lorsqu'il y'a une entreprise je récupère l'id de l'entreprise et je le met en localstorage et si il crée une nouvelle id je met l'id de la response en local storage
-
 export const InvoiceStepOne = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
@@ -26,11 +22,6 @@ export const InvoiceStepOne = () => {
     city: "",
     postalCode: "",
     country: "",
-    billingIsDifferent: false,
-    billingAddress: "",
-    billingCity: "",
-    billingPostalCode: "",
-    billingCountry: "",
     sirenSiret: "",
     legalForm: "",
     rmNumber: "",
@@ -270,7 +261,6 @@ export const InvoiceStepOne = () => {
               value={formData.vatId}
               onChange={handleInputChange}
             />
-
             <label htmlFor="legalForm">Forme juridique :</label>
             <select
               id="legalForm"
