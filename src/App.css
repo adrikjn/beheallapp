@@ -666,58 +666,6 @@ ul li {
   padding-bottom: 11px;
 }
 
-.iphone-switch {
-  position: relative;
-  width: 40px;
-  height: 20px;
-  margin-left: 10px;
-}
-
-.switch-label {
-  display: block;
-  width: 40px;
-  height: 20px;
-  background-color: #ccc;
-  border-radius: 10px;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: background-color 0.3s;
-}
-
-.switch-input {
-  display: none;
-}
-
-.switch-input:checked + .switch-label {
-  background-color: #000;
-}
-
-.switch-label::after {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: white;
-  top: 2px;
-  left: 2px;
-  transition: transform 0.3s;
-}
-
-.switch-input:checked + .switch-label::after {
-  transform: translateX(20px);
-}
-
-.billing-is-different-input {
-  display: flex;
-  flex-direction: column;
-  gap: 19px;
-  margin: auto;
-  width: 100%;
-}
-
 .input-row {
   display: flex;
   justify-content: space-between;
