@@ -11,6 +11,7 @@ export const InvoiceStepTwo = () => {
   const selectedCompanyId = invoiceData ? invoiceData.company : null;
   const [companyOptions, setCompanyOptions] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState("undefined");
+  const [globalErrors, setGlobalErrors] = useState([]);
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     lastName: "",
@@ -29,6 +30,9 @@ export const InvoiceStepTwo = () => {
     notes: "",
   });
 
+  // const addGlobalError = (error) => {
+  //   setGlobalErrors([...globalErrors, error]);
+  // };
 
   useEffect(() => {
     if (!token) {
@@ -40,8 +44,7 @@ export const InvoiceStepTwo = () => {
       navigate("/invoice-step-one");
       return;
     }
-
-  }, [token, navigate, invoiceData]); 
+  }, [token, navigate, invoiceData]);
 
   useEffect(() => {
     console.log(selectedCustomer);
@@ -127,6 +130,21 @@ export const InvoiceStepTwo = () => {
       navigate("/invoice-step-three");
     } catch (error) {
       console.error("Error submitting customer data:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.violations
+      ) {
+        const validationErrors = [];
+
+        // Bouclez sur les violations pour extraire les messages d'erreur
+        error.response.data.violations.forEach((violation) => {
+          validationErrors.push(violation.message);
+        });
+
+        // Ajoutez les erreurs de validation à la liste globale
+        setGlobalErrors([...globalErrors, ...validationErrors]);
+      }
     }
   };
 
@@ -158,12 +176,16 @@ export const InvoiceStepTwo = () => {
     }
   };
 
+  const closeAlert = () => {
+    setGlobalErrors([]);
+  };
+
   return (
     <div className="invoice-step-one-page">
+      {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
         <h1>creation factures</h1>
         <Account />
-
       </div>
       <div className="invoice-step-one-title">
         <h2>Etape</h2>
@@ -176,7 +198,9 @@ export const InvoiceStepTwo = () => {
         name="name"
         className="select-company"
       >
-        <option defaultValue value="undefined">Sélectionner un client</option>
+        <option defaultValue value="undefined">
+          Sélectionner un client
+        </option>
         {companyOptions.map((customer) => (
           <option key={customer.id} value={customer.id}>
             {customer.firstName} {customer.lastName} - {customer.companyName}
@@ -184,54 +208,64 @@ export const InvoiceStepTwo = () => {
         ))}
       </select>
       <div id="newCompanieForm">
-      <div className="add-company-exp">
-        <h2>new client</h2>
-      </div>
-      <form onSubmit={handleFormSubmit}>
-        <div className="add-company">
-          <div className="input-row">
+        <div className="add-company-exp">
+          <h2>new client</h2>
+        </div>
+        <form onSubmit={handleFormSubmit}>
+          <div className="add-company">
+            {globalErrors.length > 0 && (
+              <div className="alert">
+                <span onClick={closeAlert} className="close-alert">
+                  &times;
+                </span>
+                {globalErrors.map((error, index) => (
+                  <p key={index}>{error}</p>
+                ))}
+              </div>
+            )}
+            <div className="input-row">
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="Nom"
+                value={formData.lastName}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                id="firstName"
+                placeholder="Prénom"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+              />
+            </div>
             <input
               type="text"
-              id="lastName"
-              name="lastName"
-              placeholder="Nom"
-              value={formData.lastName}
+              id="companyName"
+              placeholder="Nom de l'entreprise"
+              name="companyName"
+              value={formData.companyName}
               onChange={handleInputChange}
             />
             <input
-              type="text"
-              id="firstName"
-              placeholder="Prénom"
-              name="firstName"
-              value={formData.firstName}
+              type="email"
+              id="email"
+              placeholder="E-mail"
+              name="email"
+              value={formData.email}
               onChange={handleInputChange}
             />
-          </div>
-          <input
-            type="text"
-            id="companyName"
-            placeholder="Nom de l'entreprise"
-            name="companyName"
-            value={formData.companyName}
-            onChange={handleInputChange}
-          />
-          <input
-            type="email"
-            id="email"
-            placeholder="E-mail"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-          <input
-            type="tel"
-            id="tel"
-            placeholder="Téléphone"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleInputChange}
-          />
-          <input
+            <input
+              type="tel"
+              id="tel"
+              placeholder="Téléphone"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleInputChange}
+            />
+            <input
               type="text"
               id="vatId"
               placeholder="Numéro de TVA Intracommunautaire"
@@ -239,74 +273,74 @@ export const InvoiceStepTwo = () => {
               value={formData.vatId}
               onChange={handleInputChange}
             />
-          <input
-            type="text"
-            id="activity"
-            placeholder="Activité"
-            name="activity"
-            value={formData.activity}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            id="address"
-            placeholder="Adresse"
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            id="city"
-            placeholder="Ville"
-            name="city"
-            value={formData.city}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            id="postalCode"
-            placeholder="Code postal"
-            name="postalCode"
-            value={formData.postalCode}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            id="website"
-            placeholder="Site web"
-            name="website"
-            value={formData.website}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            id="country"
-            placeholder="Pays"
-            name="country"
-            value={formData.country}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            id="billingAddress"
-            placeholder="Adresse de facturation"
-            name="billingAddress"
-            value={formData.billingAddress}
-            onChange={handleInputChange}
-          />
-          <textarea
-            id="notes"
-            placeholder="Notes"
-            name="notes"
-            value={formData.notes}
-            onChange={handleInputChange}
-          ></textarea>
-        </div>
-        <div className="btn-invoice-2">
-          <button>Ajouter un client</button>
-        </div>
-      </form>
+            <input
+              type="text"
+              id="activity"
+              placeholder="Activité"
+              name="activity"
+              value={formData.activity}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              id="address"
+              placeholder="Adresse"
+              name="address"
+              value={formData.address}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              id="billingAddress"
+              placeholder="Adresse de facturation"
+              name="billingAddress"
+              value={formData.billingAddress}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              id="city"
+              placeholder="Ville"
+              name="city"
+              value={formData.city}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              id="postalCode"
+              placeholder="Code postal"
+              name="postalCode"
+              value={formData.postalCode}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              id="website"
+              placeholder="Site web"
+              name="website"
+              value={formData.website}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              id="country"
+              placeholder="Pays"
+              name="country"
+              value={formData.country}
+              onChange={handleInputChange}
+            />
+            <textarea
+              id="notes"
+              placeholder="Notes"
+              name="notes"
+              value={formData.notes}
+              onChange={handleInputChange}
+            ></textarea>
+          </div>
+          <div className="btn-invoice-2">
+            <button>Ajouter un client</button>
+          </div>
+        </form>
       </div>
 
       <div className="btn-invoice-2 fixed-btn">

@@ -1022,7 +1022,7 @@ ul li {
 
 .alert {
   position: fixed;
-  top: 40%;
+  top: 20%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #f2dede; /* Couleur rouge clair */
@@ -1036,8 +1036,10 @@ ul li {
   max-width: 400px; /* Largeur maximale */
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Légère ombre */
+  font-family: Roboto;
+
 }
 
 .close-alert {
