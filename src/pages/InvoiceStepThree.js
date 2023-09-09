@@ -10,12 +10,13 @@ export const InvoiceStepThree = () => {
   const invoiceData = JSON.parse(localStorage.getItem("InvoiceData"));
   const selectedCompanyId = invoiceData ? invoiceData.company : null;
   const selectedCustomerId = invoiceData ? invoiceData.customer : null;
+  const [globalErrors, setGlobalErrors] = useState([]);
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     customer: `/api/customers/${selectedCustomerId}`,
     title: "",
     description: "",
-    billNumber: "", // Mettez à jour le billNumber avec le numéro généré
+    billNumber: "F01-2023", //? j'ai ajouté ça idk
     fromDate: "",
     deliveryDate: "",
     totalPrice: 0,
@@ -26,6 +27,10 @@ export const InvoiceStepThree = () => {
     paymentDays: "0",
     paymentDateLimit: "",
   });
+
+  // const addGlobalError = (error) => {
+  //   setGlobalErrors([...globalErrors, error]);
+  // };
 
   useEffect(() => {
     if (!token) {
@@ -113,6 +118,21 @@ export const InvoiceStepThree = () => {
       navigate("/invoice-step-four");
     } catch (error) {
       console.error("Error submitting invoice data:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.violations
+      ) {
+        const validationErrors = [];
+
+        // Bouclez sur les violations pour extraire les messages d'erreur
+        error.response.data.violations.forEach((violation) => {
+          validationErrors.push(violation.message);
+        });
+
+        // Ajoutez les erreurs de validation à la liste globale
+        setGlobalErrors([...globalErrors, ...validationErrors]);
+      }
     }
   };
 
@@ -132,8 +152,14 @@ export const InvoiceStepThree = () => {
     }));
   };
 
+  const closeAlert = () => {
+    setGlobalErrors([]);
+  };
+
+
   return (
     <div className="invoice-step-one-page">
+      {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
         <h1>creation factures</h1>
         <Account />
@@ -144,6 +170,16 @@ export const InvoiceStepThree = () => {
       </div>
       <div className="invoice-create">
         <div className="add-company">
+        {globalErrors.length > 0 && (
+              <div className="alert">
+                <span onClick={closeAlert} className="close-alert">
+                  &times;
+                </span>
+                {globalErrors.map((error, index) => (
+                  <p key={index}>{error}</p>
+                ))}
+              </div>
+            )}
           <form onSubmit={handleFormSubmit}>
             <label htmlFor="billNumber">Numéro de facture</label>
             <input
@@ -196,7 +232,7 @@ export const InvoiceStepThree = () => {
               value={formData.billValidityDuration}
               onChange={handleInputChange}
             >
-              <option disabled>
+              <option>
                 Sélectionner une durée de validité de la facture
               </option>
               <option value="30 jours">30 jours</option>
