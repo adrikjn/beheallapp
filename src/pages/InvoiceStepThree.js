@@ -178,11 +178,11 @@ export const InvoiceStepThree = () => {
             </div>
           )}
           <form onSubmit={handleFormSubmit}>
-            <label htmlFor="billNumber">Numéro de facture</label>
             <input
               type="text"
               id="billNumber"
               name="billNumber"
+              placeholder="Numéro de facture"
               value={formData.billNumber}
               readOnly 
             />
@@ -190,7 +190,7 @@ export const InvoiceStepThree = () => {
               type="text"
               id="title"
               name="title"
-              placeholder="Titre de la facture"
+              placeholder="Objet"
               value={formData.title}
               onChange={handleInputChange}
             ></input>
@@ -230,7 +230,7 @@ export const InvoiceStepThree = () => {
               onChange={handleInputChange}
               className="select-legal-form"
             >
-              <option selected>Sélectionner un moyen de paiement</option>
+              <option value="">Sélectionner un moyen de paiement</option>
               <option value="Cartes de paiement">Cartes de paiement</option>
               <option value="Paiement en ligne">Paiement en ligne</option>
               <option value="Transfert électroniques">
@@ -253,7 +253,7 @@ export const InvoiceStepThree = () => {
                 onChange={handleInputChange}
                 className="select-legal-form"
               >
-              <option>Sélectionner une durée de validité de la facture</option>
+              <option value="">Sélectionner une durée de validité de la facture</option>
               <option value="30 jours">30 jours</option>
               <option value="60 jours">60 jours</option>
               <option value="90 jours">90 jours</option>
