@@ -19,18 +19,16 @@ export const InvoiceStepTwo = () => {
     email: "",
     activity: "",
     address: "",
-    addressLine2: "",
+    vatId: "",
     city: "",
     postalCode: "",
     website: "",
     country: "",
-    companyAddress: "",
     billingAddress: "",
     phoneNumber: "",
     notes: "",
   });
 
-  //? Il faudra récupérer l'id et le stocker dans le storage qu'on a déja crée à la fin. (2/4)
 
   useEffect(() => {
     if (!token) {
@@ -43,8 +41,7 @@ export const InvoiceStepTwo = () => {
       return;
     }
 
-    // Le reste de votre code pour traiter les données de facture
-  }, [token, navigate, invoiceData]); // Assurez-vous que les dépendances sont correctement spécifiées
+  }, [token, navigate, invoiceData]); 
 
   useEffect(() => {
     console.log(selectedCustomer);
@@ -260,14 +257,6 @@ export const InvoiceStepTwo = () => {
           />
           <input
             type="text"
-            id="addressLine2"
-            placeholder="Suite de l'adresse de livraison"
-            name="addressLine2"
-            value={formData.addressLine2}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
             id="city"
             placeholder="Ville"
             name="city"
@@ -296,14 +285,6 @@ export const InvoiceStepTwo = () => {
             placeholder="Pays"
             name="country"
             value={formData.country}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            id="companyAddress"
-            placeholder="Adresse de l'entreprise"
-            name="companyAddress"
-            value={formData.companyAddress}
             onChange={handleInputChange}
           />
           <input

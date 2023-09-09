@@ -35,9 +35,9 @@ export const InvoiceStepOne = () => {
     gcs: "",
   });
 
-  const addGlobalError = (error) => {
-    setGlobalErrors([...globalErrors, error]);
-  };
+  // const addGlobalError = (error) => {
+  //   setGlobalErrors([...globalErrors, error]);
+  // };
 
   useEffect(() => {
     Axios.get(`http://localhost:8000/api/users/${userId}`)
