@@ -666,6 +666,47 @@ ul li {
   padding-bottom: 11px;
 }
 
+.switch-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.switch-container label {
+  font-size: 14px;
+  color:#000; 
+}
+
+.switch-container input[type="checkbox"] {
+  width: 40px; 
+  height: 20px; 
+  appearance: none; 
+  background-color: #ccc; 
+  border-radius: 10px; 
+  position: relative;
+  cursor: pointer;
+}
+
+.switch-container input[type="checkbox"]:checked {
+  background-color:#1b1b1b;
+}
+
+.switch-container input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: 16px; 
+  height: 16px; 
+  background-color: white; 
+  border-radius: 50%; 
+  top: 2px;
+  left: 2px; 
+  transition: 0.2s; 
+}
+
+.switch-container input[type="checkbox"]:checked::before {
+  transform: translateX(20px); 
+}
+
 .input-row {
   display: flex;
   justify-content: space-between;
