@@ -281,6 +281,13 @@ export const InvoiceStepOne = () => {
               value={formData.sirenSiret}
               onChange={handleInputChange}
             />
+             <textarea
+                  id="gcs"
+                  placeholder="Conditions générales de ventes (champ non obligatoire pouvant être utile pour vos factures)"
+                  name="gcs"
+                  value={formData.gcs}
+                  onChange={handleInputChange}
+                ></textarea>
             <div className="switch-container">
               <label htmlFor="showAdditionalFields">
                 Afficher les champs facultatifs :
@@ -291,7 +298,7 @@ export const InvoiceStepOne = () => {
                 checked={showAdditionalFields}
                 onChange={() => setShowAdditionalFields(!showAdditionalFields)}
               />
-            </div>
+            </div>         
             {showAdditionalFields && (
               <>
                 <input
@@ -354,7 +361,7 @@ export const InvoiceStepOne = () => {
                   <input
                     type="text"
                     id="rmNumber"
-                    placeholder="RM Number"
+                    placeholder="Numéro RM"
                     name="rmNumber"
                     value={formData.rmNumber}
                     onChange={handleInputChange}
@@ -362,7 +369,7 @@ export const InvoiceStepOne = () => {
                   <input
                     type="text"
                     id="rcsNumber"
-                    placeholder="RCS Number"
+                    placeholder="Numéro RCS"
                     name="rcsNumber"
                     value={formData.rcsNumber}
                     onChange={handleInputChange}
@@ -379,7 +386,7 @@ export const InvoiceStepOne = () => {
                 <input
                   type="text"
                   id="cityRegistration"
-                  placeholder="Ville de régistration"
+                  placeholder="Ville d'enregistrement"
                   name="cityRegistration"
                   value={formData.cityRegistration}
                   onChange={handleInputChange}
@@ -394,16 +401,9 @@ export const InvoiceStepOne = () => {
                 />
                 <textarea
                   id="descriptionWork"
-                  placeholder="Work description.."
+                  placeholder="Description de votre secteur d'activité"
                   name="descriptionWork"
                   value={formData.descriptionWork}
-                  onChange={handleInputChange}
-                ></textarea>
-                <textarea
-                  id="gcs"
-                  placeholder="Conditions générales de ventes.."
-                  name="gcs"
-                  value={formData.gcs}
                   onChange={handleInputChange}
                 ></textarea>
                 <label htmlFor="logo" className="custom-file-label">

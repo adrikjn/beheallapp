@@ -639,12 +639,12 @@ ul li {
 .add-company textarea {
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   resize: none;
   border: none;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
-  height: 50px;
+  height: 75px;
   background-color: #e9ebe9;
 }
 
