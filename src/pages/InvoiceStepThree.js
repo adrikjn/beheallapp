@@ -82,6 +82,14 @@ export const InvoiceStepThree = () => {
               ...prevData,
               billNumber: nextBillNumber,
             }));
+          } else {
+            // Aucune facture existante, initialisez le numéro de facture
+            const currentYear = new Date().getFullYear();
+            const initialBillNumber = `F01-${currentYear}`;
+            setFormData((prevData) => ({
+              ...prevData,
+              billNumber: initialBillNumber,
+            }));
           }
         })
         .catch((error) => {
@@ -184,7 +192,7 @@ export const InvoiceStepThree = () => {
               name="billNumber"
               placeholder="Numéro de facture"
               value={formData.billNumber}
-              readOnly 
+              readOnly
             />
             <input
               type="text"
@@ -242,18 +250,20 @@ export const InvoiceStepThree = () => {
               </option>
               <option value="Autres">Autres</option>
             </select>
-            
-              <label htmlFor="billValidityDuration">
+
+            <label htmlFor="billValidityDuration">
               Sélectionner une durée de validité de la facture
-              </label>
-              <select
-                id="billValidityDuration"
-                name="billValidityDuration"
-                value={formData.billValidityDuration}
-                onChange={handleInputChange}
-                className="select-legal-form"
-              >
-              <option value="">Sélectionner une durée de validité de la facture</option>
+            </label>
+            <select
+              id="billValidityDuration"
+              name="billValidityDuration"
+              value={formData.billValidityDuration}
+              onChange={handleInputChange}
+              className="select-legal-form"
+            >
+              <option value="">
+                Sélectionner une durée de validité de la facture
+              </option>
               <option value="30 jours">30 jours</option>
               <option value="60 jours">60 jours</option>
               <option value="90 jours">90 jours</option>

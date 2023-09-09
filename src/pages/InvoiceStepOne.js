@@ -325,7 +325,7 @@ export const InvoiceStepOne = () => {
                   value={formData.legalForm}
                   onChange={handleInputChange}
                 >
-                  <option selected>Sélectionnez une forme juridique</option>
+                  <option value="">Sélectionnez une forme juridique</option>
                   <option value="Entreprise Individuelle">
                     Entreprise individuelle (EI)
                   </option>
