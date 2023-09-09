@@ -17,7 +17,7 @@ export const Register = () => {
   const addGlobalError = (error) => {
     setGlobalErrors([...globalErrors, error]);
   };
-  
+
   const handleRegister = async (e) => {
     e.preventDefault(); // Empêche la soumission du formulaire par défaut
 
@@ -43,14 +43,18 @@ export const Register = () => {
       console.error("Erreur d'inscription :", error);
 
       // Si l'erreur est liée à la validation du formulaire, par exemple, en cas de validation Symfony, vous pouvez extraire les erreurs de la réponse
-      if (error.response && error.response.data && error.response.data.violations) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.violations
+      ) {
         const validationErrors = [];
-  
+
         // Bouclez sur les violations pour extraire les messages d'erreur
         error.response.data.violations.forEach((violation) => {
           validationErrors.push(violation.message);
         });
-  
+
         // Ajoutez les erreurs de validation à la liste globale
         setGlobalErrors([...globalErrors, ...validationErrors]);
       }

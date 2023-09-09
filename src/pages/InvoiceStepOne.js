@@ -12,6 +12,7 @@ export const InvoiceStepOne = () => {
   const userId = userData.id;
   const [selectedCompanie, setSelectedCompanie] = useState("undefined");
   const [userCompanies, setUserCompanies] = useState([]);
+  const [globalErrors, setGlobalErrors] = useState([]);
   const [formData, setFormData] = useState({
     user: `/api/users/${userId}`,
     name: "",
@@ -33,6 +34,10 @@ export const InvoiceStepOne = () => {
     descriptionWork: "",
     gcs: "",
   });
+
+  const addGlobalError = (error) => {
+    setGlobalErrors([...globalErrors, error]);
+  };
 
   useEffect(() => {
     Axios.get(`http://localhost:8000/api/users/${userId}`)
@@ -121,6 +126,21 @@ export const InvoiceStepOne = () => {
       navigate("/invoice-step-two");
     } catch (error) {
       console.error("Error submitting data:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.violations
+      ) {
+        const validationErrors = [];
+
+        // Bouclez sur les violations pour extraire les messages d'erreur
+        error.response.data.violations.forEach((violation) => {
+          validationErrors.push(violation.message);
+        });
+
+        // Ajoutez les erreurs de validation à la liste globale
+        setGlobalErrors([...globalErrors, ...validationErrors]);
+      }
     }
   };
 
@@ -156,8 +176,13 @@ export const InvoiceStepOne = () => {
     }
   };
 
+  const closeAlert = () => {
+    setGlobalErrors([]);
+  };
+
   return (
     <div className="invoice-step-one-page">
+      {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
         <h1>creation factures</h1>
         <Account />
@@ -187,6 +212,17 @@ export const InvoiceStepOne = () => {
         </div>
         <form onSubmit={handleFormSubmit}>
           <div className="add-company">
+            {globalErrors.length > 0 && (
+              <div className="alert">
+                <span onClick={closeAlert} className="close-alert">
+                  &times;
+                </span>
+                {globalErrors.map((error, index) => (
+                  <p key={index}>{error}</p>
+                ))}
+              </div>
+            )}
+
             <input
               type="text"
               id="name"

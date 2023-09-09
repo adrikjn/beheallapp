@@ -235,6 +235,14 @@ export const InvoiceStepTwo = () => {
             onChange={handleInputChange}
           />
           <input
+              type="text"
+              id="vatId"
+              placeholder="Numéro de TVA Intracommunautaire"
+              name="vatId"
+              value={formData.vatId}
+              onChange={handleInputChange}
+            />
+          <input
             type="text"
             id="activity"
             placeholder="Activité"
