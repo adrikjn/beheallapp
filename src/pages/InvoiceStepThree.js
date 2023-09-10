@@ -16,14 +16,13 @@ export const InvoiceStepThree = () => {
     customer: `/api/customers/${selectedCustomerId}`,
     title: "",
     description: "",
-    billNumber: "", //? j'ai ajouté ça idk
+    billNumber: "",
     fromDate: "",
     deliveryDate: "",
     totalPrice: 0,
     billValidityDuration: "",
     status: "brouillon",
     paymentMethod: "",
-    paymentDateLimit: "",
   });
 
   // const addGlobalError = (error) => {
@@ -162,6 +161,15 @@ export const InvoiceStepThree = () => {
     setGlobalErrors([]);
   };
 
+  function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+  
+
   return (
     <div className="invoice-step-one-page">
       {globalErrors.length > 0 && <div className="overlay"></div>}
@@ -185,7 +193,7 @@ export const InvoiceStepThree = () => {
               ))}
             </div>
           )}
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleFormSubmit} id="submit-invoice">
             <input
               type="text"
               id="billNumber"
@@ -198,7 +206,7 @@ export const InvoiceStepThree = () => {
               type="text"
               id="title"
               name="title"
-              placeholder="Objet"
+              placeholder="Objet (ex: Prestation de Marchandise)"
               value={formData.title}
               onChange={handleInputChange}
             ></input>
@@ -209,13 +217,17 @@ export const InvoiceStepThree = () => {
               value={formData.description}
               onChange={handleInputChange}
             ></textarea>
-            <label htmlFor="fromDate">Date de début de l'opération</label>
+            <label htmlFor="fromDate">
+              Date de début de l'opération (Laisser le champ vide si l'opération
+              dure moins d'une journée)
+            </label>
             <input
               type="date"
               id="fromDate"
               name="fromDate"
               value={formData.fromDate}
               onChange={handleInputChange}
+              min={getCurrentDate()}
             />
             <label htmlFor="deliveryDate">
               Date de l'opération / date de fin de l'opération
@@ -226,6 +238,7 @@ export const InvoiceStepThree = () => {
               name="deliveryDate"
               value={formData.deliveryDate}
               onChange={handleInputChange}
+              min={getCurrentDate()}
             />
 
             <label htmlFor="paymentMethod">
@@ -248,7 +261,6 @@ export const InvoiceStepThree = () => {
               <option value="Méthodes traditionnelles">
                 Méthodes traditionnelles
               </option>
-              <option value="Autres">Autres</option>
             </select>
 
             <label htmlFor="billValidityDuration">
@@ -264,25 +276,17 @@ export const InvoiceStepThree = () => {
               <option value="">
                 Sélectionner une durée de validité de la facture
               </option>
+              <option value="15 jours">15 jours</option>
               <option value="30 jours">30 jours</option>
+              <option value="45 jours">45 jours</option>
               <option value="60 jours">60 jours</option>
               <option value="90 jours">90 jours</option>
-              <option value="120 jours">120 jours</option>
             </select>
-
-            <label htmlFor="paymentDateLimit">Date limite de paiement</label>
-            <input
-              type="date"
-              id="paymentDateLimit"
-              name="paymentDateLimit"
-              value={formData.paymentDateLimit}
-              onChange={handleInputChange}
-            />
-            <div className="btn-invoice-2">
-              <button type="submit">Continuer</button>
-            </div>
           </form>
         </div>
+      </div>
+      <div className="btn-invoice-2">
+        <button type="submit" form="submit-invoice">Continuer</button>
       </div>
       <AccordionNav />
     </div>
