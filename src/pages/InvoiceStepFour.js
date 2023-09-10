@@ -242,7 +242,7 @@ export const InvoiceStepFour = () => {
                 type="text"
                 id="title"
                 name="title"
-                placeholder="Nom de votre produit"
+                placeholder="Nom du produit ou service"
                 value={formData.title}
                 onChange={handleInputChange}
               ></input>
@@ -257,14 +257,15 @@ export const InvoiceStepFour = () => {
                 type="number"
                 name="unitCost"
                 id="unitCost"
-                placeholder="Prix unitaires"
+                placeholder="Prix unitaires / Prix journalier"
                 onChange={handleInputChange}
+                step="0.01"
               />
               <input
                 type="number"
                 name="quantity"
                 id="quantity"
-                placeholder="Quantité"
+                placeholder="Quantité / Durée en jours"
                 onChange={handleInputChange}
               />
               <input
@@ -274,6 +275,7 @@ export const InvoiceStepFour = () => {
                 placeholder="Prix HT"
                 onChange={handleInputChange}
                 value={formData.totalPrice}
+                step="0.01"
               />
               <input
                 type="number"
@@ -281,6 +283,7 @@ export const InvoiceStepFour = () => {
                 id="vat"
                 placeholder="TVA"
                 onChange={handleInputChange}
+                step="0.01"
               />
               <div className="btn-invoice-4 ">
                 <button type="submit">Ajouter le produit</button>

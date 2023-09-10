@@ -831,6 +831,10 @@ ul li {
   margin-bottom: 3px;
 }
 
+.label-span-red {
+  color: #d9544f9d;
+}
+
 /*? INVOICE STEP FOUR */
 .add-product {
   margin-top: 35px;

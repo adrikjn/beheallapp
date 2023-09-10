@@ -168,7 +168,6 @@ export const InvoiceStepThree = () => {
     const day = String(today.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   }
-  
 
   return (
     <div className="invoice-step-one-page">
@@ -218,8 +217,10 @@ export const InvoiceStepThree = () => {
               onChange={handleInputChange}
             ></textarea>
             <label htmlFor="fromDate">
-              Date de début de l'opération (Laisser le champ vide si l'opération
-              dure moins d'une journée)
+              Date de début de l'opération{" "}
+              <span className="label-span-red">
+                (Laisser le champ vide si l'opération dure moins d'une journée){" "}
+              </span>
             </label>
             <input
               type="date"
@@ -286,7 +287,9 @@ export const InvoiceStepThree = () => {
         </div>
       </div>
       <div className="btn-invoice-2">
-        <button type="submit" form="submit-invoice">Continuer</button>
+        <button type="submit" form="submit-invoice">
+          Continuer
+        </button>
       </div>
       <AccordionNav />
     </div>
