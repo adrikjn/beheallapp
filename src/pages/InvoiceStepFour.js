@@ -10,6 +10,7 @@ export const InvoiceStepFour = () => {
   const invoiceId = localStorage.getItem("invoice");
   const [productList, setProductList] = useState([]);
   const [totalTTC, setTotalTTC] = useState(0);
+  const [globalErrors, setGlobalErrors] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -19,6 +20,10 @@ export const InvoiceStepFour = () => {
     vat: 0,
     invoice: `/api/invoices/${invoiceId}`,
   });
+
+  // const addGlobalError = (error) => {
+  //   setGlobalErrors([...globalErrors, error]);
+  // };
 
   const [isInvoiceCreateVisible, setIsInvoiceCreateVisible] = useState(false);
   const [isProductListVisible, setIsProductListVisible] = useState(true);
@@ -123,6 +128,22 @@ export const InvoiceStepFour = () => {
       navigate("/invoice-step-four");
     } catch (error) {
       console.error("Error submitting invoice data:", error);
+       // Si l'erreur est liée à la validation du formulaire, par exemple, en cas de validation Symfony, vous pouvez extraire les erreurs de la réponse
+       if (
+        error.response &&
+        error.response.data &&
+        error.response.data.violations
+      ) {
+        const validationErrors = [];
+
+        // Bouclez sur les violations pour extraire les messages d'erreur
+        error.response.data.violations.forEach((violation) => {
+          validationErrors.push(violation.message);
+        });
+
+        // Ajoutez les erreurs de validation à la liste globale
+        setGlobalErrors([...globalErrors, ...validationErrors]);
+      }
     }
   };
 
@@ -181,8 +202,13 @@ export const InvoiceStepFour = () => {
     }));
   };
 
+  const closeAlert = () => {
+    setGlobalErrors([]);
+  };
+
   return (
     <div className="invoice-step-one-page">
+      {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
         <h1>creation factures</h1>
         <Account />
@@ -200,6 +226,17 @@ export const InvoiceStepFour = () => {
           }
         >
           <div className="add-company">
+            {/* Affichez les erreurs globales dans un composant d'alerte */}
+            {globalErrors.length > 0 && (
+              <div className="alert">
+                <span onClick={closeAlert} className="close-alert">
+                  &times;
+                </span>
+                {globalErrors.map((error, index) => (
+                  <p key={index}>{error}</p>
+                ))}
+              </div>
+            )}
             <form onSubmit={handleFormSubmit}>
               <input
                 type="text"
