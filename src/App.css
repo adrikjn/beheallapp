@@ -465,14 +465,13 @@ ul li {
   border: 0;
   width: 100%;
   cursor: pointer;
-  margin-bottom: 95px;
 }
 
 /*? COMPONENT NAV */
 
 .accordion-nav {
   right: 7.5%;
-  top: 90%;
+  top: 85%;
   position: fixed;
   display: flex;
   justify-content: flex-end;
@@ -753,7 +752,7 @@ ul li {
   text-transform: uppercase;
   border: 0;
   cursor: pointer;
-  margin-bottom: 95px;
+  margin-bottom: 145px;
 }
 
 .btn-invoice-2.fixed-btn {
@@ -877,10 +876,10 @@ ul li {
   font-family: Articulat CF;
   font-size: 18px;
   font-weight: 700;
-  margin-top: 25px;
+  margin-top: 238px;
 }
 
-/* .btn-invoice-4 {
+.btn-invoice-4 {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -902,8 +901,9 @@ ul li {
   line-height: normal;
   text-transform: uppercase;
   border: 0;
+  width: 100%;
   cursor: pointer;
-} */
+}
 
 .delete-icon {
   background-color: #e9ebe9;

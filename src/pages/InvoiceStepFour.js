@@ -309,7 +309,7 @@ export const InvoiceStepFour = () => {
                 onChange={handleInputChange}
                 step="0.01"
               />
-              <div className="btn-invoice-2">
+              <div className="btn-invoice-4">
                 <button type="submit">Ajouter le produit</button>
               </div>
             </form>
