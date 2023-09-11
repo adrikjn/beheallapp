@@ -48,6 +48,7 @@ export const InvoiceStepFour = () => {
         );
 
         const updatedServices = invoiceResponse.data.services;
+
         // Mettre à jour la liste des produits dans l'état
         setProductList(updatedServices);
       } catch (error) {
@@ -128,8 +129,8 @@ export const InvoiceStepFour = () => {
       navigate("/invoice-step-four");
     } catch (error) {
       console.error("Error submitting invoice data:", error);
-       // Si l'erreur est liée à la validation du formulaire, par exemple, en cas de validation Symfony, vous pouvez extraire les erreurs de la réponse
-       if (
+      // Si l'erreur est liée à la validation du formulaire, par exemple, en cas de validation Symfony, vous pouvez extraire les erreurs de la réponse
+      if (
         error.response &&
         error.response.data &&
         error.response.data.violations
@@ -200,6 +201,29 @@ export const InvoiceStepFour = () => {
       ...prevData,
       [name]: newValue,
     }));
+  };
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      if (productId) {
+        // Envoyer une requête DELETE à l'API pour supprimer le produit
+        await Axios.delete(`http://localhost:8000/api/services/${productId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // Mettre à jour la liste des produits en supprimant le produit supprimé
+        setProductList((prevList) =>
+          prevList.filter((product) => product.id !== productId)
+        );
+      } else {
+        console.error("Product ID is undefined.");
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      // Gestion des erreurs ici (affichage d'un message à l'utilisateur, etc.)
+    }
   };
 
   const closeAlert = () => {
@@ -285,7 +309,7 @@ export const InvoiceStepFour = () => {
                 onChange={handleInputChange}
                 step="0.01"
               />
-              <div className="btn-invoice-4 ">
+              <div className="btn-invoice-2">
                 <button type="submit">Ajouter le produit</button>
               </div>
             </form>
@@ -299,11 +323,12 @@ export const InvoiceStepFour = () => {
         }
       >
         <ul className="product-header">
-          <li>Produits</li>
-          <li>Quantité</li>
-          <li>Prix unitaires</li>
+          <li>Intitulés</li>
+          <li>Volumes</li>
+          <li>Tarifs</li>
           <li>TVA</li>
           <li>Prix HT</li>
+          <li>Action</li>
         </ul>
         {productList.map((product, index) => (
           <ul className="product-item" key={index}>
@@ -312,6 +337,14 @@ export const InvoiceStepFour = () => {
             <li>{product.unitCost}€</li>
             <li>{product.vat}%</li>
             <li>{product.totalPrice}€</li>
+            <li>
+              <img
+                className="delete-icon"
+                onClick={() => handleDeleteProduct(product.id)}
+                src="delete-icon.svg"
+                alt="Delete"
+              />
+            </li>
           </ul>
         ))}
         <div className="center-plus">
@@ -330,7 +363,3 @@ export const InvoiceStepFour = () => {
     </div>
   );
 };
-
-// Le total TTC je vais faire avec du pure js le calculture de tout le prix ht avec la quantité tva etc SANS BACKEND et l'afficher dans le total TTC. Et a partir de ce total TTC je vais envoyer la valeure dans la BDD avec un put sur la facture.
-
-// Je vais faire un get id a partir du invoice et récupéré toute les données sur les  services à l'aide de la serialization.
