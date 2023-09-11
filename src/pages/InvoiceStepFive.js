@@ -103,6 +103,7 @@ export const InvoiceStepFive = () => {
               </p>
               <p>{invoiceData?.company?.name}</p>
               <p> {invoiceData?.company?.sirenSiret}</p>
+              <p> {invoiceData?.company?.vatId}</p>
             </div>
             <div className="company-info-2">
               <p>
@@ -125,6 +126,7 @@ export const InvoiceStepFive = () => {
                 {invoiceData?.customer?.firstName?.toUpperCase()})
               </p>
               <p>{invoiceData?.customer?.email}</p>
+              <p>{invoiceData?.customer?.sirenSiret}</p>
             </div>
             <div className="customer-info-2">
               <p>
@@ -132,6 +134,7 @@ export const InvoiceStepFive = () => {
                 {invoiceData?.customer?.postalCode}
               </p>
               <p>{invoiceData?.customer?.phoneNumber}</p>
+              <p>{invoiceData?.customer?.vatId}</p>
             </div>
           </div>
         </div>
@@ -139,9 +142,9 @@ export const InvoiceStepFive = () => {
           <h2>Produits</h2>
           <div className="product-summary-part">
             <ul className="product-summary-header">
-              <li>Produits</li>
-              <li>Quantité</li>
-              <li>Prix unitaires</li>
+              <li>Intitulés</li>
+              <li>Volumes</li>
+              <li>Tarifs</li>
               <li>TVA</li>
               <li>Prix HT</li>
             </ul>
@@ -151,7 +154,7 @@ export const InvoiceStepFive = () => {
                   {service.title} <p>- {service.description}</p>
                 </li>
                 <li>{service.quantity}</li>
-                <li>{service.unitCost}</li>
+                <li>{service.unitCost}€</li>
                 <li>{service.vat}%</li>
                 <li>{service.totalPrice}€</li>
               </ul>
@@ -162,9 +165,23 @@ export const InvoiceStepFive = () => {
               <p>Details :</p>
               <p>PRIX TTC : {invoiceData?.totalPrice.toFixed(2)}€</p>
             </div>
-            <p>Titre : {invoiceData?.title}</p>
+            <p>Objet : {invoiceData?.title}</p>
+            <p>Description : {invoiceData?.description}</p>
             <p>Numéro de facture : {invoiceData?.billNumber.toUpperCase()}</p>
-            <p>Date : {formatDate(invoiceData?.createdAt)}</p>
+            <p>
+              Date de l'opération:{" "}
+              {invoiceData?.fromDate
+                ? `${formatDate(invoiceData?.fromDate)} - ${formatDate(
+                    invoiceData?.deliveryDate
+                  )}`
+                : formatDate(invoiceData?.deliveryDate)}
+            </p>
+            <p>
+              Durée de validité de la facture :{" "}
+              {invoiceData?.billValidityDuration}
+            </p>
+            <p>Moyen de paiement : {invoiceData?.paymentMethod}</p>
+            <p>Conditions générales de vente : {invoiceData?.company?.gcs}</p>
           </div>
           <div className="btn-invoice-2">
             <button onClick={sendInvoice}>Envoyer</button>

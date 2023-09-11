@@ -942,7 +942,6 @@ ul li {
 .customer-info-1 {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin: 21px 0 31px 18px;
   gap: 10px;
 }
@@ -951,7 +950,6 @@ ul li {
 .customer-info-2 {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin: 27px 18px 25px 0px;
   gap: 10px;
 }
