@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 export const InvoiceStepFive = () => {
   const token = localStorage.getItem("Token");
@@ -93,96 +93,168 @@ export const InvoiceStepFive = () => {
     pdf.setFont("helvetica");
     pdf.setFontSize(12);
     pdf.setTextColor(0, 0, 0); // Couleur du texte : Noir
-  
-    // En-tête de la facture
-    pdf.setFontSize(18);
-    pdf.text(20, 20, "Facture");
-  
+
+    const maxWidth = pdf.internal.pageSize.getWidth() * 0.90;
+
+    // En-tête de la facture alignée à droite
+    pdf.setFontSize(36);
+    const headerText = "FACTURE";
+    const headerTextWidth =
+      (pdf.getStringUnitWidth(headerText) * pdf.internal.getFontSize()) /
+      pdf.internal.scaleFactor;
+    const headerX = maxWidth - headerTextWidth;
+    pdf.text(headerX, 15, headerText);
+
+    // Référence facture alignée à droite
+    pdf.setFontSize(10);
+    const referenceText = `Référence facture : ${invoiceData?.billNumber.toUpperCase()}`;
+    const referenceTextWidth =
+      (pdf.getStringUnitWidth(referenceText) * pdf.internal.getFontSize()) /
+      pdf.internal.scaleFactor;
+    const referenceX = maxWidth - referenceTextWidth;
+    pdf.text(referenceX, 21, referenceText);
+
     // Informations sur l'expéditeur
-    pdf.setFontSize(14);
-    pdf.text(20, 40, "Expéditeur");
-    pdf.setFontSize(12);
-    pdf.text(20, 50, `Nom: ${userData?.firstName?.toUpperCase()} ${userData?.lastName?.toUpperCase()}`);
-    pdf.text(20, 60, `Nom: ${invoiceData?.company?.name}`);
-    pdf.text(20, 70, `Adresse: ${invoiceData?.company?.address}, ${invoiceData?.company?.postalCode}, ${invoiceData?.company?.city}`);
-    pdf.text(20, 80, `Email: ${invoiceData?.company?.email}`);
-    pdf.text(20, 90, `Téléphone: ${invoiceData?.company?.phoneNumber}`);
+    pdf.setFontSize(11);
+    const leftXCompany = 15;
+    const textYCompany = 30;
+    pdf.setFont('helvetica', 'bold');
+    pdf.text(leftXCompany, textYCompany, `${invoiceData?.company?.name.toUpperCase()}`);
+    pdf.setFont('helvetica', 'normal'); // Revenir à la police normale
+    pdf.text(leftXCompany, textYCompany + 6, `${invoiceData?.company?.email}`);
+    pdf.text(leftXCompany, textYCompany + 12, `${invoiceData?.company?.phoneNumber}`);
+    pdf.text(leftXCompany, textYCompany + 18, `${invoiceData?.company?.address}, ${invoiceData?.company?.postalCode}, ${invoiceData?.company?.city}`);
+    pdf.text(leftXCompany, textYCompany + 24, `${invoiceData?.company?.sirenSiret}`);
+    pdf.text(leftXCompany, textYCompany + 30, `${invoiceData?.company?.vatId}`);
   
     // Informations sur le destinataire
-    pdf.setFontSize(14);
-    pdf.text(100, 40, "Destinataire");
+    pdf.setFontSize(11);
+    const rightXCustomer = 120;
+    const textYCustomer = 49;
+    pdf.setFont('helvetica', 'bold');
+    pdf.text(rightXCustomer, textYCustomer, `${invoiceData?.customer?.companyName.toUpperCase()}`);
+    pdf.setFont('helvetica', 'normal'); // Revenir à la police normale
+    pdf.text(rightXCustomer, textYCustomer + 6, `${invoiceData?.customer?.lastName?.toUpperCase()} ${userData?.firstName ? userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1) : ''}`);
+    pdf.text(
+      rightXCustomer,
+      textYCustomer + 12,
+      `${invoiceData?.customer?.address}, ${invoiceData?.customer?.postalCode}, ${invoiceData?.customer?.city}`
+    );
+    pdf.text(rightXCustomer, textYCustomer + 18, `${invoiceData?.customer?.email}`);
+    pdf.text(rightXCustomer, textYCustomer + 24, `${invoiceData?.customer?.phoneNumber}`);
+    pdf.text(rightXCustomer, textYCustomer + 30, `${invoiceData?.customer?.sirenSiret}`);
+    pdf.text(rightXCustomer, textYCustomer + 36, `${invoiceData?.customer?.vatId}`);
+
+
+
+    // Objet/Descriptipn/Date etc..
     pdf.setFontSize(12);
-    pdf.text(100, 50, `Nom: ${invoiceData?.customer?.companyName}`);
-    pdf.text(100, 60, `Adresse: ${invoiceData?.customer?.address}, ${invoiceData?.customer?.postalCode}, ${invoiceData?.customer?.city}`);
-    pdf.text(100, 70, `Email: ${invoiceData?.customer?.email}`);
-    pdf.text(100, 80, `Téléphone: ${invoiceData?.customer?.phoneNumber}`);
-  
-    // Liste des produits
-    pdf.setFontSize(16);
-  pdf.text(20, 110, "Liste des produits");
+    pdf.text(15, 103, `${invoiceData?.title} ${invoiceData?.fromDate
+      ? `du ${formatDate(invoiceData?.fromDate)} au ${formatDate(
+          invoiceData?.deliveryDate
+        )}` 
+      : formatDate(invoiceData?.deliveryDate)}`);
+
+// Tableau pour afficher les produits
+const zebraStyle = {
+  startY: 108, // Ajustez la position Y en conséquence
+  theme: "striped",
+  tableWidth: "auto", // Ajustez la largeur de la table en conséquence
+  styles: {
+    font: "helvetica",
+    fontSize: 10,
+    textColor: [0, 0, 0], // Couleur du texte : Noir
+    cellPadding: 5,
+    overflow: "linebreak",
+    halign: "center", // Centrer le contenu horizontalement
+    valign: "middle", // Centrer le contenu verticalement
+  },
+  headStyles: {
+    halign: "center", // Centrer le contenu horizontalement dans les en-têtes
+    valign: "middle", // Centrer le contenu verticalement dans les en-têtes
+  },
+};
+
+// Tableau pour afficher les produits en utilisant jsPDF-AutoTable
+const productsTable = {
+  headers: ["Intitulés", "Volumes", "Tarif", "TVA", "Prix HT"],
+  rows: [],
+};
+
+let isGray = false;
+
+invoiceData?.services?.forEach((service) => {
+  const titleWithDescription = `${service.title}\n - ${service.description}`;
+  const fillColor = isGray ? [192, 192, 192] : [255, 255, 255];
+  productsTable.rows.push([
+    { content: titleWithDescription, fillColor },
+    { content: service.quantity, fillColor },
+    { content: `${service.unitCost}€`, fillColor },
+    { content: `${service.vat}%`, fillColor },
+    { content: `${service.totalPrice}€`, fillColor },
+  ]);
+  isGray = !isGray; // Alterne la couleur pour chaque ligne
+});
+
+// Dessiner le tableau des produits avec les styles personnalisés
+pdf.autoTable(productsTable.headers, productsTable.rows, {
+  ...zebraStyle,
+});
+
+// Calculer le Total HT en additionnant tous les service.totalPrice
+const totalHT = invoiceData?.services?.reduce(
+  (accumulator, service) => accumulator + service.totalPrice,
+  0
+);
+
+// Calculer le Taux TVA en calculant la moyenne des taux de TVA de tous les services
+const totalServices = invoiceData?.services?.length || 1; // Assurez-vous que le dénominateur n'est pas nul
+const averageVATRate =
+  (invoiceData?.services?.reduce(
+    (accumulator, service) => accumulator + service.vat,
+    0
+  ) / totalServices) || 0;
+
+// Calculer le Total TTC en utilisant la valeur existante
+const totalTTC = invoiceData?.totalPrice.toFixed(2);
+
+pdf.setFontSize(12);
+
+
+pdf.text(200, 150, totalTTC);
+
+
+
+
+
+
+
 
   
-    // Tableau pour afficher les produits
-    const tableStyle = {
-      theme: "grid",
-      tableWidth: "auto", // Ajustez la largeur de la table en conséquence
-      styles: {
-        font: "helvetica",
-        fontSize: 10,
-        textColor: [0, 0, 0], // Couleur du texte : Noir
-        cellPadding: 5,
-        overflow: "linebreak",
-      },
-      headStyles: {
-        fillColor: [238, 238, 238], // Couleur de fond pour les en-têtes
-        textColor: [0, 0, 0], // Couleur du texte pour les en-têtes
-        fontStyle: "bold",
-      },
-    };
-  
-    // Tableau pour afficher les produits en utilisant jsPDF-AutoTable
-    const productsTable = {
-      headers: ["Intitulés", "Volumes", "Tarif", "TVA", "Prix HT"],
-      rows: [],
-    };
-  
-    invoiceData?.services?.forEach((service) => {
-      productsTable.rows.push([
-        service.title,
-        service.quantity,
-        `${service.unitCost}€`,
-        `${service.vat}%`,
-        `${service.totalPrice}€`,
-      ]);
-    });
-  
-    // Dessiner le tableau
-    pdf.autoTable({
-      startY: 120, // Ajustez la position Y en conséquence
-      head: [productsTable.headers],
-      body: productsTable.rows,
-      ...tableStyle, // Appliquez le style CSS défini ci-dessus
-    });
-  
+
     // Montant total TTC
-    const totalAmount = `Montant total TTC: ${invoiceData?.totalPrice.toFixed(2)}€`;
-    pdf.setFontSize(14);
-    pdf.text(20, pdf.autoTable.previous.finalY + 20, totalAmount);
-  
+
+
     // Conditions générales de vente
     pdf.setFontSize(12);
-    pdf.text(20, pdf.autoTable.previous.finalY + 40, `Conditions générales de vente: ${invoiceData?.company?.gcs}`);
-  
+    pdf.text(
+      20,
+      pdf.autoTable.previous.finalY + 40,
+      `Conditions générales de vente: ${invoiceData?.company?.gcs}`
+    );
+
     // Télécharger le PDF avec un nom de fichier personnalisé
-    const fileName = `${invoiceData?.company?.name.replace(/\s+/g, "_").toUpperCase()}_Facture_${invoiceData?.billNumber.toUpperCase()}_${formatDate(invoiceData?.createdAt)}.pdf`;
+    const fileName = `${invoiceData?.company?.name
+      .replace(/\s+/g, "_")
+      .toUpperCase()}_Facture_${invoiceData?.billNumber.toUpperCase()}_${formatDate(
+      invoiceData?.createdAt
+    )}.pdf`;
     pdf.save(fileName);
   };
-  
-  // generateInvoicePDF();
 
-  
-  
-  
+
+
+  // generateInvoicePDF();
 
   return (
     <div className="invoice-step-one-page">
@@ -191,15 +263,15 @@ export const InvoiceStepFive = () => {
         <Account />
       </div>
       <div className="summary">
-      <button onClick={generateInvoicePDF}>Télécharger Facture PDF</button>
-        
+        <button onClick={generateInvoicePDF}>Télécharger Facture PDF</button>
+
         <div className="company-summary">
           <h2>Expéditaire</h2>
           <div className="company-summary-part">
             <div className="company-info-1">
               <p>
-                {userData?.firstName?.toUpperCase()}{" "}
-                {userData?.lastName?.toUpperCase()}
+                {userData?.lastName?.toUpperCase()}{" "}
+                {userData?.firstName ? userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1) : ''}
               </p>
               <p>{invoiceData?.company?.name}</p>
               <p> {invoiceData?.company?.sirenSiret}</p>
@@ -223,7 +295,7 @@ export const InvoiceStepFive = () => {
               <p>
                 {invoiceData?.customer?.companyName} (
                 {invoiceData?.customer?.lastName?.toUpperCase()}{" "}
-                {invoiceData?.customer?.firstName?.toUpperCase()})
+                {userData?.firstName ? userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1) : ''})
               </p>
               <p>{invoiceData?.customer?.email}</p>
               <p>{invoiceData?.customer?.sirenSiret}</p>
