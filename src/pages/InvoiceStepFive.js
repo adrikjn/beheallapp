@@ -281,7 +281,6 @@ export const InvoiceStepFive = () => {
               {invoiceData?.billValidityDuration}
             </p>
             <p>Moyen de paiement : {invoiceData?.paymentMethod}</p>
-            <p>Conditions générales de vente : {invoiceData?.company?.gcs}</p>
           </div>
 
           <div className="btn-invoice-2">
