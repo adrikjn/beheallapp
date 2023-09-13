@@ -261,6 +261,25 @@ export const InvoiceStepFive = () => {
       ...zebraStyle,
     });
 
+   // Calculer la hauteur du tableau
+const tableHeight = pdf.previousAutoTable.finalY || 0;
+
+// Définir la position Y pour le contenu en dessous du tableau
+let contentY = tableHeight + 10; // Commencez à 10 unités en dessous du tableau
+
+const pageHeight = pdf.internal.pageSize.getHeight();
+
+// Vérifier si le contenu en dessous peut tenir sur la première page
+if (contentY > pageHeight - 20) {
+  // Si le contenu ne tient pas sur la première page, ajoutez une nouvelle page
+  pdf.addPage();
+  // Réinitialisez la position Y pour le contenu en dessous
+  contentY = 20;
+  
+  // Numérotez la page
+  pdf.text(10, pageHeight - 10, `Page ${pdf.internal.getNumberOfPages()}`);
+}
+
     // Calculer le Total HT en additionnant tous les service.totalPrice
     const totalHT = invoiceData?.services?.reduce(
       (accumulator, service) => accumulator + service.totalPrice,
@@ -269,11 +288,12 @@ export const InvoiceStepFive = () => {
 
     // Calculer le Taux TVA en calculant la moyenne des taux de TVA de tous les services
     const totalServices = invoiceData?.services?.length || 1; // Assurez-vous que le dénominateur n'est pas nul
-    const averageVATRate =
+    const averageVATRate = (
       invoiceData?.services?.reduce(
         (accumulator, service) => accumulator + service.vat,
         0
-      ) / totalServices || 0;
+      ) / totalServices || 0
+    ).toFixed(2);
 
     // Calculer le Total TTC en utilisant la valeur existante
     const totalTTC = invoiceData?.totalPrice.toFixed(2);
@@ -281,40 +301,46 @@ export const InvoiceStepFive = () => {
     pdf.setFontSize(12);
 
     let xResults = 145;
-    let yResults = 185;
 
     // Afficher le Total HT
     pdf.setFont("helvetica", "bold");
-    pdf.text("Total HT:", xResults, yResults);
+    pdf.text("Total HT:", xResults, contentY);
     const totalHTString = totalHT.toFixed(2) + " €";
-    pdf.text(totalHTString.toString(), xResults + 24, yResults); // Utilisez une position légèrement décalée
+    pdf.text(totalHTString.toString(), xResults + 24, contentY); // Utilisez une position légèrement décalée
 
     // Déplacer vers la prochaine ligne
-    yResults += 10;
+    contentY += 10;
 
     // Afficher l'Average VAT Rate
     pdf.setFont("helvetica", "normal");
-    pdf.text("TVA:", xResults, yResults);
+    pdf.text("TVA:", xResults, contentY);
     const averageVATRateString = averageVATRate + " %";
-    pdf.text(averageVATRateString.toString(), xResults + 24, yResults); // Utilisez une position légèrement décalée
+    pdf.text(averageVATRateString.toString(), xResults + 24, contentY); // Utilisez une position légèrement décalée
 
     // Déplacer vers la prochaine ligne
-    yResults += 10;
+    contentY += 10;
 
     // Afficher le Total TTC
     pdf.setFont("helvetica", "bold");
-    pdf.text("Total TTC:", xResults, yResults);
+    pdf.text("Total TTC:", xResults, contentY);
     const totalTTCString = totalTTC.toString() + " €";
 
-    pdf.text(totalTTCString, xResults + 24, yResults); // Utilisez une position légèrement décalée
+    pdf.text(totalTTCString, xResults + 24, contentY); // Utilisez une position légèrement décalée
 
-    // Conditions générales de vente
+    contentY += 10;
+
     pdf.setFont("helvetica", "normal");
-    pdf.setFontSize(12);
+    pdf.setFontSize(11);
+    const footerX = 15;
     pdf.text(
-      20,
-      pdf.autoTable.previous.finalY + 40,
-      `Conditions générales de vente: ${invoiceData?.company?.gcs}`
+      footerX,
+      contentY,
+      `Notes supplémentaires : ${invoiceData?.description}`
+    );
+    pdf.text(
+      footerX,
+      contentY + 5,
+      `Le paiement doit être réalisé sous ${invoiceData?.billValidityDuration} par ${invoiceData?.paymentMethod}`
     );
 
     // Télécharger le PDF avec un nom de fichier personnalisé
@@ -335,7 +361,9 @@ export const InvoiceStepFive = () => {
         <Account />
       </div>
       <div className="summary">
-        <button onClick={generateInvoicePDF}>Télécharger Facture PDF</button>
+        <button onClick={generateInvoicePDF}>
+          <img src="bill-pdf-dl.svg" alt="" />
+        </button>
 
         <div className="company-summary">
           <h2>Expéditaire</h2>
