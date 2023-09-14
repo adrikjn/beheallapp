@@ -229,6 +229,7 @@ export const InvoiceStepFive = () => {
       }`
     );
 
+
     // Tableau pour afficher les produits
     const zebraStyle = {
       startY: 108, // Ajustez la position Y en conséquence
