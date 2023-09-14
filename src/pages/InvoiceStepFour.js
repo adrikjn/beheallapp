@@ -21,9 +21,9 @@ export const InvoiceStepFour = () => {
     invoice: `/api/invoices/${invoiceId}`,
   });
 
-  // const addGlobalError = (error) => {
-  //   setGlobalErrors([...globalErrors, error]);
-  // };
+  const addGlobalError = (error) => {
+    setGlobalErrors([...globalErrors, error]);
+  };
 
   const [isInvoiceCreateVisible, setIsInvoiceCreateVisible] = useState(false);
   const [isProductListVisible, setIsProductListVisible] = useState(true);
@@ -78,8 +78,16 @@ export const InvoiceStepFour = () => {
     setTotalTTC(initialTotalTTC);
   }, [productList]);
 
+  const MAX_PRODUCTS = 5;
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    if (productList.length >= MAX_PRODUCTS) {
+      // Display an error message or prevent adding more products
+      addGlobalError("Vous ne pouvez que ajouter 5 produits/services");
+      return;
+    }
 
     try {
       console.log("Form data before submission:", formData);
