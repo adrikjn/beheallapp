@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 export const InvoiceStepFive = () => {
   const token = localStorage.getItem("Token");
@@ -100,6 +101,7 @@ export const InvoiceStepFive = () => {
 
     const maxWidth = pdf.internal.pageSize.getWidth() * 0.9;
     const lineHeight = 5; // Hauteur de ligne
+    
 
     // Fonction utilitaire pour ajouter du texte avec une largeur maximale
     const addTextWithMaxWidth = (text, x, y) => {
@@ -227,46 +229,53 @@ export const InvoiceStepFive = () => {
       }`
     );
 
-    let yPosition = 80; // Position verticale de départ pour le tableau
-const tableHeaders = ["Intitulé", "Volume", "Tarif", "TVA", "Prix HT"];
-const tableWidth = maxWidth - 15; // Largeur totale du tableau
+    // Tableau pour afficher les produits
+    const zebraStyle = {
+      startY: 108, // Ajustez la position Y en conséquence
+      theme: "striped",
+      tableWidth: "auto", // Ajustez la largeur de la table en conséquence
+      styles: {
+        font: "helvetica",
+        fontSize: 10,
+        textColor: [0, 0, 0], // Couleur du texte : Noir
+        cellPadding: 3,
+        overflow: "split",
+        halign: "center", // Centrer le contenu horizontalement
+        valign: "middle", // Centrer le contenu verticalement
+      },
+      headStyles: {
+        halign: "center", // Centrer le contenu horizontalement dans les en-têtes
+        valign: "middle", // Centrer le contenu verticalement dans les en-têtes
+        fillColor: [0, 0, 0], // Couleur de fond : Noir
+        textColor: [255, 255, 255], // Couleur du texte : Blanc
+      },
+    };
 
-// Style des en-têtes du tableau
-pdf.setFont("helvetica", "bold");
-pdf.setFillColor(192, 192, 192); // Couleur de fond des en-têtes
-pdf.rect(15, yPosition, tableWidth, lineHeight, "F"); // Dessiner le rectangle de l'en-tête
-pdf.setTextColor(0, 0, 0); // Couleur du texte : Noir
-pdf.setFontSize(10);
+    // Tableau pour afficher les produits en utilisant jsPDF-AutoTable
+    const productsTable = {
+      headers: ["Intitulés", "Volumes", "Tarif", "TVA", "Prix HT"],
+      rows: [],
+    };
 
-// Dessinez les en-têtes du tableau
-tableHeaders.forEach((header, index) => {
-  const headerWidth = tableWidth / tableHeaders.length;
-  pdf.text(15 + index * headerWidth + headerWidth / 2, yPosition + 5, header, null, null, "center"); // Centrer le texte dans la cellule
-});
+    let isGray = false;
 
-yPosition += lineHeight;
+    invoiceData?.services?.forEach((service) => {
+      const titleWithDescription = `${service.title}\n - ${service.description}`;
+      const fillColor = isGray ? [192, 192, 192] : [255, 255, 255];
+      productsTable.rows.push([
+        { content: titleWithDescription, fillColor },
+        { content: service.quantity, fillColor },
+        { content: `${service.unitCost}€`, fillColor },
+        { content: `${service.vat}%`, fillColor },
+        { content: `${service.totalPrice}€`, fillColor },
+      ]);
+      isGray = !isGray; // Alterne la couleur pour chaque ligne
+    });
 
-// Style des lignes de données du tableau
-pdf.setFont("helvetica", "normal");
-pdf.setFontSize(10);
-
-// Dessinez les données du tableau
-invoiceData?.services?.forEach((service, index) => {
-  const rowData = [
-    `${service.title} - ${service.description}`,
-    service.quantity.toString(),
-    `${service.unitCost}€`,
-    `${service.vat.toString()}%`,
-    `${service.totalPrice.toFixed(2)}€`,
-  ];
-
-  rowData.forEach((data, colIndex) => {
-    const colWidth = tableWidth / tableHeaders.length;
-    pdf.text(15 + colIndex * colWidth + colWidth / 2, yPosition + 5, data, null, null, "center"); // Centrer le texte dans la cellule
-  });
-
-  yPosition += lineHeight;
-});
+    // Dessiner le tableau des produits avec les styles personnalisés
+    pdf.autoTable(productsTable.headers, productsTable.rows, {
+      ...zebraStyle,
+    });
 
     // Calculer la hauteur totale du contenu
     const tableHeight = pdf.previousAutoTable.finalY || 0;
@@ -279,7 +288,7 @@ invoiceData?.services?.forEach((service, index) => {
     const pageHeight = pdf.internal.pageSize.getHeight();
 
     // Vérifier si le contenu en dessous peut tenir sur la page actuelle
-    if (contentY > pageHeight - 40) {
+    if (contentY > pageHeight - 30) {
       // Si le contenu ne tient pas sur la page actuelle, ajoutez une nouvelle page
       pdf.addPage();
       // Réinitialisez la position Y pour le contenu en dessous
