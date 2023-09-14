@@ -386,9 +386,9 @@ export const InvoiceStepFive = () => {
         <Account />
       </div>
       <div className="summary">
-        {/* <button onClick={generateInvoicePDF}>
+        <button onClick={generateInvoicePDF}>
           <img src="bill-pdf-dl.svg" alt="" />
-        </button> */}
+        </button>
 
         <div className="company-summary">
           <h2>Expéditaire</h2>
