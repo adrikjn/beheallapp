@@ -278,7 +278,7 @@ export const InvoiceStepFive = () => {
 
     // Calculer la hauteur totale du contenu
     const tableHeight = pdf.previousAutoTable.finalY || 0;
-    const contentBelowTableHeight = 20; // Ajoutez la hauteur du contenu en dessous du tableau
+    const contentBelowTableHeight = 12; // Ajoutez la hauteur du contenu en dessous du tableau
     const totalContentHeight = tableHeight + contentBelowTableHeight;
 
     // Définir la position Y pour le contenu en dessous du tableau
@@ -344,7 +344,7 @@ export const InvoiceStepFive = () => {
 
     pdf.text(totalTTCString, xResults + 24, contentY); // Utilisez une position légèrement décalée
 
-    contentY += 10;
+    contentY += 15;
 
     pdf.setFont("helvetica", "normal");
 pdf.setFontSize(11);
@@ -359,9 +359,9 @@ contentY += addTextWithMaxWidth(
 
 // Le paiement doit être réalisé
 contentY += addTextWithMaxWidth(
-  `Le paiement doit être réalisé sous ${invoiceData?.billValidityDuration} par ${invoiceData?.paymentMethod}`,
+  `Le paiement doit être réalisé sous ${invoiceData?.billValidityDuration} à sa date d'émission, par ${invoiceData?.paymentMethod}.`,
   footerX,
-  contentY + 5
+  contentY
 );
 
 
