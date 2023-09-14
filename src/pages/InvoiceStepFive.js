@@ -4,6 +4,8 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { SignatureCanvas } from "react-signature-canvas";
+
 
 export const InvoiceStepFive = () => {
   const token = localStorage.getItem("Token");
