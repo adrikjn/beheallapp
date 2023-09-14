@@ -100,6 +100,16 @@ export const InvoiceStepFive = () => {
     pdf.setTextColor(0, 0, 0); // Couleur du texte : Noir
 
     const maxWidth = pdf.internal.pageSize.getWidth() * 0.9;
+    const lineHeight = 5; // Hauteur de ligne
+
+    // Fonction utilitaire pour ajouter du texte avec une largeur maximale
+    const addTextWithMaxWidth = (text, x, y) => {
+      const textPieces = pdf.splitTextToSize(text, maxWidth);
+      textPieces.forEach((textPiece, index) => {
+        pdf.text(x, y + index * lineHeight, textPiece);
+      });
+      return textPieces.length * lineHeight;
+    };
 
     pdf.setFontSize(36);
     const headerText = "FACTURE";
@@ -337,24 +347,24 @@ export const InvoiceStepFive = () => {
     contentY += 10;
 
     pdf.setFont("helvetica", "normal");
-    pdf.setFontSize(11);
-    const footerX = 15;
-    pdf.text(
-      footerX,
-      contentY,
-      `Informations supplémentaires : ${invoiceData?.description}`
-    );
-    pdf.text(
-      footerX,
-      contentY + 5,
-      `Le paiement doit être réalisé sous ${invoiceData?.billValidityDuration} par ${invoiceData?.paymentMethod}`
-    );
+pdf.setFontSize(11);
+const footerX = 15;
 
-    pdf.text(
-      footerX,
-      contentY + 10,
-      `Conditions générales de vente ${invoiceData?.company.gcs} par ${invoiceData?.paymentMethod}`
-    );
+// Informations supplémentaires
+contentY += addTextWithMaxWidth(
+  `Conditions générales de vente : ${invoiceData?.description}`,
+  footerX,
+  contentY
+);
+
+// Le paiement doit être réalisé
+contentY += addTextWithMaxWidth(
+  `Le paiement doit être réalisé sous ${invoiceData?.billValidityDuration} par ${invoiceData?.paymentMethod}`,
+  footerX,
+  contentY + 5
+);
+
+
 
     // Télécharger le PDF avec un nom de fichier personnalisé
     const fileName = `${invoiceData?.company?.name
