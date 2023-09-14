@@ -89,7 +89,12 @@ export const InvoiceStepFive = () => {
   };
 
   const generateInvoicePDF = () => {
-    const pdf = new jsPDF();
+    const pdf = new jsPDF({
+      orientation: "portrait", // ou 'landscape'
+      unit: "mm",
+      format: "a4", // ou toute autre taille de page
+    });
+
     pdf.setFont("helvetica");
     pdf.setFontSize(12);
     pdf.setTextColor(0, 0, 0); // Couleur du texte : Noir
@@ -223,7 +228,7 @@ export const InvoiceStepFive = () => {
         fontSize: 10,
         textColor: [0, 0, 0], // Couleur du texte : Noir
         cellPadding: 5,
-        overflow: "linebreak",
+        overflow: "split",
         halign: "center", // Centrer le contenu horizontalement
         valign: "middle", // Centrer le contenu verticalement
       },
@@ -261,24 +266,26 @@ export const InvoiceStepFive = () => {
       ...zebraStyle,
     });
 
-   // Calculer la hauteur du tableau
-const tableHeight = pdf.previousAutoTable.finalY || 0;
+    // Calculer la hauteur totale du contenu
+    const tableHeight = pdf.previousAutoTable.finalY || 0;
+    const contentBelowTableHeight = 20; // Ajoutez la hauteur du contenu en dessous du tableau
+    const totalContentHeight = tableHeight + contentBelowTableHeight;
 
-// Définir la position Y pour le contenu en dessous du tableau
-let contentY = tableHeight + 10; // Commencez à 10 unités en dessous du tableau
+    // Définir la position Y pour le contenu en dessous du tableau
+    let contentY = totalContentHeight;
 
-const pageHeight = pdf.internal.pageSize.getHeight();
+    const pageHeight = pdf.internal.pageSize.getHeight();
 
-// Vérifier si le contenu en dessous peut tenir sur la première page
-if (contentY > pageHeight - 20) {
-  // Si le contenu ne tient pas sur la première page, ajoutez une nouvelle page
-  pdf.addPage();
-  // Réinitialisez la position Y pour le contenu en dessous
-  contentY = 20;
-  
-  // Numérotez la page
-  pdf.text(10, pageHeight - 10, `Page ${pdf.internal.getNumberOfPages()}`);
-}
+    // Vérifier si le contenu en dessous peut tenir sur la page actuelle
+    if (contentY > pageHeight - 20) {
+      // Si le contenu ne tient pas sur la page actuelle, ajoutez une nouvelle page
+      pdf.addPage();
+      // Réinitialisez la position Y pour le contenu en dessous
+      contentY = 20;
+
+      // Numérotez la page
+      pdf.text(10, pageHeight - 10, `Page ${pdf.internal.getNumberOfPages()}`);
+    }
 
     // Calculer le Total HT en additionnant tous les service.totalPrice
     const totalHT = invoiceData?.services?.reduce(
@@ -335,12 +342,18 @@ if (contentY > pageHeight - 20) {
     pdf.text(
       footerX,
       contentY,
-      `Notes supplémentaires : ${invoiceData?.description}`
+      `Informations supplémentaires : ${invoiceData?.description}`
     );
     pdf.text(
       footerX,
       contentY + 5,
       `Le paiement doit être réalisé sous ${invoiceData?.billValidityDuration} par ${invoiceData?.paymentMethod}`
+    );
+
+    pdf.text(
+      footerX,
+      contentY + 10,
+      `Conditions générales de vente ${invoiceData?.company.gcs} par ${invoiceData?.paymentMethod}`
     );
 
     // Télécharger le PDF avec un nom de fichier personnalisé

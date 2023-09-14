@@ -211,7 +211,7 @@ export const InvoiceStepThree = () => {
             ></input>
             <textarea
               id="description"
-              placeholder="Description"
+              placeholder="Informations supplémentaires (pénalités de retard, rétraction..)"
               name="description"
               value={formData.description}
               onChange={handleInputChange}
