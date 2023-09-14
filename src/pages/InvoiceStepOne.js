@@ -33,7 +33,6 @@ export const InvoiceStepOne = () => {
     vatId: "",
     website: "",
     descriptionWork: "",
-    gcs: "",
   });
 
   // const addGlobalError = (error) => {
@@ -106,7 +105,6 @@ export const InvoiceStepOne = () => {
         vatId: "",
         website: "",
         descriptionWork: "",
-        gcs: "",
       });
 
       // Faire une requête GET pour actualiser les données utilisateur
@@ -281,13 +279,6 @@ export const InvoiceStepOne = () => {
               value={formData.sirenSiret}
               onChange={handleInputChange}
             />
-             <textarea
-                  id="gcs"
-                  placeholder="Conditions générales de ventes (champ non obligatoire pouvant être utile pour vos factures)"
-                  name="gcs"
-                  value={formData.gcs}
-                  onChange={handleInputChange}
-                ></textarea>
             <div className="switch-container">
               <label htmlFor="showAdditionalFields">
                 Afficher les champs facultatifs :
