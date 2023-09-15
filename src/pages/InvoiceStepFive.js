@@ -277,7 +277,7 @@ export const InvoiceStepFive = () => {
           ? `du ${formatDate(invoiceData?.fromDate)} au ${formatDate(
               invoiceData?.deliveryDate
             )}`
-          : formatDate(invoiceData?.deliveryDate)
+          : `le ${formatDate(invoiceData?.deliveryDate)}`
       }`
     );
 
@@ -439,8 +439,19 @@ export const InvoiceStepFive = () => {
         <h1>Finalisation</h1>
         <Account />
       </div>
-      <div className="summary">
+      <div className="contents-try">
+        <div className="dl-pdf">
+          <h1>Veuillez signer la facture puis cliquer sur l'icône PDF</h1>
+          <button onClick={captureSignature}>
+            <img
+              src="bill-pdf-dl.svg"
+              alt="Télécharger Facture PDF"
+              className="dl-pdf-img"
+            />
+          </button>
+        </div>
         <div className="sign-pdf-div">
+        <h2>Signature</h2>
           <canvas
             className="canva-signature"
             ref={signatureCanvasRef}
@@ -449,13 +460,15 @@ export const InvoiceStepFive = () => {
             onMouseUp={endDrawing}
             onMouseOut={endDrawing}
           ></canvas>
-          <button className="clear-signature-button" onClick={clearSignature}>
-            <img src="erase-signature.svg" alt="Effacer signature" />
-          </button>
-          <button onClick={captureSignature} className="dl-pdf">
-            <img src="bill-pdf-dl.svg" alt="" />
-          </button>
+          <img
+            src="erase-signature.svg"
+            alt="Effacer signature"
+            className="clear-signature-button"
+            onClick={clearSignature}
+          />
         </div>
+      </div>
+      <div className="summary">
         <div className="company-summary">
           <h2>Expéditaire</h2>
           <div className="company-summary-part">
@@ -552,7 +565,6 @@ export const InvoiceStepFive = () => {
             </p>
             <p>Moyen de paiement : {invoiceData?.paymentMethod}</p>
           </div>
-
           <div className="btn-invoice-2">
             <button onClick={sendInvoice}>Envoyer</button>
           </div>
