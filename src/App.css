@@ -1159,6 +1159,12 @@ ul li {
   }
 }
 
+@media (min-width: 960px) {
+  .dl-pdf-img {
+    margin-top: 15px;
+  }
+}
+
 
 .sign-pdf-div h2 {
   color: #000;
