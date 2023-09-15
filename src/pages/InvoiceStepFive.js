@@ -210,19 +210,25 @@ export const InvoiceStepFive = () => {
     pdf.text(
       leftXCompany,
       textYCompany + 18,
-      `${invoiceData?.company?.address}, ${invoiceData?.company?.postalCode}, ${invoiceData?.company?.city}`
+      `${invoiceData?.company?.address}`
     );
+    
     pdf.text(
       leftXCompany,
       textYCompany + 24,
+      `${invoiceData?.company?.postalCode}, ${invoiceData?.company?.city}`
+    );
+    pdf.text(
+      leftXCompany,
+      textYCompany + 30,
       `${invoiceData?.company?.sirenSiret}`
     );
-    pdf.text(leftXCompany, textYCompany + 30, `${invoiceData?.company?.vatId}`);
+    pdf.text(leftXCompany, textYCompany + 36, `${invoiceData?.company?.vatId}`);
 
     // Informations sur le destinataire
     pdf.setFontSize(11);
-    const rightXCustomer = 120;
-    const textYCustomer = 60;
+    const rightXCustomer = 125;
+    const textYCustomer = 50;
     pdf.setFont("helvetica", "bold");
     pdf.text(
       rightXCustomer,
@@ -243,26 +249,32 @@ export const InvoiceStepFive = () => {
     pdf.text(
       rightXCustomer,
       textYCustomer + 12,
-      `${invoiceData?.customer?.address}, ${invoiceData?.customer?.postalCode}, ${invoiceData?.customer?.city}`
+      `${invoiceData?.customer?.address}`
     );
+    
     pdf.text(
       rightXCustomer,
       textYCustomer + 18,
-      `${invoiceData?.customer?.email}`
+      `${invoiceData?.customer?.postalCode}, ${invoiceData?.customer?.city}`
     );
     pdf.text(
       rightXCustomer,
       textYCustomer + 24,
-      `${invoiceData?.customer?.phoneNumber}`
+      `${invoiceData?.customer?.email}`
     );
     pdf.text(
       rightXCustomer,
       textYCustomer + 30,
-      `${invoiceData?.customer?.sirenSiret}`
+      `${invoiceData?.customer?.phoneNumber}`
     );
     pdf.text(
       rightXCustomer,
       textYCustomer + 36,
+      `${invoiceData?.customer?.sirenSiret}`
+    );
+    pdf.text(
+      rightXCustomer,
+      textYCustomer + 42,
       `${invoiceData?.customer?.vatId}`
     );
 
@@ -270,13 +282,13 @@ export const InvoiceStepFive = () => {
     pdf.setFontSize(12);
     pdf.text(
       15,
-      97,
+      98,
       `${invoiceData?.title} ${
         invoiceData?.fromDate
           ? `du ${formatDate(invoiceData?.fromDate)} au ${formatDate(
               invoiceData?.deliveryDate
             )}`
-          : `le ${formatDate(invoiceData?.deliveryDate)}`
+          : `du ${formatDate(invoiceData?.deliveryDate)}`
       }`
     );
 
@@ -378,7 +390,7 @@ export const InvoiceStepFive = () => {
     pdf.text(totalHTString.toString(), xResults + 24, contentY); // Utilisez une position légèrement décalée
 
     // Déplacer vers la prochaine ligne
-    contentY += 10;
+    contentY += 9;
 
     // Afficher l'Average VAT Rate
     pdf.setFont("helvetica", "normal");
@@ -387,7 +399,7 @@ export const InvoiceStepFive = () => {
     pdf.text(averageVATRateString.toString(), xResults + 24, contentY); // Utilisez une position légèrement décalée
 
     // Déplacer vers la prochaine ligne
-    contentY += 10;
+    contentY += 9;
 
     // Afficher le Total TTC
     pdf.setFont("helvetica", "bold");
@@ -396,7 +408,7 @@ export const InvoiceStepFive = () => {
 
     pdf.text(totalTTCString, xResults + 24, contentY); // Utilisez une position légèrement décalée
 
-    contentY += 15;
+    contentY += 9;
 
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(11);
@@ -420,13 +432,12 @@ export const InvoiceStepFive = () => {
       contentY += 5;
 
       pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(10);
+      pdf.setFontSize(11);
       const signatureDate = `Signé le ${formatDate(new Date())}`;
 
       const dateX = 150; // Réduisez cette valeur pour décaler moins vers la droite
       pdf.text(signatureDate, dateX, contentY);
 
-      contentY += 5;
 
       const imgWidth = 50;
       const imgHeight = (imgWidth * 200) / 400;
