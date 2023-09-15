@@ -340,7 +340,11 @@ export const InvoiceStepFour = () => {
         </ul>
         {productList.map((product, index) => (
           <ul className="product-item" key={index}>
-            <li>{product.title}</li>
+            <li>
+              {product.title.length > 8
+                ? `${product.title.substring(0, 8)}...`
+                : product.title}
+            </li>
             <li>{product.quantity}</li>
             <li>{product.unitCost}€</li>
             <li>{product.vat}%</li>

@@ -221,8 +221,8 @@ export const InvoiceStepFive = () => {
 
     // Informations sur le destinataire
     pdf.setFontSize(11);
-    const rightXCustomer = 131;
-    const textYCustomer = 49;
+    const rightXCustomer = 120;
+    const textYCustomer = 60;
     pdf.setFont("helvetica", "bold");
     pdf.text(
       rightXCustomer,
@@ -271,7 +271,7 @@ export const InvoiceStepFive = () => {
     pdf.setFontSize(12);
     pdf.text(
       15,
-      103,
+      97,
       `${invoiceData?.title} ${
         invoiceData?.fromDate
           ? `du ${formatDate(invoiceData?.fromDate)} au ${formatDate(
@@ -283,7 +283,7 @@ export const InvoiceStepFive = () => {
 
     // Tableau pour afficher les produits
     const zebraStyle = {
-      startY: 108, // Ajustez la position Y en conséquence
+      startY: 104, // Ajustez la position Y en conséquence
       theme: "striped",
       tableWidth: "auto", // Ajustez la largeur de la table en conséquence
       styles: {
@@ -566,7 +566,6 @@ export const InvoiceStepFive = () => {
               <p>PRIX TTC : {invoiceData?.totalPrice.toFixed(2)}€</p>
             </div>
             <p>Objet : {invoiceData?.title}</p>
-            <p>Description : {invoiceData?.description}</p>
             <p>Numéro de facture : {invoiceData?.billNumber.toUpperCase()}</p>
             <p>
               Date de l'opération:{" "}
