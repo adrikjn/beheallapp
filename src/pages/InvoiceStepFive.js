@@ -14,7 +14,6 @@ export const InvoiceStepFive = () => {
   const signatureCanvasRef = useRef(null);
   const [signatureDataURL, setSignatureDataURL] = useState(null);
 
-
   function formatDate(dateString) {
     if (!dateString) return "";
     const date = new Date(dateString);
@@ -55,22 +54,19 @@ export const InvoiceStepFive = () => {
   };
 
   useEffect(() => {
-  if (signatureDataURL) {
-    generateInvoicePDF();
-  }
-  // eslint-disable-next-line
-}, [signatureDataURL]);
-
+    if (signatureDataURL) {
+     generateInvoicePDF();
+    }
+    // eslint-disable-next-line
+  }, [signatureDataURL]);
 
   const captureSignature = () => {
     const canvas = signatureCanvasRef.current;
     const signatureData = canvas.toDataURL("image/png");
     setSignatureDataURL(signatureData);
-  
-    generateInvoicePDF();
+
+    //? DECOMMENTER generateInvoicePDF();
   };
-  
-  
 
   useEffect(() => {
     if (!token) {
@@ -421,8 +417,6 @@ export const InvoiceStepFive = () => {
       contentY += imgHeight + 10; // Ajustez la position Y
     }
 
-    
-
     // Télécharger le PDF avec un nom de fichier personnalisé
     const fileName = `${invoiceData?.company?.name
       .replace(/\s+/g, "_")
@@ -432,25 +426,25 @@ export const InvoiceStepFive = () => {
     pdf.save(fileName);
   };
 
-
   return (
     <div className="invoice-step-one-page">
       <div className="welcome-user">
-        <h1>Recapitulatif</h1>
+        <h1>Finalisation</h1>
         <Account />
       </div>
       <div className="summary">
-        <canvas
-          ref={signatureCanvasRef}
-          width={400}
-          height={200}
-          style={{ border: "1px solid #000" }}
-          onMouseDown={startDrawing}
-          onMouseMove={draw}
-          onMouseUp={endDrawing}
-          onMouseOut={endDrawing}
-        ></canvas>
-        <button onClick={captureSignature}>Capturer la Signature</button>
+        <div className="sign-pdf-div">
+          <canvas
+            className="canva-signature"
+            ref={signatureCanvasRef}
+            style={{ border: "1px solid #000" }}
+            onMouseDown={startDrawing}
+            onMouseMove={draw}
+            onMouseUp={endDrawing}
+            onMouseOut={endDrawing}
+          ></canvas>
+          <button onClick={captureSignature}>Télécharger le PDF<img src="bill-pdf-dl.svg" alt="" /></button>
+        </div>
         <div className="company-summary">
           <h2>Expéditaire</h2>
           <div className="company-summary-part">

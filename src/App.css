@@ -1123,3 +1123,18 @@ ul li {
   background-color: #d9534f; /* Couleur de fond au survol, légèrement plus foncée */
   color: #fff;
 }
+
+/*? CANVA SIGNATURE */
+.sign-pdf-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.canva-signature {
+  width: 20%;
+  height: 100px;
+}
+
+.sign-pdf-div button {
+  width: 50%;
+}
