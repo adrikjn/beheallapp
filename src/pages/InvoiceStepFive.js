@@ -72,7 +72,7 @@ export const InvoiceStepFive = () => {
     const signatureData = canvas.toDataURL("image/png");
     setSignatureDataURL(signatureData);
 
-    //? DECOMMENTER generateInvoicePDF();
+    generateInvoicePDF();
   };
 
   useEffect(() => {
@@ -418,12 +418,29 @@ export const InvoiceStepFive = () => {
     );
 
     if (signatureDataURL) {
-      const imgWidth = 80; // Largeur de l'image de signature
-      const imgHeight = (imgWidth * 200) / 400; // Ajustez la hauteur en proportion
-      pdf.addImage(signatureDataURL, "PNG", 15, contentY, imgWidth, imgHeight);
-      contentY += imgHeight + 10; // Ajustez la position Y
-    }
+      contentY += 5;
+    
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(10);
+      const signatureDate = `Signé le ${formatDate(new Date())}`;
+     
+    
+    
+      const dateX = 150; // Réduisez cette valeur pour décaler moins vers la droite
+      pdf.text(signatureDate, dateX, contentY);
 
+      contentY += 5;
+
+    
+      const imgWidth = 50;
+      const imgHeight = (imgWidth * 200) / 400; 
+    
+      const imgX = 150;
+      pdf.addImage(signatureDataURL, "PNG", imgX, contentY, imgWidth, imgHeight);
+      contentY += imgHeight + 10; 
+    }
+    
+    
     // Télécharger le PDF avec un nom de fichier personnalisé
     const fileName = `${invoiceData?.company?.name
       .replace(/\s+/g, "_")
