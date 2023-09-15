@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { SignatureCanvas } from "react-signature-canvas";
-
 
 export const InvoiceStepFive = () => {
   const token = localStorage.getItem("Token");
@@ -13,6 +11,9 @@ export const InvoiceStepFive = () => {
   const userData = JSON.parse(localStorage.getItem("UserData"));
   const navigate = useNavigate();
   const [invoiceData, setInvoiceData] = useState(null);
+  const signatureCanvasRef = useRef(null);
+  const [signatureDataURL, setSignatureDataURL] = useState(null);
+
 
   function formatDate(dateString) {
     if (!dateString) return "";
@@ -23,6 +24,53 @@ export const InvoiceStepFive = () => {
 
     return `${day}/${month}/${year}`;
   }
+
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  const startDrawing = (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.nativeEvent.offsetX, e.nativeEvent.offsetY];
+  };
+
+  const draw = (e) => {
+    if (!isDrawing) return;
+    const ctx = signatureCanvasRef.current.getContext("2d");
+    ctx.strokeStyle = "#000"; // Définissez la couleur du trait
+    ctx.lineWidth = 2; // Définissez la largeur de ligne
+    ctx.lineCap = "round"; // Définissez le style du capuchon de ligne
+
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    const x = e.nativeEvent.offsetX;
+    const y = e.nativeEvent.offsetY;
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    [lastX, lastY] = [x, y];
+  };
+
+  const endDrawing = () => {
+    isDrawing = false;
+  };
+
+  useEffect(() => {
+  if (signatureDataURL) {
+    generateInvoicePDF();
+  }
+  // eslint-disable-next-line
+}, [signatureDataURL]);
+
+
+  const captureSignature = () => {
+    const canvas = signatureCanvasRef.current;
+    const signatureData = canvas.toDataURL("image/png");
+    setSignatureDataURL(signatureData);
+  
+    generateInvoicePDF();
+  };
+  
+  
 
   useEffect(() => {
     if (!token) {
@@ -103,7 +151,6 @@ export const InvoiceStepFive = () => {
 
     const maxWidth = pdf.internal.pageSize.getWidth() * 0.9;
     const lineHeight = 5; // Hauteur de ligne
-    
 
     // Fonction utilitaire pour ajouter du texte avec une largeur maximale
     const addTextWithMaxWidth = (text, x, y) => {
@@ -230,7 +277,6 @@ export const InvoiceStepFive = () => {
           : formatDate(invoiceData?.deliveryDate)
       }`
     );
-
 
     // Tableau pour afficher les produits
     const zebraStyle = {
@@ -368,6 +414,15 @@ export const InvoiceStepFive = () => {
       contentY
     );
 
+    if (signatureDataURL) {
+      const imgWidth = 80; // Largeur de l'image de signature
+      const imgHeight = (imgWidth * 200) / 400; // Ajustez la hauteur en proportion
+      pdf.addImage(signatureDataURL, "PNG", 15, contentY, imgWidth, imgHeight);
+      contentY += imgHeight + 10; // Ajustez la position Y
+    }
+
+    
+
     // Télécharger le PDF avec un nom de fichier personnalisé
     const fileName = `${invoiceData?.company?.name
       .replace(/\s+/g, "_")
@@ -377,7 +432,6 @@ export const InvoiceStepFive = () => {
     pdf.save(fileName);
   };
 
-  // generateInvoicePDF();
 
   return (
     <div className="invoice-step-one-page">
@@ -386,10 +440,17 @@ export const InvoiceStepFive = () => {
         <Account />
       </div>
       <div className="summary">
-        <button onClick={generateInvoicePDF}>
-          <img src="bill-pdf-dl.svg" alt="" />
-        </button>
-
+        <canvas
+          ref={signatureCanvasRef}
+          width={400}
+          height={200}
+          style={{ border: "1px solid #000" }}
+          onMouseDown={startDrawing}
+          onMouseMove={draw}
+          onMouseUp={endDrawing}
+          onMouseOut={endDrawing}
+        ></canvas>
+        <button onClick={captureSignature}>Capturer la Signature</button>
         <div className="company-summary">
           <h2>Expéditaire</h2>
           <div className="company-summary-part">
