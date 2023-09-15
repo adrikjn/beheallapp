@@ -1128,13 +1128,34 @@ ul li {
 .sign-pdf-div {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  position: relative;  
 }
 
 .canva-signature {
-  width: 20%;
-  height: 100px;
+  width: 100%; /* Utilisez la largeur totale pour les petits écrans */
+  height: auto; /* Hauteur automatique pour conserver le rapport hauteur/largeur */
+  border: 1px solid black;
+  position: relative;
 }
 
-.sign-pdf-div button {
-  width: 50%;
+@media (min-width: 550px) {
+  .canva-signature {
+    width: 400px; /* Largeur fixe pour les grands écrans */
+    height: 150px; /* Hauteur fixe pour les grands écrans */
+  }
 }
+
+.clear-signature-button {
+  position: absolute; /* Position absolue par rapport au parent sign-pdf-div */
+  top: 0; /* Alignez le haut du bouton au haut du parent */
+  right: 0; /* Alignez le côté droit du bouton au côté droit du parent */
+  margin: 5px; /* Ajoutez une marge pour l'espace autour du bouton */
+}
+
+.dl-pdf  {
+  width: 10%;
+}
+
+
+

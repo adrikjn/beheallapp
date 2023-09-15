@@ -53,9 +53,16 @@ export const InvoiceStepFive = () => {
     isDrawing = false;
   };
 
+  const clearSignature = () => {
+    const canvas = signatureCanvasRef.current;
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    setSignatureDataURL(null);
+  };
+
   useEffect(() => {
     if (signatureDataURL) {
-     generateInvoicePDF();
+      generateInvoicePDF();
     }
     // eslint-disable-next-line
   }, [signatureDataURL]);
@@ -437,13 +444,17 @@ export const InvoiceStepFive = () => {
           <canvas
             className="canva-signature"
             ref={signatureCanvasRef}
-            style={{ border: "1px solid #000" }}
             onMouseDown={startDrawing}
             onMouseMove={draw}
             onMouseUp={endDrawing}
             onMouseOut={endDrawing}
           ></canvas>
-          <button onClick={captureSignature}>Télécharger le PDF<img src="bill-pdf-dl.svg" alt="" /></button>
+          <button className="clear-signature-button" onClick={clearSignature}>
+            <img src="erase-signature.svg" alt="Effacer signature" />
+          </button>
+          <button onClick={captureSignature} className="dl-pdf">
+            <img src="bill-pdf-dl.svg" alt="" />
+          </button>
         </div>
         <div className="company-summary">
           <h2>Expéditaire</h2>
