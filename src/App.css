@@ -939,6 +939,7 @@ ul li {
   justify-content: space-between;
   font-size: 10px;
   font-weight: 300;
+  gap: 20px;
 }
 
 .company-info-1,

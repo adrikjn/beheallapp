@@ -240,7 +240,6 @@ export const InvoiceStepFive = () => {
           : ""
       }`
     );
-
     pdf.text(
       rightXCustomer,
       textYCustomer + 12,
@@ -419,28 +418,31 @@ export const InvoiceStepFive = () => {
 
     if (signatureDataURL) {
       contentY += 5;
-    
+
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(10);
       const signatureDate = `Signé le ${formatDate(new Date())}`;
-     
-    
-    
+
       const dateX = 150; // Réduisez cette valeur pour décaler moins vers la droite
       pdf.text(signatureDate, dateX, contentY);
 
       contentY += 5;
 
-    
       const imgWidth = 50;
-      const imgHeight = (imgWidth * 200) / 400; 
-    
+      const imgHeight = (imgWidth * 200) / 400;
+
       const imgX = 150;
-      pdf.addImage(signatureDataURL, "PNG", imgX, contentY, imgWidth, imgHeight);
-      contentY += imgHeight + 10; 
+      pdf.addImage(
+        signatureDataURL,
+        "PNG",
+        imgX,
+        contentY,
+        imgWidth,
+        imgHeight
+      );
+      contentY += imgHeight + 10;
     }
-    
-    
+
     // Télécharger le PDF avec un nom de fichier personnalisé
     const fileName = `${invoiceData?.company?.name
       .replace(/\s+/g, "_")
@@ -468,7 +470,7 @@ export const InvoiceStepFive = () => {
           </button>
         </div>
         <div className="sign-pdf-div">
-        <h2>Signature</h2>
+          <h2>Signature</h2>
           <canvas
             className="canva-signature"
             ref={signatureCanvasRef}
@@ -551,7 +553,15 @@ export const InvoiceStepFive = () => {
             {invoiceData?.services?.map((service) => (
               <ul className="product-summary-item" key={service.id}>
                 <li>
-                  {service.title} <p>- {service.description}</p>
+                  {service.title.length > 8
+                    ? `${service.title.substring(0, 8)}...`
+                    : service.title}{" "}
+                  <p>
+                    -{" "}
+                    {service.description.length > 8
+                      ? `${service.description.substring(0, 8)}...`
+                      : service.description}
+                  </p>
                 </li>
                 <li>{service.quantity}</li>
                 <li>{service.unitCost}€</li>
