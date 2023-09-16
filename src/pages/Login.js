@@ -11,6 +11,12 @@ export const Login = () => {
     location.state && location.state.registrationSuccess;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [globalErrors, setGlobalErrors] = useState([]);
+
+  const addGlobalError = (error) => {
+    setGlobalErrors([...globalErrors, error]);
+  };
+
 
   const handleLogin = async () => {
     try {
@@ -51,13 +57,27 @@ export const Login = () => {
       navigate("/dashboard");
     } catch (error) {
       console.error("Erreur de connexion :", error);
-
-      //Afficher une erreur propre sur la vue (alert box) suite a l'erreur de connexion
+      addGlobalError("Erreur de connexion. Veuillez vérifier vos informations d'identification.");
     }
+  };
+
+  const closeAlert = () => {
+    setGlobalErrors([]);
   };
 
   return (
     <div className="login-page">
+      {globalErrors.length > 0 && <div className="overlay"></div>}
+      {globalErrors.length > 0 && (
+              <div className="alert">
+                <span onClick={closeAlert} className="close-alert">
+                  &times;
+                </span>
+                {globalErrors.map((error, index) => (
+                  <p key={index}>{error}</p>
+                ))}
+              </div>
+            )}
       <div className="login-part-one">
         <LogoAndPicture />
         <p className="login-description">On s'occupe de tout</p>
@@ -65,6 +85,7 @@ export const Login = () => {
       </div>
       <div className="login-part-two">
         <div className="login-space">
+        
           <h1>Connexion</h1>
           {registrationSuccess && (
             <p className="success-message">
