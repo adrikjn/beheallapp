@@ -471,7 +471,7 @@ export const InvoiceStepFive = () => {
       </div>
       <div className="contents-try">
         <div className="dl-pdf">
-          <h1>Veuillez signer la facture puis cliquer sur l'icône PDF</h1>
+          <h1>Veuillez signer la facture puis cliquer sur l'icône PDF pour la télécharger</h1>
           <button onClick={captureSignature}>
             <img
               src="bill-pdf-dl.svg"
