@@ -67,7 +67,7 @@ export const Register = () => {
   };
 
   return (
-    <div className="login-page">
+    <div className="login-page fade-in">
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <LogoAndPicture />
       <h1 className="register-title">Inscription</h1>

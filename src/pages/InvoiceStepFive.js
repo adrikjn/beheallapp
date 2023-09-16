@@ -464,7 +464,7 @@ export const InvoiceStepFive = () => {
   };
 
   return (
-    <div className="invoice-step-one-page">
+    <div className="invoice-step-one-page fade-in">
       <div className="welcome-user">
         <h1>Finalisation</h1>
         <Account />

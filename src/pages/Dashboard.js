@@ -103,7 +103,7 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
 }
 
   return (
-    <div className="dashboard-page">
+    <div className="dashboard-page fade-in">
       {userData && (
         <div className="welcome-user">
           <h1>Welcome, {userData.firstName}</h1>

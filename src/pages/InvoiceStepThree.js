@@ -170,7 +170,7 @@ export const InvoiceStepThree = () => {
   }
 
   return (
-    <div className="invoice-step-one-page">
+    <div className="invoice-step-one-page fade-in">
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
         <h1>creation factures</h1>
