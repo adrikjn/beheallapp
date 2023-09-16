@@ -66,7 +66,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="login-page">
+    <div className="login-page fade-in">
       {globalErrors.length > 0 && <div className="overlay"></div>}
       {globalErrors.length > 0 && (
               <div className="alert">

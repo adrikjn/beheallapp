@@ -23,6 +23,20 @@ ul li {
 }
 
 /*? LANDING PAGE */
+/* App.css */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
 .landing-page-height {
   min-height: 769px;
   display: flex;
