@@ -60,6 +60,11 @@ export const InvoiceStepFour = () => {
     fetchProducts();
   }, [token, navigate, invoiceId]);
 
+  const handleRefreshPage = () => {
+    // Rafraîchir la page
+    window.location.reload();
+  };
+
   useEffect(() => {
     // Fonction pour calculer le total TTC
     const calculateTotalTTC = () => {
@@ -85,7 +90,7 @@ export const InvoiceStepFour = () => {
 
     if (productList.length >= MAX_PRODUCTS) {
       // Display an error message or prevent adding more products
-      addGlobalError("Vous ne pouvez que ajouter 5 produits/services");
+      addGlobalError("Vous ne pouvez ajouter que 5 produits/services");
       return;
     }
 
@@ -319,6 +324,9 @@ export const InvoiceStepFour = () => {
               />
               <div className="btn-invoice-4">
                 <button type="submit">Ajouter le produit</button>
+              </div>
+              <div className="center-plus">
+                <img src="going-back.svg" alt="" onClick={handleRefreshPage} />
               </div>
             </form>
           </div>
