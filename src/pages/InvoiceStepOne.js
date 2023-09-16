@@ -26,8 +26,6 @@ export const InvoiceStepOne = () => {
     country: "",
     sirenSiret: "",
     legalForm: "",
-    rmNumber: "",
-    rcsNumber: "",
     shareCapital: "",
     cityRegistration: "",
     vatId: "",
@@ -98,8 +96,6 @@ export const InvoiceStepOne = () => {
         country: "",
         sirenSiret: "",
         legalForm: "",
-        rmNumber: "",
-        rcsNumber: "",
         shareCapital: "",
         cityRegistration: "",
         vatId: "",
@@ -348,24 +344,6 @@ export const InvoiceStepOne = () => {
                     commandite simple (SCS)
                   </option>
                 </select>
-                <div className="input-row">
-                  <input
-                    type="text"
-                    id="rmNumber"
-                    placeholder="Numéro RM"
-                    name="rmNumber"
-                    value={formData.rmNumber}
-                    onChange={handleInputChange}
-                  />
-                  <input
-                    type="text"
-                    id="rcsNumber"
-                    placeholder="Numéro RCS"
-                    name="rcsNumber"
-                    value={formData.rcsNumber}
-                    onChange={handleInputChange}
-                  />
-                </div>
                 <input
                   type="text"
                   id="shareCapital"
