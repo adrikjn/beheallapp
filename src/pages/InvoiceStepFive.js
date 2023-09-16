@@ -408,7 +408,7 @@ export const InvoiceStepFive = () => {
 
     pdf.text(totalTTCString, xResults + 24, contentY); // Utilisez une position légèrement décalée
 
-    contentY += 9;
+    contentY += 12;
 
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(11);

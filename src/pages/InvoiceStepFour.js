@@ -107,6 +107,7 @@ export const InvoiceStepFour = () => {
         }
       );
       console.log(response);
+      
 
       const invoiceResponse = await Axios.get(
         `http://localhost:8000/api/invoices/${invoiceId}`,
