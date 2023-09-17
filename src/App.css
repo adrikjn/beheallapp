@@ -213,7 +213,7 @@ ul li {
 .login-part-two .login-space button {
   height: 72px;
   border-radius: 2px;
-  background: #1b1b1b;
+  background-color: #252525;
   color: #fff;
   text-align: center;
   font-family: Articulat CF;
@@ -222,6 +222,11 @@ ul li {
   text-transform: uppercase;
   cursor: pointer;
   margin-bottom: 65px;
+  transition: background-color 0.2s ease;
+}
+
+.login-part-two .login-space button:hover {
+  background-color: #434344;
 }
 
 /** Register part */
@@ -286,7 +291,7 @@ ul li {
   width: 100%;
   height: 72px;
   border-radius: 2px;
-  background: #1b1b1b;
+  background-color: #252525;
   color: #fff;
   font-family: Articulat CF;
   font-size: 18px;
@@ -294,6 +299,11 @@ ul li {
   text-transform: uppercase;
   cursor: pointer;
   margin-bottom: 65px;
+  transition: background-color 0.2s ease;
+}
+
+.align-btn button:hover {
+  background-color: #434344;
 }
 
 /*? DASHBOARD PAGE */
@@ -479,12 +489,17 @@ ul li {
   border: 0;
   width: 100%;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-invoice button:hover {
+  background: #487e58;
 }
 
 /*? HEADER NAV */
 .header-nav {
   padding: 20px 0px;
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -493,8 +508,6 @@ ul li {
   width: 85%;
   margin: auto;
 }
-
-
 
 .desktop-nav {
   display: flex;
@@ -533,13 +546,13 @@ ul li {
 }
 
 .nav-links-desktop {
-  color:#000;
+  color: #000;
   list-style: none;
   text-decoration: none;
 }
 
 .nav-links-desktop:hover {
-  color:#434344 ;
+  color: #434344;
 }
 
 /*? ACCORDEON NAV */
@@ -577,7 +590,6 @@ ul li {
   transition: transform 0.3s ease-in-out;
   margin-top: 5px;
   cursor: pointer;
-  
 }
 
 .toggle-lines img {
@@ -828,6 +840,12 @@ ul li {
   border: 0;
   cursor: pointer;
   margin-bottom: 145px;
+  transition: background-color 0.2s ease;
+}
+
+
+.btn-invoice-2 button:hover {
+  background: #487e58;
 }
 
 .btn-invoice-2.fixed-btn {
@@ -975,6 +993,11 @@ ul li {
   border: 0;
   width: 100%;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-invoice-4 button:hover {
+  background: #487e58;
 }
 
 .delete-icon {
