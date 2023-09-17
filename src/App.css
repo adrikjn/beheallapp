@@ -481,8 +481,62 @@ ul li {
   cursor: pointer;
 }
 
-/*? COMPONENT NAV */
+/*? HEADER NAV */
+.header-nav {
+  padding: 20px 0px;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: transparent;
+  width: 85%;
+  margin: auto;
+}
 
+.nav-links-desktop {
+  color: #1b1b1b;
+  list-style: none;
+  text-decoration: none;
+}
+
+.desktop-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 8.16px;
+  font-size: 32px;
+  text-transform: uppercase;
+  color: #434344;
+}
+
+.nav-brand span {
+  font-weight: 300;
+  margin-left: -8.16px;
+}
+
+.header-nav .desktop-nav ul {
+  display: flex;
+  gap: 20px;
+}
+
+.header-nav .links-style {
+  text-decoration: none;
+  color: #fff;
+  font-family: Articulat CF;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/*? ACCORDEON NAV */
 .accordion-nav {
   right: 7.5%;
   top: 85%;
@@ -503,7 +557,6 @@ ul li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
   z-index: 200;
 }
 
@@ -517,6 +570,8 @@ ul li {
   margin-right: 32.5px;
   transition: transform 0.3s ease-in-out;
   margin-top: 5px;
+  cursor: pointer;
+  
 }
 
 .toggle-lines img {
@@ -778,9 +833,6 @@ ul li {
   z-index: 0.9;
 }
 
-
-
-
 .custom-file-label {
   display: flex;
   justify-content: space-between;
@@ -926,8 +978,6 @@ ul li {
   cursor: pointer;
   margin-top: -4px;
 }
-
-
 
 /*? INVOICE STEP FIVE SUMMARY */
 .dl-pdf h1 {
@@ -1156,8 +1206,8 @@ ul li {
 }
 
 .canva-signature {
-  width: 100%; 
-  height: auto; 
+  width: 100%;
+  height: auto;
   border: 1px solid black;
 }
 
@@ -1180,7 +1230,6 @@ ul li {
   }
 }
 
-
 .sign-pdf-div h2 {
   color: #000;
   font-size: 12px;
@@ -1200,7 +1249,7 @@ ul li {
   text-align: center;
 }
 
-.dl-pdf button  {
+.dl-pdf button {
   border: none;
   background-color: #e9ebe9;
   cursor: pointer;
@@ -1210,6 +1259,3 @@ ul li {
 .dl-pdf-img {
   width: 80px;
 }
-
-
-

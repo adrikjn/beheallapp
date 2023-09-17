@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import jwtDecode from "jwt-decode";
 
+
 export const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -118,6 +119,7 @@ export const Login = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
