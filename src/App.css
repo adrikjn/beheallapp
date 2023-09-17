@@ -494,11 +494,7 @@ ul li {
   margin: auto;
 }
 
-.nav-links-desktop {
-  color: #1b1b1b;
-  list-style: none;
-  text-decoration: none;
-}
+
 
 .desktop-nav {
   display: flex;
@@ -534,6 +530,16 @@ ul li {
   font-family: Articulat CF;
   font-size: 14px;
   font-weight: 400;
+}
+
+.nav-links-desktop {
+  color:#000;
+  list-style: none;
+  text-decoration: none;
+}
+
+.nav-links-desktop:hover {
+  color:#434344 ;
 }
 
 /*? ACCORDEON NAV */
