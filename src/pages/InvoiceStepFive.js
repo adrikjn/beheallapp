@@ -603,7 +603,7 @@ export const InvoiceStepFive = () => {
             <p>Moyen de paiement : {invoiceData?.paymentMethod}</p>
           </div>
           <div className="btn-invoice-2">
-            <button onClick={sendInvoice}>Retour à l'accueil</button>
+            <button onClick={sendInvoice}>Enregistrer et retourner à l'accueil</button>
           </div>
         </div>
       </div>
