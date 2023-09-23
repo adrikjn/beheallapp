@@ -1170,54 +1170,54 @@ ul li {
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #f2dede; /* Couleur rouge clair */
-  color: #a94442; /* Texte plus sombre */
+  background-color: #f2dede; 
+  color: #a94442; 
   padding: 10px 15px;
   text-align: center;
-  z-index: 9999; /* Placez l'alerte au-dessus de tout le contenu */
-  border: 2px solid #ebccd1; /* Bordure légèrement plus claire */
+  z-index: 9999;
+  border: 2px solid #ebccd1; 
   border-radius: 5px;
   width: 85%;
-  max-width: 400px; /* Largeur maximale */
+  max-width: 400px; 
   display: flex;
   flex-direction: column;
   gap: 7px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Légère ombre */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   font-family: Roboto;
 }
 
 .close-alert {
-  color: #fff; /* Texte blanc pour une meilleure visibilité */
+  color: #fff; 
   position: absolute;
   top: 5px;
   right: 10px;
-  font-size: 28px; /* Taille de police plus grande */
+  font-size: 28px; 
   cursor: pointer;
-  background-color: #d9534f; /* Couleur de fond de la croix plus distincte */
-  padding: 6px 10px; /* Plus grand padding pour une meilleure visibilité */
+  background-color: #d9534f; 
+  padding: 6px 10px; 
   border-radius: 50%;
-  transition: background-color 0.3s ease-in-out; /* Animation de transition */
+  transition: background-color 0.3s ease-in-out; 
 }
 
 .close-alert:hover {
-  background-color: #c9302c; /* Couleur de fond au survol, légèrement plus foncée */
+  background-color: #c9302c; 
 }
 
 .close-alert {
-  color: #a94442; /* Texte plus sombre */
+  color: #a94442; 
   position: absolute;
   top: 3px;
   right: 5px;
   font-size: 24px;
   cursor: pointer;
-  background-color: #ebccd1; /* Couleur de fond de la croix légèrement plus claire */
+  background-color: #ebccd1; 
   padding: 2px 8px;
   border-radius: 50%;
-  transition: background-color 0.3s ease-in-out; /* Animation de transition */
+  transition: background-color 0.3s ease-in-out; 
 }
 
 .close-alert:hover {
-  background-color: #d9534f; /* Couleur de fond au survol, légèrement plus foncée */
+  background-color: #d9534f; 
   color: #fff;
 }
 
