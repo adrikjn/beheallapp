@@ -11,6 +11,7 @@ export const Register = () => {
   const [plainPassword, setPlainPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [globalErrors, setGlobalErrors] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ export const Register = () => {
         return;
       }
 
-      const response = await Axios.post("http://localhost:8000/api/users", {
+      const response = await Axios.post(`${apiUrl}/users`, {
         firstName,
         lastName,
         email,
