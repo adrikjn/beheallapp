@@ -13,6 +13,8 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [globalErrors, setGlobalErrors] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
 
   const addGlobalError = (error) => {
     setGlobalErrors([...globalErrors, error]);
@@ -22,7 +24,7 @@ export const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await Axios.post(
-        "http://localhost:8000/api/login_check",
+        `${apiUrl}/login_check`,
         {
           email: email,
           password: password,
