@@ -11,9 +11,7 @@ export const Register = () => {
   const [plainPassword, setPlainPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [globalErrors, setGlobalErrors] = useState([]);
-  const remoteApiUrl = 'https://behealldashboard.osc-fr1.scalingo.io/api/users';
-  const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
-  const apiUrl = corsAnywhereUrl + remoteApiUrl;
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   const navigate = useNavigate();
 
@@ -30,7 +28,7 @@ export const Register = () => {
         return;
       }
 
-      const response = await Axios.post(apiUrl, {
+      const response = await Axios.post(`${apiUrl}/api/users`, {
         firstName,
         lastName,
         email,
