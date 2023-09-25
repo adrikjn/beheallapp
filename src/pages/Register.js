@@ -28,7 +28,7 @@ export const Register = () => {
         return;
       }
 
-      const response = await Axios.post(`${apiUrl}/api/users`, {
+      const response = await Axios.post(`${apiUrl}/users`, {
         firstName,
         lastName,
         email,
