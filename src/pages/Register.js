@@ -11,7 +11,9 @@ export const Register = () => {
   const [plainPassword, setPlainPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [globalErrors, setGlobalErrors] = useState([]);
-  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+  const apiUrl = process.env.NODE_ENV === 'development'
+    ? process.env.REACT_APP_API_BASE_URL
+    : 'https://behealldashboard.osc-fr1.scalingo.io';
 
   const navigate = useNavigate();
 
