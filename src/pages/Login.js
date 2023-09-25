@@ -34,7 +34,7 @@ export const Login = () => {
       console.log(response.data.token);
 
       const userResponse = await Axios.get(
-        `http://localhost:8000/api/users?email=${email}`
+        `${apiUrl}/users?email=${email}`
       );
 
       const user = userResponse.data[0];
