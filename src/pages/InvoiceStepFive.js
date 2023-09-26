@@ -13,6 +13,7 @@ export const InvoiceStepFive = () => {
   const [invoiceData, setInvoiceData] = useState(null);
   const signatureCanvasRef = useRef(null);
   const [signatureDataURL, setSignatureDataURL] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   function formatDate(dateString) {
     if (!dateString) return "";
@@ -117,7 +118,7 @@ export const InvoiceStepFive = () => {
   const sendInvoice = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/invoices/${invoiceId}`,
+        `${apiUrl}/invoices/${invoiceId}`,
         {
           method: "PUT",
           headers: {
