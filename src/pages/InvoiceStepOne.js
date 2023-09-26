@@ -17,7 +17,7 @@ export const InvoiceStepOne = () => {
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   const [formData, setFormData] = useState({
-    user: `/api/users/${userId}`,
+    user: `/users/${userId}`,
     name: "",
     logo: "",
     address: "",
@@ -87,7 +87,7 @@ export const InvoiceStepOne = () => {
       console.log("Data submitted:", response.data);
 
       setFormData({
-        user: `/api/users/${userId}`,
+        user: `/users/${userId}`,
         name: "",
         logo: "",
         address: "",
