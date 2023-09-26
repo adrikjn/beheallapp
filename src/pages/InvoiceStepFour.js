@@ -11,6 +11,7 @@ export const InvoiceStepFour = () => {
   const [productList, setProductList] = useState([]);
   const [totalTTC, setTotalTTC] = useState(0);
   const [globalErrors, setGlobalErrors] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -39,7 +40,7 @@ export const InvoiceStepFour = () => {
     const fetchProducts = async () => {
       try {
         const invoiceResponse = await Axios.get(
-          `http://localhost:8000/api/invoices/${invoiceId}`,
+          `${apiUrl}/invoices/${invoiceId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -97,7 +98,7 @@ export const InvoiceStepFour = () => {
     try {
       console.log("Form data before submission:", formData);
       const response = await Axios.post(
-        "http://localhost:8000/api/services",
+        `${apiUrl}/services`,
         formData,
         {
           headers: {
@@ -110,7 +111,7 @@ export const InvoiceStepFour = () => {
       
 
       const invoiceResponse = await Axios.get(
-        `http://localhost:8000/api/invoices/${invoiceId}`,
+        `${apiUrl}/invoices/${invoiceId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Assurez-vous que token contient le jeton d'accès valide
@@ -166,7 +167,7 @@ export const InvoiceStepFour = () => {
     try {
       // Envoyer la valeur de totalTTC à l'API pour mettre à jour le champ totalPrice de l'Invoice
       await Axios.put(
-        `http://localhost:8000/api/invoices/${invoiceId}`,
+        `${apiUrl}/invoices/${invoiceId}`,
         { totalPrice: totalTTC }, // Envoyer la nouvelle valeur de totalPrice
         {
           headers: {
@@ -221,7 +222,7 @@ export const InvoiceStepFour = () => {
     try {
       if (productId) {
         // Envoyer une requête DELETE à l'API pour supprimer le produit
-        await Axios.delete(`http://localhost:8000/api/services/${productId}`, {
+        await Axios.delete(`${apiUrl}/services/${productId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
