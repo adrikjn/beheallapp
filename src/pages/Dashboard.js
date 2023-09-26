@@ -9,6 +9,7 @@ export const Dashboard = () => {
   const [userCompanies, setUserCompanies] = useState([]);
   const userData = JSON.parse(localStorage.getItem("UserData"));
   const currentDate = new Date(); // Obtenir la date actuelle
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     if (!token) {
@@ -26,7 +27,7 @@ export const Dashboard = () => {
       Promise.all(
         companyIds.map(async (companyId) => {
           const response = await fetch(
-            `http://localhost:8000/api/companies/${companyId}`,
+            `${apiUrl}/companies/${companyId}`,
             {
               method: "GET",
               headers: headers,
