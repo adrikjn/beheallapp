@@ -41,7 +41,7 @@ export const InvoiceStepThree = () => {
   useEffect(() => {
     if (selectedCompanyId) {
       const apiUrl = `${apiUrl}/companies/${selectedCompanyId}`;
-  
+
       Axios.get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -49,42 +49,41 @@ export const InvoiceStepThree = () => {
       })
         .then((response) => {
           const companyData = response.data;
-          const invoices = companyData.invoices || [];
-  
-          // Triez les factures de l'entreprise sélectionnée par date pour obtenir la dernière facture
+          const invoices = companyData.invoices || []; // Défaut à un tableau vide s'il n'y a pas de factures
+
+          // Triez les factures par date pour obtenir la dernière facture
           const sortedInvoices = invoices.sort((a, b) => {
             return new Date(b.createdAt) - new Date(a.createdAt);
           });
-  
+
           // Obtenez le dernier numéro de facture
           if (sortedInvoices.length > 0) {
             const lastInvoice = sortedInvoices[0];
-            const lastBillNumber = lastInvoice.billNumber || "";
-  
+            const lastBillNumber = lastInvoice.billNumber || ""; // Défaut à une chaîne vide s'il n'y a pas de numéro de facture
+
             // Extraire la partie numérique du dernier numéro de facture
-            const lastBillNumberParts = lastBillNumber.split("-");
             const lastBillNumberNumeric = parseInt(
-              lastBillNumberParts[0].substring(1)
+              lastBillNumber.split("-")[0].substring(1)
             );
-  
+
             // Incrémenter la partie numérique
             const nextBillNumberNumeric = lastBillNumberNumeric + 1;
-  
+
             // Obtenir l'année actuelle
             const currentYear = new Date().getFullYear();
-  
+
             // Formater le prochain numéro de facture
             const nextBillNumber = `F${nextBillNumberNumeric
               .toString()
               .padStart(2, "0")}-${currentYear}`;
-  
+
             // Mettre à jour le champ billNumber du formulaire
             setFormData((prevData) => ({
               ...prevData,
               billNumber: nextBillNumber,
             }));
           } else {
-            // Aucune facture existante pour l'entreprise sélectionnée, initialisez le numéro de facture
+            // Aucune facture existante, initialisez le numéro de facture
             const currentYear = new Date().getFullYear();
             const initialBillNumber = `F01-${currentYear}`;
             setFormData((prevData) => ({
@@ -100,9 +99,7 @@ export const InvoiceStepThree = () => {
           );
         });
     }
-  }, [selectedCompanyId, token, apiUrl]);
-  
-  
+  }, [selectedCompanyId, token]);
 
 
   const handleFormSubmit = async (e) => {
