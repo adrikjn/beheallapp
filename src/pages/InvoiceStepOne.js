@@ -14,6 +14,8 @@ export const InvoiceStepOne = () => {
   const [userCompanies, setUserCompanies] = useState([]);
   const [globalErrors, setGlobalErrors] = useState([]);
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
   const [formData, setFormData] = useState({
     user: `/api/users/${userId}`,
     name: "",
@@ -38,7 +40,7 @@ export const InvoiceStepOne = () => {
   // };
 
   useEffect(() => {
-    Axios.get(`http://localhost:8000/api/users/${userId}`)
+    Axios.get(`${apiUrl}/users/${userId}`)
       .then((response) => {
         const companies = response.data.companies;
         setUserCompanies(companies);
@@ -72,7 +74,7 @@ export const InvoiceStepOne = () => {
 
     try {
       const response = await Axios.post(
-        "http://localhost:8000/api/companies",
+        `${apiUrl}/companies`,
         JSON.stringify(formData),
         {
           headers: {
@@ -105,7 +107,7 @@ export const InvoiceStepOne = () => {
 
       // Faire une requête GET pour actualiser les données utilisateur
       const userResponse = await Axios.get(
-        `http://localhost:8000/api/users/${userId}`
+        `${apiUrl}/users/${userId}`
       );
 
       // Mettre à jour les données utilisateur dans le localStorage
