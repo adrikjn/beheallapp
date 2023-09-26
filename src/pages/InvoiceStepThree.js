@@ -41,7 +41,7 @@ export const InvoiceStepThree = () => {
   useEffect(() => {
     if (selectedCompanyId) {
       const apiUrl = `${apiUrl}/companies/${selectedCompanyId}`;
-
+  
       Axios.get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -49,34 +49,35 @@ export const InvoiceStepThree = () => {
       })
         .then((response) => {
           const companyData = response.data;
-          const invoices = companyData.invoices || []; // Défaut à un tableau vide s'il n'y a pas de factures
-
+          const invoices = companyData.invoices || [];
+  
           // Triez les factures par date pour obtenir la dernière facture
           const sortedInvoices = invoices.sort((a, b) => {
             return new Date(b.createdAt) - new Date(a.createdAt);
           });
-
+  
           // Obtenez le dernier numéro de facture
           if (sortedInvoices.length > 0) {
             const lastInvoice = sortedInvoices[0];
-            const lastBillNumber = lastInvoice.billNumber || ""; // Défaut à une chaîne vide s'il n'y a pas de numéro de facture
-
+            const lastBillNumber = lastInvoice.billNumber || "";
+  
             // Extraire la partie numérique du dernier numéro de facture
+            const lastBillNumberParts = lastBillNumber.split("-");
             const lastBillNumberNumeric = parseInt(
-              lastBillNumber.split("-")[0].substring(1)
+              lastBillNumberParts[0].substring(1)
             );
-
+  
             // Incrémenter la partie numérique
             const nextBillNumberNumeric = lastBillNumberNumeric + 1;
-
+  
             // Obtenir l'année actuelle
             const currentYear = new Date().getFullYear();
-
+  
             // Formater le prochain numéro de facture
             const nextBillNumber = `F${nextBillNumberNumeric
               .toString()
               .padStart(2, "0")}-${currentYear}`;
-
+  
             // Mettre à jour le champ billNumber du formulaire
             setFormData((prevData) => ({
               ...prevData,
@@ -99,7 +100,8 @@ export const InvoiceStepThree = () => {
           );
         });
     }
-  }, [selectedCompanyId, token]);
+  }, [selectedCompanyId, token, apiUrl]);
+  
 
 
   const handleFormSubmit = async (e) => {
