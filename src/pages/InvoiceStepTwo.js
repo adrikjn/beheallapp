@@ -13,6 +13,7 @@ export const InvoiceStepTwo = () => {
   const [selectedCustomer, setSelectedCustomer] = useState("undefined");
   const [globalErrors, setGlobalErrors] = useState([]);
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     lastName: "",
@@ -60,7 +61,7 @@ export const InvoiceStepTwo = () => {
 
   useEffect(() => {
     if (selectedCompanyId) {
-      Axios.get(`http://localhost:8000/api/companies/${selectedCompanyId}`, {
+      Axios.get(`${apiUrl}/companies/${selectedCompanyId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -90,7 +91,7 @@ export const InvoiceStepTwo = () => {
 
     try {
       const response = await Axios.post(
-        "http://localhost:8000/api/customers",
+        `${apiUrl}/customers`,
         formData,
         {
           headers: {
@@ -106,7 +107,7 @@ export const InvoiceStepTwo = () => {
       invoiceData.customer = newCustomerId; // Store selectedCustomerId in invoiceData
       localStorage.setItem("InvoiceData", JSON.stringify(invoiceData)); // Save updated invoiceData in localStorage
 
-      Axios.get(`http://localhost:8000/api/companies/${selectedCompanyId}`, {
+      Axios.get(`${apiUrl}/companies/${selectedCompanyId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
