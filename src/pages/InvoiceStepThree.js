@@ -51,7 +51,7 @@ export const InvoiceStepThree = () => {
           const companyData = response.data;
           const invoices = companyData.invoices || [];
   
-          // Triez les factures par date pour obtenir la dernière facture
+          // Triez les factures de l'entreprise sélectionnée par date pour obtenir la dernière facture
           const sortedInvoices = invoices.sort((a, b) => {
             return new Date(b.createdAt) - new Date(a.createdAt);
           });
@@ -84,7 +84,7 @@ export const InvoiceStepThree = () => {
               billNumber: nextBillNumber,
             }));
           } else {
-            // Aucune facture existante, initialisez le numéro de facture
+            // Aucune facture existante pour l'entreprise sélectionnée, initialisez le numéro de facture
             const currentYear = new Date().getFullYear();
             const initialBillNumber = `F01-${currentYear}`;
             setFormData((prevData) => ({
@@ -101,6 +101,7 @@ export const InvoiceStepThree = () => {
         });
     }
   }, [selectedCompanyId, token, apiUrl]);
+  
   
 
 
