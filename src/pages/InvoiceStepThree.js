@@ -11,6 +11,7 @@ export const InvoiceStepThree = () => {
   const selectedCompanyId = invoiceData ? invoiceData.company : null;
   const selectedCustomerId = invoiceData ? invoiceData.customer : null;
   const [globalErrors, setGlobalErrors] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     customer: `/api/customers/${selectedCustomerId}`,
@@ -39,7 +40,7 @@ export const InvoiceStepThree = () => {
 
   useEffect(() => {
     if (selectedCompanyId) {
-      const apiUrl = `http://localhost:8000/api/companies/${selectedCompanyId}`;
+      const apiUrl = `${apiUrl}/companies/${selectedCompanyId}`;
 
       Axios.get(apiUrl, {
         headers: {
@@ -106,7 +107,7 @@ export const InvoiceStepThree = () => {
     try {
       console.log("Form data before submission:", formData);
       const response = await Axios.post(
-        "http://localhost:8000/api/invoices",
+        `${apiUrl}/invoices`,
         formData,
         {
           headers: {
