@@ -88,7 +88,7 @@ export const InvoiceStepFive = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/invoices/${invoiceId}`,
+          `${apiUrl}/invoices/${invoiceId}`,
           {
             method: "GET",
             headers: {
