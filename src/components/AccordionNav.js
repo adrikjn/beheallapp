@@ -91,7 +91,7 @@ const AccordionNav = () => {
 
       {/* Accordéon mobile */}
       {window.innerWidth <= 992 && (
-        <div className="accordion-nav">
+        <header className="accordion-nav">
           <div
             className={`toggle-button ${isLinksVisible ? "open" : ""}`}
             onClick={handleToggleLinks}
@@ -131,7 +131,7 @@ const AccordionNav = () => {
               </ul>
             </div>
           </div>
-        </div>
+        </header>
       )}
     </div>
   );
