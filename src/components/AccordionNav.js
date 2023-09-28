@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const AccordionNav = () => {
-  const [isLinksVisible, setIsLinksVisible] = useState(true); // Par défaut, l'accordéon est visible
-  const location = useLocation(); // Pour obtenir le chemin de la page actuelle
+  const [isLinksVisible, setIsLinksVisible] = useState(true); 
+  const location = useLocation(); 
 
   const handleToggleLinks = () => {
     setIsLinksVisible(!isLinksVisible);
   };
 
-  // Fonction pour obtenir le nom de la page à partir du chemin
   const getPageName = (path) => {
     switch (path) {
       case "/dashboard":
@@ -27,10 +26,10 @@ const AccordionNav = () => {
     }
   };
 
-  // Obtenez le nom de la page actuelle à partir du chemin
+  
   const currentPage = getPageName(location.pathname);
 
-  // Utilisez useEffect pour vérifier la largeur de l'écran et masquer l'accordéon en conséquence
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 992) {
@@ -41,7 +40,7 @@ const AccordionNav = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Appel initial pour définir l'état initial en fonction de la largeur actuelle
+    handleResize(); 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -49,7 +48,6 @@ const AccordionNav = () => {
 
   return (
     <div>
-      {/* Barre de navigation de type "header" pour les écrans larges */}
       {window.innerWidth > 992 && (
         <header className="header-nav">
           <nav className="desktop-nav">
@@ -89,7 +87,6 @@ const AccordionNav = () => {
         </header>
       )}
 
-      {/* Accordéon mobile */}
       {window.innerWidth <= 992 && (
         <header className="accordion-nav">
           <div
@@ -98,8 +95,8 @@ const AccordionNav = () => {
           >
             <span>{currentPage}</span>
             <div className="toggle-lines">
-              <img src="/line-16.svg" alt="Logo" />
-              <img src="/line-17.svg" alt="Logo" />
+              <img src="/line-16.svg" alt="Ouvrir/Fermer la nav" />
+              <img src="/line-17.svg" alt="Ouvrir/Fermer la nav" />
             </div>
             <div className={`nav-links ${isLinksVisible ? "links-open" : ""}`}>
               <ul>

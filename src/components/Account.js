@@ -10,13 +10,11 @@ const Account = () => {
   };
 
   const handleLogout = () => {
-    // Supprimer les données stockées localement
     localStorage.removeItem("Token");
     localStorage.removeItem("invoice");
     localStorage.removeItem("UserData");
     localStorage.removeItem("InvoiceData");
 
-    // Utiliser navigate pour rediriger l'utilisateur vers la page de connexion
     navigate("/login");
   };
 
@@ -24,13 +22,12 @@ const Account = () => {
     <div className="account-container">
       <img
         src="/profil-icon.svg"
-        alt="account"
+        alt="Gestion du compte"
         className="account-icon"
         onClick={toggleMenu}
       />
       {isOpen && (
         <div className="account-menu">
-          <a href="/mon-profil">Profil</a>
           <button onClick={handleLogout}>Déconnexion</button>
         </div>
       )}
