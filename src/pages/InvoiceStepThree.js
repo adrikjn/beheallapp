@@ -27,10 +27,6 @@ export const InvoiceStepThree = () => {
     paymentMethod: "",
   });
 
-  // const addGlobalError = (error) => {
-  //   setGlobalErrors([...globalErrors, error]);
-  // };
-
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -50,41 +46,33 @@ export const InvoiceStepThree = () => {
       })
         .then((response) => {
           const companyData = response.data;
-          const invoices = companyData.invoices; // Défaut à un tableau vide s'il n'y a pas de factures
+          const invoices = companyData.invoices; 
 
-          // Triez les factures par date pour obtenir la dernière facture
           const sortedInvoices = invoices.sort((a, b) => {
             return new Date(b.createdAt) - new Date(a.createdAt);
           });
 
-          // Obtenez le dernier numéro de facture
           if (sortedInvoices.length > 0) {
             const lastInvoice = sortedInvoices[0];
-            const lastBillNumber = lastInvoice.billNumber; // Défaut à une chaîne vide s'il n'y a pas de numéro de facture
+            const lastBillNumber = lastInvoice.billNumber; 
 
-            // Extraire la partie numérique du dernier numéro de facture
             const lastBillNumberNumeric = parseInt(
               lastBillNumber.split("-")[0].substring(1)
             );
 
-            // Incrémenter la partie numérique
             const nextBillNumberNumeric = lastBillNumberNumeric + 1;
 
-            // Obtenir l'année actuelle
             const currentYear = new Date().getFullYear();
 
-            // Formater le prochain numéro de facture
             const nextBillNumber = `F${nextBillNumberNumeric
               .toString()
               .padStart(2, "0")}-${currentYear}`;
 
-            // Mettre à jour le champ billNumber du formulaire
             setFormData((prevData) => ({
               ...prevData,
               billNumber: nextBillNumber,
             }));
           } else {
-            // Aucune facture existante, initialisez le numéro de facture
             const currentYear = new Date().getFullYear();
             const initialBillNumber = `F01-${currentYear}`;
             setFormData((prevData) => ({
@@ -133,12 +121,10 @@ export const InvoiceStepThree = () => {
       ) {
         const validationErrors = [];
 
-        // Bouclez sur les violations pour extraire les messages d'erreur
         error.response.data.violations.forEach((violation) => {
           validationErrors.push(violation.message);
         });
 
-        // Ajoutez les erreurs de validation à la liste globale
         setGlobalErrors([...globalErrors, ...validationErrors]);
       }
     }
@@ -301,19 +287,3 @@ export const InvoiceStepThree = () => {
     </div>
   );
 };
-
-//? faire les labels des date
-
-//?Set le company depuis le local storage
-//?Set le customer depuis le local storage
-//? Set le numéro de la facture
-//? Set le total price sur 0
-//? Set la tva sur 0
-//? Set le status sur en attente
-//? Set le paymentDays sur 0 pour l'instant (peut etre enlever) ça représente le jour restant avant le paymentDateLimit
-
-//? je vais faire un put pour changer les valeurs des choses a set 0 ou en attente etc
-
-//? lorsque le formulaire est envoyé stocker le invoiceId pour la partie service
-
-//? a l'aide de la sérialization à partir du invoice je vais pouvoir récupérérer les infos de l'entreprise / customer / service
