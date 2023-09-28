@@ -26,7 +26,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="*" element={<h1>PAGE NOT FOUND</h1>} />
+          <Route path="*" element={<h1>La page demandée n'existe pas</h1>} />
         </Routes>
       </Router>
     </div>
