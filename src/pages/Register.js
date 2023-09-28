@@ -72,6 +72,10 @@ export const Register = () => {
     <div className="login-page fade-in">
       <Helmet>
         <title>Inscription | Beheall</title>
+        <meta
+          name="description"
+          content="Rejoignez Beheall en vous inscrivant dès maintenant. Créez votre compte et commencez à profiter de nos services de facturation en ligne."
+        />
       </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <LogoAndPicture />
