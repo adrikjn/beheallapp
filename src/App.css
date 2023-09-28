@@ -1242,8 +1242,8 @@ ul li {
 
 @media (min-width: 657px) {
   .sign-pdf-div {
-    width: 400px; /* Largeur fixe pour les grands écrans */
-    height: auto; /* Hauteur fixe pour les grands écrans */
+    width: 400px; 
+    height: auto; 
   }
   .contents-try {
     display: flex;
