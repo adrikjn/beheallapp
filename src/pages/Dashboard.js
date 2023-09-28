@@ -108,6 +108,10 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
     <div className="dashboard-page fade-in">
       <Helmet>
         <title>Dashboard | Beheall</title>
+        <meta
+          name="description"
+          content="Accédez à votre tableau de bord Beheall pour inspecter votre chiffre d'affaires, consulter vos dernières factures et gérer efficacement vos opérations financières en ligne."
+        />
       </Helmet>
       {userData && (
         <div className="welcome-user">
