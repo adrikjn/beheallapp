@@ -7,7 +7,7 @@ const LogoAndPicture = () => {
         Be<span>heall</span>
       </h2>
       <div className="register-facture-image">
-        <img src="/facture.png" alt="facture" />
+        <img src="/facture.png" alt="Image de Facture" />
       </div>
     </div>
   );

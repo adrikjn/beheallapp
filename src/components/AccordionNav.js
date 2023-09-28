@@ -63,22 +63,22 @@ const AccordionNav = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/invoice-step-one" className="nav-links-desktop">
+                <Link to="/dashboard" className="nav-links-desktop">
                   Paramètres
                 </Link>
               </li>
               <li>
-                <Link to="/invoice-step-two" className="nav-links-desktop">
+                <Link to="/dashboard" className="nav-links-desktop">
                   Factures
                 </Link>
               </li>
               <li>
-                <Link to="/invoice-step-four" className="nav-links-desktop">
+                <Link to="/dashboard" className="nav-links-desktop">
                   Devis
                 </Link>
               </li>
               <li>
-                <Link to="/invoice-step-three" className="nav-links-desktop">
+                <Link to="/dashboard" className="nav-links-desktop">
                   Clients
                 </Link>
               </li>
@@ -106,22 +106,22 @@ const AccordionNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/invoice-step-one" className="links-style">
+                  <Link to="/dashboard" className="links-style">
                     Paramètres
                   </Link>
                 </li>
                 <li>
-                  <Link to="/invoice-step-two" className="links-style">
+                  <Link to="/dashboard" className="links-style">
                     Factures
                   </Link>
                 </li>
                 <li>
-                  <Link to="/invoice-step-four" className="links-style">
+                  <Link to="/dashboard" className="links-style">
                     Devis
                   </Link>
                 </li>
                 <li>
-                  <Link to="/invoice-step-three" className="links-style">
+                  <Link to="/dashboard" className="links-style">
                     Clients
                   </Link>
                 </li>

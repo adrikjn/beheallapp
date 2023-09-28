@@ -9,22 +9,18 @@ export const Dashboard = () => {
   const navigate = useNavigate();
   const [userCompanies, setUserCompanies] = useState([]);
   const userData = JSON.parse(localStorage.getItem("UserData"));
-  const currentDate = new Date(); // Obtenir la date actuelle
+  const currentDate = new Date();
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
     } else if (userData && userData.companies) {
-      // Extract company IDs from userData
       const companyIds = userData.companies.map((company) => company.id);
 
-      // Create an authorization header with the Bearer Token
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-
-      // Make API calls to fetch company data with the authorization header
       Promise.all(
         companyIds.map(async (companyId) => {
           const response = await fetch(
@@ -49,12 +45,10 @@ export const Dashboard = () => {
 
   const allInvoices = userCompanies.flatMap((company) => company.invoices);
 
-  // Sort all invoices by createdAt in descending order
   const sortedInvoices = allInvoices.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
 
-  // Get the first two invoices (the two most recent)
   const lastTwoInvoices = sortedInvoices.slice(0, 2);
 
   const currentMonth = currentDate.toLocaleString("default", { month: "long" });
@@ -69,14 +63,12 @@ export const Dashboard = () => {
     return invoiceMonth.toLowerCase() === currentMonth.toLowerCase();
   });
 
-  // Calculer le total des prix des factures de ce mois
   const totalThisMonth = invoicesThisMonth.reduce((total, invoice) => {
     return total + invoice.totalPrice;
   }, 0);
 
   const formattedTotalThisMonth = totalThisMonth.toFixed(2);
 
-  // Gérer l'affichage du montant ou du message
   const displayTotalThisMonth =
     totalThisMonth <= 99999999
       ? `${formattedTotalThisMonth} €`
@@ -85,7 +77,7 @@ export const Dashboard = () => {
   const hasDraftInvoice = lastTwoInvoices.some(
     (invoice) => invoice.status === "brouillon"
   );
-  // Fonction pour stocker l'ID du dernier brouillon en local storage
+
 const storeDraftInvoiceIdLocally = () => {
   const lastDraftInvoice = lastTwoInvoices.find(
     (invoice) => invoice.status === "brouillon"
@@ -96,10 +88,8 @@ const storeDraftInvoiceIdLocally = () => {
   }
 };
 
-// Vérifier si un brouillon existe en local storage
 const storedDraftInvoiceId = localStorage.getItem("invoice");
 
-// Si aucun brouillon en local storage, stockez l'ID du dernier brouillon
 if (!storedDraftInvoiceId && hasDraftInvoice) {
   storeDraftInvoiceIdLocally();
 }
@@ -108,10 +98,6 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
     <div className="dashboard-page fade-in">
       <Helmet>
         <title>Dashboard | Beheall</title>
-        <meta
-          name="description"
-          content="Accédez à votre tableau de bord Beheall pour inspecter votre chiffre d'affaires, consulter vos dernières factures et gérer efficacement vos opérations financières en ligne."
-        />
       </Helmet>
       {userData && (
         <div className="welcome-user">
@@ -160,12 +146,12 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
             <p>{formattedCurrentDate}</p>
           </div>
           <p className="revenue-amount">{displayTotalThisMonth}</p>
-          <div className="view-more-revenue">
-            <img src="/arrow.svg" alt="facture" />
+          {/* <div className="view-more-revenue">
+            <img src="/arrow.svg" alt="" />
             <Link to="/dashboard" className="link-see-more">
               Voir plus
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
 

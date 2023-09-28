@@ -38,7 +38,6 @@ export const InvoiceStepFour = () => {
       navigate("/invoice-step-one");
     }
 
-    // Effectuer la requête GET pour obtenir la liste des produits
     const fetchProducts = async () => {
       try {
         const invoiceResponse = await Axios.get(
@@ -52,28 +51,23 @@ export const InvoiceStepFour = () => {
 
         const updatedServices = invoiceResponse.data.services;
 
-        // Mettre à jour la liste des produits dans l'état
         setProductList(updatedServices);
       } catch (error) {
         console.error("Error fetching invoice data:", error);
       }
     };
 
-    // Charger les produits lorsque le composant est monté
     fetchProducts();
   }, [token, navigate, invoiceId]);
 
   const handleRefreshPage = () => {
-    // Rafraîchir la page
     window.location.reload();
   };
 
   useEffect(() => {
-    // Fonction pour calculer le total TTC
     const calculateTotalTTC = () => {
       let total = 0;
 
-      // Parcourez la liste des produits et ajoutez le prix total de chaque produit au total
       productList.forEach((product) => {
         total += product.totalPrice + (product.totalPrice * product.vat) / 100;
       });
@@ -81,7 +75,6 @@ export const InvoiceStepFour = () => {
       return total;
     };
 
-    // Après le chargement initial des produits, calculez le total TTC
     const initialTotalTTC = calculateTotalTTC();
     setTotalTTC(initialTotalTTC);
   }, [productList]);
@@ -92,7 +85,6 @@ export const InvoiceStepFour = () => {
     e.preventDefault();
 
     if (productList.length >= MAX_PRODUCTS) {
-      // Display an error message or prevent adding more products
       addGlobalError("Vous ne pouvez ajouter que 5 produits/services");
       return;
     }
@@ -116,16 +108,13 @@ export const InvoiceStepFour = () => {
         `${apiUrl}/invoices/${invoiceId}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Assurez-vous que token contient le jeton d'accès valide
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      // Mettre à jour la liste des produits dans l'interface utilisateur
       const updatedServices = invoiceResponse.data.services;
-      // Supprimez les éléments actuels de la liste (remplacez par la nouvelle liste)
       setProductList([]);
-      // Ajoutez les services mis à jour à la liste
       updatedServices.forEach((service) => {
         setProductList((prevList) => [
           ...prevList,
@@ -133,20 +122,18 @@ export const InvoiceStepFour = () => {
             title: service.title,
             quantity: service.quantity,
             unitCost: service.unitCost,
-            vat: service.vat, // Utilisez la TVA saisie dans le formulaire
+            vat: service.vat, 
             totalPrice: service.totalPrice,
           },
         ]);
       });
 
-      // Toggle visibility after form submission
       setIsInvoiceCreateVisible(!isInvoiceCreateVisible);
       setIsProductListVisible(!isProductListVisible);
 
       navigate("/invoice-step-four");
     } catch (error) {
       console.error("Error submitting invoice data:", error);
-      // Si l'erreur est liée à la validation du formulaire, par exemple, en cas de validation Symfony, vous pouvez extraire les erreurs de la réponse
       if (
         error.response &&
         error.response.data &&
@@ -154,12 +141,10 @@ export const InvoiceStepFour = () => {
       ) {
         const validationErrors = [];
 
-        // Bouclez sur les violations pour extraire les messages d'erreur
         error.response.data.violations.forEach((violation) => {
           validationErrors.push(violation.message);
         });
 
-        // Ajoutez les erreurs de validation à la liste globale
         setGlobalErrors([...globalErrors, ...validationErrors]);
       }
     }
@@ -167,10 +152,9 @@ export const InvoiceStepFour = () => {
 
   const handleCreateInvoice = async () => {
     try {
-      // Envoyer la valeur de totalTTC à l'API pour mettre à jour le champ totalPrice de l'Invoice
       await Axios.put(
         `${apiUrl}/invoices/${invoiceId}`,
-        { totalPrice: totalTTC }, // Envoyer la nouvelle valeur de totalPrice
+        { totalPrice: totalTTC }, 
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -179,11 +163,9 @@ export const InvoiceStepFour = () => {
         }
       );
 
-      // Rediriger l'utilisateur vers une page de confirmation ou de récapitulatif
       navigate("/invoice-step-five");
     } catch (error) {
       console.error("Error updating invoice data:", error);
-      // Gestion des erreurs ici (affichage d'un message à l'utilisateur, etc.)
     }
   };
 
@@ -223,14 +205,12 @@ export const InvoiceStepFour = () => {
   const handleDeleteProduct = async (productId) => {
     try {
       if (productId) {
-        // Envoyer une requête DELETE à l'API pour supprimer le produit
         await Axios.delete(`${apiUrl}/services/${productId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        // Mettre à jour la liste des produits en supprimant le produit supprimé
         setProductList((prevList) =>
           prevList.filter((product) => product.id !== productId)
         );
@@ -239,7 +219,6 @@ export const InvoiceStepFour = () => {
       }
     } catch (error) {
       console.error("Error deleting product:", error);
-      // Gestion des erreurs ici (affichage d'un message à l'utilisateur, etc.)
     }
   };
 
@@ -270,7 +249,6 @@ export const InvoiceStepFour = () => {
           }
         >
           <div className="add-company">
-            {/* Affichez les erreurs globales dans un composant d'alerte */}
             {globalErrors.length > 0 && (
               <div className="alert">
                 <span onClick={closeAlert} className="close-alert">
@@ -333,7 +311,7 @@ export const InvoiceStepFour = () => {
                 <button type="submit">Ajouter le produit</button>
               </div>
               <div className="center-plus">
-                <img src="going-back.svg" alt="" onClick={handleRefreshPage} />
+                <img src="going-back.svg" alt="Revenir en arrière" onClick={handleRefreshPage} />
               </div>
             </form>
           </div>
@@ -369,13 +347,13 @@ export const InvoiceStepFour = () => {
                 className="delete-icon"
                 onClick={() => handleDeleteProduct(product.id)}
                 src="delete-icon.svg"
-                alt="Delete"
+                alt="Supprimer le produit"
               />
             </li>
           </ul>
         ))}
         <div className="center-plus">
-          <img src="/plus.svg" alt="add-products" onClick={handleToggle} />
+          <img src="/plus.svg" alt="Ajouter un produit ou un service" onClick={handleToggle} />
         </div>
         <div className="total-price">
           <p>Total TTC: {totalTTC.toFixed(2)}€</p>

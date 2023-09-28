@@ -21,7 +21,6 @@ export const InvoiceStepOne = () => {
   const [formData, setFormData] = useState({
     user: `/api/users/${userId}`,
     name: "",
-    logo: "",
     address: "",
     email: "",
     phoneNumber: "",
@@ -36,10 +35,6 @@ export const InvoiceStepOne = () => {
     website: "",
     descriptionWork: "",
   });
-
-  // const addGlobalError = (error) => {
-  //   setGlobalErrors([...globalErrors, error]);
-  // };
 
   useEffect(() => {
     Axios.get(`${apiUrl}/users/${userId}`)
@@ -91,7 +86,6 @@ export const InvoiceStepOne = () => {
       setFormData({
         user: `/api/users/${userId}`,
         name: "",
-        logo: "",
         address: "",
         email: "",
         phoneNumber: "",
@@ -107,12 +101,10 @@ export const InvoiceStepOne = () => {
         descriptionWork: "",
       });
 
-      // Faire une requête GET pour actualiser les données utilisateur
       const userResponse = await Axios.get(
         `${apiUrl}/users/${userId}`
       );
 
-      // Mettre à jour les données utilisateur dans le localStorage
       const updatedUserData = userResponse.data;
       localStorage.setItem("UserData", JSON.stringify(updatedUserData));
       setUserCompanies(updatedUserData.companies);
@@ -121,7 +113,6 @@ export const InvoiceStepOne = () => {
       invoiceData.company = response.data.id;
       localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
 
-      // Rediriger vers l'étape suivante
       navigate("/invoice-step-two");
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -132,12 +123,10 @@ export const InvoiceStepOne = () => {
       ) {
         const validationErrors = [];
 
-        // Bouclez sur les violations pour extraire les messages d'erreur
         error.response.data.violations.forEach((violation) => {
           validationErrors.push(violation.message);
         });
 
-        // Ajoutez les erreurs de validation à la liste globale
         setGlobalErrors([...globalErrors, ...validationErrors]);
       }
     }
@@ -170,7 +159,6 @@ export const InvoiceStepOne = () => {
         console.error("Error fetching company details:", error);
       }
     } else {
-      // Gérer le cas où aucune entreprise n'est sélectionnée
       console.log("Aucune entreprise sélectionnée.");
     }
   };
@@ -382,19 +370,6 @@ export const InvoiceStepOne = () => {
                   value={formData.descriptionWork}
                   onChange={handleInputChange}
                 ></textarea>
-                <label htmlFor="logo" className="custom-file-label">
-                  Télécharger votre logo
-                  <img src="/download.svg" alt="download-icon" />
-                </label>
-                <input
-                  type="file"
-                  id="logo"
-                  accept="image/*"
-                  className="custom-file-input"
-                  name="logo"
-                  value={formData.logo}
-                  onChange={handleInputChange}
-                />
               </>
             )}
 

@@ -39,9 +39,9 @@ export const InvoiceStepFive = () => {
   const draw = (e) => {
     if (!isDrawing) return;
     const ctx = signatureCanvasRef.current.getContext("2d");
-    ctx.strokeStyle = "#000"; // Définissez la couleur du trait
-    ctx.lineWidth = 2; // Définissez la largeur de ligne
-    ctx.lineCap = "round"; // Définissez le style du capuchon de ligne
+    ctx.strokeStyle = "#000"; 
+    ctx.lineWidth = 2; 
+    ctx.lineCap = "round"; 
 
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
@@ -82,7 +82,7 @@ export const InvoiceStepFive = () => {
     if (!token) {
       navigate("/login");
     } else if (!invoiceId) {
-      navigate("/invoice-step-one"); // Redirection vers invoice-step-one si invoiceId est nul
+      navigate("/invoice-step-one"); 
     }
   }, [token, navigate, invoiceId]);
 
@@ -127,7 +127,7 @@ export const InvoiceStepFive = () => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ status: "envoyé" }), // Mettez à jour le statut ici
+          body: JSON.stringify({ status: "envoyé" }), 
         }
       );
 
@@ -146,19 +146,18 @@ export const InvoiceStepFive = () => {
 
   const generateInvoicePDF = () => {
     const pdf = new jsPDF({
-      orientation: "portrait", // ou 'landscape'
+      orientation: "portrait", 
       unit: "mm",
-      format: "a4", // ou toute autre taille de page
+      format: "a4", 
     });
 
     pdf.setFont("helvetica");
     pdf.setFontSize(12);
-    pdf.setTextColor(0, 0, 0); // Couleur du texte : Noir
+    pdf.setTextColor(0, 0, 0); 
 
     const maxWidth = pdf.internal.pageSize.getWidth() * 0.9;
-    const lineHeight = 5; // Hauteur de ligne
-
-    // Fonction utilitaire pour ajouter du texte avec une largeur maximale
+    const lineHeight = 5; 
+   
     const addTextWithMaxWidth = (text, x, y) => {
       const textPieces = pdf.splitTextToSize(text, maxWidth);
       textPieces.forEach((textPiece, index) => {
@@ -203,7 +202,7 @@ export const InvoiceStepFive = () => {
       textYCompany,
       `${invoiceData?.company?.name.toUpperCase()}`
     );
-    pdf.setFont("helvetica", "normal"); // Revenir à la police normale
+    pdf.setFont("helvetica", "normal");
     pdf.text(leftXCompany, textYCompany + 6, `${invoiceData?.company?.email}`);
     pdf.text(
       leftXCompany,
@@ -228,7 +227,6 @@ export const InvoiceStepFive = () => {
     );
     pdf.text(leftXCompany, textYCompany + 36, `${invoiceData?.company?.vatId}`);
 
-    // Informations sur le destinataire
     pdf.setFontSize(11);
     const rightXCustomer = 125;
     const textYCustomer = 50;
@@ -238,7 +236,7 @@ export const InvoiceStepFive = () => {
       textYCustomer,
       `${invoiceData?.customer?.companyName.toUpperCase()}`
     );
-    pdf.setFont("helvetica", "normal"); // Revenir à la police normale
+    pdf.setFont("helvetica", "normal"); 
     pdf.text(
       rightXCustomer,
       textYCustomer + 6,
@@ -281,7 +279,6 @@ export const InvoiceStepFive = () => {
       `${invoiceData?.customer?.vatId}`
     );
 
-    // Objet/Descriptipn/Date etc..
     pdf.setFontSize(12);
     pdf.text(
       15,
@@ -295,29 +292,28 @@ export const InvoiceStepFive = () => {
       }`
     );
 
-    // Tableau pour afficher les produits
+  
     const zebraStyle = {
-      startY: 104, // Ajustez la position Y en conséquence
+      startY: 104, 
       theme: "striped",
-      tableWidth: "auto", // Ajustez la largeur de la table en conséquence
+      tableWidth: "auto", 
       styles: {
         font: "helvetica",
         fontSize: 10,
-        textColor: [0, 0, 0], // Couleur du texte : Noir
+        textColor: [0, 0, 0], 
         cellPadding: 3,
         overflow: "split",
-        halign: "center", // Centrer le contenu horizontalement
-        valign: "middle", // Centrer le contenu verticalement
+        halign: "center", 
+        valign: "middle", 
       },
       headStyles: {
-        halign: "center", // Centrer le contenu horizontalement dans les en-têtes
-        valign: "middle", // Centrer le contenu verticalement dans les en-têtes
-        fillColor: [0, 0, 0], // Couleur de fond : Noir
-        textColor: [255, 255, 255], // Couleur du texte : Blanc
+        halign: "center", 
+        valign: "middle", 
+        fillColor: [0, 0, 0], 
+        textColor: [255, 255, 255], 
       },
     };
 
-    // Tableau pour afficher les produits en utilisant jsPDF-AutoTable
     const productsTable = {
       headers: ["Intitulés", "Volumes", "Tarif", "TVA", "Prix HT"],
       rows: [],
@@ -335,43 +331,34 @@ export const InvoiceStepFive = () => {
         { content: `${service.vat}%`, fillColor },
         { content: `${service.totalPrice}€`, fillColor },
       ]);
-      isGray = !isGray; // Alterne la couleur pour chaque ligne
+      isGray = !isGray; 
     });
 
-    // Dessiner le tableau des produits avec les styles personnalisés
     pdf.autoTable(productsTable.headers, productsTable.rows, {
       ...zebraStyle,
     });
 
-    // Calculer la hauteur totale du contenu
     const tableHeight = pdf.previousAutoTable.finalY || 0;
-    const contentBelowTableHeight = 12; // Ajoutez la hauteur du contenu en dessous du tableau
+    const contentBelowTableHeight = 12; 
     const totalContentHeight = tableHeight + contentBelowTableHeight;
 
-    // Définir la position Y pour le contenu en dessous du tableau
     let contentY = totalContentHeight;
 
     const pageHeight = pdf.internal.pageSize.getHeight();
 
-    // Vérifier si le contenu en dessous peut tenir sur la page actuelle
     if (contentY > pageHeight - 30) {
-      // Si le contenu ne tient pas sur la page actuelle, ajoutez une nouvelle page
       pdf.addPage();
-      // Réinitialisez la position Y pour le contenu en dessous
       contentY = 20;
 
-      // Numérotez la page
       pdf.text(10, pageHeight - 10, `Page ${pdf.internal.getNumberOfPages()}`);
     }
 
-    // Calculer le Total HT en additionnant tous les service.totalPrice
     const totalHT = invoiceData?.services?.reduce(
       (accumulator, service) => accumulator + service.totalPrice,
       0
     );
 
-    // Calculer le Taux TVA en calculant la moyenne des taux de TVA de tous les services
-    const totalServices = invoiceData?.services?.length || 1; // Assurez-vous que le dénominateur n'est pas nul
+    const totalServices = invoiceData?.services?.length || 1;
     const averageVATRate = (
       invoiceData?.services?.reduce(
         (accumulator, service) => accumulator + service.vat,
@@ -379,37 +366,31 @@ export const InvoiceStepFive = () => {
       ) / totalServices || 0
     ).toFixed(2);
 
-    // Calculer le Total TTC en utilisant la valeur existante
     const totalTTC = invoiceData?.totalPrice.toFixed(2);
 
     pdf.setFontSize(12);
 
     let xResults = 145;
 
-    // Afficher le Total HT
     pdf.setFont("helvetica", "bold");
     pdf.text("Total HT:", xResults, contentY);
     const totalHTString = totalHT.toFixed(2) + " €";
-    pdf.text(totalHTString.toString(), xResults + 24, contentY); // Utilisez une position légèrement décalée
+    pdf.text(totalHTString.toString(), xResults + 24, contentY); 
 
-    // Déplacer vers la prochaine ligne
     contentY += 9;
 
-    // Afficher l'Average VAT Rate
     pdf.setFont("helvetica", "normal");
     pdf.text("TVA:", xResults, contentY);
     const averageVATRateString = averageVATRate + " %";
-    pdf.text(averageVATRateString.toString(), xResults + 24, contentY); // Utilisez une position légèrement décalée
+    pdf.text(averageVATRateString.toString(), xResults + 24, contentY); 
 
-    // Déplacer vers la prochaine ligne
     contentY += 9;
 
-    // Afficher le Total TTC
     pdf.setFont("helvetica", "bold");
     pdf.text("Total TTC:", xResults, contentY);
     const totalTTCString = totalTTC.toString() + " €";
 
-    pdf.text(totalTTCString, xResults + 24, contentY); // Utilisez une position légèrement décalée
+    pdf.text(totalTTCString, xResults + 24, contentY); 
 
     contentY += 12;
 
@@ -417,14 +398,12 @@ export const InvoiceStepFive = () => {
     pdf.setFontSize(11);
     const footerX = 15;
 
-    // Informations supplémentaires
     contentY += addTextWithMaxWidth(
       `Conditions générales de vente : ${invoiceData?.description}`,
       footerX,
       contentY
     );
 
-    // Le paiement doit être réalisé
     contentY += addTextWithMaxWidth(
       `Le paiement doit être réalisé sous ${invoiceData?.billValidityDuration} à sa date d'émission, par ${invoiceData?.paymentMethod}.`,
       footerX,
@@ -438,7 +417,7 @@ export const InvoiceStepFive = () => {
       pdf.setFontSize(11);
       const signatureDate = `Signé le ${formatDate(new Date())}`;
 
-      const dateX = 150; // Réduisez cette valeur pour décaler moins vers la droite
+      const dateX = 150; 
       pdf.text(signatureDate, dateX, contentY);
 
 
@@ -457,7 +436,6 @@ export const InvoiceStepFive = () => {
       contentY += imgHeight + 10;
     }
 
-    // Télécharger le PDF avec un nom de fichier personnalisé
     const fileName = `${invoiceData?.company?.name
       .replace(/\s+/g, "_")
       .toUpperCase()}_Facture_${invoiceData?.billNumber.toUpperCase()}_${formatDate(
@@ -481,7 +459,7 @@ export const InvoiceStepFive = () => {
           <button onClick={captureSignature}>
             <img
               src="bill-pdf-dl.svg"
-              alt="Télécharger Facture PDF"
+              alt="Télécharger la facture au format PDF"
               className="dl-pdf-img"
             />
           </button>
@@ -498,7 +476,7 @@ export const InvoiceStepFive = () => {
           ></canvas>
           <img
             src="erase-signature.svg"
-            alt="Effacer signature"
+            alt="Effacer la signature"
             className="clear-signature-button"
             onClick={clearSignature}
           />

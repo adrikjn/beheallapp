@@ -1,5 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
+Disallow: /dashboard
 Disallow: /invoice-step-one
 Disallow: /invoice-step-two
 Disallow: /invoice-step-three
