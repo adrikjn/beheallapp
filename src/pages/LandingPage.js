@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../App.css";
 import Logo from "../components/Logo";
 import Brand from "../components/Brand";
+import { Helmet } from "react-helmet";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -16,6 +17,12 @@ export const LandingPage = () => {
   }, [navigate]);
   return (
     <div className="landing-page fade-in">
+      <Helmet>
+        <meta
+          name="description"
+          content="Notre service de facturation en ligne simplifie la création de factures. Générez rapidement des factures professionnelles. Essayez dès maintenant !"
+        />
+      </Helmet>
       <div className="landing-page-height">
         <Logo />
         <Brand />
