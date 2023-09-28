@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import jwtDecode from "jwt-decode";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -15,27 +15,20 @@ export const Login = () => {
   const [globalErrors, setGlobalErrors] = useState([]);
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
-
   const addGlobalError = (error) => {
     setGlobalErrors([...globalErrors, error]);
   };
 
-
   const handleLogin = async () => {
     try {
-      const response = await Axios.post(
-        `${apiUrl}/login_check`,
-        {
-          email: email,
-          password: password,
-        }
-      );
+      const response = await Axios.post(`${apiUrl}/login_check`, {
+        email: email,
+        password: password,
+      });
 
       console.log(response.data.token);
 
-      const userResponse = await Axios.get(
-        `${apiUrl}/users?email=${email}`
-      );
+      const userResponse = await Axios.get(`${apiUrl}/users?email=${email}`);
 
       const user = userResponse.data[0];
 
@@ -60,7 +53,9 @@ export const Login = () => {
       navigate("/dashboard");
     } catch (error) {
       console.error("Erreur de connexion :", error);
-      addGlobalError("Erreur de connexion. Veuillez vérifier vos informations d'identification.");
+      addGlobalError(
+        "Erreur de connexion. Veuillez vérifier vos informations d'identification."
+      );
     }
   };
 
@@ -72,18 +67,22 @@ export const Login = () => {
     <div className="login-page fade-in fade-in">
       <Helmet>
         <title>Connexion | Beheall</title>
+        <meta
+          name="description"
+          content="Connectez-vous à votre compte Beheall pour accéder à votre profil et gérer vos factures."
+        />
       </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       {globalErrors.length > 0 && (
-              <div className="alert">
-                <span onClick={closeAlert} className="close-alert">
-                  &times;
-                </span>
-                {globalErrors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
+        <div className="alert">
+          <span onClick={closeAlert} className="close-alert">
+            &times;
+          </span>
+          {globalErrors.map((error, index) => (
+            <p key={index}>{error}</p>
+          ))}
+        </div>
+      )}
       <div className="login-part-one">
         <LogoAndPicture />
         <p className="login-description">On s'occupe de tout</p>
@@ -91,7 +90,6 @@ export const Login = () => {
       </div>
       <div className="login-part-two">
         <div className="login-space">
-        
           <h1>Connexion</h1>
           {registrationSuccess && (
             <p className="success-message">
@@ -124,7 +122,6 @@ export const Login = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
