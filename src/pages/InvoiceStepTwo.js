@@ -33,9 +33,7 @@ export const InvoiceStepTwo = () => {
     sirenSiret: "",
   });
 
-  // const addGlobalError = (error) => {
-  //   setGlobalErrors([...globalErrors, error]);
-  // };
+
 
   useEffect(() => {
     if (!token) {
@@ -103,10 +101,10 @@ export const InvoiceStepTwo = () => {
       );
       console.log("Customer data submitted:", response.data);
 
-      const newCustomerId = response.data.id; // Get the newly created customer's ID
+      const newCustomerId = response.data.id; 
 
-      invoiceData.customer = newCustomerId; // Store selectedCustomerId in invoiceData
-      localStorage.setItem("InvoiceData", JSON.stringify(invoiceData)); // Save updated invoiceData in localStorage
+      invoiceData.customer = newCustomerId; 
+      localStorage.setItem("InvoiceData", JSON.stringify(invoiceData)); 
 
       Axios.get(`${apiUrl}/companies/${selectedCompanyId}`, {
         headers: {
@@ -140,12 +138,10 @@ export const InvoiceStepTwo = () => {
       ) {
         const validationErrors = [];
 
-        // Bouclez sur les violations pour extraire les messages d'erreur
         error.response.data.violations.forEach((violation) => {
           validationErrors.push(violation.message);
         });
 
-        // Ajoutez les erreurs de validation à la liste globale
         setGlobalErrors([...globalErrors, ...validationErrors]);
       }
     }
@@ -168,8 +164,8 @@ export const InvoiceStepTwo = () => {
   const handleContinueClick = async () => {
     if (selectedCustomer !== "undefined" && selectedCustomer !== null) {
       try {
-        invoiceData.customer = selectedCustomer; // Store selectedCustomerId in invoiceData
-        localStorage.setItem("InvoiceData", JSON.stringify(invoiceData)); // Save updated invoiceData in localStorage
+        invoiceData.customer = selectedCustomer; 
+        localStorage.setItem("InvoiceData", JSON.stringify(invoiceData)); 
         navigate("/invoice-step-three");
       } catch (error) {
         console.error("Error navigating:", error);

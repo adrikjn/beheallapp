@@ -21,7 +21,7 @@ export const Register = () => {
   };
 
   const handleRegister = async (e) => {
-    e.preventDefault(); // Empêche la soumission du formulaire par défaut
+    e.preventDefault(); 
 
     try {
       if (plainPassword !== confirmPassword) {
@@ -38,13 +38,11 @@ export const Register = () => {
       });
 
       if (response.status === 201) {
-        // Redirigez l'utilisateur vers la page de connexion avec un paramètre "registrationSuccess"
         navigate("/login", { state: { registrationSuccess: true } });
       }
     } catch (error) {
       console.error("Erreur d'inscription :", error);
 
-      // Si l'erreur est liée à la validation du formulaire, par exemple, en cas de validation Symfony, vous pouvez extraire les erreurs de la réponse
       if (
         error.response &&
         error.response.data &&
@@ -52,18 +50,15 @@ export const Register = () => {
       ) {
         const validationErrors = [];
 
-        // Bouclez sur les violations pour extraire les messages d'erreur
         error.response.data.violations.forEach((violation) => {
           validationErrors.push(violation.message);
         });
 
-        // Ajoutez les erreurs de validation à la liste globale
         setGlobalErrors([...globalErrors, ...validationErrors]);
       }
     }
   };
 
-  // Fonction pour fermer l'alerte
   const closeAlert = () => {
     setGlobalErrors([]);
   };
