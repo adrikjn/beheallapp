@@ -4,6 +4,8 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { Helmet } from 'react-helmet';
+
 
 export const InvoiceStepFive = () => {
   const token = localStorage.getItem("Token");
@@ -466,6 +468,9 @@ export const InvoiceStepFive = () => {
 
   return (
     <div className="invoice-step-one-page fade-in">
+      <Helmet>
+        <title>Récapitulatif & Finalisation | Beheall</title>
+      </Helmet>
       <div className="welcome-user">
         <h1>Finalisation</h1>
         <Account />

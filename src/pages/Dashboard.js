@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
+import { Helmet } from 'react-helmet';
 
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
@@ -105,6 +106,9 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
 
   return (
     <div className="dashboard-page fade-in">
+      <Helmet>
+        <title>Dashboard | Beheall</title>
+      </Helmet>
       {userData && (
         <div className="welcome-user">
           <h1>Welcome, {userData.firstName}</h1>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import jwtDecode from "jwt-decode";
-
+import { Helmet } from 'react-helmet';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -70,6 +70,9 @@ export const Login = () => {
 
   return (
     <div className="login-page fade-in fade-in">
+      <Helmet>
+        <title>Connexion | Beheall</title>
+      </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       {globalErrors.length > 0 && (
               <div className="alert">

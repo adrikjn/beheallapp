@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
+import { Helmet } from 'react-helmet';
+
 
 export const InvoiceStepOne = () => {
   const token = localStorage.getItem("Token");
@@ -179,6 +181,9 @@ export const InvoiceStepOne = () => {
 
   return (
     <div className="invoice-step-one-page fade-in">
+      <Helmet>
+        <title>Ajout Entreprise | Beheall</title>
+      </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
         <h1>creation factures</h1>

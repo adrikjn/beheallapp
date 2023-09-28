@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
+import { Helmet } from 'react-helmet';
 
 export const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -69,6 +70,9 @@ export const Register = () => {
 
   return (
     <div className="login-page fade-in">
+      <Helmet>
+        <title>Inscription | Beheall</title>
+      </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <LogoAndPicture />
       <h1 className="register-title">Inscription</h1>

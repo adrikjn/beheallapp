@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
+import { Helmet } from 'react-helmet';
 
 export const InvoiceStepThree = () => {
   const token = localStorage.getItem("Token");
@@ -173,6 +174,9 @@ export const InvoiceStepThree = () => {
 
   return (
     <div className="invoice-step-one-page fade-in">
+      <Helmet>
+        <title>Création Facture | Beheall</title>
+      </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
         <h1>creation factures</h1>
