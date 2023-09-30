@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Importez Link depuis react-router-dom
+import { Link } from "react-router-dom"; 
 
 const Footer = () => (
   <div className="footer">
