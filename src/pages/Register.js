@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
 import { Helmet } from 'react-helmet';
+import Footer from "../components/Footer.js";
+
 
 export const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -135,6 +137,7 @@ export const Register = () => {
           </div>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };

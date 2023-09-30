@@ -1288,3 +1288,23 @@ ul li {
 .dl-pdf-img {
   width: 80px;
 }
+
+/*? FOOTER */
+.footer ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+}
+
+.footer-links {
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+.footer-links:hover {
+  color: #434344;
+}

@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import "../App.css";
 import { Helmet } from "react-helmet";
 import AccordionNav from "../components/AccordionNav";
+import Footer from "../components/Footer.js";
 
 export const LegalNotice = () => {
-    const hasToken = !!localStorage.getItem("Token");
+  const hasToken = !!localStorage.getItem("Token");
   return (
     <div className="legal-policy fade-in">
       <Helmet>
@@ -47,6 +47,7 @@ export const LegalNotice = () => {
         </p>
       </div>
       {hasToken && <AccordionNav />}
+      <Footer />
     </div>
   );
 };

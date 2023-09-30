@@ -4,6 +4,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import jwtDecode from "jwt-decode";
 import { Helmet } from "react-helmet";
+import Footer from "../components/Footer.js";
+
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -122,6 +124,7 @@ export const Login = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

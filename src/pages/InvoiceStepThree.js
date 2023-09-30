@@ -4,6 +4,8 @@ import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet } from 'react-helmet';
+import Footer from "../components/Footer.js";
+
 
 export const InvoiceStepThree = () => {
   const token = localStorage.getItem("Token");
@@ -284,6 +286,8 @@ export const InvoiceStepThree = () => {
         </button>
       </div>
       <AccordionNav />
+      <Footer />
+
     </div>
   );
 };

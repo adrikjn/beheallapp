@@ -5,6 +5,8 @@ import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet } from 'react-helmet';
+import Footer from "../components/Footer.js";
+
 
 
 export const InvoiceStepOne = () => {
@@ -404,6 +406,8 @@ export const InvoiceStepOne = () => {
       </div>
 
       <AccordionNav />
+      <Footer />
+
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Account from "../components/Account";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { Helmet } from 'react-helmet';
+import Footer from "../components/Footer.js";
 
 
 export const InvoiceStepFive = () => {
@@ -592,6 +593,8 @@ export const InvoiceStepFive = () => {
         </div>
       </div>
       <AccordionNav />
+      <Footer />
+
     </div>
   );
 };

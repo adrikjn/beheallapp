@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet } from 'react-helmet';
+import Footer from "../components/Footer.js";
+
 
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
@@ -162,6 +164,8 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
       </div>
 
       <AccordionNav />
+      <Footer />
+
     </div>
   );
 };
