@@ -3,6 +3,7 @@ import "../App.css";
 import { Helmet } from "react-helmet";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
+import Account from "../components/Account";
 
 export const LegalNotice = () => {
   const hasToken = !!localStorage.getItem("Token");
@@ -16,7 +17,8 @@ export const LegalNotice = () => {
         />
       </Helmet>
       <div>
-        <h1>Mentions Légales</h1>
+        <h1>Mentions Légales {hasToken &&<Account />}</h1>
+        
         <div className="legal-notice-rules">
           <p>
             Ce site web permet de créer des factures en ligne dans le cadre d'un

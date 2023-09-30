@@ -3,6 +3,7 @@ import "../App.css";
 import { Helmet } from "react-helmet";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
+import Account from "../components/Account";
 
 export const PrivacyPolicy = () => {
   const hasToken = !!localStorage.getItem("Token");
@@ -15,8 +16,11 @@ export const PrivacyPolicy = () => {
           content="Découvrez notre politique de confidentialité pour comprendre comment nous collectons, utilisons et protégeons vos données personnelles lorsque vous utilisez notre service de génération de factures en ligne. Nous nous engageons à garantir la sécurité et la confidentialité de vos informations."
         />
       </Helmet>
+        <h1>
+          Politique de Confidentialité {hasToken &&<Account />}
+        </h1>
+
       <div className="privacy-policy-rules">
-        <h1>Politique de Confidentialité</h1>
         <p>Date de dernière mise à jour : 30/09/2023</p>
         <h2>Collecte des Données Personnelles</h2>
         <p>
@@ -76,6 +80,7 @@ export const PrivacyPolicy = () => {
           France.
         </p>
       </div>
+
       {hasToken && <AccordionNav />}
       <Footer />
     </div>
