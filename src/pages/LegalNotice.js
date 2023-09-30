@@ -10,41 +10,34 @@ export const LegalNotice = () => {
     <div className="legal-policy fade-in">
       <Helmet>
         <title>Mentions Légales | Beheall</title>
-        <meta name="description" content="" />
+        <meta
+          name="description"
+          content="Consultez nos mentions légales pour obtenir des informations sur notre application web, nos coordonnées, et les règles et réglementations qui s'appliquent à l'utilisation de notre service de génération de factures en ligne."
+        />
       </Helmet>
       <div>
         <h1>Mentions Légales</h1>
-        <p>Nom de l'entreprise : [Votre Nom d'Entreprise]</p>
-        <p>Forme juridique : [SARL, SAS, auto-entrepreneur, etc.]</p>
-        <p>Adresse de l'entreprise : [Votre Adresse]</p>
-        <p>Numéro de téléphone de l'entreprise : [Votre Numéro de Téléphone]</p>
-        <p>Adresse e-mail de l'entreprise : [Votre Adresse E-mail]</p>
-        <p>Numéro SIRET : [Votre Numéro SIRET, si applicable]</p>
-        <p>Directeur de la publication : [Votre Nom]</p>
-        <p>Hébergeur du site web : [Nom de l'Hébergeur]</p>
-        <p>Adresse de l'hébergeur : [Adresse de l'Hébergeur]</p>
-        <p>
-          Le site web [Votre Nom de Domaine] est régi par la loi applicable en
-          France.
-        </p>
-        <h2>Droits d'auteur</h2>
-        <p>
-          Tous les contenus de ce site web, y compris les textes, les
-          graphiques, les logos, les images, les clips audio et vidéo, sont la
-          propriété de [Votre Nom d'Entreprise] ou de ses fournisseurs de
-          contenu et sont protégés par les lois françaises sur les droits
-          d'auteur. Toute utilisation non autorisée de ces contenus est
-          interdite.
-        </p>
-        <h2>Contact</h2>
-        <p>
-          Pour toute question ou préoccupation concernant ces mentions légales,
-          veuillez nous contacter à [Votre Adresse E-mail].
-        </p>
-        <p>
-          Date de dernière mise à jour : [Date de la dernière mise à jour des
-          mentions légales]
-        </p>
+        <div className="legal-notice-rules">
+          <p>
+            Ce site web permet de créer des factures en ligne dans le cadre d'un
+            projet scolaire réalisé dans le cadre de l'obtention de mon bac +2
+            Développeur d'Applications Multimédia à Doranco. Les factures
+            générées respectent les lois en vigueur et sont utilisables
+            conformément à la législation.
+          </p>
+          <p>Responsable de la publication : KOUYOUMJIAN Adrien</p>
+          <p>
+            Les factures générées sur ce site sont destinées à des fins
+            pédagogiques et démonstratives, mais elles sont également conformes
+            aux exigences légales. Elles peuvent être utilisées conformément à
+            la législation en vigueur.
+          </p>
+          <p>
+            Pour toute question ou commentaire concernant ce projet scolaire,
+            veuillez nous contacter à beheallpro@outlook.com.
+          </p>
+          <p>Date de dernière mise à jour : 30/09/2023</p>
+        </div>
       </div>
       {hasToken && <AccordionNav />}
       <Footer />

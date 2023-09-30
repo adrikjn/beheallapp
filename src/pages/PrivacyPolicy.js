@@ -10,14 +10,14 @@ export const PrivacyPolicy = () => {
     <div className="legal-policy fade-in">
       <Helmet>
         <title>Politique de Confidentialité | Beheall</title>
-        <meta name="description" content="" />
+        <meta
+          name="description"
+          content="Découvrez notre politique de confidentialité pour comprendre comment nous collectons, utilisons et protégeons vos données personnelles lorsque vous utilisez notre service de génération de factures en ligne. Nous nous engageons à garantir la sécurité et la confidentialité de vos informations."
+        />
       </Helmet>
-      <div>
+      <div className="privacy-policy-rules">
         <h1>Politique de Confidentialité</h1>
-        <p>
-          Date de dernière mise à jour : [Date de la dernière mise à jour de la
-          politique de confidentialité]
-        </p>
+        <p>Date de dernière mise à jour : 30/09/2023</p>
         <h2>Collecte des Données Personnelles</h2>
         <p>
           Nous collectons les données personnelles suivantes lorsque vous
@@ -26,7 +26,7 @@ export const PrivacyPolicy = () => {
         <ul>
           <li>Votre nom</li>
           <li>Votre adresse e-mail</li>
-          <li>Votre numéro de téléphone (facultatif)</li>
+          <li>Votre numéro de téléphone</li>
           <li>Les informations relatives à vos factures</li>
         </ul>
         <h2>Utilisation des Données Personnelles</h2>
@@ -60,12 +60,6 @@ export const PrivacyPolicy = () => {
           Nous utilisons des cookies et d'autres technologies de suivi pour
           améliorer l'expérience de l'utilisateur sur notre site web.
         </p>
-        <h2>Vos Droits</h2>
-        <p>
-          Vous avez le droit d'accéder à vos données personnelles, de les
-          corriger, de les supprimer ou de vous opposer à leur traitement. Pour
-          exercer ces droits, veuillez nous contacter à [Votre Adresse E-mail].
-        </p>
         <h2>Modifications de la Politique de Confidentialité</h2>
         <p>
           Nous pouvons mettre à jour cette politique de confidentialité de temps
@@ -75,7 +69,7 @@ export const PrivacyPolicy = () => {
         <h2>Contact</h2>
         <p>
           Pour toute question ou préoccupation concernant notre politique de
-          confidentialité, veuillez nous contacter à [Votre Adresse E-mail].
+          confidentialité, veuillez nous contacter à beheallpro@outlook.com.
         </p>
         <p>
           Cette politique de confidentialité est régie par la loi applicable en
