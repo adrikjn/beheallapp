@@ -1,6 +1,8 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
+import { LegalNotice } from "./pages/LegalNotice";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Dashboard } from "./pages/Dashboard";
@@ -23,6 +25,8 @@ function App() {
           <Route path="/invoice-step-three" element={<InvoiceStepThree />} />
           <Route path="/invoice-step-four" element={<InvoiceStepFour />} />
           <Route path="/invoice-step-five" element={<InvoiceStepFive />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/legal-notice" element={<LegalNotice />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

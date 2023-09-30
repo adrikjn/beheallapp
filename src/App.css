@@ -17,7 +17,7 @@ ul li {
 /*? SETTINGS FOR SOME PAGES */
 .landing-page,
 .dashboard-page,
-.invoice-step-one-page {
+.invoice-step-one-page, .legal-policy {
   width: 85vw;
   margin: 0 auto;
 }
