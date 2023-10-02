@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const AccordionNav = () => {
-  const [isLinksVisible, setIsLinksVisible] = useState(true); 
-  const location = useLocation(); 
+  const [isLinksVisible, setIsLinksVisible] = useState(true);
+  const location = useLocation();
 
   const handleToggleLinks = () => {
     setIsLinksVisible(!isLinksVisible);
@@ -13,12 +13,8 @@ const AccordionNav = () => {
     switch (path) {
       case "/dashboard":
         return "Home";
-      case "/invoice-step-one":
-        return "Paramètres";
       case "/invoice-step-two":
         return "Factures";
-      case "/invoice-step-four":
-        return "Devis";
       case "/invoice-step-three":
         return "Clients";
       default:
@@ -26,9 +22,7 @@ const AccordionNav = () => {
     }
   };
 
-  
   const currentPage = getPageName(location.pathname);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,7 +34,7 @@ const AccordionNav = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); 
+    handleResize();
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -64,17 +58,7 @@ const AccordionNav = () => {
               </li>
               <li>
                 <Link to="/dashboard" className="nav-links-desktop">
-                  Paramètres
-                </Link>
-              </li>
-              <li>
-                <Link to="/dashboard" className="nav-links-desktop">
                   Factures
-                </Link>
-              </li>
-              <li>
-                <Link to="/dashboard" className="nav-links-desktop">
-                  Devis
                 </Link>
               </li>
               <li>
@@ -106,20 +90,23 @@ const AccordionNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard" className="links-style">
-                    Paramètres
-                  </Link>
+                  <li>
+                    <Link to="/legal-notice" className="links-style">
+                      Mentions Légales
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/privacy-policy" className="links-style">
+                      Politique de Confidentialité
+                    </Link>
+                  </li>
                 </li>
                 <li>
                   <Link to="/dashboard" className="links-style">
                     Factures
                   </Link>
                 </li>
-                <li>
-                  <Link to="/dashboard" className="links-style">
-                    Devis
-                  </Link>
-                </li>
+                <li></li>
                 <li>
                   <Link to="/dashboard" className="links-style">
                     Clients

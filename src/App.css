@@ -567,6 +567,15 @@ ul li {
   background: #487e58;
 }
 
+.desktop-footer {
+  display: none;
+}
+@media (min-width: 992px) {
+  .desktop-footer {
+    display: block;
+  }
+}
+
 @media (min-width: 1200px) {
   .draft-button {
     display: flex;

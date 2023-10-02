@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet } from "react-helmet";
+import Footer from "../components/Footer.js";
 
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
@@ -104,13 +105,13 @@ export const Dashboard = () => {
       )}
       <div className="draft-button">
         {storedDraftInvoiceId && (
-        <Link to={`/invoice-step-four`} className="link-no-underline">
-          <button>
-            Finaliser le brouillon
-            <img src="favicon.ico" alt="" />
-          </button>
-        </Link>
-         )} 
+          <Link to={`/invoice-step-four`} className="link-no-underline">
+            <button>
+              Finaliser le brouillon
+              <img src="favicon.ico" alt="" />
+            </button>
+          </Link>
+        )}
       </div>
       <div className="invoice-title">
         <p>Dernières factures</p>
@@ -156,6 +157,9 @@ export const Dashboard = () => {
       </div>
 
       <AccordionNav />
+      <div className="desktop-footer">
+        <Footer />
+      </div>
     </div>
   );
 };
