@@ -104,14 +104,14 @@ export const Dashboard = () => {
         </div>
       )}
       <div className="draft-button">
-        {/* {storedDraftInvoiceId && ( */}
+        {storedDraftInvoiceId && (
         <Link to={`/invoice-step-four`} className="link-no-underline">
           <button>
             Finaliser le brouillon
             <img src="favicon.ico" alt="" />
           </button>
         </Link>
-        {/* )} */}
+         )} 
       </div>
       <div className="invoice-title">
         <p>Dernières factures</p>
