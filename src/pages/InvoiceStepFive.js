@@ -593,7 +593,9 @@ export const InvoiceStepFive = () => {
         </div>
       </div>
       <AccordionNav />
-      <Footer />
+          <div className="desktop-footer">
+        <Footer />
+      </div>
 
     </div>
   );

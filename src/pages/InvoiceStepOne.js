@@ -406,7 +406,9 @@ export const InvoiceStepOne = () => {
       </div>
 
       <AccordionNav />
-      <Footer />
+      <div className="desktop-footer">
+        <Footer />
+      </div>
 
     </div>
   );
