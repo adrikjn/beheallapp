@@ -227,7 +227,7 @@ ul li {
   transition: background-color 0.2s ease;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1200px) {
   .login-part-two {
     margin-top: 30px;
   }
@@ -346,7 +346,7 @@ ul li {
   background-color: #434344;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1200px) {
   .register-title {
     text-align: center;
   }
@@ -567,7 +567,7 @@ ul li {
   background: #487e58;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1200px) {
   .draft-button {
     display: flex;
     justify-content: end;
