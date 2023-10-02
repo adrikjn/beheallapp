@@ -494,13 +494,11 @@ ul li {
 }
 
 .status-draft {
-  background: #e14848;
-  width: 25%;
+  color: #e14848;
 }
 
 .status-sent {
-  background: #4f9e65;
-  width: 25%;
+  color: #4f9e65;
 }
 
 .line {

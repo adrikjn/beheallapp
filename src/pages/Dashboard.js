@@ -148,12 +148,6 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
             <p>{formattedCurrentDate}</p>
           </div>
           <p className="revenue-amount">{displayTotalThisMonth}</p>
-          {/* <div className="view-more-revenue">
-            <img src="/arrow.svg" alt="" />
-            <Link to="/dashboard" className="link-see-more">
-              Voir plus
-            </Link>
-          </div> */}
         </div>
       </div>
 
