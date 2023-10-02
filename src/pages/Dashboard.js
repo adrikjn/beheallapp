@@ -108,11 +108,11 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
         </div>
       )}
       <div className="draft-button">
-      {storedDraftInvoiceId && (
+      {/* {storedDraftInvoiceId && ( */}
         <Link to={`/invoice-step-four`}>
-          <button>Finaliser le brouillon</button>
+          <button>Finaliser le brouillon<img src="favicon.ico" alt="" /></button>
         </Link>
-      )}
+      {/* )} */}
     </div>
       <div className="invoice-title">
         <p>Dernières factures</p>

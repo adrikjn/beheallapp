@@ -420,8 +420,8 @@ ul li {
 }
 
 .draft-button button {
-  background-color: #252525;
-  color: #fff;
+  background-color: #F2F4F3;
+  color: #1b1b1b;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -430,6 +430,9 @@ ul li {
   transition: background-color 0.2s ease;
   width: 100%;
   margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .draft-button button:hover {
@@ -493,10 +496,12 @@ ul li {
 
 .status-draft {
   color: #e14848;
+  font-weight: bold;
 }
 
 .status-sent {
   color: #4f9e65;
+  font-weight: bold;
 }
 
 .line {
