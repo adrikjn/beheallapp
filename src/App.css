@@ -455,7 +455,7 @@ ul li {
 }
 
 .invoice-title > p:nth-child(2) {
-  margin-right: 25px;
+  margin-right: 27px;
   font-size: 14px;
   font-weight: 400;
 }
@@ -548,7 +548,7 @@ ul li {
 }
 
 .btn-invoice button {
-  margin: 30px 0;
+  margin: 100px 0 40px 0;
   border-radius: 5px;
   padding: 24px 64px;
   background: #4f9e65;
