@@ -23,7 +23,6 @@ ul li {
 }
 
 /*? LANDING PAGE */
-/* App.css */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -38,11 +37,11 @@ ul li {
 }
 
 .landing-page-height {
-  min-height: 769px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 41px;
+  padding-top: 41px;
 }
 
 .logo {
