@@ -266,16 +266,12 @@ ul li {
 }
 
 .register-title {
-  width: 185px;
-  color: #fff;
-  font-family: Roboto;
-  font-size: 13px;
-  line-height: normal;
-  background: #1b1b1b;
+  color: #1b1b1b;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 5.1px;
   text-transform: uppercase;
-  padding: 10px 0 10px 13px;
-  margin-left: 32px;
-  margin-bottom: 16px;
+  margin: 30px;
 }
 
 .login-part-two .login-space p {
@@ -316,10 +312,24 @@ ul li {
   width: 50%;
 }
 
+
+.login-page .register .name-inputs-size {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-page .register .name-inputs-size input {
+  width: 100%;
+}
+
+
 .align-btn {
   width: 98%;
   margin: auto;
   margin-top: 35px;
+  margin-bottom: 12px;
 }
 
 .align-btn button {
@@ -333,12 +343,55 @@ ul li {
   font-weight: 500;
   text-transform: uppercase;
   cursor: pointer;
-  margin-bottom: 65px;
   transition: background-color 0.2s ease;
 }
 
 .align-btn button:hover {
   background-color: #434344;
+}
+
+@media (min-width: 1200px) {
+  .register-title {
+    text-align: center;
+  }
+  .align-btn {
+    display: flex;
+    align-items: center;
+  }
+  .align-btn button {
+    width: 20%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  .login-page .register input {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 300;
+    width: 50%;
+    margin: auto;
+  }
+  .login-page .register .name-inputs {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  .login-page .register .name-inputs input {
+    width: 50%;
+  }
+  .login-page .register .name-inputs-size {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    gap: 15px;
+  }
+  .login-page .register .name-inputs-size input{
+    width: 50%;
+  }
 }
 
 /*? DASHBOARD PAGE */

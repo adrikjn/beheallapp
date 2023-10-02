@@ -76,11 +76,11 @@ export const Register = () => {
       </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <LogoAndPicture />
+      <div className="login-border"></div>
       <h1 className="register-title">Inscription</h1>
       <div className="register">
         <form onSubmit={handleRegister}>
           <div className="register-marge">
-            {/* Affichez les erreurs globales dans un composant d'alerte */}
             {globalErrors.length > 0 && (
               <div className="alert">
                 <span onClick={closeAlert} className="close-alert">
@@ -106,6 +106,7 @@ export const Register = () => {
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
+            <div className="name-inputs-size">
             <input
               type="email"
               placeholder="E-mail"
@@ -118,6 +119,8 @@ export const Register = () => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
+            </div>
+            <div className="name-inputs-size">
             <input
               type="password"
               placeholder="Mot de passe"
@@ -130,6 +133,7 @@ export const Register = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
+            </div>
           </div>
 
           <div className="align-btn">
