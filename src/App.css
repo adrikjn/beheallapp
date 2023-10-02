@@ -1417,7 +1417,7 @@ ul li {
   align-items: end;
   justify-content: end;
   gap: 15px;
-  position: absolute;
+  position: relative;
   top: 97%;
   width: 85%;
 }
