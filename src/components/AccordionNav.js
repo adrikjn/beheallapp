@@ -90,6 +90,17 @@ const AccordionNav = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/dashboard" className="links-style">
+                    Factures
+                  </Link>
+                </li>
+                <li></li>
+                <li>
+                  <Link to="/dashboard" className="links-style">
+                    Clients
+                  </Link>
+                </li>
+                <li>
                   <li>
                     <Link to="/legal-notice" className="links-style">
                       Mentions Légales
@@ -100,17 +111,6 @@ const AccordionNav = () => {
                       Politique de Confidentialité
                     </Link>
                   </li>
-                </li>
-                <li>
-                  <Link to="/dashboard" className="links-style">
-                    Factures
-                  </Link>
-                </li>
-                <li></li>
-                <li>
-                  <Link to="/dashboard" className="links-style">
-                    Clients
-                  </Link>
                 </li>
               </ul>
             </div>
