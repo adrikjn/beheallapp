@@ -66,7 +66,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="login-page fade-in fade-in">
+    <div className="login-page fade-in">
       <Helmet>
         <title>Connexion | Beheall</title>
         <meta

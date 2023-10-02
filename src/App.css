@@ -98,16 +98,16 @@ ul li {
   text-align: center;
   width: 82%;
   margin: auto;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Ombre douce */
-  animation: fadeInOut 0.2s ease-in-out; /* Animation de fondu */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
+  animation: fadeInOut 0.2s ease-in-out; 
 }
 
 @keyframes fadeInOut {
   0% {
-    opacity: 0; /* Commencez complètement transparent */
+    opacity: 0; 
   }
   100% {
-    opacity: 1; /* Devenez opaque rapidement */
+    opacity: 1; 
   }
 }
 
@@ -118,7 +118,7 @@ ul li {
   letter-spacing: 8.16px;
   text-transform: uppercase;
   text-align: center;
-  margin-top: 59px;
+  padding-top: 59px;
 }
 
 .login-page h2 span {
@@ -131,7 +131,7 @@ ul li {
 }
 
 .login-description {
-  margin: 0 68px 25px 36px;
+  margin: 0 30px 20px 36px;
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 6px;
@@ -147,15 +147,17 @@ ul li {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 85px;
+  margin-top: 50px;
 }
 
 .login-part-two .login-space {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: flex-end;
   gap: 28px;
 }
+
+
 
 .login-part-two .login-space h1 {
   color: #1b1b1b;
@@ -171,7 +173,6 @@ ul li {
   padding: 0 35px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
 .login-part-two .login-space input {
@@ -197,11 +198,13 @@ ul li {
   font-family: Roboto;
   font-size: 15px;
   font-weight: 200;
+  display: flex;
 }
 
 .login-part-two .login-space p .register-link {
   color: #1b1b1b;
   font-size: 15px;
+  
 }
 
 .center-btn {
@@ -210,7 +213,7 @@ ul li {
 }
 
 .login-part-two .login-space button {
-  height: 72px;
+  padding: 20px;
   border-radius: 2px;
   background-color: #252525;
   color: #fff;
@@ -220,9 +223,37 @@ ul li {
   width: 100%;
   text-transform: uppercase;
   cursor: pointer;
-  margin-bottom: 65px;
+  margin-bottom: 30px;
   transition: background-color 0.2s ease;
 }
+
+
+@media (min-width: 1200px) {
+  .login-part-two { 
+    margin-top: 30px;
+  }
+  .login-part-two .login-space h1 {
+    width: 100%;
+    text-align: center;
+  }
+  .login-part-two .login-space input {
+    width: 50%;
+    margin: auto;
+  }
+  .center-btn {
+    display: flex;
+    align-items: center;
+  }
+  .login-part-two .login-space button {
+    width: 20%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  .login-part-two .login-space p {
+    justify-content: center;
+  }
+}
+
 
 .login-part-two .login-space button:hover {
   background-color: #434344;
@@ -230,7 +261,7 @@ ul li {
 
 /** Register part */
 .register-facture-image {
-  margin: 15px 0 0 0;
+  margin-top: 15px;
   text-align: center;
 }
 
@@ -245,6 +276,11 @@ ul li {
   padding: 10px 0 10px 13px;
   margin-left: 32px;
   margin-bottom: 16px;
+}
+
+.login-part-two .login-space p {
+  text-align: center;
+  width: 100%;
 }
 
 .login-page .register {
@@ -1343,6 +1379,7 @@ ul li {
   color: #000;
   text-decoration: none;
   font-weight: 300;
+  font-family: Roboto;
 }
 
 .footer-links:hover {
