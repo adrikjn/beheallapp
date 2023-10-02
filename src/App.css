@@ -17,7 +17,8 @@ ul li {
 /*? SETTINGS FOR SOME PAGES */
 .landing-page,
 .dashboard-page,
-.invoice-step-one-page, .legal-policy {
+.invoice-step-one-page,
+.legal-policy {
   width: 85vw;
   margin: 0 auto;
 }
@@ -99,16 +100,16 @@ ul li {
   text-align: center;
   width: 82%;
   margin: auto;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
-  animation: fadeInOut 0.2s ease-in-out; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  animation: fadeInOut 0.2s ease-in-out;
 }
 
 @keyframes fadeInOut {
   0% {
-    opacity: 0; 
+    opacity: 0;
   }
   100% {
-    opacity: 1; 
+    opacity: 1;
   }
 }
 
@@ -159,8 +160,6 @@ ul li {
   gap: 28px;
 }
 
-
-
 .login-part-two .login-space h1 {
   color: #1b1b1b;
   font-size: 20px;
@@ -206,7 +205,6 @@ ul li {
 .login-part-two .login-space p .register-link {
   color: #1b1b1b;
   font-size: 15px;
-  
 }
 
 .center-btn {
@@ -229,9 +227,8 @@ ul li {
   transition: background-color 0.2s ease;
 }
 
-
 @media (min-width: 1200px) {
-  .login-part-two { 
+  .login-part-two {
     margin-top: 30px;
   }
   .login-part-two .login-space h1 {
@@ -255,7 +252,6 @@ ul li {
     justify-content: center;
   }
 }
-
 
 .login-part-two .login-space button:hover {
   background-color: #434344;
@@ -314,7 +310,6 @@ ul li {
   width: 50%;
 }
 
-
 .login-page .register .name-inputs-size {
   width: 100%;
   display: flex;
@@ -325,7 +320,6 @@ ul li {
 .login-page .register .name-inputs-size input {
   width: 100%;
 }
-
 
 .align-btn {
   width: 98%;
@@ -391,7 +385,7 @@ ul li {
     margin: auto;
     gap: 15px;
   }
-  .login-page .register .name-inputs-size input{
+  .login-page .register .name-inputs-size input {
     width: 50%;
   }
 }
@@ -420,7 +414,7 @@ ul li {
 }
 
 .draft-button button {
-  background-color: #B7B5B3;
+  background-color: #b7b5b3;
   color: #1b1b1b;
   border: none;
   border-radius: 5px;
@@ -442,7 +436,7 @@ ul li {
 }
 
 .draft-button button:hover {
-  background-color: #A6A4A2;
+  background-color: #a6a4a2;
 }
 
 .invoice-title {
@@ -554,8 +548,7 @@ ul li {
 }
 
 .btn-invoice button {
-  margin-top: 150px;
-  margin-bottom: 100px;
+  margin-top: 30px;
   border-radius: 5px;
   padding: 24px 64px;
   background: #4f9e65;
@@ -574,7 +567,7 @@ ul li {
   background: #487e58;
 }
 
-@media (min-width: 1200px) { 
+@media (min-width: 1200px) {
   .draft-button {
     display: flex;
     justify-content: end;
@@ -934,7 +927,6 @@ ul li {
   transition: background-color 0.2s ease;
 }
 
-
 .btn-invoice-2 button:hover {
   background: #487e58;
 }
@@ -1261,15 +1253,15 @@ ul li {
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #f2dede; 
-  color: #a94442; 
+  background-color: #f2dede;
+  color: #a94442;
   padding: 10px 15px;
   text-align: center;
   z-index: 9999;
-  border: 2px solid #ebccd1; 
+  border: 2px solid #ebccd1;
   border-radius: 5px;
   width: 85%;
-  max-width: 400px; 
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   gap: 7px;
@@ -1278,37 +1270,37 @@ ul li {
 }
 
 .close-alert {
-  color: #fff; 
+  color: #fff;
   position: absolute;
   top: 5px;
   right: 10px;
-  font-size: 28px; 
+  font-size: 28px;
   cursor: pointer;
-  background-color: #d9534f; 
-  padding: 6px 10px; 
+  background-color: #d9534f;
+  padding: 6px 10px;
   border-radius: 50%;
-  transition: background-color 0.3s ease-in-out; 
+  transition: background-color 0.3s ease-in-out;
 }
 
 .close-alert:hover {
-  background-color: #c9302c; 
+  background-color: #c9302c;
 }
 
 .close-alert {
-  color: #a94442; 
+  color: #a94442;
   position: absolute;
   top: 3px;
   right: 5px;
   font-size: 24px;
   cursor: pointer;
-  background-color: #ebccd1; 
+  background-color: #ebccd1;
   padding: 2px 8px;
   border-radius: 50%;
-  transition: background-color 0.3s ease-in-out; 
+  transition: background-color 0.3s ease-in-out;
 }
 
 .close-alert:hover {
-  background-color: #d9534f; 
+  background-color: #d9534f;
   color: #fff;
 }
 
@@ -1333,8 +1325,8 @@ ul li {
 
 @media (min-width: 657px) {
   .sign-pdf-div {
-    width: 400px; 
-    height: auto; 
+    width: 400px;
+    height: auto;
   }
   .contents-try {
     display: flex;
@@ -1419,15 +1411,15 @@ ul li {
   margin-bottom: 50px;
 }
 
-
-
 /*? FOOTER */
-.footer ul{
+.footer ul {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  align-items: end;
+  justify-content: end;
   gap: 15px;
+  position: absolute;
+  top: 97%;
+  width: 85%;
 }
 
 .footer-links {
@@ -1441,4 +1433,3 @@ ul li {
 .footer-links:hover {
   color: #434344;
 }
-
