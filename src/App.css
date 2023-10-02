@@ -1426,7 +1426,7 @@ ul li {
   display: flex;
   justify-content: end;
   align-items: end;
-  position: relative;
+  position: fixe;
   gap: 15px;
   top: 97%;
   width: 100%;
