@@ -578,6 +578,16 @@ ul li {
     width: 100%;
     gap: 10px;
   }
+
+  .btn-invoice {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-invoice button {
+    width: 100%;
+  }
 }
 
 /*? HEADER NAV */
