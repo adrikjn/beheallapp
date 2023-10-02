@@ -548,7 +548,7 @@ ul li {
 }
 
 .btn-invoice button {
-  margin-top: 30px;
+  margin: 30px 0;
   border-radius: 5px;
   padding: 24px 64px;
   background: #4f9e65;
@@ -1414,12 +1414,12 @@ ul li {
 /*? FOOTER */
 .footer ul {
   display: flex;
-  align-items: end;
   justify-content: end;
-  gap: 15px;
+  align-items: end;
   position: relative;
+  gap: 15px;
   top: 97%;
-  width: 85%;
+  width: 100%;
 }
 
 .footer-links {
