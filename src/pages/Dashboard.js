@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import Footer from "../components/Footer.js";
-
 
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
@@ -25,13 +24,10 @@ export const Dashboard = () => {
       };
       Promise.all(
         companyIds.map(async (companyId) => {
-          const response = await fetch(
-            `${apiUrl}/companies/${companyId}`,
-            {
-              method: "GET",
-              headers: headers,
-            }
-          );
+          const response = await fetch(`${apiUrl}/companies/${companyId}`, {
+            method: "GET",
+            headers: headers,
+          });
           const companyData = await response.json();
           return companyData;
         })
@@ -80,21 +76,21 @@ export const Dashboard = () => {
     (invoice) => invoice.status === "brouillon"
   );
 
-const storeDraftInvoiceIdLocally = () => {
-  const lastDraftInvoice = lastTwoInvoices.find(
-    (invoice) => invoice.status === "brouillon"
-  );
+  const storeDraftInvoiceIdLocally = () => {
+    const lastDraftInvoice = lastTwoInvoices.find(
+      (invoice) => invoice.status === "brouillon"
+    );
 
-  if (lastDraftInvoice) {
-    localStorage.setItem("invoice", lastDraftInvoice.id);
+    if (lastDraftInvoice) {
+      localStorage.setItem("invoice", lastDraftInvoice.id);
+    }
+  };
+
+  const storedDraftInvoiceId = localStorage.getItem("invoice");
+
+  if (!storedDraftInvoiceId && hasDraftInvoice) {
+    storeDraftInvoiceIdLocally();
   }
-};
-
-const storedDraftInvoiceId = localStorage.getItem("invoice");
-
-if (!storedDraftInvoiceId && hasDraftInvoice) {
-  storeDraftInvoiceIdLocally();
-}
 
   return (
     <div className="dashboard-page fade-in">
@@ -108,12 +104,15 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
         </div>
       )}
       <div className="draft-button">
-      {/* {storedDraftInvoiceId && ( */}
-        <Link to={`/invoice-step-four`}>
-          <button>Finaliser le brouillon<img src="favicon.ico" alt="" /></button>
+        {/* {storedDraftInvoiceId && ( */}
+        <Link to={`/invoice-step-four`} className="link-no-underline">
+          <button>
+            Finaliser le brouillon
+            <img src="favicon.ico" alt="" />
+          </button>
         </Link>
-      {/* )} */}
-    </div>
+        {/* )} */}
+      </div>
       <div className="invoice-title">
         <p>Dernières factures</p>
         <p>Statut</p>
@@ -159,7 +158,6 @@ if (!storedDraftInvoiceId && hasDraftInvoice) {
 
       <AccordionNav />
       <Footer />
-
     </div>
   );
 };
