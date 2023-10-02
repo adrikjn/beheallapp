@@ -3,9 +3,9 @@ import React from "react";
 const LogoAndPicture = () => {
   return (
     <div>
-      <h2>
+      <p className="brand-login-register">
         Be<span>heall</span>
-      </h2>
+      </p>
       <div className="register-facture-image">
         <img src="/facture.png" alt="Image de Facture" />
       </div>

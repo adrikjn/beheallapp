@@ -2,9 +2,9 @@ import React from "react";
 
 const Brand = () => (
   <div className="brand">
-    <h1>
+    <p>
       Be<span>heall</span>
-    </h1>
+    </p>
   </div>
 );
 

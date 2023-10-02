@@ -54,7 +54,7 @@ ul li {
   justify-content: center;
 }
 
-.brand h1 {
+.brand p {
   color: #434344;
   font-family: Montserrat;
   font-size: 32px;
@@ -64,16 +64,17 @@ ul li {
   letter-spacing: 8.16px;
 }
 
-.brand h1 {
+.brand p {
   color: #434344;
   text-align: center;
   font-family: Montserrat;
   font-size: 32px;
   letter-spacing: 8.16px;
   text-transform: uppercase;
+  font-weight: 700;
 }
 
-.brand h1 span {
+.brand p span {
   font-weight: 300;
   margin-left: -8.16px;
 }
@@ -111,7 +112,7 @@ ul li {
   }
 }
 
-.login-page h2 {
+.login-page .brand-login-register {
   color: #434344;
   font-family: Montserrat;
   font-size: 32px;
@@ -119,9 +120,10 @@ ul li {
   text-transform: uppercase;
   text-align: center;
   padding-top: 59px;
+  font-weight: 700;
 }
 
-.login-page h2 span {
+.login-page .brand-login-register span {
   font-weight: 300;
   margin-left: -8.16px;
 }
