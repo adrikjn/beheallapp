@@ -6,7 +6,6 @@ import jwtDecode from "jwt-decode";
 import { Helmet } from "react-helmet";
 import Footer from "../components/Footer.js";
 
-
 export const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -113,7 +112,7 @@ export const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <p>
-              Vous n'avez pas de compte ?{" "}
+              Vous n'avez pas de compte ?&nbsp;
               <Link to="/register" className="register-link">
                 S'inscrire
               </Link>
