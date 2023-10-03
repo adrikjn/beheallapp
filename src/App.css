@@ -943,7 +943,6 @@ ul li {
   border: 0;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-bottom: 5px;
 }
 
 .btn-invoice-2 button:hover {
