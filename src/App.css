@@ -1252,7 +1252,7 @@ ul li {
 .btn-invoice-add-ps.fixed-btn-4 {
     width: 90%;
     position: fixed;
-    bottom: 5%;
+    bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 0.9;
@@ -1270,9 +1270,10 @@ ul li {
     margin: auto;
     width: 25%;
   }
-  .btn-invoice-add-ps {
+  .btn-invoice-add-ps button{
     margin: auto;
     width: 25%;
+    text-align: center;
   }
 }
 
