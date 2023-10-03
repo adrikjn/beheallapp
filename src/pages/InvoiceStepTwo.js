@@ -37,17 +37,17 @@ export const InvoiceStepTwo = () => {
 
 
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate("/login");
-  //     return;
-  //   }
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
 
-  //   if (!invoiceData) {
-  //     navigate("/invoice-step-one");
-  //     return;
-  //   }
-  // }, [token, navigate, invoiceData]);
+    if (!invoiceData) {
+      navigate("/invoice-step-one");
+      return;
+    }
+  }, [token, navigate, invoiceData]);
 
   useEffect(() => {
     console.log(selectedCustomer);
