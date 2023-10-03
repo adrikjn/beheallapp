@@ -216,7 +216,8 @@ export const InvoiceStepOne = () => {
                 ))}
               </div>
             )}
-            <input
+            <div className="invoice-step-sizes">
+               <input
               type="text"
               id="name"
               name="name"
@@ -224,6 +225,16 @@ export const InvoiceStepOne = () => {
               value={formData.name}
               onChange={handleInputChange}
             />
+            <input
+              type="text"
+              id="siret"
+              placeholder="SIREN/SIRET"
+              name="sirenSiret"
+              value={formData.sirenSiret}
+              onChange={handleInputChange}
+            />
+            </div>
+            <div className="invoice-step-sizes">
             <input
               type="email"
               id="email"
@@ -240,6 +251,7 @@ export const InvoiceStepOne = () => {
               value={formData.phoneNumber}
               onChange={handleInputChange}
             />
+            </div>
             <input
               type="text"
               id="address"
@@ -266,14 +278,6 @@ export const InvoiceStepOne = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <input
-              type="text"
-              id="siret"
-              placeholder="SIREN/SIRET"
-              name="sirenSiret"
-              value={formData.sirenSiret}
-              onChange={handleInputChange}
-            />
             <div className="switch-container">
               <label htmlFor="showAdditionalFields">
                 Afficher les champs facultatifs :
@@ -287,14 +291,6 @@ export const InvoiceStepOne = () => {
             </div>         
             {showAdditionalFields && (
               <>
-                <input
-                  type="text"
-                  id="country"
-                  placeholder="Pays"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleInputChange}
-                />
                 <input
                   type="text"
                   id="vatId"
@@ -343,6 +339,7 @@ export const InvoiceStepOne = () => {
                     commandite simple (SCS)
                   </option>
                 </select>
+              <div className="invoice-step-sizes">
                 <input
                   type="text"
                   id="shareCapital"
@@ -359,6 +356,16 @@ export const InvoiceStepOne = () => {
                   value={formData.cityRegistration}
                   onChange={handleInputChange}
                 />
+                </div>
+                <div className="invoice-step-sizes">
+                <input
+                  type="text"
+                  id="country"
+                  placeholder="Pays"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleInputChange}
+                />
                 <input
                   type="text"
                   id="website"
@@ -367,6 +374,7 @@ export const InvoiceStepOne = () => {
                   value={formData.website}
                   onChange={handleInputChange}
                 />
+                </div>
                 <textarea
                   id="descriptionWork"
                   placeholder="Description de votre secteur d'activité"
