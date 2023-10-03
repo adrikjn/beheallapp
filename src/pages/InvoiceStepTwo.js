@@ -37,17 +37,17 @@ export const InvoiceStepTwo = () => {
 
 
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-      return;
-    }
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate("/login");
+  //     return;
+  //   }
 
-    if (!invoiceData) {
-      navigate("/invoice-step-one");
-      return;
-    }
-  }, [token, navigate, invoiceData]);
+  //   if (!invoiceData) {
+  //     navigate("/invoice-step-one");
+  //     return;
+  //   }
+  // }, [token, navigate, invoiceData]);
 
   useEffect(() => {
     console.log(selectedCustomer);
@@ -253,6 +253,7 @@ export const InvoiceStepTwo = () => {
               value={formData.companyName}
               onChange={handleInputChange}
             />
+            <div className="invoice-step-sizes">
             <input
               type="email"
               id="email"
@@ -269,6 +270,7 @@ export const InvoiceStepTwo = () => {
               value={formData.phoneNumber}
               onChange={handleInputChange}
             />
+            </div>
             <input
               type="text"
               id="address"
@@ -308,6 +310,7 @@ export const InvoiceStepTwo = () => {
             </div>
             {showAdditionalFields && (
               <>
+            <div className="invoice-step-sizes">
                 <input
                   type="text"
                   id="siret"
@@ -324,6 +327,7 @@ export const InvoiceStepTwo = () => {
                   value={formData.vatId}
                   onChange={handleInputChange}
                 />
+                </div>
                 <input
                   type="text"
                   id="activity"
@@ -332,6 +336,7 @@ export const InvoiceStepTwo = () => {
                   value={formData.activity}
                   onChange={handleInputChange}
                 />
+            <div className="invoice-step-sizes">
                 <input
                   type="text"
                   id="website"
@@ -348,6 +353,7 @@ export const InvoiceStepTwo = () => {
                   value={formData.country}
                   onChange={handleInputChange}
                 />
+                </div>
                 <textarea
                   id="notes"
                   placeholder="Notes"
