@@ -1250,7 +1250,7 @@ ul li {
 }
 
 .btn-invoice-add-ps.fixed-btn-4 {
-    width: 90%;
+    width: 85%;
     position: fixed;
     bottom: 10%;
     left: 50%;
@@ -1270,11 +1270,11 @@ ul li {
     margin: auto;
     width: 25%;
   }
-  .btn-invoice-add-ps button{
-    margin: auto;
+  .btn-invoice-add-ps.fixed-btn-4 {
     width: 25%;
+    margin: auto;
     text-align: center;
-  }
+}
 }
 
 /*? INVOICE STEP FIVE SUMMARY */
