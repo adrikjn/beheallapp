@@ -187,6 +187,7 @@ export const InvoiceStepThree = () => {
             </div>
           )}
           <form onSubmit={handleFormSubmit} id="submit-invoice">
+          <div className="invoice-step-sizes">
             <input
               type="text"
               id="billNumber"
@@ -203,6 +204,7 @@ export const InvoiceStepThree = () => {
               value={formData.title}
               onChange={handleInputChange}
             ></input>
+            </div>
             <textarea
               id="description"
               placeholder="Conditions générales de vente (si nécessaire)"
@@ -235,16 +237,17 @@ export const InvoiceStepThree = () => {
               onChange={handleInputChange}
               min={getCurrentDate()}
             />
+          <div className="invoice-step-sizes">
 
             <label htmlFor="paymentMethod">
-              Sélectionner les moyens de méthode de paiement que vous acceptez
+              Sélectionner un moyen de paiement :
             </label>
             <select
               id="paymentMethod"
               name="paymentMethod"
               value={formData.paymentMethod}
               onChange={handleInputChange}
-              className="select-legal-form"
+              className="select-form-3"
             >
               <option value="">Sélectionner un moyen de paiement</option>
               <option value="Cartes de paiement">Cartes de paiement</option>
@@ -259,17 +262,17 @@ export const InvoiceStepThree = () => {
             </select>
 
             <label htmlFor="billValidityDuration">
-              Sélectionner une durée de validité de la facture
+              Sélectionner une durée de validité de facture :
             </label>
             <select
               id="billValidityDuration"
               name="billValidityDuration"
               value={formData.billValidityDuration}
               onChange={handleInputChange}
-              className="select-legal-form"
+              className="select-form-3"
             >
               <option value="">
-                Sélectionner une durée de validité de la facture
+                Sélectionner une durée de validité de facture 
               </option>
               <option value="15 jours">15 jours</option>
               <option value="30 jours">30 jours</option>
@@ -277,6 +280,7 @@ export const InvoiceStepThree = () => {
               <option value="60 jours">60 jours</option>
               <option value="90 jours">90 jours</option>
             </select>
+            </div>
           </form>
         </div>
       </div>

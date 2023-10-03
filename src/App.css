@@ -1031,9 +1031,6 @@ ul li {
     margin: auto;
     width: 20%;
   }
-  
-  
-  
 }
 
 /*? INVOICE STEP THREE */
@@ -1074,6 +1071,25 @@ ul li {
   color: #d9544f9d;
 }
 
+.select-form-3 {
+  padding: 6px 20px;
+  border-radius: 5px;
+  background: #d9d9d9;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("../public/polygon-1.svg");
+  background-position: right 20px center;
+  background-repeat: no-repeat;
+  border: none;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
 .btn-invoice-3 button {
   margin-top: 18px;
   border-radius: 5px;
@@ -1096,6 +1112,23 @@ ul li {
 
 .btn-invoice-3 button:hover {
   background: #487e58;
+}
+
+@media (min-width: 1200px) {
+  .select-form-3 {
+    width: 50%;
+  }
+  .btn-invoice-3 {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    margin-top: 15px;
+  }
+  .btn-invoice-3 button {
+    width: 20%;
+    margin-bottom: 0px;
+    margin: auto;
+  }
 }
 
 /*? INVOICE STEP FOUR */
