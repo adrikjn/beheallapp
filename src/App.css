@@ -1246,10 +1246,26 @@ ul li {
   border: 0;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  margin-bottom: 80px;
+}
+
+.btn-invoice-add-ps.fixed-btn {
+  width: 90%;
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0.9;
 }
 
 .btn-invoice-add-ps button:hover {
   background: #487e58;
+}
+
+@media (min-width: 1200px) {
+  .btn-invoice-add-ps button {
+    margin-bottom: 0px;
+  }
 }
 
 /*? INVOICE STEP FIVE SUMMARY */
