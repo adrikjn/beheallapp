@@ -951,7 +951,7 @@ ul li {
 }
 
 .btn-invoice-2.fixed-btn {
-  width: 85%;
+  width: 88%;
   position: fixed;
   bottom: 10%;
   left: 50%;
@@ -1021,6 +1021,13 @@ ul li {
     width: 20%;
   }
   .custom-file-label {
+    width: 20%;
+  }
+  .btn-invoice-2 {
+    margin: auto;
+    width: 20%;
+  }
+  .btn-invoice-2.fixed-btn {
     width: 20%;
   }
   
