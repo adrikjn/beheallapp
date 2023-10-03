@@ -1220,6 +1220,38 @@ ul li {
   margin-top: -4px;
 }
 
+.btn-invoice-2 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.btn-invoice-add-ps button {
+  margin-top: 18px;
+  border-radius: 5px;
+  padding: 24px 5px;
+  width: 100%;
+  background: #4f9e65;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-invoice-add-ps button:hover {
+  background: #487e58;
+}
+
 /*? INVOICE STEP FIVE SUMMARY */
 .dl-pdf h1 {
   color: #000;
