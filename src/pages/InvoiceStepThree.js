@@ -39,9 +39,9 @@ export const InvoiceStepThree = () => {
 
   useEffect(() => {
     if (selectedCompanyId) {
-      const apiUrl = `${apiUrl}/companies/${selectedCompanyId}`;
+      const companyApiUrl = `${apiUrl}/companies/${selectedCompanyId}`;
 
-      Axios.get(apiUrl, {
+      Axios.get(companyApiUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
