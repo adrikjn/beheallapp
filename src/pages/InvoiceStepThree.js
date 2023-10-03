@@ -29,13 +29,13 @@ export const InvoiceStepThree = () => {
     paymentMethod: "",
   });
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate("/login");
-  //   } else if (!invoiceData) {
-  //     navigate("/invoice-step-two");
-  //   }
-  // }, [token, navigate, invoiceData]);
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    } else if (!invoiceData) {
+      navigate("/invoice-step-two");
+    }
+  }, [token, navigate, invoiceData]);
 
   useEffect(() => {
     if (selectedCompanyId) {
