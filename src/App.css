@@ -1178,7 +1178,7 @@ ul li {
   font-family: Articulat CF;
   font-size: 18px;
   font-weight: 700;
-  margin-top: 238px;
+  margin-top: 15px;
 }
 
 .btn-invoice-4 {
@@ -1220,7 +1220,7 @@ ul li {
   margin-top: -4px;
 }
 
-.btn-iinvoice-add-ps {
+.btn-invoice-add-ps {
   display: flex;
   width: 100%;
   justify-content: center;
