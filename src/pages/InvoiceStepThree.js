@@ -29,13 +29,13 @@ export const InvoiceStepThree = () => {
     paymentMethod: "",
   });
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    } else if (!invoiceData) {
-      navigate("/invoice-step-two");
-    }
-  }, [token, navigate, invoiceData]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate("/login");
+  //   } else if (!invoiceData) {
+  //     navigate("/invoice-step-two");
+  //   }
+  // }, [token, navigate, invoiceData]);
 
   useEffect(() => {
     if (selectedCompanyId) {
@@ -280,7 +280,7 @@ export const InvoiceStepThree = () => {
           </form>
         </div>
       </div>
-      <div className="btn-invoice-2">
+      <div className="btn-invoice-3">
         <button type="submit" form="submit-invoice">
           Continuer
         </button>

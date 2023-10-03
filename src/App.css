@@ -943,6 +943,7 @@ ul li {
   border: 0;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  margin-bottom: 80px;
 }
 
 .btn-invoice-2 button:hover {
@@ -1025,6 +1026,8 @@ ul li {
   .btn-invoice-2 {
     margin: auto;
     width: 20%;
+    margin-bottom: 0;
+
   }
   .btn-invoice-2.fixed-btn {
     margin: auto;
@@ -1071,6 +1074,30 @@ ul li {
 
 .label-span-red {
   color: #d9544f9d;
+}
+
+.btn-invoice-3 button {
+  margin-top: 18px;
+  border-radius: 5px;
+  padding: 24px 43px;
+  width: 100%;
+  background: #4f9e65;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 80px;
+}
+
+.btn-invoice-3 button:hover {
+  background: #487e58;
 }
 
 /*? INVOICE STEP FOUR */
