@@ -1026,8 +1026,7 @@ ul li {
   .btn-invoice-2 {
     margin: auto;
     width: 20%;
-    margin-bottom: 0;
-
+    margin-bottom: 0px;
   }
   .btn-invoice-2.fixed-btn {
     margin: auto;
