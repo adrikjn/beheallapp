@@ -299,7 +299,6 @@ export const InvoiceStepOne = () => {
                   value={formData.vatId}
                   onChange={handleInputChange}
                 />
-                <label htmlFor="legalForm">Forme juridique :</label>
                 <select
                   id="legalForm"
                   name="legalForm"

@@ -1017,6 +1017,13 @@ ul li {
     font-size: 14px;
     color: #000;
   }
+  .select-legal-form {
+    width: 20%;
+  }
+  .custom-file-label {
+    width: 20%;
+  }
+  
   
   
 }
