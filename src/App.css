@@ -953,7 +953,7 @@ ul li {
 .btn-invoice-2.fixed-btn {
   width: 85%;
   position: fixed;
-  bottom: 0%;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 0.9;
@@ -1473,10 +1473,10 @@ ul li {
   display: flex;
   justify-content: end;
   align-items: end;
-  position: fixe;
+  position: fixed;
   gap: 15px;
   top: 97%;
-  width: 100%;
+  width: 85%;
 }
 
 .footer-links {
