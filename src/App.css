@@ -1023,15 +1023,13 @@ ul li {
   .custom-file-label {
     width: 20%;
   }
-  .btn-invoice-2 {
+  .btn-invoice-2 button{
     margin: auto;
     width: 25%;
-    margin-bottom: 0px;
   }
-  .btn-invoice-2.fixed-btn {
+  .btn-invoice-2.fixed-btn button{
     margin: auto;
     width: 20%;
-    margin-bottom: 0px;
   }
   
   
