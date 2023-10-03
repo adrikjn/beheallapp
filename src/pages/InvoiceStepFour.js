@@ -3,10 +3,8 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import Footer from "../components/Footer.js";
-
-
 
 export const InvoiceStepFour = () => {
   const token = localStorage.getItem("Token");
@@ -93,18 +91,13 @@ export const InvoiceStepFour = () => {
 
     try {
       console.log("Form data before submission:", formData);
-      const response = await Axios.post(
-        `${apiUrl}/services`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await Axios.post(`${apiUrl}/services`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       console.log(response);
-      
 
       const invoiceResponse = await Axios.get(
         `${apiUrl}/invoices/${invoiceId}`,
@@ -124,7 +117,7 @@ export const InvoiceStepFour = () => {
             title: service.title,
             quantity: service.quantity,
             unitCost: service.unitCost,
-            vat: service.vat, 
+            vat: service.vat,
             totalPrice: service.totalPrice,
           },
         ]);
@@ -156,7 +149,7 @@ export const InvoiceStepFour = () => {
     try {
       await Axios.put(
         `${apiUrl}/invoices/${invoiceId}`,
-        { totalPrice: totalTTC }, 
+        { totalPrice: totalTTC },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -313,7 +306,11 @@ export const InvoiceStepFour = () => {
                 <button type="submit">Ajouter le produit</button>
               </div>
               <div className="center-plus">
-                <img src="going-back.svg" alt="Revenir en arrière" onClick={handleRefreshPage} />
+                <img
+                  src="going-back.svg"
+                  alt="Revenir en arrière"
+                  onClick={handleRefreshPage}
+                />
               </div>
             </form>
           </div>
@@ -334,10 +331,18 @@ export const InvoiceStepFour = () => {
           <li>Action</li>
         </ul>
         {productList.map((product, index) => (
-          <ul className="product-item" key={index}>
+          <ul
+            className={`product-item ${
+              window.innerWidth < 1200 ? "small-screen" : "large-screen"
+            }`}
+            key={index}
+          >
             <li>
-              {product.title.length > 8
-                ? `${product.title.substring(0, 8)}...`
+              {product.title.length > (window.innerWidth < 1200 ? 8 : 20)
+                ? `${product.title.substring(
+                    0,
+                    window.innerWidth < 1200 ? 8 : 20
+                  )}...`
                 : product.title}
             </li>
             <li>{product.quantity}</li>
@@ -355,7 +360,11 @@ export const InvoiceStepFour = () => {
           </ul>
         ))}
         <div className="center-plus">
-          <img src="/plus.svg" alt="Ajouter un produit ou un service" onClick={handleToggle} />
+          <img
+            src="/plus.svg"
+            alt="Ajouter un produit ou un service"
+            onClick={handleToggle}
+          />
         </div>
         <div className="total-price">
           <p>Total TTC: {totalTTC.toFixed(2)}€</p>
@@ -370,7 +379,6 @@ export const InvoiceStepFour = () => {
       <div className="desktop-footer">
         <Footer />
       </div>
-
     </div>
   );
 };
