@@ -338,10 +338,10 @@ export const InvoiceStepFour = () => {
             key={index}
           >
             <li>
-              {product.title.length > (window.innerWidth < 1200 ? 8 : 20)
+              {product.title.length > (window.innerWidth < 1200 ? 8 : 25)
                 ? `${product.title.substring(
                     0,
-                    window.innerWidth < 1200 ? 8 : 20
+                    window.innerWidth < 1200 ? 8 : 25
                   )}...`
                 : product.title}
             </li>
