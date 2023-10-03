@@ -942,8 +942,8 @@ ul li {
   text-transform: uppercase;
   border: 0;
   cursor: pointer;
-  margin-bottom: 30px;
   transition: background-color 0.2s ease;
+  margin-bottom: 5px;
 }
 
 .btn-invoice-2 button:hover {
