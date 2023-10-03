@@ -369,7 +369,7 @@ export const InvoiceStepFour = () => {
         <div className="total-price">
           <p>Total TTC: {totalTTC.toFixed(2)}€</p>
         </div>
-        <div className="btn-invoice-add-ps">
+        <div className="btn-invoice-add-ps fixed-btn">
           <button type="submit" onClick={handleCreateInvoice}>
             Créer votre facture
           </button>
