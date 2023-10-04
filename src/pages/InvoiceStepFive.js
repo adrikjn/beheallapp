@@ -79,13 +79,13 @@ export const InvoiceStepFive = () => {
     generateInvoicePDF();
   };
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    } else if (!invoiceId) {
-      navigate("/invoice-step-one"); 
-    }
-  }, [token, navigate, invoiceId]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate("/login");
+  //   } else if (!invoiceId) {
+  //     navigate("/invoice-step-one"); 
+  //   }
+  // }, [token, navigate, invoiceId]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -454,9 +454,19 @@ export const InvoiceStepFive = () => {
         <h1>Finalisation</h1>
         <Account />
       </div>
+      <div className="pdf-mobile">
+        <h2>Télécharger le PDF</h2>
+      <button onClick={captureSignature}>
+            <img
+              src="bill-pdf-dl.svg"
+              alt="Télécharger la facture au format PDF"
+              className="dl-pdf-img"
+            />
+          </button>
+      </div>
       <div className="contents-try">
         <div className="dl-pdf">
-          <h1>Veuillez signer la facture puis cliquer sur l'icône PDF pour la télécharger</h1>
+          <h2>Veuillez signer la facture puis cliquer sur l'icône PDF pour la télécharger</h2>
           <button onClick={captureSignature}>
             <img
               src="bill-pdf-dl.svg"

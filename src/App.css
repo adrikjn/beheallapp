@@ -1278,7 +1278,7 @@ ul li {
 }
 
 /*? INVOICE STEP FIVE SUMMARY */
-.dl-pdf h1 {
+.dl-pdf h2 {
   color: #000;
   font-size: 16px;
   font-weight: 600;
@@ -1492,8 +1492,7 @@ ul li {
 
 /*? CANVA SIGNATURE */
 .contents-try {
-  display: flex;
-  flex-direction: column;
+  display: none;
 }
 
 .sign-pdf-div {
@@ -1509,7 +1508,27 @@ ul li {
   border: 1px solid black;
 }
 
-@media (min-width: 657px) {
+.pdf-mobile {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  margin-top: 15px;
+  padding: 0 20px;
+}
+
+.pdf-mobile h2 {
+  font-size: 16px;
+}
+
+.pdf-mobile button {
+  border: none;
+  background-color: #e9ebe9;
+}
+
+@media (min-width: 1200px) {
+  .contents-try {
+    display: flex;
+  }
   .sign-pdf-div {
     width: 400px;
     height: auto;
@@ -1519,6 +1538,9 @@ ul li {
     flex-direction: row-reverse;
     justify-content: space-between;
     gap: 50px;
+  }
+  .pdf-mobile {
+    display: none;
   }
 }
 
