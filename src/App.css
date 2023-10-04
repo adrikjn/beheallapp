@@ -1525,6 +1525,43 @@ ul li {
   background-color: #e9ebe9;
 }
 
+
+
+
+
+.btn-invoice-5 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.btn-invoice-5 button {
+  margin-top: 18px;
+  border-radius: 5px;
+  padding: 24px 5px;
+  width: 100%;
+  background: #4f9e65;
+  color: #fff;
+  text-align: center;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 80px;
+}
+
+.btn-invoice-5 button:hover {
+  background: #487e58;
+}
+
 @media (min-width: 1200px) {
   .contents-try {
     display: flex;
@@ -1541,6 +1578,10 @@ ul li {
   }
   .pdf-mobile {
     display: none;
+  }
+  .btn-invoice-5 {
+    width: 25%;
+    margin: auto;
   }
 }
 
