@@ -24,6 +24,22 @@ export const InvoiceStepFour = () => {
     invoice: `/api/invoices/${invoiceId}`,
   });
 
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    window.innerWidth < 1200
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1200);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const addGlobalError = (error) => {
     setGlobalErrors([...globalErrors, error]);
   };
@@ -332,19 +348,16 @@ export const InvoiceStepFour = () => {
         </ul>
         {productList.map((product, index) => (
           <ul
-            className={`product-item ${
-              window.innerWidth < 1200 ? "small-screen" : "large-screen"
-            }`}
-            key={index}
-          >
-            <li>
-              {product.title.length > (window.innerWidth < 1200 ? 8 : 25)
-                ? `${product.title.substring(
-                    0,
-                    window.innerWidth < 1200 ? 8 : 25
-                  )}...`
-                : product.title}
-            </li>
+          className={`product-item ${
+            isSmallScreen ? "small-screen" : "large-screen"
+          }`}
+          key={index}
+        >
+          <li>
+            {product.title.length > (isSmallScreen ? 8 : 25)
+              ? `${product.title.substring(0, isSmallScreen ? 8 : 25)}...`
+              : product.title}
+          </li>
             <li>{product.quantity}</li>
             <li>{product.unitCost}€</li>
             <li>{product.vat}%</li>
