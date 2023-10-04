@@ -28,6 +28,22 @@ export const InvoiceStepFive = () => {
     return `${day}/${month}/${year}`;
   }
 
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    window.innerWidth < 1200
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1200);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   let isDrawing = false;
   let lastX = 0;
   let lastY = 0;
@@ -557,17 +573,22 @@ export const InvoiceStepFive = () => {
               <li>Prix HT</li>
             </ul>
             {invoiceData?.services?.map((service) => (
-              <ul className="product-summary-item" key={service.id}>
-                <li>
-                  {service.title.length > 8
-                    ? `${service.title.substring(0, 8)}...`
-                    : service.title}{" "}
-                  <p>
-                    -{" "}
-                    {service.description.length > 8
-                      ? `${service.description.substring(0, 8)}...`
-                      : service.description}
-                  </p>
+        <ul
+          className={`product-summary-item ${
+            isSmallScreen ? "small-screen" : "large-screen"
+          }`}
+          key={service.id}
+        >
+          <li>
+            {service.title.length > (isSmallScreen ? 8 : 25)
+              ? `${service.title.substring(0, isSmallScreen ? 8 : 25)}...`
+              : service.title}{" "}
+            <p>
+              -{" "}
+              {service.description.length > (isSmallScreen ? 8 : 25)
+                ? `${service.description.substring(0, isSmallScreen ? 8 : 25)}...`
+                : service.description}
+            </p>
                 </li>
                 <li>{service.quantity}</li>
                 <li>{service.unitCost}€</li>
