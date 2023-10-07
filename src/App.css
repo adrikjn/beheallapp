@@ -334,8 +334,14 @@ font-size: 15px;
 font-weight: 200;
 }
 
+.accept-cgu label {
+color: #1b1b1b;
+}
+
+
 .accept-cgu .cgu-decoration {
   text-decoration-color: #000;
+  color: inherit;
 }
 
 .align-btn {

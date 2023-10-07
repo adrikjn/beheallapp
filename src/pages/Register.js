@@ -146,7 +146,9 @@ export const Register = () => {
             <input type="checkbox" id="accept-cgu-checkbox" required />
             <label htmlFor="accept-cgu-checkbox">
               J'accepte les{" "}
-              <Link to="/cgu" className="cgu-decoration">Conditions Générales d'Utilisation</Link>
+              <Link to="/cgu" className="cgu-decoration no-link-style">
+                Conditions Générales d'Utilisation
+              </Link>
             </label>
           </div>
 
