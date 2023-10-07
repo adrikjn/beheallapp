@@ -328,6 +328,14 @@ margin-top: 15px;
 align-items: center;
 justify-content: center;
 gap: 5px;
+color: #1b1b1b;
+font-family: Roboto;
+font-size: 15px;
+font-weight: 200;
+}
+
+.accept-cgu .cgu-decoration {
+  text-decoration-color: #000;
 }
 
 .align-btn {

@@ -4,6 +4,7 @@ import Axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
 import { Helmet } from "react-helmet";
 import Footer from "../components/Footer.js";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -142,10 +143,10 @@ export const Register = () => {
             </div>
           </div>
           <div className="accept-cgu">
-            <input type="checkbox"id="accept-cgu-checkbox" required />
+            <input type="checkbox" id="accept-cgu-checkbox" required />
             <label htmlFor="accept-cgu-checkbox">
               J'accepte les{" "}
-              <a href="/cgu">Conditions Générales d'Utilisation</a>
+              <Link to="/cgu" className="cgu-decoration">Conditions Générales d'Utilisation</Link>
             </label>
           </div>
 
