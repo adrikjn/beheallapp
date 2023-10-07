@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import Footer from "../components/Footer.js";
-
 
 export const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -23,11 +22,18 @@ export const Register = () => {
   };
 
   const handleRegister = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     try {
       if (plainPassword !== confirmPassword) {
         addGlobalError("Les mots de passe ne correspondent pas.");
+        return;
+      }
+      const acceptCguCheckbox = document.getElementById("accept-cgu-checkbox");
+      if (!acceptCguCheckbox.checked) {
+        addGlobalError(
+          "Veuillez accepter les Conditions Générales d'Utilisation avant de vous inscrire."
+        );
         return;
       }
 
@@ -107,33 +113,40 @@ export const Register = () => {
               />
             </div>
             <div className="name-inputs-size">
-            <input
-              type="email"
-              placeholder="E-mail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="Numéro de téléphone"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
+              <input
+                type="email"
+                placeholder="E-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Numéro de téléphone"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
             </div>
             <div className="name-inputs-size">
-            <input
-              type="password"
-              placeholder="Mot de passe"
-              value={plainPassword}
-              onChange={(e) => setPlainPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Confirmation du mot de passe"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+              <input
+                type="password"
+                placeholder="Mot de passe"
+                value={plainPassword}
+                onChange={(e) => setPlainPassword(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Confirmation du mot de passe"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
             </div>
+          </div>
+          <div className="accept-cgu">
+            <input type="checkbox"id="accept-cgu-checkbox" required />
+            <label htmlFor="accept-cgu-checkbox">
+              J'accepte les{" "}
+              <a href="/cgu">Conditions Générales d'Utilisation</a>
+            </label>
           </div>
 
           <div className="align-btn">

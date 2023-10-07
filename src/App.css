@@ -321,10 +321,19 @@ ul li {
   width: 100%;
 }
 
+.accept-cgu {
+width: 100%;
+display: flex;
+margin-top: 15px;
+align-items: center;
+justify-content: center;
+gap: 5px;
+}
+
 .align-btn {
   width: 98%;
   margin: auto;
-  margin-top: 35px;
+  margin-top: 15px;
   margin-bottom: 12px;
 }
 
@@ -359,12 +368,18 @@ ul li {
     margin: auto;
     margin-bottom: 30px;
   }
-  .login-page .register input {
+  /* .login-page .register input {
     padding: 10px 20px;
     font-size: 18px;
     font-weight: 300;
     width: 50%;
     margin: auto;
+  } */
+  .login-page .register .accept-cgu {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
   }
   .login-page .register .name-inputs {
     width: 50%;
