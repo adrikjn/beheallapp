@@ -1675,7 +1675,13 @@ color: #1b1b1b;
 }
 
 .legal-notice-rules p:last-child {
-  margin-bottom: 300px;
+  margin-bottom: 100px;
+}
+
+@media (min-width: 1200px) {
+  .legal-notice-rules p:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 .privacy-policy-rules {
@@ -1710,4 +1716,10 @@ color: #1b1b1b;
 
 .footer-links:hover {
   color: #434344;
+}
+
+@media (max-width: 992px) {
+  .footer {
+    display: none;
+  }
 }

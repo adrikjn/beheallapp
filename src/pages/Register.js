@@ -4,9 +4,11 @@ import Axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
 import { Helmet } from "react-helmet";
 import Footer from "../components/Footer.js";
+import AccordionNav from "../components/AccordionNav";
 import { Link } from "react-router-dom";
 
 export const Register = () => {
+  const hasToken = !!localStorage.getItem("Token");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -158,6 +160,7 @@ export const Register = () => {
         </form>
       </div>
       <Footer />
+      {hasToken && <AccordionNav />}
     </div>
   );
 };

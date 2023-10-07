@@ -4,9 +4,11 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import jwtDecode from "jwt-decode";
 import { Helmet } from "react-helmet";
+import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
 
 export const Login = () => {
+  const hasToken = !!localStorage.getItem("Token");
   const navigate = useNavigate();
   const location = useLocation();
   const registrationSuccess =
@@ -123,6 +125,7 @@ export const Login = () => {
           </div>
         </div>
       </div>
+      {hasToken && <AccordionNav />}
       <Footer />
     </div>
   );
