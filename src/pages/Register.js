@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
@@ -23,6 +23,14 @@ export const Register = () => {
   const addGlobalError = (error) => {
     setGlobalErrors([...globalErrors, error]);
   };
+
+  useEffect(() => {
+    const hasToken = !!localStorage.getItem("Token");
+
+    if (hasToken) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const handleRegister = async (e) => {
     e.preventDefault();

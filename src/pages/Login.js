@@ -1,5 +1,5 @@
 import LogoAndPicture from "../components/LogoAndPicture";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import jwtDecode from "jwt-decode";
@@ -65,6 +65,14 @@ export const Login = () => {
   const closeAlert = () => {
     setGlobalErrors([]);
   };
+
+  useEffect(() => {
+    const hasToken = !!localStorage.getItem("Token");
+
+    if (hasToken) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   return (
     <div className="login-page fade-in">
