@@ -1692,7 +1692,13 @@ color: #1b1b1b;
 }
 
 .privacy-policy-rules p:last-child {
-  margin-bottom: 50px;
+  margin-bottom: 100px;
+}
+
+@media (min-width: 1200px) {
+  .privacy-policy-rules p:last-child {
+    margin-bottom: 10px;
+  }
 }
 
 /*? FOOTER */
