@@ -10,35 +10,68 @@ export const Cgu = () => {
   return (
     <div className="legal-policy fade-in">
       <Helmet>
-        <title> | Beheall</title>
+        <title>Conditions Générales d'Utilisation | Beheall</title>
         <meta
           name="description"
-          content=""
+          content="Consultez nos Conditions Générales d'Utilisation pour utiliser notre service de création de facture gratuit en ligne."
         />
       </Helmet>
       <div>
-        <h1>Mentions Légales {hasToken &&<Account />}</h1>
-        
+        <h1>Conditions Générales d'Utilisation {hasToken && <Account />}</h1>
+
         <div className="legal-notice-rules">
           <p>
-            Ce site web permet de créer des factures en ligne dans le cadre d'un
-            projet scolaire réalisé dans le cadre de l'obtention de mon bac +2
-            Développeur d'Applications Multimédia à Doranco. Les factures
-            générées respectent les lois en vigueur et sont utilisables
-            conformément à la législation.
-          </p>
-          <p>Responsable de la publication : KOUYOUMJIAN Adrien</p>
-          <p>
-            Les factures générées sur ce site sont destinées à des fins
-            pédagogiques et démonstratives, mais elles sont également conformes
-            aux exigences légales. Elles peuvent être utilisées conformément à
-            la législation en vigueur.
+            Bienvenue sur Beheall, un service de création de facture gratuit en
+            ligne.
           </p>
           <p>
-            Pour toute question ou commentaire concernant ce projet scolaire,
-            veuillez nous contacter à beheallpro@outlook.com.
+            En utilisant notre service, vous acceptez de vous conformer aux
+            présentes Conditions Générales d'Utilisation ("CGU"). Veuillez les
+            lire attentivement avant d'utiliser notre service.
           </p>
-          <p>Date de dernière mise à jour : 30/09/2023</p>
+          <h2>1. Utilisation du Service</h2>
+          <p>
+            Vous êtes autorisé à utiliser notre service à des fins légales et
+            conformes aux présentes CGU. Vous ne pouvez pas utiliser notre
+            service à des fins illégales ou frauduleuses.
+          </p>
+          <h2>2. Compte Utilisateur</h2>
+          <p>
+            Pour accéder à certaines fonctionnalités de notre service, vous
+            devrez créer un compte utilisateur. Vous êtes responsable
+            de la confidentialité de votre mot de passe et de vos informations
+            d'identification.
+          </p>
+          <h2>3. Données Personnelles</h2>
+          <p>
+            Nous recueillons et traitons vos données personnelles conformément à
+            notre Politique de Confidentialité. En utilisant notre service, vous
+            consentez à la collecte et au traitement de vos données personnelles
+            comme décrit dans cette politique.
+          </p>
+          <h2>4. Propriété Intellectuelle</h2>
+          <p>
+            Nous détenons tous les droits de propriété intellectuelle associés à
+            notre service, y compris les marques, les logos, les textes, les
+            images et le code source.
+          </p>
+          <h2>5. Responsabilité</h2>
+          <p>
+            Nous nous efforçons de fournir un service de qualité, mais nous ne
+            pouvons garantir son fonctionnement continu et sans erreurs. Nous ne
+            sommes pas responsables des pertes ou dommages résultant de
+            l'utilisation de notre service.
+          </p>
+          <h2>6. Modifications des CGU</h2>
+          <p>
+            Nous nous réservons le droit de modifier ces CGU à tout moment. Les
+            modifications prendront effet dès leur publication sur notre site
+            web.
+          </p>
+          <p>
+            En utilisant notre service après toute modification, vous acceptez
+            les nouvelles CGU.
+          </p>
         </div>
       </div>
       {hasToken && <AccordionNav />}
