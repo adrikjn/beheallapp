@@ -9,6 +9,14 @@ export const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const hasToken = !!localStorage.getItem("Token");
+
+    if (hasToken) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
     const redirectTimeout = setTimeout(() => {
       navigate("/login");
     }, 3000);
