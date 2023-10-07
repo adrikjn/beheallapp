@@ -111,6 +111,11 @@ const AccordionNav = () => {
                       Politique de Confidentialité
                     </Link>
                   </li>
+                  <li>
+                    <Link to="/cgu" className="links-style">
+                      CGU
+                    </Link>
+                  </li>
                 </li>
               </ul>
             </div>

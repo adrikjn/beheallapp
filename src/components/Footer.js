@@ -10,6 +10,9 @@ const Footer = () => (
       <li>
         <Link to="/privacy-policy" className="footer-links">Politique de Confidentialité</Link>
       </li>
+      <li>
+        <Link to="/cgu" className="footer-links">CGU</Link>
+      </li>
     </ul>
   </div>
 );
