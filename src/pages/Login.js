@@ -127,6 +127,9 @@ export const Login = () => {
                 S'inscrire
               </Link>
             </p>
+            <Link to="/reset-password" className="reset-password-login">
+              Mot de passe oublié ?
+            </Link>
           </div>
           <div className="center-btn">
             <button onClick={handleLogin}>Se connecter</button>

@@ -169,6 +169,17 @@ ul li {
   padding: 0 35px;
 }
 
+.reset-password-login {
+  color: #1b1b1b;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 200;
+  display: flex;
+  margin-top: 5px;
+  display: flex;
+}
+
+
 .login-part-two .login-space .padding-form {
   width: 100%;
   padding: 0 35px;
@@ -249,6 +260,9 @@ ul li {
     margin-bottom: 30px;
   }
   .login-part-two .login-space p {
+    justify-content: center;
+  }
+  .reset-password-login {
     justify-content: center;
   }
 }
