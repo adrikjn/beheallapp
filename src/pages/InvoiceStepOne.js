@@ -23,7 +23,6 @@ export const InvoiceStepOne = () => {
   const [formData, setFormData] = useState({
     user: `/api/users/${userId}`,
     name: "",
-    logo: "",
     address: "",
     email: "",
     phoneNumber: "",
@@ -89,7 +88,6 @@ export const InvoiceStepOne = () => {
       setFormData({
         user: `/api/users/${userId}`,
         name: "",
-        logo: "",
         address: "",
         email: "",
         phoneNumber: "",
@@ -381,19 +379,6 @@ export const InvoiceStepOne = () => {
                   value={formData.descriptionWork}
                   onChange={handleInputChange}
                 ></textarea>
-                <label htmlFor="logo" className="custom-file-label">
-                  Télécharger votre logo
-                  <img src="/download.svg" alt="download-icon" />
-                </label>
-                <input
-                  type="file"
-                  id="logo"
-                  accept="image/*"
-                  className="custom-file-input"
-                  name="logo"
-                  value={formData.logo}
-                  onChange={handleInputChange}
-                />
               </>
             )}
 
