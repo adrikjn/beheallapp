@@ -13,7 +13,7 @@ export const ResetPassword = () => {
   const handleSendEmail = async (e) => {
     e.preventDefault();
     try {
-    const response = await axios.post("http://localhost:8000/reset-password", { email });
+    const response = await axios.post("https://api.beheall.com/reset-password", { email });
       console.log("E-mail de réinitialisation envoyé avec succès !");
     } catch (error) {
       console.error("Erreur lors de l'envoi de l'e-mail de réinitialisation :", error);
