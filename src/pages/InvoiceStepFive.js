@@ -492,7 +492,6 @@ export const InvoiceStepFive = () => {
           </button>
         </div>
         <div className="sign-pdf-div">
-          <h2>Signature</h2>
           <canvas
             className="canva-signature"
             ref={signatureCanvasRef}

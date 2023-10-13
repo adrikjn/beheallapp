@@ -1469,10 +1469,18 @@ ul li {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    background-color: pink;
   }
-  .company-summary-part {
-    width: 100%;
+  .company-summary, .customer-summary {
+    width: 45%;
   }
+  .summary h2 {
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 12px 0 12px 4px;
+  }
+  
 }
 
 /*? ERROR MESSAGE ALERT */
@@ -1631,6 +1639,10 @@ ul li {
     width: 25%;
     margin: auto;
   }
+  .canva-signature {
+    margin-top: 20px;
+  }
+
 }
 
 @media (min-width: 960px) {
