@@ -113,7 +113,9 @@ export const MyAccount = () => {
             <p>{userDetails.phoneNumber} <img src="/phone.png" alt="Téléphone" /></p>
           </div>
         )}
-        <form onSubmit={handleSubmit}>
+        <div>
+            <form onSubmit={handleSubmit} className="change-password">
+            <h2>modif pw</h2>
           {globalErrors.length > 0 && (
             <div className="alert">
               <span onClick={closeAlert} className="close-alert">
@@ -142,6 +144,8 @@ export const MyAccount = () => {
           />
           <button type="submit">Modifier le mot de passe</button>
         </form>
+        </div>
+        
       </div>
       <AccordionNav />
       <div className="desktop-footer">
