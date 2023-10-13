@@ -122,7 +122,7 @@ export const MyAccount = () => {
   return (
     <div className="invoice-step-one-page fade-in">
       <Helmet>
-        <title>Ajout Entreprise | Beheall</title>
+        <title>Mon Compte | Beheall</title>
       </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
