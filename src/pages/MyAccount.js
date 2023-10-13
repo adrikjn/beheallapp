@@ -80,7 +80,7 @@ export const MyAccount = () => {
     } else {
       Axios.get(`http://localhost:8000/api/users/${userId}`)
         .then((response) => {
-          setUserDetails(response.data); // Mettez à jour l'état avec les détails de l'utilisateur
+          setUserDetails(response.data); 
         })
         .catch((error) => {
           console.error(
