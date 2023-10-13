@@ -146,7 +146,7 @@ export const MyAccount = () => {
           </div>
         )}
         {successMessage && (
-          <div className="success-message">{successMessage}</div>
+          <div className="success-message-password">{successMessage}</div>
         )}
         <div>
           <form onSubmit={handleSubmit} className="change-password">

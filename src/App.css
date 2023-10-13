@@ -92,7 +92,7 @@ ul li {
 }
 
 /*? LOGIN PART */
-.success-message {
+.login-part-two .login-space .success-message {
   background-color: #4caf50;
   color: #fff;
   padding: 10px 15px;
@@ -1802,6 +1802,18 @@ ul li {
 
 .account-btn button:hover {
   background: #487e58;
+}
+
+.success-message-password {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-align: center;
+  width: 82%;
+  margin: auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  animation: fadeInOut 0.2s ease-in-out;
 }
 
 .delete-account-link {
