@@ -15,8 +15,6 @@ const AccordionNav = () => {
         return "Home";
       case "/invoice-step-two":
         return "Factures";
-      case "/invoice-step-three":
-        return "Clients";
       default:
         return "Home";
     }
@@ -61,11 +59,6 @@ const AccordionNav = () => {
                   Factures
                 </Link>
               </li>
-              <li>
-                <Link to="/dashboard" className="nav-links-desktop">
-                  Clients
-                </Link>
-              </li>
             </ul>
           </nav>
         </header>
@@ -95,11 +88,6 @@ const AccordionNav = () => {
                   </Link>
                 </li>
                 <li></li>
-                <li>
-                  <Link to="/dashboard" className="links-style">
-                    Clients
-                  </Link>
-                </li>
                 <li>
                   <li>
                     <Link to="/legal-notice" className="links-style">

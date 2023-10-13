@@ -1464,6 +1464,17 @@ ul li {
   }
 }
 
+@media (min-width: 1200px) {
+  .company-customer-summary {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .company-summary-part {
+    width: 100%;
+  }
+}
+
 /*? ERROR MESSAGE ALERT */
 .overlay {
   position: fixed;

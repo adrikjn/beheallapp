@@ -95,13 +95,13 @@ export const InvoiceStepFive = () => {
     generateInvoicePDF();
   };
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    } else if (!invoiceId) {
-      navigate("/invoice-step-one"); 
-    }
-  }, [token, navigate, invoiceId]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate("/login");
+  //   } else if (!invoiceId) {
+  //     navigate("/invoice-step-one"); 
+  //   }
+  // }, [token, navigate, invoiceId]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,9 +120,9 @@ export const InvoiceStepFive = () => {
         if (response.ok) {
           const data = await response.json();
           setInvoiceData(data);
-        } else {
-          navigate("/invoice-step-one");
-        }
+        }// } else {
+        //   navigate("/invoice-step-one");
+        // }
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des données de la facture : ",
@@ -510,7 +510,8 @@ export const InvoiceStepFive = () => {
         </div>
       </div>
       <div className="summary">
-        <div className="company-summary">
+        <div className="company-customer-summary">
+          <div className="company-summary">
           <h2>Expéditaire</h2>
           <div className="company-summary-part">
             <div className="company-info-1">
@@ -562,6 +563,8 @@ export const InvoiceStepFive = () => {
             </div>
           </div>
         </div>
+        </div>
+        
         <div className="products-summary">
           <h2>Produits</h2>
           <div className="product-summary-part">
