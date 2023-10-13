@@ -1650,6 +1650,12 @@ ul li {
   .canva-signature {
     margin-top: 20px;
   }
+  .clear-signature-button {
+    position: absolute; /* Position absolue par rapport au parent sign-pdf-div */
+    top: 20px; /* Alignez le haut du bouton au haut du parent */
+    right: 5px; /* Alignez le côté droit du bouton au côté droit du parent */
+    cursor: pointer;
+  }
 }
 
 @media (min-width: 960px) {
@@ -1665,12 +1671,6 @@ ul li {
   margin: 12px 0 12px 4px;
 }
 
-.clear-signature-button {
-  position: absolute; /* Position absolue par rapport au parent sign-pdf-div */
-  top: 50px; /* Alignez le haut du bouton au haut du parent */
-  right: 5px; /* Alignez le côté droit du bouton au côté droit du parent */
-  cursor: pointer;
-}
 
 .dl-pdf {
   margin-top: 30px;

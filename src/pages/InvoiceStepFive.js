@@ -4,8 +4,9 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
 import Footer from "../components/Footer.js";
+
 
 export const InvoiceStepFive = () => {
   const token = localStorage.getItem("Token");
@@ -27,7 +28,9 @@ export const InvoiceStepFive = () => {
     return `${day}/${month}/${year}`;
   }
 
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    window.innerWidth < 1200
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,9 +56,9 @@ export const InvoiceStepFive = () => {
   const draw = (e) => {
     if (!isDrawing) return;
     const ctx = signatureCanvasRef.current.getContext("2d");
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
+    ctx.strokeStyle = "#000"; 
+    ctx.lineWidth = 2; 
+    ctx.lineCap = "round"; 
 
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
@@ -92,31 +95,34 @@ export const InvoiceStepFive = () => {
     generateInvoicePDF();
   };
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    } else if (!invoiceId) {
-      navigate("/invoice-step-one");
-    }
-  }, [token, navigate, invoiceId]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate("/login");
+  //   } else if (!invoiceId) {
+  //     navigate("/invoice-step-one"); 
+  //   }
+  // }, [token, navigate, invoiceId]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${apiUrl}/invoices/${invoiceId}`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `${apiUrl}/invoices/${invoiceId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
           setInvoiceData(data);
-        } else {
-          navigate("/invoice-step-one");
-        }
+        }// } else {
+        //   navigate("/invoice-step-one");
+        // }
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des données de la facture : ",
@@ -130,14 +136,17 @@ export const InvoiceStepFive = () => {
 
   const sendInvoice = async () => {
     try {
-      const response = await fetch(`${apiUrl}/invoices/${invoiceId}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status: "envoyé" }),
-      });
+      const response = await fetch(
+        `${apiUrl}/invoices/${invoiceId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: "envoyé" }), 
+        }
+      );
 
       if (response.ok) {
         localStorage.removeItem("invoice");
@@ -154,18 +163,18 @@ export const InvoiceStepFive = () => {
 
   const generateInvoicePDF = () => {
     const pdf = new jsPDF({
-      orientation: "portrait",
+      orientation: "portrait", 
       unit: "mm",
-      format: "a4",
+      format: "a4", 
     });
 
     pdf.setFont("helvetica");
     pdf.setFontSize(12);
-    pdf.setTextColor(0, 0, 0);
+    pdf.setTextColor(0, 0, 0); 
 
     const maxWidth = pdf.internal.pageSize.getWidth() * 0.9;
-    const lineHeight = 5;
-
+    const lineHeight = 5; 
+   
     const addTextWithMaxWidth = (text, x, y) => {
       const textPieces = pdf.splitTextToSize(text, maxWidth);
       textPieces.forEach((textPiece, index) => {
@@ -222,7 +231,7 @@ export const InvoiceStepFive = () => {
       textYCompany + 18,
       `${invoiceData?.company?.address}`
     );
-
+    
     pdf.text(
       leftXCompany,
       textYCompany + 24,
@@ -244,7 +253,7 @@ export const InvoiceStepFive = () => {
       textYCustomer,
       `${invoiceData?.customer?.companyName.toUpperCase()}`
     );
-    pdf.setFont("helvetica", "normal");
+    pdf.setFont("helvetica", "normal"); 
     pdf.text(
       rightXCustomer,
       textYCustomer + 6,
@@ -260,7 +269,7 @@ export const InvoiceStepFive = () => {
       textYCustomer + 12,
       `${invoiceData?.customer?.address}`
     );
-
+    
     pdf.text(
       rightXCustomer,
       textYCustomer + 18,
@@ -300,24 +309,25 @@ export const InvoiceStepFive = () => {
       }`
     );
 
+  
     const zebraStyle = {
-      startY: 104,
+      startY: 104, 
       theme: "striped",
-      tableWidth: "auto",
+      tableWidth: "auto", 
       styles: {
         font: "helvetica",
         fontSize: 10,
-        textColor: [0, 0, 0],
+        textColor: [0, 0, 0], 
         cellPadding: 3,
         overflow: "split",
-        halign: "center",
-        valign: "middle",
+        halign: "center", 
+        valign: "middle", 
       },
       headStyles: {
-        halign: "center",
-        valign: "middle",
-        fillColor: [0, 0, 0],
-        textColor: [255, 255, 255],
+        halign: "center", 
+        valign: "middle", 
+        fillColor: [0, 0, 0], 
+        textColor: [255, 255, 255], 
       },
     };
 
@@ -338,7 +348,7 @@ export const InvoiceStepFive = () => {
         { content: `${service.vat}%`, fillColor },
         { content: `${service.totalPrice}€`, fillColor },
       ]);
-      isGray = !isGray;
+      isGray = !isGray; 
     });
 
     pdf.autoTable(productsTable.headers, productsTable.rows, {
@@ -346,7 +356,7 @@ export const InvoiceStepFive = () => {
     });
 
     const tableHeight = pdf.previousAutoTable.finalY || 0;
-    const contentBelowTableHeight = 12;
+    const contentBelowTableHeight = 12; 
     const totalContentHeight = tableHeight + contentBelowTableHeight;
 
     let contentY = totalContentHeight;
@@ -382,14 +392,14 @@ export const InvoiceStepFive = () => {
     pdf.setFont("helvetica", "bold");
     pdf.text("Total HT:", xResults, contentY);
     const totalHTString = totalHT.toFixed(2) + " €";
-    pdf.text(totalHTString.toString(), xResults + 24, contentY);
+    pdf.text(totalHTString.toString(), xResults + 24, contentY); 
 
     contentY += 9;
 
     pdf.setFont("helvetica", "normal");
     pdf.text("TVA:", xResults, contentY);
     const averageVATRateString = averageVATRate + " %";
-    pdf.text(averageVATRateString.toString(), xResults + 24, contentY);
+    pdf.text(averageVATRateString.toString(), xResults + 24, contentY); 
 
     contentY += 9;
 
@@ -397,7 +407,7 @@ export const InvoiceStepFive = () => {
     pdf.text("Total TTC:", xResults, contentY);
     const totalTTCString = totalTTC.toString() + " €";
 
-    pdf.text(totalTTCString, xResults + 24, contentY);
+    pdf.text(totalTTCString, xResults + 24, contentY); 
 
     contentY += 12;
 
@@ -424,8 +434,9 @@ export const InvoiceStepFive = () => {
       pdf.setFontSize(11);
       const signatureDate = `Signé le ${formatDate(new Date())}`;
 
-      const dateX = 150;
+      const dateX = 150; 
       pdf.text(signatureDate, dateX, contentY);
+
 
       const imgWidth = 50;
       const imgHeight = (imgWidth * 200) / 400;
@@ -460,21 +471,18 @@ export const InvoiceStepFive = () => {
         <Account />
       </div>
       <div className="pdf-mobile">
-        <h2>Télécharger le PDF</h2>
-        <button onClick={captureSignature}>
-          <img
-            src="bill-pdf-dl.svg"
-            alt="Télécharger la facture au format PDF"
-            className="dl-pdf-img"
-          />
-        </button>
+        <h2>Télécharger le PDF :</h2>
+      <button onClick={captureSignature}>
+            <img
+              src="bill-pdf-dl.svg"
+              alt="Télécharger la facture au format PDF"
+              className="dl-pdf-img"
+            />
+          </button>
       </div>
       <div className="contents-try">
         <div className="dl-pdf">
-          <h2>
-            Veuillez signer la facture puis cliquer sur l'icône PDF pour la
-            télécharger
-          </h2>
+          <h2>Veuillez signer la facture puis cliquer sur l'icône PDF pour la télécharger</h2>
           <button onClick={captureSignature}>
             <img
               src="bill-pdf-dl.svg"
@@ -503,59 +511,59 @@ export const InvoiceStepFive = () => {
       <div className="summary">
         <div className="company-customer-summary">
           <div className="company-summary">
-            <h2>Expéditaire</h2>
-            <div className="company-summary-part">
-              <div className="company-info-1">
-                <p>
-                  {userData?.lastName?.toUpperCase()}{" "}
-                  {userData?.firstName
-                    ? userData.firstName.charAt(0).toUpperCase() +
-                      userData.firstName.slice(1)
-                    : ""}
-                </p>
-                <p>{invoiceData?.company?.name}</p>
-                <p> {invoiceData?.company?.sirenSiret}</p>
-                <p> {invoiceData?.company?.vatId}</p>
-              </div>
-              <div className="company-info-2">
-                <p>
-                  {invoiceData?.company?.address} {invoiceData?.company?.city}{" "}
-                  {invoiceData?.company?.postalCode}
-                </p>
-                <p>{invoiceData?.company?.email}</p>
-                <p>{invoiceData?.company?.phoneNumber}</p>
-              </div>
+          <h2>Expéditaire</h2>
+          <div className="company-summary-part">
+            <div className="company-info-1">
+              <p>
+                {userData?.lastName?.toUpperCase()}{" "}
+                {userData?.firstName
+                  ? userData.firstName.charAt(0).toUpperCase() +
+                    userData.firstName.slice(1)
+                  : ""}
+              </p>
+              <p>{invoiceData?.company?.name}</p>
+              <p> {invoiceData?.company?.sirenSiret}</p>
+              <p> {invoiceData?.company?.vatId}</p>
             </div>
-          </div>
-
-          <div className="customer-summary">
-            <h2>Clients</h2>
-            <div className="customer-summary-part">
-              <div className="customer-info-1">
-                <p>
-                  {invoiceData?.customer?.companyName} (
-                  {invoiceData?.customer?.lastName?.toUpperCase()}{" "}
-                  {invoiceData?.customer?.firstName
-                    ? invoiceData.customer.firstName.charAt(0).toUpperCase() +
-                      invoiceData.customer.firstName.slice(1)
-                    : ""}
-                  )
-                </p>
-                <p>{invoiceData?.customer?.email}</p>
-                <p>{invoiceData?.customer?.sirenSiret}</p>
-              </div>
-              <div className="customer-info-2">
-                <p>
-                  {invoiceData?.customer?.address} {invoiceData?.customer?.city}{" "}
-                  {invoiceData?.customer?.postalCode}
-                </p>
-                <p>{invoiceData?.customer?.phoneNumber}</p>
-                <p>{invoiceData?.customer?.vatId}</p>
-              </div>
+            <div className="company-info-2">
+              <p>
+                {invoiceData?.company?.address} {invoiceData?.company?.city}{" "}
+                {invoiceData?.company?.postalCode}
+              </p>
+              <p>{invoiceData?.company?.email}</p>
+              <p>{invoiceData?.company?.phoneNumber}</p>
             </div>
           </div>
         </div>
 
+        <div className="customer-summary">
+          <h2>Clients</h2>
+          <div className="customer-summary-part">
+            <div className="customer-info-1">
+              <p>
+                {invoiceData?.customer?.companyName} (
+                {invoiceData?.customer?.lastName?.toUpperCase()}{" "}
+                {invoiceData?.customer?.firstName
+                  ? invoiceData.customer.firstName.charAt(0).toUpperCase() +
+                    invoiceData.customer.firstName.slice(1)
+                  : ""}
+                )
+              </p>
+              <p>{invoiceData?.customer?.email}</p>
+              <p>{invoiceData?.customer?.sirenSiret}</p>
+            </div>
+            <div className="customer-info-2">
+              <p>
+                {invoiceData?.customer?.address} {invoiceData?.customer?.city}{" "}
+                {invoiceData?.customer?.postalCode}
+              </p>
+              <p>{invoiceData?.customer?.phoneNumber}</p>
+              <p>{invoiceData?.customer?.vatId}</p>
+            </div>
+          </div>
+        </div>
+        </div>
+        
         <div className="products-summary">
           <h2>Produits</h2>
           <div className="product-summary-part">
@@ -567,25 +575,22 @@ export const InvoiceStepFive = () => {
               <li>Prix HT</li>
             </ul>
             {invoiceData?.services?.map((service) => (
-              <ul
-                className={`product-summary-item ${
-                  isSmallScreen ? "small-screen" : "large-screen"
-                }`}
-                key={service.id}
-              >
-                <li>
-                  {service.title.length > (isSmallScreen ? 8 : 25)
-                    ? `${service.title.substring(0, isSmallScreen ? 8 : 25)}...`
-                    : service.title}{" "}
-                  <p>
-                    -{" "}
-                    {service.description.length > (isSmallScreen ? 8 : 25)
-                      ? `${service.description.substring(
-                          0,
-                          isSmallScreen ? 8 : 25
-                        )}...`
-                      : service.description}
-                  </p>
+        <ul
+          className={`product-summary-item ${
+            isSmallScreen ? "small-screen" : "large-screen"
+          }`}
+          key={service.id}
+        >
+          <li>
+            {service.title.length > (isSmallScreen ? 8 : 25)
+              ? `${service.title.substring(0, isSmallScreen ? 8 : 25)}...`
+              : service.title}{" "}
+            <p>
+              -{" "}
+              {service.description.length > (isSmallScreen ? 8 : 25)
+                ? `${service.description.substring(0, isSmallScreen ? 8 : 25)}...`
+                : service.description}
+            </p>
                 </li>
                 <li>{service.quantity}</li>
                 <li>{service.unitCost}€</li>
@@ -616,16 +621,15 @@ export const InvoiceStepFive = () => {
             <p>Moyen de paiement : {invoiceData?.paymentMethod}</p>
           </div>
           <div className="btn-invoice-5">
-            <button onClick={sendInvoice}>
-              Enregistrer et retourner à l'accueil
-            </button>
+            <button onClick={sendInvoice}>Enregistrer et retourner à l'accueil</button>
           </div>
         </div>
       </div>
       <AccordionNav />
-      <div className="desktop-footer">
+          <div className="desktop-footer">
         <Footer />
       </div>
+
     </div>
   );
 };
