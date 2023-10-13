@@ -48,7 +48,7 @@ export const MyAccount = () => {
           },
         }
       );
-      setSuccessMessage("Le mot de passe a été changé avec succès.");
+      setSuccessMessage("Le mot de passe a été modifié avec succès.");
       // Ajoutez ici la logique pour gérer la réponse de l'API
     } catch (error) {
       console.error("Error submitting data:", error);
