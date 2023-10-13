@@ -15,6 +15,7 @@ export const MyAccount = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [globalErrors, setGlobalErrors] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [passwords, setPasswords] = useState({
     plainPassword: "",
     confirmPassword: "",
@@ -67,6 +68,25 @@ export const MyAccount = () => {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    try {
+      await Axios.delete(`${apiUrl}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      navigate("/login");
+    } catch (error) {
+      console.error("Error deleting account:", error);
+    }
+  };
+
+  const handleDeleteAccountLink = () => {
+    setShowDeleteConfirmation(true);
+  };
+
   const addGlobalError = (error) => {
     setGlobalErrors([...globalErrors, error]);
   };
@@ -79,7 +99,7 @@ export const MyAccount = () => {
     if (!token) {
       navigate("/login");
     } else {
-      Axios.get(`http://localhost:8000/api/users/${userId}`)
+      Axios.get(`${apiUrl}/users/${userId}`)
         .then((response) => {
           setUserDetails(response.data);
         })
@@ -159,7 +179,29 @@ export const MyAccount = () => {
             </div>
           </form>
         </div>
-        <p>Supprimer le compte</p>
+        <p className="delete-account-link" onClick={handleDeleteAccountLink}>
+          Supprimer le compte
+        </p>
+        {showDeleteConfirmation && (
+          <div className="delete-confirmation">
+            <p className="confirmation-message">
+              Êtes-vous sûr de vouloir supprimer votre compte de façon
+              permanente ? Cette action est irréversible et vous ne pourrez pas
+              récupérer votre compte ultérieurement.
+            </p>
+            <div className="confirmation-buttons">
+              <button
+                className="cancel-button"
+                onClick={() => setShowDeleteConfirmation(false)}
+              >
+                Non
+              </button>
+              <button className="confirm-button" onClick={handleDeleteAccount}>
+                Oui
+              </button>
+            </div>
+          </div>
+        )}
       </div>
       <AccordionNav />
       <div className="desktop-footer">

@@ -1714,12 +1714,9 @@ ul li {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
-  padding-bottom: 15px;
   font-family: Roboto;
   margin-top: 15px;
   font-size: 14px;
-  margin-bottom: 25px;
 }
 
 .user-infos p {
@@ -1743,14 +1740,14 @@ ul li {
   position: relative;
   padding: 8px 34px;
   width: 100%;
-  margin-top: 8px;
+  margin-top: 15px;
 }
 
 .change-password {
   display: flex;
   flex-direction: column;
   gap: 22px;
-  margin-top: 28px;
+  margin-top: 10px;
   border: 1px solid black;
   border-radius: 5px;
   padding:10px 20px;
@@ -1806,6 +1803,62 @@ ul li {
 .account-btn button:hover {
   background: #487e58;
 }
+
+.delete-account-link {
+  cursor: pointer;
+  color: #d9534f;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Roboto;
+  margin-top: 10px;
+  text-align: right;
+}
+
+.delete-account-link:hover {
+color: #a94442;
+}
+
+.delete-confirmation {
+  border: 1px solid black;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-family: Roboto;
+}
+
+.confirmation-message {
+  font-weight: bold;
+}
+
+.confirmation-buttons {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-button,
+.cancel-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #f44336;
+}
+
+.confirm-button:hover,
+.cancel-button:hover {
+  opacity: 0.8;
+}
+
 
 /*? FOOTER */
 .footer ul {
