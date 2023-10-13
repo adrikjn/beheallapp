@@ -13,8 +13,8 @@ export const MyAccount = () => {
   const userData = JSON.parse(localStorage.getItem("UserData"));
   const userId = userData.id;
   const [userDetails, setUserDetails] = useState(null);
+  const [globalErrors, setGlobalErrors] = useState([]);
   const [passwords, setPasswords] = useState({
-    currentPassword: "",
     plainPassword: "",
     confirmPassword: "",
   });
@@ -29,36 +29,56 @@ export const MyAccount = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (passwords.plainPassword !== passwords.confirmPassword) {
-      alert("Les mots de passe ne correspondent pas.");
+      addGlobalError("Les mots de passe ne correspondent pas.");
       return;
     }
 
     try {
-        const response = await Axios.put(
-          `${apiUrl}/users/${userId}`,
-          JSON.stringify({
-            currentPassword: passwords.currentPassword,
-            plainPassword: passwords.plainPassword,
-          }),
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        console.log("Changement de mot de passe réussi", response.data);
-        // Ajoutez ici la logique pour gérer la réponse de l'API
-      } catch (error) {
-        console.error("Erreur lors de la modification du mot de passe", error);
+      const response = await Axios.put(
+        `http://localhost:8000/api/users/${userId}`,
+        JSON.stringify({
+          plainPassword: passwords.plainPassword,
+        }),
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Changement de mot de passe réussi", response.data);
+      // Ajoutez ici la logique pour gérer la réponse de l'API
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.violations
+      ) {
+        const validationErrors = [];
+
+        error.response.data.violations.forEach((violation) => {
+          validationErrors.push(violation.message);
+        });
+
+        setGlobalErrors([...globalErrors, ...validationErrors]);
       }
-    };
+    }
+  };
+
+  const addGlobalError = (error) => {
+    setGlobalErrors([...globalErrors, error]);
+  };
+
+  const closeAlert = () => {
+    setGlobalErrors([]);
+  };
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
     } else {
-      Axios.get(`${apiUrl}/users/${userId}`)
+      Axios.get(`http://localhost:8000/api/users/${userId}`)
         .then((response) => {
           setUserDetails(response.data); // Mettez à jour l'état avec les détails de l'utilisateur
         })
@@ -69,13 +89,14 @@ export const MyAccount = () => {
           );
         });
     }
-  }, [token, navigate, userId]);
+  }, [token, navigate, userId, apiUrl]);
 
   return (
     <div className="invoice-step-one-page fade-in">
       <Helmet>
         <title>Ajout Entreprise | Beheall</title>
       </Helmet>
+      {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
         <h1>Votre compte</h1>
         <Account />
@@ -90,14 +111,16 @@ export const MyAccount = () => {
           </div>
         )}
         <form onSubmit={handleSubmit}>
-          <input
-            type="password"
-            name="currentPassword"
-            value={passwords.currentPassword}
-            onChange={handleInputChange}
-            placeholder="Mot de passe actuel"
-            required
-          />
+          {globalErrors.length > 0 && (
+            <div className="alert">
+              <span onClick={closeAlert} className="close-alert">
+                &times;
+              </span>
+              {globalErrors.map((error, index) => (
+                <p key={index}>{error}</p>
+              ))}
+            </div>
+          )}
           <input
             type="password"
             name="plainPassword"
