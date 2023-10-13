@@ -35,7 +35,7 @@ export const MyAccount = () => {
 
     try {
         const response = await Axios.put(
-          `http://localhost:8000/api/users/${userId}`,
+          `${apiUrl}/users/${userId}`,
           JSON.stringify({
             currentPassword: passwords.currentPassword,
             plainPassword: passwords.plainPassword,
@@ -58,7 +58,7 @@ export const MyAccount = () => {
     if (!token) {
       navigate("/login");
     } else {
-      Axios.get(`http://localhost:8000/api/users/${userId}`)
+      Axios.get(`${apiUrl}/users/${userId}`)
         .then((response) => {
           setUserDetails(response.data); // Mettez à jour l'état avec les détails de l'utilisateur
         })
