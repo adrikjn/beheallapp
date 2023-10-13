@@ -76,7 +76,10 @@ export const MyAccount = () => {
           "Content-Type": "application/json",
         },
       });
-
+  
+      localStorage.removeItem("Token");
+      localStorage.removeItem("UserData");
+  
       navigate("/login");
     } catch (error) {
       console.error("Error deleting account:", error);
