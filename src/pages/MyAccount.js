@@ -91,6 +91,10 @@ export const MyAccount = () => {
     }
   }, [token, navigate, userId, apiUrl]);
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
     <div className="invoice-step-one-page fade-in">
       <Helmet>
@@ -103,11 +107,10 @@ export const MyAccount = () => {
       </div>
       <div>
         {userDetails && (
-          <div>
-            <p>Prénom : {userDetails.firstName}</p>
-            <p>Nom : {userDetails.lastName}</p>
-            <p>Email : {userDetails.email}</p>
-            <p>Numéro de téléphone : {userDetails.phoneNumber}</p>
+          <div className="user-infos">
+             <p>{userDetails.lastName.toUpperCase()} {capitalizeFirstLetter(userDetails.firstName)} <img src="/identity.png" alt="Profil" /></p>
+            <p>{userDetails.email} <img src="/letter.png" alt="Email" /></p>
+            <p>{userDetails.phoneNumber} <img src="/phone.png" alt="Téléphone" /></p>
           </div>
         )}
         <form onSubmit={handleSubmit}>
