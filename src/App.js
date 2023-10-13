@@ -4,6 +4,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { LegalNotice } from "./pages/LegalNotice";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { Cgu } from "./pages/Cgu";
+import { MyAccount } from "./pages/MyAccount";
 import { ResetPassword } from "./pages/ResetPassword";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
@@ -31,6 +32,7 @@ function App() {
           <Route path="/legal-notice" element={<LegalNotice />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/cgu" element={<Cgu />} />
+          <Route path="/my-account" element={<MyAccount />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

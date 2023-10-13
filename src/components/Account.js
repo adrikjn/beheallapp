@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Account = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +28,9 @@ const Account = () => {
       />
       {isOpen && (
         <div className="account-menu">
+          <Link to="/my-account">
+            Compte
+          </Link>
           <button onClick={handleLogout}>Déconnexion</button>
         </div>
       )}
