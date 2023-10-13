@@ -1469,8 +1469,10 @@ ul li {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
   }
-  .company-summary, .customer-summary {
+  .company-summary,
+  .customer-summary {
     width: 45%;
   }
   .summary h2 {
@@ -1480,11 +1482,13 @@ ul li {
     margin: 12px 0 12px 4px;
   }
   .summary .company-summary-part,
-.customer-summary-part,
-.product-summary-part {
+  .customer-summary-part,
+  .product-summary-part {
     font-size: 13px;
   }
-  
+  .summary-details {
+    font-size: 14px;
+  }
 }
 
 /*? ERROR MESSAGE ALERT */
@@ -1646,7 +1650,6 @@ ul li {
   .canva-signature {
     margin-top: 20px;
   }
-
 }
 
 @media (min-width: 960px) {
@@ -1777,9 +1780,8 @@ ul li {
   margin-top: 10px;
   border: 1px solid black;
   border-radius: 5px;
-  padding:10px 20px;
+  padding: 10px 20px;
 }
-
 
 .change-password input {
   color: rgba(0, 0, 0, 0.5);
@@ -1790,13 +1792,11 @@ ul li {
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
   background-color: #e9ebe9;
   padding-bottom: 11px;
-  
 }
 
 .user-infos p img {
   height: 24px;
 }
-
 
 .account-btn {
   display: flex;
@@ -1855,7 +1855,7 @@ ul li {
 }
 
 .delete-account-link:hover {
-color: #a94442;
+  color: #a94442;
 }
 
 .delete-confirmation {
@@ -1879,7 +1879,7 @@ color: #a94442;
 
 .confirm-button,
 .cancel-button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -1913,7 +1913,7 @@ color: #a94442;
     width: 100%;
   }
   .success-message-password {
-    margin: 30px auto 0 ;
+    margin: 30px auto 0;
     width: 50%;
   }
   .change-password {
@@ -1934,7 +1934,6 @@ color: #a94442;
     margin: auto;
   }
 }
-
 
 /*? FOOTER */
 .footer ul {
