@@ -1837,7 +1837,7 @@ color: #a94442;
   margin-top: 10px;
   border-radius: 5px;
   font-family: Roboto;
-  margin-bottom: 125px;
+  margin-bottom: 110px;
 }
 
 .confirmation-message {
@@ -1862,6 +1862,7 @@ color: #a94442;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .cancel-button {
@@ -1871,6 +1872,40 @@ color: #a94442;
 .confirm-button:hover,
 .cancel-button:hover {
   opacity: 0.8;
+}
+
+@media (min-width: 1200px) {
+  .user-infos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+
+  .user-infos p {
+    width: 100%;
+  }
+  .success-message-password {
+    margin: 30px auto 0 ;
+    width: 50%;
+  }
+  .change-password {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 50px;
+  }
+  .change-password h2 {
+    width: 50%;
+    margin: auto;
+  }
+  .delete-confirmation {
+    margin-top: 20px;
+    margin-bottom: 0px;
+  }
+  .account-btn {
+    width: 30%;
+    margin: auto;
+  }
 }
 
 
