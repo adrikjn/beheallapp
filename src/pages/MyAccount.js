@@ -14,6 +14,7 @@ export const MyAccount = () => {
   const userId = userData.id;
   const [userDetails, setUserDetails] = useState(null);
   const [globalErrors, setGlobalErrors] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
   const [passwords, setPasswords] = useState({
     plainPassword: "",
     confirmPassword: "",
@@ -34,8 +35,8 @@ export const MyAccount = () => {
     }
 
     try {
-      const response = await Axios.put(
-        `http://localhost:8000/api/users/${userId}`,
+      await Axios.put(
+        `${apiUrl}/users/${userId}`,
         JSON.stringify({
           plainPassword: passwords.plainPassword,
         }),
@@ -46,7 +47,7 @@ export const MyAccount = () => {
           },
         }
       );
-      console.log("Changement de mot de passe réussi", response.data);
+      setSuccessMessage("Le mot de passe a été changé avec succès.");
       // Ajoutez ici la logique pour gérer la réponse de l'API
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -80,7 +81,7 @@ export const MyAccount = () => {
     } else {
       Axios.get(`http://localhost:8000/api/users/${userId}`)
         .then((response) => {
-          setUserDetails(response.data); 
+          setUserDetails(response.data);
         })
         .catch((error) => {
           console.error(
@@ -108,44 +109,57 @@ export const MyAccount = () => {
       <div>
         {userDetails && (
           <div className="user-infos">
-             <p>{userDetails.lastName.toUpperCase()} {capitalizeFirstLetter(userDetails.firstName)} <img src="/identity.png" alt="Profil" /></p>
-            <p>{userDetails.email} <img src="/letter.png" alt="Email" /></p>
-            <p>{userDetails.phoneNumber} <img src="/phone.png" alt="Téléphone" /></p>
+            <p>
+              {userDetails.lastName.toUpperCase()}{" "}
+              {capitalizeFirstLetter(userDetails.firstName)}{" "}
+              <img src="/identity.png" alt="Profil" />
+            </p>
+            <p>
+              {userDetails.email} <img src="/letter.png" alt="Email" />
+            </p>
+            <p>
+              {userDetails.phoneNumber} <img src="/phone.png" alt="Téléphone" />
+            </p>
           </div>
         )}
+        {successMessage && (
+          <div className="success-message">{successMessage}</div>
+        )}
         <div>
-            <form onSubmit={handleSubmit} className="change-password">
-            <h2>modif pw</h2>
-          {globalErrors.length > 0 && (
-            <div className="alert">
-              <span onClick={closeAlert} className="close-alert">
-                &times;
-              </span>
-              {globalErrors.map((error, index) => (
-                <p key={index}>{error}</p>
-              ))}
+          <form onSubmit={handleSubmit} className="change-password">
+            <h2>Modifier le mot de passe</h2>
+            {globalErrors.length > 0 && (
+              <div className="alert">
+                <span onClick={closeAlert} className="close-alert">
+                  &times;
+                </span>
+                {globalErrors.map((error, index) => (
+                  <p key={index}>{error}</p>
+                ))}
+              </div>
+            )}
+            <input
+              type="password"
+              name="plainPassword"
+              value={passwords.plainPassword}
+              onChange={handleInputChange}
+              placeholder="Nouveau mot de passe"
+              required
+            />
+            <input
+              type="password"
+              name="confirmPassword"
+              value={passwords.confirmPassword}
+              onChange={handleInputChange}
+              placeholder="Confirmer le nouveau mot de passe"
+              required
+            />
+            <div className="account-btn">
+              <button type="submit">Confirmer</button>
             </div>
-          )}
-          <input
-            type="password"
-            name="plainPassword"
-            value={passwords.plainPassword}
-            onChange={handleInputChange}
-            placeholder="Nouveau mot de passe"
-            required
-          />
-          <input
-            type="password"
-            name="confirmPassword"
-            value={passwords.confirmPassword}
-            onChange={handleInputChange}
-            placeholder="Confirmer le nouveau mot de passe"
-            required
-          />
-          <button type="submit">Modifier le mot de passe</button>
-        </form>
+          </form>
         </div>
-        
+        <p>Supprimer le compte</p>
       </div>
       <AccordionNav />
       <div className="desktop-footer">
