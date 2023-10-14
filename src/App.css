@@ -620,7 +620,7 @@ ul li {
 @media (min-width: 1200px) {
   .draft-button {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 15px;
     width: 100%;
   }
@@ -1938,8 +1938,8 @@ ul li {
 /*? FOOTER */
 .footer ul {
   display: flex;
-  justify-content: end;
-  align-items: end;
+  justify-content: flex-end;
+  align-items: flex-end;
   position: fixed;
   gap: 15px;
   top: 97%;
