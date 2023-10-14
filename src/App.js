@@ -9,6 +9,7 @@ import { ResetPassword } from "./pages/ResetPassword";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Dashboard } from "./pages/Dashboard";
+import { Invoices } from "./pages/Invoices";
 import { InvoiceStepOne } from "./pages/InvoiceStepOne";
 import { InvoiceStepTwo } from "./pages/InvoiceStepTwo";
 import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
@@ -23,6 +24,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/invoices" element={<Invoices />} />
           <Route path="/invoice-step-one" element={<InvoiceStepOne />} />
           <Route path="/invoice-step-two" element={<InvoiceStepTwo />} />
           <Route path="/invoice-step-three" element={<InvoiceStepThree />} />
