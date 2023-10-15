@@ -87,8 +87,6 @@ const AccordionNav = () => {
                     Factures
                   </Link>
                 </li>
-                <li></li>
-                <li>
                   <li>
                     <Link to="/legal-notice" className="links-style">
                       Mentions Légales
@@ -104,7 +102,6 @@ const AccordionNav = () => {
                       CGU
                     </Link>
                   </li>
-                </li>
               </ul>
             </div>
           </div>
