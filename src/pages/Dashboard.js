@@ -39,7 +39,7 @@ export const Dashboard = () => {
           console.error("Error fetching company data:", error);
         });
     }
-  }, [token, navigate, userData]);
+  }, [token, navigate, userData, apiUrl]);
 
   const allInvoices = userCompanies.flatMap((company) => company.invoices);
 
