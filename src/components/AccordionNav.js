@@ -55,7 +55,7 @@ const AccordionNav = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard" className="nav-links-desktop">
+                <Link to="/invoices" className="nav-links-desktop">
                   Factures
                 </Link>
               </li>
@@ -83,7 +83,7 @@ const AccordionNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard" className="links-style">
+                  <Link to="/invoices" className="links-style">
                     Factures
                   </Link>
                 </li>
