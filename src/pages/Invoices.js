@@ -11,17 +11,39 @@ export const Invoices = () => {
   const token = localStorage.getItem("Token");
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("UserData"));
-  const userId = userData.id;
+  const [userCompanies, setUserCompanies] = useState([]);
   //   const apiUrl = process.env.REACT_APP_API_BASE_URL;
-
-  // Axios.get(`http://localhost:8000/api/users/${userId}`)
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
-    }
-  }, [token, navigate]);
+    } else if (userData && userData.companies) {
+      const companyIds = userData.companies.map((company) => company.id);
 
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      Promise.all(
+        companyIds.map(async (companyId) => {
+          const response = await fetch(
+            `http://localhost:8000/api/companies/${companyId}`,
+            {
+              method: "GET",
+              headers: headers,
+            }
+          );
+          const companyData = await response.json();
+          return companyData;
+        })
+      )
+        .then((companies) => {
+          setUserCompanies(companies);
+        })
+        .catch((error) => {
+          console.error("Error fetching company data:", error);
+        });
+    }
+  }, [token, navigate, userData]);
   return (
     <div className="invoice-step-one-page fade-in">
       <Helmet>
@@ -40,12 +62,10 @@ export const Invoices = () => {
       </div>
       <div className="invoices-id-companies-list">
         <ul>
-            <li>yo</li>
-            <li>yo</li>
-            <li>yo</li>
-            <li>yo</li>
+          <li>yo</li>
         </ul>
       </div>
+
       <AccordionNav />
       <div className="desktop-footer">
         <Footer />
@@ -54,6 +74,3 @@ export const Invoices = () => {
   );
 };
 
-// prendre le user_id de la table company en compte  (requête company (user_id??)) OU userData et récupérer l'id de l'utilsateur
-// afficher les entreprises dans la liste déroulante et récupérer les id
-// afficher les invoices a partir de l'id des company à l'aide de la sérialization
