@@ -12,9 +12,15 @@ const AccordionNav = () => {
   const getPageName = (path) => {
     switch (path) {
       case "/dashboard":
-        return "Home";
-      case "/invoice-step-two":
+        return "Dashboard";
+      case "/invoices":
         return "Factures";
+      case "/legal-notice":
+        return "Mentions Légales";
+      case "/privacy-policy":
+        return "Politique de Confidentialité";
+      case "/cgu":
+        return "CGU";
       default:
         return "Home";
     }
