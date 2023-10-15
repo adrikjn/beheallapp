@@ -29,7 +29,7 @@ const Account = () => {
       {isOpen && (
         <div className="account-menu">
           <Link to="/my-account">
-            Compte
+            Mon compte
           </Link>
           <button onClick={handleLogout}>Déconnexion</button>
         </div>
