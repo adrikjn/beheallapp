@@ -10,19 +10,18 @@ const AccordionNav = () => {
   };
 
   const getPageName = (path) => {
-    switch (path) {
-      case "/dashboard":
-        return "Dashboard";
-      case "/invoices":
-        return "Factures";
-      case "/legal-notice":
-        return "Mentions Légales";
-      case "/privacy-policy":
-        return "Politique de Confidentialité";
-      case "/cgu":
-        return "CGU";
-      default:
-        return "Dashboard";
+    if (path === "/dashboard") {
+      return "Dashboard";
+    } else if (path === "/invoices") {
+      return "Factures";
+    } else if (path === "/legal-notice") {
+      return "Mentions Légales";
+    } else if (path === "/privacy-policy") {
+      return "Politique de Confidentialité";
+    } else if (path === "/cgu") {
+      return "CGU";
+    } else {
+      return "Dashboard";
     }
   };
 
