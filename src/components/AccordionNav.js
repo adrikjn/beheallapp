@@ -22,7 +22,7 @@ const AccordionNav = () => {
       case "/cgu":
         return "CGU";
       default:
-        return "Home";
+        return "Dashboard";
     }
   };
 
@@ -57,7 +57,7 @@ const AccordionNav = () => {
             <ul>
               <li>
                 <Link to="/dashboard" className="nav-links-desktop">
-                  Home
+                  Dashboard
                 </Link>
               </li>
               <li>
@@ -85,7 +85,7 @@ const AccordionNav = () => {
               <ul>
                 <li>
                   <Link to="/dashboard" className="links-style">
-                    Home
+                    Dashboard
                   </Link>
                 </li>
                 <li>
