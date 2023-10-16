@@ -26,7 +26,7 @@ export const Invoices = () => {
       Promise.all(
         companyIds.map(async (companyId) => {
           const response = await fetch(
-            `http://localhost:8000/api/companies/${companyId}`,
+            `${apiUrl}/companies/${companyId}`,
             {
               method: "GET",
               headers: headers,
@@ -53,13 +53,13 @@ export const Invoices = () => {
         <h1>factures</h1>
         <Account />
       </div>
-      {/* <div className="invoices-history">
+      <div className="invoices-history">
         <div className="invoices-companies-list">
           <select name="" id="" className="select-company">
             <option value="">a</option>
           </select>
         </div>
-      </div> */}
+      </div>
       <div className="invoices-id-companies-list">
         <ul>
           <li>yo</li>
