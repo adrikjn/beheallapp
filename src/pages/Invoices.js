@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet } from "react-helmet";
@@ -12,7 +11,6 @@ export const Invoices = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("UserData"));
   const [userCompanies, setUserCompanies] = useState([]);
-  //   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     if (!token) {
@@ -44,25 +42,32 @@ export const Invoices = () => {
         });
     }
   }, [token, navigate, userData]);
+
   return (
     <div className="invoice-step-one-page fade-in">
       <Helmet>
-        <title>Ajout Entreprise | Beheall</title>
+        <title>Vos Factures | Beheall</title>
       </Helmet>
       <div className="welcome-user">
         <h1>factures</h1>
         <Account />
       </div>
-      <div className="invoices-history">
-        <div className="invoices-companies-list">
-          <select name="" id="" className="select-company">
-            <option value="">a</option>
-          </select>
-        </div>
-      </div>
       <div className="invoices-id-companies-list">
         <ul>
-          <li>yo</li>
+          {userCompanies &&
+            userCompanies.map(
+              (company) =>
+                company.invoices &&
+                company.invoices.map((invoice) => (
+                  <li key={invoice.id}>
+                    {invoice.customer.companyName.toUpperCase()} - (
+                    {invoice.customer.lastName.toUpperCase()}{" "}
+                    {invoice.customer.firstName.charAt(0).toUpperCase() +
+                      invoice.customer.firstName.slice(1)}
+                    )
+                  </li>
+                ))
+            )}
         </ul>
       </div>
 
@@ -73,4 +78,3 @@ export const Invoices = () => {
     </div>
   );
 };
-
