@@ -12,7 +12,7 @@ export const Invoices = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("UserData"));
   const [userCompanies, setUserCompanies] = useState([]);
-  //   const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     if (!token) {
