@@ -71,24 +71,24 @@ export const Invoices = () => {
         </ul>
       </div>
       <div>
-        {userCompanies.map((company) => (
-          <ul key={company?.id} className="invoices-id-companies-list">
-            {company?.invoices &&
-              Array.isArray(company.invoices) &&
-              company.invoices.map((invoice) => (
-                <li key={invoice?.id}>
-                  <span>{company?.name}</span>
-                  <span>
-                    {invoice?.customer && invoice.customer.companyName}
-                  </span>
-                  <span>{invoice?.billNumber}</span>
-                  <span>{invoice?.totalPrice}</span>
-                  <span>{invoice?.createdAt}</span>
-                </li>
-              ))}
-          </ul>
+  {userCompanies.map((company) => (
+    <ul key={company?.id} className="invoices-id-companies-list">
+      {company?.invoices &&
+        Array.isArray(company.invoices) &&
+        company.invoices.map((invoice) => (
+          <li key={invoice?.id}>
+            <div className="company-name">{company?.name}</div>
+            <div className="customer-name">
+              {invoice?.customer && invoice.customer.companyName}
+            </div>
+            <div className="bill-number">{invoice?.billNumber}</div>
+            <div className="total-price">{invoice?.totalPrice}</div>
+            <div className="created-at">{invoice?.createdAt}</div>
+          </li>
         ))}
-      </div>
+    </ul>
+  ))}
+</div>
 
       <AccordionNav />
       <div className="desktop-footer">
