@@ -1947,6 +1947,10 @@ ul li {
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
 }
 
+.invoices-id-companies-list p{
+  width: 20%;
+}
+
 
 
 /*? FOOTER */
