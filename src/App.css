@@ -1961,7 +1961,10 @@ ul li {
 
 .invoices-id-companies-title li {
   font-weight: bold;
-  margin: 5px 0;
+}
+
+.invoices-id-companies-list p {
+  padding: 5px 0;
 }
 
 @media (max-width: 768px) {
