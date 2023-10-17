@@ -16,7 +16,7 @@ export const Dashboard = () => {
   useEffect(() => {
     if (!token) {
       navigate("/login");
-    } else if (userData && userData.companies && userData.companies.length > 0) {
+    } else if (userData && userData.companies) {
       const companyIds = userData.companies.map((company) => company.id);
 
       const headers = {
@@ -38,8 +38,6 @@ export const Dashboard = () => {
         .catch((error) => {
           console.error("Error fetching company data:", error);
         });
-    } else {
-      setUserCompanies([]); // Réinitialiser les données de l'entreprise à une liste vide
     }
   }, [token, navigate, userData, apiUrl]);
 
@@ -105,67 +103,63 @@ export const Dashboard = () => {
           <Account />
         </div>
       )}
-      {userCompanies.length > 0 && (
-        <div>
-          <div className="draft-button">
-            {storedDraftInvoiceId && (
-              <Link to={`/invoice-step-four`} className="link-no-underline">
-                <button>
-                  Finaliser le brouillon
-                  <img src="favicon.ico" alt="" />
-                </button>
-              </Link>
-            )}
-          </div>
-          <div className="invoice-title">
-            <p>Dernières factures</p>
-            <p>Statut</p>
-          </div>
+      <div className="draft-button">
+        {storedDraftInvoiceId && (
+          <Link to={`/invoice-step-four`} className="link-no-underline">
+            <button>
+              Finaliser le brouillon
+              <img src="favicon.ico" alt="" />
+            </button>
+          </Link>
+        )}
+      </div>
+      <div className="invoice-title">
+        <p>Dernières factures</p>
+        <p>Statut</p>
+      </div>
 
-          <div className="invoice-list">
-            {lastTwoInvoices.map((invoice) => (
-              <div key={invoice.id} className="invoice-customers">
-                <p>
-                  {invoice.customer.companyName.toUpperCase()} - (
-                  {invoice.customer.lastName.toUpperCase()}{" "}
-                  {invoice.customer.firstName.charAt(0).toUpperCase() +
-                    invoice.customer.firstName.slice(1)}
-                  )
-                </p>
-                <p
-                  className={
-                    invoice.status === "brouillon" ? "status-draft" : "status-sent"
-                  }
-                >
-                  {invoice.status}
-                </p>
-              </div>
-            ))}
+      <div className="invoice-list">
+        {lastTwoInvoices.map((invoice) => (
+          <div key={invoice.id} className="invoice-customers">
+            <p>
+              {invoice.customer.companyName.toUpperCase()} - (
+              {invoice.customer.lastName.toUpperCase()}{" "}
+              {invoice.customer.firstName.charAt(0).toUpperCase() +
+                invoice.customer.firstName.slice(1)}
+              )
+            </p>
+            <p
+              className={
+                invoice.status === "brouillon" ? "status-draft" : "status-sent"
+              }
+            >
+              {invoice.status}
+            </p>
           </div>
+        ))}
+      </div>
 
-          <div className="revenue-party">
-            <h2>Chiffre d'affaires du mois</h2>
-            <div className="revenue">
-              <div className="revenue-title-date">
-                <p>CA :</p>
-                <p>{formattedCurrentDate}</p>
-              </div>
-              <p className="revenue-amount">{displayTotalThisMonth}</p>
-            </div>
+      <div className="revenue-party">
+        <h2>Chiffre d'affaires du mois</h2>
+        <div className="revenue">
+          <div className="revenue-title-date">
+            <p>CA :</p>
+            <p>{formattedCurrentDate}</p>
           </div>
-
-          <div className="btn-invoice">
-            <Link to="/invoice-step-one">
-              <button>Créer une facture</button>
-            </Link>
-          </div>
-
-          <AccordionNav />
-          <div className="desktop-footer">
-            <Footer />
-          </div>
+          <p className="revenue-amount">{displayTotalThisMonth}</p>
         </div>
-      )}
+      </div>
+
+      <div className="btn-invoice">
+        <Link to="/invoice-step-one">
+          <button>Créer une facture</button>
+        </Link>
+      </div>
+
+      <AccordionNav />
+      <div className="desktop-footer">
+        <Footer />
+      </div>
     </div>
   );
 };
