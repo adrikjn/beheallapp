@@ -63,31 +63,29 @@ export const Invoices = () => {
         </ul>
       </div>
       <div>
-  {userCompanies.map((company) => (
-    <ul key={company?.id}>
-      {company?.invoices &&
-        Array.isArray(company.invoices)
-        // Trier les factures par date de création
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .map((invoice) => {
-          if (invoice?.status === "envoyé") {
-            const formattedDate = new Date(invoice.createdAt).toLocaleDateString("fr-FR");
-            return (
-              <li key={invoice?.id} className="invoices-id-companies-list">
-                <p>{company?.name}</p>
-                <p>{invoice?.customer && invoice.customer.companyName}</p>
-                <p>{invoice?.billNumber}</p>
-                <p>{invoice?.totalPrice}€</p>
-                <p>{formattedDate}</p>
-              </li>
-            );
-          } else {
-            return null;
-          }
-        })}
-    </ul>
-  ))}
-</div>
+        {userCompanies.map((company) => (
+          <ul key={company?.id}>
+            {company?.invoices &&
+              Array.isArray(company.invoices) &&
+              company.invoices.map((invoice) => {
+                if (invoice?.status === "envoyé") {
+                  const formattedDate = new Date(invoice.createdAt).toLocaleDateString("fr-FR");
+                  return (
+                    <li key={invoice?.id} className="invoices-id-companies-list">
+                      <p>{company?.name}</p>
+                      <p>{invoice?.customer && invoice.customer.companyName}</p>
+                      <p>{invoice?.billNumber}</p>
+                      <p>{invoice?.totalPrice}€</p>
+                      <p>{formattedDate}</p>
+                    </li>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+          </ul>
+        ))}
+      </div>
 
       <AccordionNav />
       <div className="desktop-footer">
