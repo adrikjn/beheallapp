@@ -23,23 +23,20 @@ export const Invoices = () => {
         const headers = {
           Authorization: `Bearer ${token}`,
         };
-        Promise.all(
-          companyIds.map(async (companyId) => {
-            try {
-              const response = await fetch(
-                `${apiUrl}/companies/${companyId}`,
-                {
-                  method: "GET",
-                  headers: headers,
-                }
-              );
-              const companyData = await response.json();
-              return companyData;
-            } catch (error) {
-              console.error("Error fetching company data:", error);
-            }
-          })
-        )
+  
+        const fetchCompanyData = async (companyId) => {
+          try {
+            const response = await Axios.get(
+              `${apiUrl}/companies/${companyId}`,
+              { headers }
+            );
+            return response.data;
+          } catch (error) {
+            console.error("Error fetching company data:", error);
+          }
+        };
+  
+        Promise.all(companyIds.map((companyId) => fetchCompanyData(companyId)))
           .then((companies) => {
             setUserCompanies(companies);
           })
