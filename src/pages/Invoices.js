@@ -73,7 +73,7 @@ export const Invoices = () => {
                   return (
                     <li key={invoice?.id} className="invoices-id-companies-list">
                       <p>{company?.name}</p>
-                      <p>{invoice?.customer && invoice.customer.companyName}</p>
+                      <p>{invoice?.customer && invoice.customer.companyName ? invoice.customer.companyName : invoice.customer.lastName}</p>
                       <p>{invoice?.billNumber}</p>
                       <p className="hidden-mobile-price">{invoice?.totalPrice}€</p>
                       <p>{formattedDate}</p>
