@@ -4,6 +4,7 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet } from "react-helmet";
 import Footer from "../components/Footer.js";
+import Axios from "axios";
 
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
@@ -22,16 +23,19 @@ export const Dashboard = () => {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      Promise.all(
-        companyIds.map(async (companyId) => {
-          const response = await fetch(`${apiUrl}/companies/${companyId}`, {
-            method: "GET",
+
+      const fetchCompanyData = async (companyId) => {
+        try {
+          const response = await Axios.get(`${apiUrl}/companies/${companyId}`, {
             headers: headers,
           });
-          const companyData = await response.json();
-          return companyData;
-        })
-      )
+          return response.data;
+        } catch (error) {
+          console.error("Error fetching company data:", error);
+        }
+      };
+
+      Promise.all(companyIds.map((companyId) => fetchCompanyData(companyId)))
         .then((companies) => {
           setUserCompanies(companies);
         })
