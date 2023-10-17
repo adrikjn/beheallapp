@@ -95,13 +95,13 @@ export const InvoiceStepFive = () => {
     generateInvoicePDF();
   };
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate("/login");
-  //   } else if (!invoiceId) {
-  //     navigate("/invoice-step-one"); 
-  //   }
-  // }, [token, navigate, invoiceId]);
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    } else if (!invoiceId) {
+      navigate("/invoice-step-one"); 
+    }
+  }, [token, navigate, invoiceId]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,7 +132,7 @@ export const InvoiceStepFive = () => {
     };
 
     fetchData();
-  }, [invoiceId, navigate, token]);
+  }, [invoiceId, navigate, token, apiUrl]);
 
   const sendInvoice = async () => {
     try {

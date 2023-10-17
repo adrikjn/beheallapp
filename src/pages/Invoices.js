@@ -26,10 +26,9 @@ export const Invoices = () => {
 
       const fetchCompanyData = async (companyId) => {
         try {
-          const response = await Axios.get(
-            `${apiUrl}/companies/${companyId}`,
-            { headers }
-          );
+          const response = await Axios.get(`${apiUrl}/companies/${companyId}`, {
+            headers,
+          });
           return response.data;
         } catch (error) {
           console.error("Error fetching company data:", error);
@@ -71,24 +70,30 @@ export const Invoices = () => {
         </ul>
       </div>
       <div>
-  {userCompanies.map((company) => (
-    <ul key={company?.id} className="invoices-id-companies-list">
-      {company?.invoices &&
-        Array.isArray(company.invoices) &&
-        company.invoices.map((invoice) => (
-          <li key={invoice?.id}>
-            <p className="company-name">{company?.name}</p>
-            <p className="customer-name">
-              {invoice?.customer && invoice.customer.companyName}
-            </p>
-            <p className="bill-number">{invoice?.billNumber}</p>
-            <p className="total-price">{invoice?.totalPrice}</p>
-            <p className="created-at">{invoice?.createdAt}</p>
-          </li>
+        {userCompanies.map((company) => (
+          <ul key={company?.id} className="invoices-id-companies-list">
+            {company?.invoices &&
+              Array.isArray(company.invoices) &&
+              company.invoices.map((invoice) => {
+                if (invoice?.status === "envoyé") {
+                  return (
+                    <li key={invoice?.id}>
+                      <div className="company-name">{company?.name}</div>
+                      <div className="customer-name">
+                        {invoice?.customer && invoice.customer.companyName}
+                      </div>
+                      <div className="bill-number">{invoice?.billNumber}</div>
+                      <div className="total-price">{invoice?.totalPrice}</div>
+                      <div className="created-at">{invoice?.createdAt}</div>
+                    </li>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+          </ul>
         ))}
-    </ul>
-  ))}
-</div>
+      </div>
 
       <AccordionNav />
       <div className="desktop-footer">
