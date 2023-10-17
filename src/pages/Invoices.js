@@ -12,6 +12,7 @@ export const Invoices = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("UserData"));
   const [userCompanies, setUserCompanies] = useState([]);
+  const [selectedCompanyId, setSelectedCompanyId] = useState("");
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
@@ -44,6 +45,11 @@ export const Invoices = () => {
         });
     }
   }, [token, navigate, userData, apiUrl]);
+
+  const handleCompanyChange = (event) => {
+    setSelectedCompanyId(event.target.value);
+  };
+
   return (
     <div className="invoice-step-one-page fade-in">
       <Helmet>
@@ -53,13 +59,24 @@ export const Invoices = () => {
         <h1>factures</h1>
         <Account />
       </div>
-      {/* <div className="invoices-history">
+      <div className="invoices-history">
         <div className="invoices-companies-list">
-          <select name="" id="" className="select-company">
-            <option value="">a</option>
-          </select>
-        </div>
-      </div> */}
+        <select
+          name=""
+          id=""
+          className="select-company"
+          onChange={handleCompanyChange}
+          value={selectedCompanyId}
+        >
+          <option value="">Toutes les entreprises</option>
+          {userCompanies.map((company) => (
+            <option key={company?.id} value={company?.id}>
+              {company?.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      </div>
       <div className="invoices-list-part">
         <ul className="invoices-id-companies-title">
           <li>Entreprise</li>
