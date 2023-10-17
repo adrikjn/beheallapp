@@ -1935,6 +1935,20 @@ ul li {
   }
 }
 
+/*? INVOICES LIST */
+.invoices-list-part {
+  margin-top: 50px;
+}
+.invoices-id-companies-title, .invoices-id-companies-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+
+
+
 /*? FOOTER */
 .footer ul {
   display: flex;

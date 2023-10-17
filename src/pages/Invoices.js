@@ -12,39 +12,39 @@ export const Invoices = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("UserData"));
   const [userCompanies, setUserCompanies] = useState([]);
-    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
-    useEffect(() => {
-      if (!token) {
-        navigate("/login");
-      } else if (userData && userData.companies && userData.companies.length) {
-        const companyIds = userData.companies.map((company) => company.id);
-  
-        const headers = {
-          Authorization: `Bearer ${token}`,
-        };
-  
-        const fetchCompanyData = async (companyId) => {
-          try {
-            const response = await Axios.get(
-              `${apiUrl}/companies/${companyId}`,
-              { headers }
-            );
-            return response.data;
-          } catch (error) {
-            console.error("Error fetching company data:", error);
-          }
-        };
-  
-        Promise.all(companyIds.map((companyId) => fetchCompanyData(companyId)))
-          .then((companies) => {
-            setUserCompanies(companies);
-          })
-          .catch((error) => {
-            console.error("Error fetching company data:", error);
-          });
-      }
-    }, [token, navigate, userData, apiUrl]);
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    } else if (userData && userData.companies && userData.companies.length) {
+      const companyIds = userData.companies.map((company) => company.id);
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      const fetchCompanyData = async (companyId) => {
+        try {
+          const response = await Axios.get(
+            `${apiUrl}/companies/${companyId}`,
+            { headers }
+          );
+          return response.data;
+        } catch (error) {
+          console.error("Error fetching company data:", error);
+        }
+      };
+
+      Promise.all(companyIds.map((companyId) => fetchCompanyData(companyId)))
+        .then((companies) => {
+          setUserCompanies(companies);
+        })
+        .catch((error) => {
+          console.error("Error fetching company data:", error);
+        });
+    }
+  }, [token, navigate, userData, apiUrl]);
   return (
     <div className="invoice-step-one-page fade-in">
       <Helmet>
@@ -54,17 +54,40 @@ export const Invoices = () => {
         <h1>factures</h1>
         <Account />
       </div>
-      <div className="invoices-history">
+      {/* <div className="invoices-history">
         <div className="invoices-companies-list">
           <select name="" id="" className="select-company">
             <option value="">a</option>
           </select>
         </div>
-      </div>
-      <div className="invoices-id-companies-list">
-        <ul>
-          <li>yo</li>
+      </div> */}
+      <div className="invoices-list-part">
+        <ul className="invoices-id-companies-title">
+          <li>Entreprise</li>
+          <li>Client</li>
+          <li>N°Facture</li>
+          <li>Prix</li>
+          <li>Date</li>
         </ul>
+      </div>
+      <div>
+        {userCompanies.map((company) => (
+          <ul key={company?.id} className="invoices-id-companies-list">
+            {company?.invoices &&
+              Array.isArray(company.invoices) &&
+              company.invoices.map((invoice) => (
+                <li key={invoice?.id}>
+                  <span>{company?.name}</span>
+                  <span>
+                    {invoice?.customer && invoice.customer.companyName}
+                  </span>
+                  <span>{invoice?.billNumber}</span>
+                  <span>{invoice?.totalPrice}</span>
+                  <span>{invoice?.createdAt}</span>
+                </li>
+              ))}
+          </ul>
+        ))}
       </div>
 
       <AccordionNav />
@@ -74,4 +97,3 @@ export const Invoices = () => {
     </div>
   );
 };
-
