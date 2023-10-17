@@ -71,20 +71,18 @@ export const Invoices = () => {
       </div>
       <div>
         {userCompanies.map((company) => (
-          <ul key={company?.id} className="invoices-id-companies-list">
+          <ul key={company?.id}>
             {company?.invoices &&
               Array.isArray(company.invoices) &&
               company.invoices.map((invoice) => {
                 if (invoice?.status === "envoyé") {
                   return (
-                    <li key={invoice?.id}>
-                      <div className="company-name">{company?.name}</div>
-                      <div className="customer-name">
-                        {invoice?.customer && invoice.customer.companyName}
-                      </div>
-                      <div className="bill-number">{invoice?.billNumber}</div>
-                      <div className="total-price">{invoice?.totalPrice}</div>
-                      <div className="created-at">{invoice?.createdAt}</div>
+                    <li key={invoice?.id} className="invoices-id-companies-list">
+                      <p>{company?.name}</p>
+                      <p>{invoice?.customer && invoice.customer.companyName}</p>
+                      <p>{invoice?.billNumber}</p>
+                      <p>{invoice?.totalPrice}</p>
+                      <p>{invoice?.createdAt}</p>
                     </li>
                   );
                 } else {
