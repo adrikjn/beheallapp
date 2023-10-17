@@ -12,7 +12,6 @@ export const Invoices = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("UserData"));
   const [userCompanies, setUserCompanies] = useState([]);
-  const [selectedCompanyId, setSelectedCompanyId] = useState("");
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
@@ -45,11 +44,6 @@ export const Invoices = () => {
         });
     }
   }, [token, navigate, userData, apiUrl]);
-
-  const handleCompanyChange = (event) => {
-    setSelectedCompanyId(event.target.value);
-  };
-
   return (
     <div className="invoice-step-one-page fade-in">
       <Helmet>
@@ -58,24 +52,6 @@ export const Invoices = () => {
       <div className="welcome-user">
         <h1>factures</h1>
         <Account />
-      </div>
-      <div className="invoices-history">
-        <div className="invoices-companies-list">
-          <select
-            name=""
-            id=""
-            className="select-company"
-            onChange={handleCompanyChange}
-            value={selectedCompanyId}
-          >
-            <option value="">Toutes les entreprises</option>
-            {userCompanies.map((company) => (
-              <option key={company?.id} value={company?.id}>
-                {company?.name}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
       <div className="invoices-list-part">
         <ul className="invoices-id-companies-title">
@@ -87,37 +63,28 @@ export const Invoices = () => {
         </ul>
       </div>
       <div>
-        {userCompanies.map((company) => {
-          if (
-            selectedCompanyId === "" ||
-            selectedCompanyId === company.id ||
-            company.id === selectedCompanyId
-          ) {
-            return (
-              <ul key={company?.id} className="invoices-id-companies-list">
-                {company?.invoices &&
-                  Array.isArray(company.invoices) &&
-                  company.invoices.map((invoice) => {
-                    if (invoice?.status === "envoyé") {
-                      const formattedDate = new Date(invoice.createdAt).toLocaleDateString("fr-FR");
-                      return (
-                        <li key={invoice?.id}>
-                          <span>{company?.name}</span>
-                          <span>{invoice?.customer && invoice.customer.companyName}</span>
-                          <span>{invoice?.billNumber}</span>
-                          <span>{invoice?.totalPrice}€</span>
-                          <span>{formattedDate}</span>
-                        </li>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-              </ul>
-            );
-          }
-          return null;
-        })}
+        {userCompanies.map((company) => (
+          <ul key={company?.id}>
+            {company?.invoices &&
+              Array.isArray(company.invoices) &&
+              company.invoices.map((invoice) => {
+                if (invoice?.status === "envoyé") {
+                  const formattedDate = new Date(invoice.createdAt).toLocaleDateString("fr-FR");
+                  return (
+                    <li key={invoice?.id} className="invoices-id-companies-list">
+                      <p>{company?.name}</p>
+                      <p>{invoice?.customer && invoice.customer.companyName}</p>
+                      <p>{invoice?.billNumber}</p>
+                      <p>{invoice?.totalPrice}€</p>
+                      <p>{formattedDate}</p>
+                    </li>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+          </ul>
+        ))}
       </div>
 
       <AccordionNav />
