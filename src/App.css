@@ -1954,6 +1954,13 @@ ul li {
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .hidden-mobile-price {
+    display: none;
+  }
+}
+
+
 
 
 

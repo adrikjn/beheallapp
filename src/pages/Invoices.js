@@ -58,7 +58,7 @@ export const Invoices = () => {
           <li>Entreprise</li>
           <li>Client</li>
           <li>N°Facture</li>
-          <li>Prix</li>
+          <li className="hidden-mobile-price">Prix</li>
           <li>Date</li>
         </ul>
       </div>
@@ -75,7 +75,7 @@ export const Invoices = () => {
                       <p>{company?.name}</p>
                       <p>{invoice?.customer && invoice.customer.companyName}</p>
                       <p>{invoice?.billNumber}</p>
-                      <p>{invoice?.totalPrice}€</p>
+                      <p className="hidden-mobile-price">{invoice?.totalPrice}€</p>
                       <p>{formattedDate}</p>
                     </li>
                   );
