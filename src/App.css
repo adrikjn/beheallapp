@@ -1948,6 +1948,11 @@ ul li {
   margin: auto;
 }
 
+.invoices-id-companies-title li, .invoices-id-companies-list p {
+  width: 25%;
+  margin: auto;
+  text-align: center;
+}
 
 
 
