@@ -4,7 +4,6 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet } from "react-helmet";
 import Footer from "../components/Footer.js";
-import Axios from "axios";
 
 export const Dashboard = () => {
   const token = localStorage.getItem("Token");
@@ -17,34 +16,33 @@ export const Dashboard = () => {
   useEffect(() => {
     if (!token) {
       navigate("/login");
-    } else if (userData && userData.companies) {
+    } else if (userData && userData.companies && userData.companies.length) {
       const companyIds = userData.companies.map((company) => company.id);
 
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-
-      const fetchCompanyData = async (companyId) => {
+      const fetchData = async () => {
         try {
-          const response = await Axios.get(`${apiUrl}/companies/${companyId}`, {
-            headers: headers,
-          });
-          return response.data;
+          const companiesData = await Promise.all(
+            companyIds.map(async (companyId) => {
+              const response = await fetch(`${apiUrl}/companies/${companyId}`, {
+                method: "GET",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+              const companyData = await response.json();
+              return companyData;
+            })
+          );
+          setUserCompanies(companiesData);
         } catch (error) {
           console.error("Error fetching company data:", error);
         }
       };
 
-      Promise.all(companyIds.map((companyId) => fetchCompanyData(companyId)))
-        .then((companies) => {
-          setUserCompanies(companies);
-        })
-        .catch((error) => {
-          console.error("Error fetching company data:", error);
-        });
+      fetchData();
     }
   }, [token, navigate, userData, apiUrl]);
-
+  
   const allInvoices = userCompanies.flatMap((company) => company.invoices);
 
   const sortedInvoices = allInvoices.sort(
