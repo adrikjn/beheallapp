@@ -70,28 +70,31 @@ export const Invoices = () => {
         </ul>
       </div>
       <div>
-        {userCompanies.map((company) => (
-          <ul key={company?.id}>
-            {company?.invoices &&
-              Array.isArray(company.invoices) &&
-              company.invoices.map((invoice) => {
-                if (invoice?.status === "envoyé") {
-                  return (
-                    <li key={invoice?.id} className="invoices-id-companies-list">
-                      <p>{company?.name}</p>
-                      <p>{invoice?.customer && invoice.customer.companyName}</p>
-                      <p>{invoice?.billNumber}</p>
-                      <p>{invoice?.totalPrice}</p>
-                      <p>{invoice?.createdAt}</p>
-                    </li>
-                  );
-                } else {
-                  return null;
-                }
-              })}
-          </ul>
-        ))}
-      </div>
+  {userCompanies.map((company) => (
+    <ul key={company?.id} className="invoices-id-companies-list">
+      {company?.invoices &&
+        Array.isArray(company.invoices) &&
+        company.invoices.map((invoice) => {
+          if (invoice?.status === "envoyé") {
+            const formattedDate = new Date(invoice.createdAt).toLocaleDateString("fr-FR");
+            return (
+              <li key={invoice?.id}>
+                <p className="company-name">{company?.name}</p>
+                <p className="customer-name">
+                  {invoice?.customer && invoice.customer.companyName}
+                </p>
+                <p className="bill-number">{invoice?.billNumber}</p>
+                <p className="total-price">{invoice?.totalPrice}</p>
+                <p className="created-at">{formattedDate}</p>
+              </li>
+            );
+          } else {
+            return null;
+          }
+        })}
+    </ul>
+  ))}
+</div>
 
       <AccordionNav />
       <div className="desktop-footer">
