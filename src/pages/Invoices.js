@@ -77,13 +77,13 @@ export const Invoices = () => {
         Array.isArray(company.invoices) &&
         company.invoices.map((invoice) => (
           <li key={invoice?.id}>
-            <div className="company-name">{company?.name}</div>
-            <div className="customer-name">
+            <p className="company-name">{company?.name}</p>
+            <p className="customer-name">
               {invoice?.customer && invoice.customer.companyName}
-            </div>
-            <div className="bill-number">{invoice?.billNumber}</div>
-            <div className="total-price">{invoice?.totalPrice}</div>
-            <div className="created-at">{invoice?.createdAt}</div>
+            </p>
+            <p className="bill-number">{invoice?.billNumber}</p>
+            <p className="total-price">{invoice?.totalPrice}</p>
+            <p className="created-at">{invoice?.createdAt}</p>
           </li>
         ))}
     </ul>
