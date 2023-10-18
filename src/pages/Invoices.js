@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
@@ -85,6 +85,12 @@ export const Invoices = () => {
               })}
           </ul>
         ))}
+      </div>
+
+      <div className="btn-invoice-2 fixed-btn">
+        <Link to="/invoice-step-one">
+          <button>Créer une facture</button>
+        </Link>
       </div>
 
       <AccordionNav />

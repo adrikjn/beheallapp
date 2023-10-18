@@ -152,7 +152,7 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      <div className="btn-invoice">
+      <div className="btn-invoice-2 fixed-btn">
         <Link to="/invoice-step-one">
           <button>Créer une facture</button>
         </Link>
