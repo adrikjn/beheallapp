@@ -87,7 +87,7 @@ export const Invoices = () => {
         ))}
       </div>
 
-      <div className="btn-invoice">
+      <div className="btn-invoice fixed-btn">
         <Link to="/invoice-step-one">
           <button>Créer une facture</button>
         </Link>
