@@ -1999,11 +1999,13 @@ ul li {
 @media (min-width: 1200px) {
   .btn-invoices.fixed-btn  {
     margin: auto;
+    text-align: center;
     width: 100%;
   }
   .btn-invoices.fixed-btn button {
     margin: auto;
     width: 25%;
+    text-align: center;
   }
 }
 
