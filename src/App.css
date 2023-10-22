@@ -1996,6 +1996,13 @@ ul li {
   z-index: 0.9;
 }
 
+@media (min-width: 1200px) {
+  .btn-invoices.fixed-btn button {
+    margin: auto;
+    width: 20%;
+  }
+}
+
 @media (max-width: 768px) {
   .hidden-mobile-price {
     display: none;
