@@ -1967,6 +1967,35 @@ ul li {
   padding: 5px 0;
 }
 
+.btn-invoices button {
+  margin: 35px 0 10px;
+  border-radius: 5px;
+  padding: 24px 64px;
+  background: #4f9e65;
+  color: #fff;
+  font-family: Articulat CF;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 0;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-invoices button:hover {
+  background: #487e58;
+}
+
+.btn-invoices.fixed-btn {
+  width: 90%;
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0.9;
+}
+
 @media (max-width: 768px) {
   .hidden-mobile-price {
     display: none;
