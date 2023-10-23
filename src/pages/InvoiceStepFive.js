@@ -92,7 +92,7 @@ export const InvoiceStepFive = () => {
     const signatureData = canvas.toDataURL("image/png");
     setSignatureDataURL(signatureData);
 
-    generateInvoicePDF();
+    // generateInvoicePDF();
   };
 
   useEffect(() => {
