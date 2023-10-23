@@ -188,14 +188,14 @@ export const InvoiceStepTwo = () => {
       </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
-        <h1>creation factures</h1>
+        <h1>création factures</h1>
         <Account />
       </div>
       <div className="invoice-step-one-title">
         <h2>Etape</h2>
         <h2>N°2</h2>
       </div>
-      <p className="invoice-step-one-p">Sélectionné un destinaire</p>
+      <p className="invoice-step-one-p">Sélectionner un destinataire</p>
 
       <select
         onChange={handleSelectChange}
@@ -213,7 +213,7 @@ export const InvoiceStepTwo = () => {
       </select>
       <div id="newCompanieForm">
         <div className="add-company-exp">
-          <h2>new client</h2>
+          <h2>nouveau client</h2>
         </div>
         <form onSubmit={handleFormSubmit}>
           <div className="add-company">
@@ -364,8 +364,8 @@ export const InvoiceStepTwo = () => {
               </>
             )}
           </div>
-          <div className="btn-invoice-2">
-            <button>Ajouter un client</button>
+          <div className="btn-invoice-2 btn-m">
+            <button>Ajouter</button>
           </div>
         </form>
       </div>
