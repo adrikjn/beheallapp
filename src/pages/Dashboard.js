@@ -165,15 +165,15 @@ export const Dashboard = () => {
                 invoice.customer.firstName.slice(1)}
               )
             </p>
-            {invoice.status === "brouillon" && (
-            <button onClick={() => deleteInvoice(invoice.id)}>Supprimer</button>
-          )}
+          
             <p
               className={
                 invoice.status === "brouillon" ? "status-draft" : "status-sent"
               }
             >
-              {invoice.status}
+              {invoice.status}   {invoice.status === "brouillon" && (
+            <button onClick={() => deleteInvoice(invoice.id)}>x</button>
+          )}
             </p>
           
           </div>
