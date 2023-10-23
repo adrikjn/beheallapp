@@ -172,7 +172,7 @@ export const Dashboard = () => {
               }
             >
               {invoice.status}   {invoice.status === "brouillon" && (
-            <button onClick={() => deleteInvoice(invoice.id)}>x</button>
+            <img src="/delete-icon.svg" alt="Supprimer le brouillon" onClick={() => deleteInvoice(invoice.id)}></img>
           )}
             </p>
           
