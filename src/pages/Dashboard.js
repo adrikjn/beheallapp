@@ -115,9 +115,7 @@ export const Dashboard = () => {
             ),
           }))
         );
-        if (localStorage.getItem("invoice")) {
-          localStorage.removeItem("invoice");
-        }
+        localStorage.removeItem("invoice");
       } else {
         console.error("La suppression de la facture a échoué.");
       }
