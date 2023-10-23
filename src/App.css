@@ -501,8 +501,7 @@ ul li {
   font-weight: 400;
 }
 
-.invoice-customers,
-.invoice-customers-2 {
+.invoice-customers {
   display: flex;
   justify-content: space-between;
   margin: 8px 13px;
@@ -517,23 +516,10 @@ ul li {
   gap: 10px;
   font-family: Roboto;
   font-size: 13px;
-  font-weight: 400;
-  line-height: normal;
+  font-weight: bold;
 }
 
-.invoice-customers-2 p:nth-child(2) {
-  display: flex;
-  padding: 5px 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  font-family: Roboto;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  color: #fff;
-  font-weight: 700;
-}
+
 
 .status-draft {
   color: #e14848;
