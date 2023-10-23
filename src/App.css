@@ -519,6 +519,12 @@ ul li {
   font-weight: bold;
 }
 
+.delete-invoice-draft {
+  border: none;
+  background-color: #e9ebe9;
+  padding: 0;
+}
+
 
 
 .status-draft {
