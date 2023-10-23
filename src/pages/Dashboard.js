@@ -94,6 +94,32 @@ export const Dashboard = () => {
     storeDraftInvoiceIdLocally();
   }
 
+  const handleDeleteInvoice = async () => {
+    try {
+      const storedDraftInvoiceId = localStorage.getItem("invoice");
+      const targetInvoice = lastTwoInvoices.find(
+        (invoice) => invoice.id === storedDraftInvoiceId
+      );
+  
+      if (targetInvoice && targetInvoice.status === "brouillon") {
+        await fetch(`${apiUrl}/invoices/${storedDraftInvoiceId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        // Mettez à jour la liste des factures après la suppression
+        // par exemple, refetch les données en fonction de vos besoins
+  
+        storeDraftInvoiceIdLocally(); // Mettre à jour localement l'ID de la facture brouillon
+      }
+    } catch (error) {
+      console.error("Error deleting invoice:", error);
+    }
+  };
+  
+
   return (
     <div className="dashboard-page fade-in">
       <Helmet>
@@ -137,6 +163,7 @@ export const Dashboard = () => {
             >
               {invoice.status}
             </p>
+            <button onClick={() => handleDeleteInvoice(invoice.id)}>Supprimer</button> {/* Ajoutez le bouton de suppression */}
           </div>
         ))}
       </div>
