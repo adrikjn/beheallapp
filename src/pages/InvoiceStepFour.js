@@ -162,29 +162,29 @@ export const InvoiceStepFour = () => {
   };
 
   const handleCreateInvoice = async () => {
-  if (productList.length === 0) {
-    addGlobalError("Vous ne pouvez créer une facture sans produits.");
-    return;
-  }
-
-  try {
-    await Axios.put(
-      `${apiUrl}/invoices/${invoiceId}`,
-      { totalPrice: totalTTC },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    navigate("/invoice-step-five");
-  } catch (error) {
-    console.error("Error updating invoice data:", error);
-  }
-};
-
+    if (productList.length === 0) {
+      addGlobalError("Vous ne pouvez pas créer une facture sans produits ou services.");
+      return;
+    }
+  
+    try {
+      await Axios.put(
+        `${apiUrl}/invoices/${invoiceId}`,
+        { totalPrice: totalTTC },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      navigate("/invoice-step-five");
+    } catch (error) {
+      console.error("Error updating invoice data:", error);
+    }
+  };
+  
 
   const handleToggle = () => {
     setIsInvoiceCreateVisible(!isInvoiceCreateVisible);
