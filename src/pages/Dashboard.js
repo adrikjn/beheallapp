@@ -104,7 +104,6 @@ export const Dashboard = () => {
       });
   
       if (response.ok) {
-        // Suppression réussie, mettez à jour l'état local des factures ici
         const updatedInvoices = allInvoices.filter(
           (invoice) => invoice.id !== invoiceId
         );
@@ -116,13 +115,20 @@ export const Dashboard = () => {
             ),
           }))
         );
+        if (localStorage.getItem("invoice") === invoiceId) {
+          localStorage.removeItem("invoice");
+        }
       } else {
         console.error("La suppression de la facture a échoué.");
       }
     } catch (error) {
-      console.error("Une erreur s'est produite lors de la suppression de la facture:", error);
+      console.error(
+        "Une erreur s'est produite lors de la suppression de la facture:",
+        error
+      );
     }
   };
+  
   
 
   return (
