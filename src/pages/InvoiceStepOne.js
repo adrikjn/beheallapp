@@ -176,14 +176,14 @@ export const InvoiceStepOne = () => {
       </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
-        <h1>creation factures</h1>
+        <h1>création factures</h1>
         <Account />
       </div>
       <div className="invoice-step-one-title">
         <h2>Etape</h2>
         <h2>N°1</h2>
       </div>
-      <p className="invoice-step-one-p">Sélectionné un expéditaire</p>
+      <p className="invoice-step-one-p">Sélectionner un expéditeur</p>
       <select
         className="select-company"
         onChange={handleSelectChange}
@@ -200,7 +200,7 @@ export const InvoiceStepOne = () => {
       </select>
       <div id="newCompanieForm">
         <div className="add-company-exp">
-          <h2>new expéditaire</h2>
+          <h2>nouvel expéditeur</h2>
         </div>
         <form onSubmit={handleFormSubmit}>
           <div className="add-company">
@@ -219,7 +219,7 @@ export const InvoiceStepOne = () => {
               type="text"
               id="name"
               name="name"
-              placeholder="Entreprise (NOM Prénom si indépendant)"
+              placeholder="Entreprise (NOM Prénom, si indépendant)"
               value={formData.name}
               onChange={handleInputChange}
             />
@@ -386,7 +386,7 @@ export const InvoiceStepOne = () => {
           </div>
 
           <div className="btn-invoice-2">
-            <button>Ajouter un expéditaire</button>
+            <button>Ajouter</button>
           </div>
         </form>
       </div>
