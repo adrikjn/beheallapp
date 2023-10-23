@@ -537,7 +537,7 @@ export const InvoiceStepFive = () => {
         </div>
 
         <div className="customer-summary">
-          <h2>Clients</h2>
+          <h2>Client</h2>
           <div className="customer-summary-part">
             <div className="customer-info-1">
               <p>
@@ -621,7 +621,7 @@ export const InvoiceStepFive = () => {
             <p>Moyen de paiement : {invoiceData?.paymentMethod}</p>
           </div>
           <div className="btn-invoice-5">
-            <button onClick={sendInvoice}>Enregistrer et retourner à l'accueil</button>
+            <button onClick={sendInvoice}>Création de la facture</button>
           </div>
         </div>
       </div>
