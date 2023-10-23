@@ -24,9 +24,7 @@ export const InvoiceStepFour = () => {
     invoice: `/api/invoices/${invoiceId}`,
   });
 
-  const [isSmallScreen, setIsSmallScreen] = useState(
-    window.innerWidth < 1200
-  );
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
 
   useEffect(() => {
     const handleResize = () => {
@@ -162,11 +160,6 @@ export const InvoiceStepFour = () => {
   };
 
   const handleCreateInvoice = async () => {
-    if (productList.length === 0) {
-      addGlobalError("Vous ne pouvez pas créer une facture sans produits ou services.");
-      return;
-    }
-  
     try {
       await Axios.put(
         `${apiUrl}/invoices/${invoiceId}`,
@@ -178,13 +171,12 @@ export const InvoiceStepFour = () => {
           },
         }
       );
-  
+
       navigate("/invoice-step-five");
     } catch (error) {
       console.error("Error updating invoice data:", error);
     }
   };
-  
 
   const handleToggle = () => {
     setIsInvoiceCreateVisible(!isInvoiceCreateVisible);
@@ -354,16 +346,16 @@ export const InvoiceStepFour = () => {
         </ul>
         {productList.map((product, index) => (
           <ul
-          className={`product-item ${
-            isSmallScreen ? "small-screen" : "large-screen"
-          }`}
-          key={index}
-        >
-          <li>
-            {product.title.length > (isSmallScreen ? 8 : 25)
-              ? `${product.title.substring(0, isSmallScreen ? 8 : 25)}...`
-              : product.title}
-          </li>
+            className={`product-item ${
+              isSmallScreen ? "small-screen" : "large-screen"
+            }`}
+            key={index}
+          >
+            <li>
+              {product.title.length > (isSmallScreen ? 8 : 25)
+                ? `${product.title.substring(0, isSmallScreen ? 8 : 25)}...`
+                : product.title}
+            </li>
             <li>{product.quantity}</li>
             <li>{product.unitCost}€</li>
             <li>{product.vat}%</li>
@@ -389,9 +381,11 @@ export const InvoiceStepFour = () => {
           <p>Total TTC: {totalTTC.toFixed(2)}€</p>
         </div>
         <div className="btn-invoice-add-ps fixed-btn-4">
-          <button type="submit" onClick={handleCreateInvoice}>
-            Créer votre facture
-          </button>
+          {productList.length > 0 && (
+            <button type="submit" onClick={handleCreateInvoice}>
+              Créer votre facture
+            </button>
+          )}
         </div>
       </div>
       <AccordionNav />
