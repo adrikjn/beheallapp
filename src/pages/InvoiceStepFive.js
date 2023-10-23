@@ -601,7 +601,6 @@ export const InvoiceStepFive = () => {
           </div>
           <div className="summary-details">
             <div className="summary-total">
-              <p>Details :</p>
               <p>PRIX TTC : {invoiceData?.totalPrice.toFixed(2)}€</p>
             </div>
             <p>Objet : {invoiceData?.title}</p>
