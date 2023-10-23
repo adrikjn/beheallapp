@@ -94,6 +94,37 @@ export const Dashboard = () => {
     storeDraftInvoiceIdLocally();
   }
 
+  const deleteInvoice = async (invoiceId) => {
+    try {
+      const response = await fetch(`${apiUrl}/invoices/${invoiceId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (response.ok) {
+        // Suppression réussie, mettez à jour l'état local des factures ici
+        const updatedInvoices = allInvoices.filter(
+          (invoice) => invoice.id !== invoiceId
+        );
+        setUserCompanies(
+          userCompanies.map((company) => ({
+            ...company,
+            invoices: updatedInvoices.filter(
+              (invoice) => invoice.companyId === company.id
+            ),
+          }))
+        );
+      } else {
+        console.error("La suppression de la facture a échoué.");
+      }
+    } catch (error) {
+      console.error("Une erreur s'est produite lors de la suppression de la facture:", error);
+    }
+  };
+  
+
   return (
     <div className="dashboard-page fade-in">
       <Helmet>
@@ -137,6 +168,9 @@ export const Dashboard = () => {
             >
               {invoice.status}
             </p>
+            {invoice.status === "brouillon" && (
+            <button onClick={() => deleteInvoice(invoice.id)}>Supprimer</button>
+          )}
           </div>
         ))}
       </div>
