@@ -385,13 +385,13 @@ export const InvoiceStepOne = () => {
           
           </div>
 
-          <div className="btn-invoice-2">
+          <div className="btn-invoice-2 btn-m">
             <button>Ajouter</button>
           </div>
         </form>
       </div>
 
-      <div className="btn-invoice-2 fixed-btn btn-m">
+      <div className="btn-invoice-2 fixed-btn">
         {selectedCompanie !== "undefined" && selectedCompanie !== null && (
           <button onClick={handleContinueClick}>Continuer</button>
         )}
