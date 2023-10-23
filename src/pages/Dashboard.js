@@ -115,7 +115,7 @@ export const Dashboard = () => {
             ),
           }))
         );
-        if (localStorage.getItem("invoice") === invoiceId) {
+        if (localStorage.getItem("invoice")) {
           localStorage.removeItem("invoice");
         }
       } else {
