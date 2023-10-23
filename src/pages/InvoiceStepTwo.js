@@ -248,7 +248,7 @@ export const InvoiceStepTwo = () => {
             <input
               type="text"
               id="companyName"
-              placeholder="Entreprise (laissez le champ vite si indépendent)"
+              placeholder="Entreprise (laissez le champ vide si indépendent)"
               name="companyName"
               value={formData.companyName}
               onChange={handleInputChange}
