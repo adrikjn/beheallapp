@@ -101,7 +101,7 @@ export const Dashboard = () => {
       </Helmet>
       {userData && (
         <div className="welcome-user">
-          <h1>Welcome, {userData.firstName}</h1>
+          <h1>Bonjour, {userData.firstName}</h1>
           <Account />
         </div>
       )}

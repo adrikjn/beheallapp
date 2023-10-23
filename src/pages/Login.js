@@ -80,7 +80,7 @@ export const Login = () => {
         <title>Connexion | Beheall</title>
         <meta
           name="description"
-          content="Connectez-vous à votre compte Beheall pour accéder à votre profil et gérer vos factures."
+          content="Commencez à créer vos factures gratuitement dès maintenant en vous connectant à votre compte Beheall."
         />
       </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
