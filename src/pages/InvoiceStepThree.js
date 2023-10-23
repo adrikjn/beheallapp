@@ -167,7 +167,7 @@ export const InvoiceStepThree = () => {
       </Helmet>
       {globalErrors.length > 0 && <div className="overlay"></div>}
       <div className="welcome-user">
-        <h1>creation factures</h1>
+        <h1>création factures</h1>
         <Account />
       </div>
       <div className="invoice-step-one-title">
