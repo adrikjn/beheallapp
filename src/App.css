@@ -1072,6 +1072,9 @@ ul li {
     margin: auto;
     width: 20%;
   }
+  .btn-m {
+    margin: 20px 0;
+  }
 }
 
 /*? INVOICE STEP THREE */
