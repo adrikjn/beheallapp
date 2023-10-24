@@ -34,12 +34,13 @@ ul li {
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-in-out;
+  animation: none;
 }
 
-@media (max-width: 1200px) {
+
+@media (min-width: 390px) {
   .fade-in {
-    animation: none;
+    animation: fadeIn 0.5s ease-in-out;
   }
 }
 
