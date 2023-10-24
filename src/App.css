@@ -37,6 +37,12 @@ ul li {
   animation: fadeIn 0.5s ease-in-out;
 }
 
+@media (max-width: 1200px) {
+  .fade-in {
+    animation: none;
+  }
+}
+
 .landing-page-height {
   height: 100vh;
   display: flex;
