@@ -83,7 +83,7 @@ export const Register = () => {
   };
 
   return (
-    <div className="login-page fade-in">
+    <div className="login-page">
       <Helmet>
         <title>Inscription | Beheall</title>
         <meta
