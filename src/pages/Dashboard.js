@@ -130,7 +130,7 @@ export const Dashboard = () => {
   
 
   return (
-    <div className="dashboard-page fade-in">
+    <div className="dashboard-page">
       <Helmet>
         <title>Dashboard | Beheall</title>
       </Helmet>

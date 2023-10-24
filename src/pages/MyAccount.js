@@ -120,7 +120,7 @@ export const MyAccount = () => {
   };
 
   return (
-    <div className="invoice-step-one-page fade-in">
+    <div className="invoice-step-one-page">
       <Helmet>
         <title>Mon Compte | Beheall</title>
       </Helmet>

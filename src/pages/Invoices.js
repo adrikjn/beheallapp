@@ -45,7 +45,7 @@ export const Invoices = () => {
     }
   }, [token, navigate, userData, apiUrl]);
   return (
-    <div className="invoice-step-one-page fade-in">
+    <div className="invoice-step-one-page">
       <Helmet>
         <title>Vos Factures | Beheall</title>
       </Helmet>

@@ -8,7 +8,7 @@ import Account from "../components/Account";
 export const LegalNotice = () => {
   const hasToken = !!localStorage.getItem("Token");
   return (
-    <div className="legal-policy fade-in">
+    <div className="legal-policy">
       <Helmet>
         <title>Mentions Légales | Beheall</title>
         <meta

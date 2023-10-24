@@ -8,7 +8,7 @@ import Account from "../components/Account";
 export const PrivacyPolicy = () => {
   const hasToken = !!localStorage.getItem("Token");
   return (
-    <div className="legal-policy fade-in">
+    <div className="legal-policy">
       <Helmet>
         <title>Politique de Confidentialité | Beheall</title>
         <meta

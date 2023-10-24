@@ -24,7 +24,7 @@ export const LandingPage = () => {
     return () => clearTimeout(redirectTimeout);
   }, [navigate]);
   return (
-    <div className="landing-page fade-in">
+    <div className="landing-page">
       <Helmet>
         <meta
           name="description"
