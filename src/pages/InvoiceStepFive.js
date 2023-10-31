@@ -398,7 +398,7 @@ export const InvoiceStepFive = () => {
     const totalTTCString = totalTTC.toString() + " €";
     pdf.text(totalTTCString, xResults + 24, contentY);
 
-    contentY += 2;
+    contentY += 5;
 
     pdf.setFont("helvetica", "normal");
     if (averageVATRate === "0.00" || averageVATRate === null) {
