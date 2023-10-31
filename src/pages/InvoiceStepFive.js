@@ -404,14 +404,15 @@ export const InvoiceStepFive = () => {
     pdf.setFontSize(11);
     const footerX = 15;
 
-    pdf.setFont("helvetica", "normal");
     if (averageVATRate === "0.00" || averageVATRate === null) {
-      pdf.text(
+      contentY = addTextWithMaxWidth(
         "TVA non applicable selon l'article 293 B du Code Général des Impôts",
         footerX,
         contentY
       );
     }
+    
+    
 
     contentY += addTextWithMaxWidth(
       `Conditions générales de vente : ${invoiceData?.description}`,
