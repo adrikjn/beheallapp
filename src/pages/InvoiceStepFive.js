@@ -398,22 +398,20 @@ export const InvoiceStepFive = () => {
     const totalTTCString = totalTTC.toString() + " €";
     pdf.text(totalTTCString, xResults + 24, contentY);
 
-    contentY += 5;
-
-    pdf.setFont("helvetica", "normal");
-    if (averageVATRate === "0.00" || averageVATRate === null) {
-      pdf.text(
-        "TVA non applicable selon l'article 293 B du Code Général des Impôts",
-        xResults,
-        contentY
-      );
-    }
-
     contentY += 12;
 
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(11);
     const footerX = 15;
+
+    pdf.setFont("helvetica", "normal");
+    if (averageVATRate === "0.00" || averageVATRate === null) {
+      pdf.text(
+        "TVA non applicable selon l'article 293 B du Code Général des Impôts",
+        footerX,
+        contentY
+      );
+    }
 
     contentY += addTextWithMaxWidth(
       `Conditions générales de vente : ${invoiceData?.description}`,
