@@ -406,7 +406,7 @@ export const InvoiceStepFive = () => {
 
     if (averageVATRate === "0.00" || averageVATRate === null) {
       contentY += addTextWithMaxWidth(
-        "TVA non applicable selon l'article 293 B du Code Général des Impôts",
+        "TVA non applicable selon l'article 293 B du Code Général des Impôts.",
         footerX,
         contentY
       );
