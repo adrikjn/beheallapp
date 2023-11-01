@@ -103,25 +103,7 @@ export const InvoiceStepFour = () => {
       return;
     }
 
-    if (!formData.unitCost) {
-      addGlobalError("Le coût unitaire/journalier ne peut être vide.");
-      return;
-    }
-
-    if (!formData.quantity) {
-      addGlobalError("La quantité/durée journalier ne peut être vide.");
-      return;
-    }
-
-    if (!formData.totalPrice) {
-      addGlobalError("Le prix total HT ne peut être vide.");
-      return;
-    }
-
-    if (formData.vat === null || formData.vat === "") {
-      addGlobalError("La TVA ne peut être vide. Veuillez mettre 0 si le produit ou service est exempté de la TVA.");
-      return;
-    }
+  
 
     try {
       console.log("Form data before submission:", formData);
@@ -175,6 +157,25 @@ export const InvoiceStepFour = () => {
         });
 
         setGlobalErrors([...globalErrors, ...validationErrors]);
+      }
+      if (!formData.unitCost) {
+        addGlobalError("Le coût unitaire/journalier ne peut être vide.");
+        return;
+      }
+  
+      if (!formData.quantity) {
+        addGlobalError("La quantité/durée journalier ne peut être vide.");
+        return;
+      }
+  
+      if (!formData.totalPrice) {
+        addGlobalError("Le prix total HT ne peut être vide.");
+        return;
+      }
+  
+      if (formData.vat === null || formData.vat === "") {
+        addGlobalError("La TVA ne peut être vide. Veuillez mettre 0 si le produit ou service est exempté de la TVA.");
+        return;
       }
     }
   };
