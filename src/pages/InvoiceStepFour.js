@@ -103,6 +103,10 @@ export const InvoiceStepFour = () => {
       return;
     }
 
+    if(formData.unitCost === null){
+      addGlobalError("Le coût unitaire/journalier ne peut être vide.")
+    }
+
     try {
       console.log("Form data before submission:", formData);
       const response = await Axios.post(`${apiUrl}/services`, formData, {
