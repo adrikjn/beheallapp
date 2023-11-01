@@ -104,7 +104,8 @@ export const InvoiceStepFour = () => {
     }
 
     if(formData.unitCost === null){
-      addGlobalError("Le coût unitaire/journalier ne peut être vide.")
+      addGlobalError("Le coût unitaire/journalier ne peut être vide.");
+      return;
     }
 
     try {
