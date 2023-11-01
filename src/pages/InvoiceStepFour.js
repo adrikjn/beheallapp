@@ -158,20 +158,20 @@ export const InvoiceStepFour = () => {
 
         setGlobalErrors([...globalErrors, ...validationErrors]);
       }
-      // if (!formData.unitCost) {
-      //   addGlobalError("Le coût unitaire/journalier ne peut être vide.");
-      //   return;
-      // }
+      if (!formData.unitCost) {
+        addGlobalError("Le coût unitaire/journalier ne peut être vide.");
+        return;
+      }
   
-      // if (!formData.quantity) {
-      //   addGlobalError("La quantité/durée journalier ne peut être vide.");
-      //   return;
-      // }
+      if (!formData.quantity) {
+        addGlobalError("La quantité/durée journalier ne peut être vide.");
+        return;
+      }
   
-      // if (!formData.totalPrice) {
-      //   addGlobalError("Le prix total HT ne peut être vide.");
-      //   return;
-      // }
+      if (!formData.totalPrice) {
+        addGlobalError("Le prix total HT ne peut être vide.");
+        return;
+      }
     }
   };
 
