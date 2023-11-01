@@ -118,8 +118,8 @@ export const InvoiceStepFour = () => {
       return;
     }
 
-    if (!formData.vat) {
-      addGlobalError("La TVA ne peut être vide. Veuillez mettre 0 si le produit ou service est exemptée de la TVA.");
+    if (![0, 10, 20, 5.5, 2.1].includes(formData.vat)) {
+      addGlobalError("La TVA ne peut être vide. Veuillez mettre 0 si le produit ou service est exempté de la TVA.");
       return;
     }
 
