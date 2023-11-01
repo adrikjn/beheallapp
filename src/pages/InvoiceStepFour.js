@@ -328,7 +328,7 @@ export const InvoiceStepFour = () => {
                 type="number"
                 name="vat"
                 id="vat"
-                placeholder="TVA"
+                placeholder="TVA (Mettre 0 si le produit ou service est exempté de la TVA)"
                 onChange={handleInputChange}
                 step="0.01"
               />
