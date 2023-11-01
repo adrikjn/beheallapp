@@ -103,7 +103,7 @@ export const InvoiceStepFour = () => {
       return;
     }
 
-    if(formData.unitCost === null){
+    if (formData.unitCost === null || formData.unitCost === undefined || formData.unitCost === '') {
       addGlobalError("Le coût unitaire/journalier ne peut être vide.");
       return;
     }
@@ -347,7 +347,7 @@ export const InvoiceStepFour = () => {
           <li>Tarifs</li>
           <li>TVA</li>
           <li>Prix HT</li>
-          <li>Action</li>
+          <li>Supprimer</li>
         </ul>
         {productList.map((product, index) => (
           <ul
