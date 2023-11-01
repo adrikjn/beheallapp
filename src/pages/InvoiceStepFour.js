@@ -103,7 +103,7 @@ export const InvoiceStepFour = () => {
       return;
     }
 
-    if (formData.unitCost === null || formData.unitCost === undefined || formData.unitCost === '') {
+    if (!formData.unitCost) {
       addGlobalError("Le coût unitaire/journalier ne peut être vide.");
       return;
     }
