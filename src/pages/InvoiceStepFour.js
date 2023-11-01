@@ -158,20 +158,20 @@ export const InvoiceStepFour = () => {
 
         setGlobalErrors([...globalErrors, ...validationErrors]);
       }
-      if (!formData.unitCost) {
-        addGlobalError("Le coût unitaire/journalier ne peut être vide.");
-        return;
-      }
+      // if (!formData.unitCost) {
+      //   addGlobalError("Le coût unitaire/journalier ne peut être vide.");
+      //   return;
+      // }
   
-      if (!formData.quantity) {
-        addGlobalError("La quantité/durée journalier ne peut être vide.");
-        return;
-      }
+      // if (!formData.quantity) {
+      //   addGlobalError("La quantité/durée journalier ne peut être vide.");
+      //   return;
+      // }
   
-      if (!formData.totalPrice) {
-        addGlobalError("Le prix total HT ne peut être vide.");
-        return;
-      }
+      // if (!formData.totalPrice) {
+      //   addGlobalError("Le prix total HT ne peut être vide.");
+      //   return;
+      // }
     }
   };
 
@@ -328,7 +328,7 @@ export const InvoiceStepFour = () => {
                 type="number"
                 name="vat"
                 id="vat"
-                placeholder="TVA (Mettre 0 si le produit ou service est exempté de la TVA)"
+                placeholder="TVA"
                 onChange={handleInputChange}
                 step="0.01"
               />
