@@ -172,11 +172,6 @@ export const InvoiceStepFour = () => {
         addGlobalError("Le prix total HT ne peut être vide.");
         return;
       }
-  
-      if (formData.vat === null || formData.vat === "") {
-        addGlobalError("La TVA ne peut être vide. Veuillez mettre 0 si le produit ou service est exempté de la TVA.");
-        return;
-      }
     }
   };
 
