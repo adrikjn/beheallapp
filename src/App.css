@@ -1488,6 +1488,15 @@ ul li {
   }
 }
 
+/*? RESET PASSWORD PAGE */
+.reset-password-div {
+  margin: 0 10%;
+}
+
+.reset-password-div h1 {
+  font-size: 21px;
+}
+
 /*? ERROR MESSAGE ALERT */
 .overlay {
   position: fixed;

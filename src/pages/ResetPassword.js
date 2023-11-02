@@ -1,7 +1,7 @@
-// ResetPassword.js
-
+import { Helmet } from "react-helmet";
 import React, { useState } from "react";
 import axios from "axios";
+import LogoAndPicture from "../components/LogoAndPicture";
 
 export const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -21,8 +21,18 @@ export const ResetPassword = () => {
   };
 
   return (
-    <div className="reset-password">
-      <h2>Réinitialisation de mot de passe</h2>
+    <div className="reset-password login-page">
+      <Helmet>
+        <title>Mot de passe oublié ? | Beheall</title>
+        <meta
+          name="description"
+          content="Besoin d'accéder à votre compte Beheall mais avez oublié votre mot de passe ? Réinitialisez-le facilement et continuez à créer vos factures gratuitement avec Beheall."
+        />
+      </Helmet>
+       <LogoAndPicture />
+       <div className="login-border"></div>
+    <div className="reset-password-div">
+       <h1>Réinitialisation de mot de passe</h1>
       <form onSubmit={handleSendEmail}>
         <input
           type="email"
@@ -32,6 +42,8 @@ export const ResetPassword = () => {
         />
         <button type="submit">Envoyer</button>
       </form>
+    </div>
+     
     </div>
   );
 };
