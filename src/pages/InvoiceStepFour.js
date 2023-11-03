@@ -114,6 +114,15 @@ export const InvoiceStepFour = () => {
         },
       });
       console.log(response);
+      setFormData({
+        title: "",
+        description: "",
+        quantity: 0,
+        unitCost: 0,
+        totalPrice: 0,
+        vat: 0,
+        invoice: `/api/invoices/${invoiceId}`,
+      });
 
       const invoiceResponse = await Axios.get(
         `${apiUrl}/invoices/${invoiceId}`,
