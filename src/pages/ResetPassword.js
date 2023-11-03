@@ -4,6 +4,7 @@ import axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
+import { Link } from "react-router-dom";
 
 export const ResetPassword = () => {
   const hasToken = !!localStorage.getItem("Token");
@@ -56,6 +57,9 @@ export const ResetPassword = () => {
           <div className="align-btn">
             <button type="submit">Envoyer</button>
           </div>
+          <Link to="/login" className="going-back-to-login">
+            <img src="going-back.svg" alt="Revenir a la page de connexion"  />
+          </Link>
         </form>
       </div>
       {showOverlay && (
@@ -66,9 +70,8 @@ export const ResetPassword = () => {
               réinitialisation de votre mot de passe seront envoyées.
             </p>
             <div className="pw-reset-right-btn">
-               <button onClick={closeOverlay}>Fermer</button>
+              <button onClick={closeOverlay}>Fermer</button>
             </div>
-           
           </div>
         </div>
       )}

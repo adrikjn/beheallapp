@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
 import Account from "../components/Account";
+import { Link } from "react-router-dom";
 
 export const Cgu = () => {
   const hasToken = !!localStorage.getItem("Token");
@@ -17,6 +18,9 @@ export const Cgu = () => {
         />
       </Helmet>
       <div>
+        <Link to="/login" className="back-to-login-footer-infos">
+          <img src="going-back.svg" alt="Revenir a la page de connexion" />
+        </Link>
         <h1>Conditions Générales d'Utilisation {hasToken && <Account />}</h1>
 
         <div className="legal-notice-rules">
@@ -38,8 +42,8 @@ export const Cgu = () => {
           <h2>2. Compte Utilisateur</h2>
           <p>
             Pour accéder à certaines fonctionnalités de notre service, vous
-            devrez créer un compte utilisateur. Vous êtes responsable
-            de la confidentialité de votre mot de passe et de vos informations
+            devrez créer un compte utilisateur. Vous êtes responsable de la
+            confidentialité de votre mot de passe et de vos informations
             d'identification.
           </p>
           <h2>3. Données Personnelles</h2>

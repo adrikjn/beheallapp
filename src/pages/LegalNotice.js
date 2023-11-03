@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
 import Account from "../components/Account";
+import { Link } from "react-router-dom";
 
 export const LegalNotice = () => {
   const hasToken = !!localStorage.getItem("Token");
@@ -17,8 +18,11 @@ export const LegalNotice = () => {
         />
       </Helmet>
       <div>
-        <h1>Mentions Légales {hasToken &&<Account />}</h1>
-        
+        <Link to="/login" className="back-to-login-footer-infos">
+          <img src="going-back.svg" alt="Revenir a la page de connexion" />
+        </Link>
+        <h1>Mentions Légales {hasToken && <Account />}</h1>
+
         <div className="legal-notice-rules">
           <p>
             Ce site web permet de créer des factures en ligne dans le cadre d'un
