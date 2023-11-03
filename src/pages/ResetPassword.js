@@ -2,8 +2,12 @@ import { Helmet } from "react-helmet";
 import React, { useState } from "react";
 import axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
+import AccordionNav from "../components/AccordionNav";
+import Footer from "../components/Footer.js";
 
 export const ResetPassword = () => {
+  const hasToken = !!localStorage.getItem("Token");
+
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (e) => {
@@ -32,7 +36,7 @@ export const ResetPassword = () => {
        <LogoAndPicture />
        <div className="login-border"></div>
     <div className="reset-password-div">
-       <h1>Réinitialisation de mot de passe</h1>
+       <h1>Réinitialisation du mot de passe</h1>
       <form onSubmit={handleSendEmail}>
         <input
           type="email"
@@ -40,9 +44,14 @@ export const ResetPassword = () => {
           value={email}
           onChange={handleEmailChange}
         />
-        <button type="submit">Envoyer</button>
+        <div className="align-btn">
+          <button type="submit">Envoyer</button>
+        </div>
+        
       </form>
     </div>
+    <Footer />
+      {hasToken && <AccordionNav />}
      
     </div>
   );
