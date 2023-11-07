@@ -32,6 +32,7 @@ export const Register = () => {
     }
   }, [navigate]);
 
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -95,62 +96,60 @@ export const Register = () => {
       <LogoAndPicture />
       <div className="login-border"></div>
       <h1 className="register-title">Inscription</h1>
-      <div className="register">
-        <form onSubmit={handleRegister}>
-          <div className="register-marge">
-            {globalErrors.length > 0 && (
-              <div className="alert">
-                <span onClick={closeAlert} className="close-alert">
-                  &times;
-                </span>
-                {globalErrors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
+      <div >
+        <form onSubmit={handleRegister} className="register">
+          {globalErrors.length > 0 && (
+            <div className="alert">
+              <span onClick={closeAlert} className="close-alert">
+                &times;
+              </span>
+              {globalErrors.map((error, index) => (
+                <p key={index}>{error}</p>
+              ))}
+            </div>
+          )}
 
-            <div className="name-inputs">
-              <input
-                type="text"
-                placeholder="Prénom"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Nom"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </div>
-            <div className="name-inputs-size">
-              <input
-                type="email"
-                placeholder="E-mail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="number"
-                placeholder="Numéro de téléphone"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </div>
-            <div className="name-inputs-size">
-              <input
-                type="password"
-                placeholder="Mot de passe"
-                value={plainPassword}
-                onChange={(e) => setPlainPassword(e.target.value)}
-              />
-              <input
-                type="password"
-                placeholder="Confirmation du mot de passe"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </div>
+          <div className="name-inputs">
+            <input
+              type="text"
+              placeholder="Prénom"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Nom"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div className="name-inputs-size">
+            <input
+              type="email"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Numéro de téléphone"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </div>
+          <div className="name-inputs-size">
+            <input
+              type="password"
+              placeholder="Mot de passe"
+              value={plainPassword}
+              onChange={(e) => setPlainPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Confirmation du mot de passe"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
           </div>
           <div className="accept-cgu">
             <input type="checkbox" id="accept-cgu-checkbox" required />

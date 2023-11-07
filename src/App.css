@@ -296,6 +296,7 @@ ul li {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 0 32px;
 }
 
 .login-page .register .register-marge {
