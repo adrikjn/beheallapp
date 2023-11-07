@@ -67,9 +67,7 @@ export const Login = () => {
   };
 
   const handleFormSubmit = (e) => {
-    e.preventDefault(); // Empêcher le comportement par défaut du formulaire
-
-    // Appelez votre méthode handleLogin() ici
+    e.preventDefault(); 
     handleLogin();
   };
 
