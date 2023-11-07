@@ -66,6 +66,13 @@ export const Login = () => {
     setGlobalErrors([]);
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault(); // Empêcher le comportement par défaut du formulaire
+
+    // Appelez votre méthode handleLogin() ici
+    handleLogin();
+  };
+
   useEffect(() => {
     const hasToken = !!localStorage.getItem("Token");
 
@@ -108,31 +115,33 @@ export const Login = () => {
               connecter.
             </p>
           )}
-          <div className="padding-form">
-            <input
-              type="text"
-              placeholder="E-MAIL"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="MOT DE PASSE"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <p>
-              Vous n'avez pas de compte ?&nbsp;
-              <Link to="/register" className="register-link">
-                S'inscrire
+          <div>
+            <form onSubmit={handleFormSubmit} className="padding-form">
+              <input
+                type="text"
+                placeholder="E-MAIL"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="MOT DE PASSE"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <p>
+                Vous n'avez pas de compte ?&nbsp;
+                <Link to="/register" className="register-link">
+                  S'inscrire
+                </Link>
+              </p>
+              <Link to="/reset-password" className="reset-password-login">
+                Mot de passe oublié ?
               </Link>
-            </p>
-            <Link to="/reset-password" className="reset-password-login">
-              Mot de passe oublié ?
-            </Link>
-          </div>
-          <div className="center-btn">
-            <button onClick={handleLogin}>Se connecter</button>
+              <div className="center-btn">
+                <button type="submit">Se connecter</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

@@ -177,6 +177,7 @@ ul li {
   display: flex;
   margin-top: 5px;
   display: flex;
+  margin-bottom: 70px;
 }
 
 .login-part-two .login-space .padding-form {
@@ -263,6 +264,7 @@ ul li {
   }
   .reset-password-login {
     justify-content: center;
+    margin-bottom: 30px;
   }
 }
 
@@ -526,8 +528,6 @@ ul li {
   padding: 0;
   cursor: pointer;
 }
-
-
 
 .status-draft {
   color: #e14848;
@@ -1565,8 +1565,6 @@ ul li {
   margin-top: 200px;
 }
 
-
-
 @media (min-width: 1200px) {
   .reset-password-div input {
     width: 50%;
@@ -1762,7 +1760,6 @@ ul li {
   font-weight: 600;
   margin: 12px 0 12px 4px;
 }
-
 
 .dl-pdf {
   margin-top: 30px;
@@ -2036,7 +2033,8 @@ ul li {
 .invoices-list-part {
   margin-top: 50px;
 }
-.invoices-id-companies-title, .invoices-id-companies-list {
+.invoices-id-companies-title,
+.invoices-id-companies-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2050,7 +2048,8 @@ ul li {
   font-family: Roboto;
 }
 
-.invoices-id-companies-title li, .invoices-id-companies-list p {
+.invoices-id-companies-title li,
+.invoices-id-companies-list p {
   width: 25%;
   margin: auto;
   text-align: center;
@@ -2094,7 +2093,7 @@ ul li {
 }
 
 @media (min-width: 1200px) {
-  .btn-invoices.fixed-btn  {
+  .btn-invoices.fixed-btn {
     margin: auto;
     text-align: center;
     width: 100%;
@@ -2111,10 +2110,6 @@ ul li {
     display: none;
   }
 }
-
-
-
-
 
 /*? FOOTER */
 .footer ul {
