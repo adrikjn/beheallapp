@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export const LegalNotice = () => {
   const hasToken = !!localStorage.getItem("Token");
   return (
-    <div className="legal-policy">
+    <div className={`legal-policy${hasToken ? ' avec-token' : ''}`}>
       <Helmet>
         <title>Mentions Légales | Beheall</title>
         <meta
@@ -18,9 +18,11 @@ export const LegalNotice = () => {
         />
       </Helmet>
       <div>
-        <Link to="/login" className="back-to-login-footer-infos">
-          <img src="going-back.svg" alt="Revenir a la page de connexion" />
-        </Link>
+      {!hasToken && (
+          <Link to="/login" className="back-to-login-footer-infos">
+            <img src="going-back.svg" alt="Revenir a la page de connexion" />
+          </Link>
+        )}
         <h1>Mentions Légales {hasToken && <Account />}</h1>
 
         <div className="legal-notice-rules">
