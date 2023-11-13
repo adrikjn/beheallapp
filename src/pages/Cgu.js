@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 export const Cgu = () => {
   const hasToken = !!localStorage.getItem("Token");
+  const loginRedirect = hasToken ? "/dashboard" : "/login";
   return (
     <div className="legal-policy">
       <Helmet>
@@ -18,8 +19,8 @@ export const Cgu = () => {
         />
       </Helmet>
       <div>
-        <Link to="/login" className="back-to-login-footer-infos">
-          <img src="going-back.svg" alt="Revenir a la page de connexion" />
+        <Link to={loginRedirect} className="back-to-login-footer-infos">
+          <img src="going-back.svg" alt="Revenir à la page de connexion" />
         </Link>
         <h1>Conditions Générales d'Utilisation {hasToken && <Account />}</h1>
 
