@@ -1785,9 +1785,6 @@ ul li {
   align-items: center;
 }
 
-.legal-policy {
-  margin-top: 41px;
-}
 
 .legal-policy h1 {
   font-weight: 600;
@@ -1802,7 +1799,7 @@ ul li {
   letter-spacing: 5px;
   text-transform: uppercase;
   margin-bottom: 30px;
-  margin-top: 41px;
+  margin-top: 82px;
 }
 
 .legal-notice-rules {
