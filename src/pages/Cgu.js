@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export const Cgu = () => {
   const hasToken = !!localStorage.getItem("Token");
   return (
-    <div className="legal-policy">
+    <div className={`legal-policy${hasToken ? ' avec-token' : ''}`}>
       <Helmet>
         <title>Conditions Générales d'Utilisation | Beheall</title>
         <meta

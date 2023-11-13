@@ -1786,6 +1786,15 @@ ul li {
   margin: 41px 0;
 }
 
+.legal-policy.avec-token h1 {
+  margin-top: 41px;
+}
+
+.legal-notice-rules.avec-token {
+  margin-top: 41px;
+}
+
+
 
 .legal-policy h1 {
   font-weight: 600;
