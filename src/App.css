@@ -1784,6 +1784,11 @@ ul li {
   justify-content: center;
   align-items: center;
 }
+
+.legal-policy {
+  margin-top: 41px;
+}
+
 .legal-policy h1 {
   font-weight: 600;
   display: flex;
