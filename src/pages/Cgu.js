@@ -18,9 +18,11 @@ export const Cgu = () => {
         />
       </Helmet>
       <div>
-        <Link to="/login" className="back-to-login-footer-infos">
-          <img src="going-back.svg" alt="Revenir a la page de connexion" />
-        </Link>
+      {!hasToken && (
+          <Link to="/login" className="back-to-login-footer-infos">
+            <img src="going-back.svg" alt="Revenir a la page de connexion" />
+          </Link>
+        )}
         <h1>Conditions Générales d'Utilisation {hasToken && <Account />}</h1>
 
         <div className="legal-notice-rules">
