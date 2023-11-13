@@ -1783,7 +1783,6 @@ ul li {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 41px 0;
 }
 .legal-policy h1 {
   font-weight: 600;
@@ -1798,6 +1797,7 @@ ul li {
   letter-spacing: 5px;
   text-transform: uppercase;
   margin-bottom: 30px;
+  margin-top: 41px;
 }
 
 .legal-notice-rules {
