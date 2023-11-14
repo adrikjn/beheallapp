@@ -1,10 +1,11 @@
 import { Helmet } from "react-helmet";
-import React, { useState } from "react";
 import axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 export const ResetPassword = () => {
   const hasToken = !!localStorage.getItem("Token");
