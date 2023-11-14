@@ -10,6 +10,15 @@ export const ResetPassword = () => {
   const hasToken = !!localStorage.getItem("Token");
   const [email, setEmail] = useState("");
   const [showOverlay, setShowOverlay] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const hasToken = !!localStorage.getItem("Token");
+
+    if (hasToken) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
