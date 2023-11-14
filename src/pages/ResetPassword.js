@@ -13,7 +13,13 @@ export const ResetPassword = () => {
   const [showOverlay, setShowOverlay] = useState(false);
   const navigate = useNavigate();
 
- 
+  useEffect(() => {
+    const hasToken = !!localStorage.getItem("Token");
+
+    if (hasToken) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
