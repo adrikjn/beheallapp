@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Footer from "../components/Footer.js";
 
 
@@ -162,6 +162,7 @@ export const InvoiceStepThree = () => {
 
   return (
     <div className="invoice-step-one-page fade-in">
+      <HelmetProvider>
       <Helmet>
         <title>Création Facture | Beheall</title>
       </Helmet>
@@ -293,7 +294,7 @@ export const InvoiceStepThree = () => {
       <div className="desktop-footer">
         <Footer />
       </div>
-
+      </HelmetProvider>
     </div>
   );
 };

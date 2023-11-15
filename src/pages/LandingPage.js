@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../App.css";
 import Logo from "../components/Logo";
 import Brand from "../components/Brand";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -25,6 +25,7 @@ export const LandingPage = () => {
   }, [navigate]);
   return (
     <div className="landing-page">
+      <HelmetProvider>
       <Helmet>
         <meta
           name="description"
@@ -40,6 +41,7 @@ export const LandingPage = () => {
           <p>fast</p>
         </div>
       </div>
+      </HelmetProvider>
     </div>
   );
 };

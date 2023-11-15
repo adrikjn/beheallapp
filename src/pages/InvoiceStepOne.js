@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Footer from "../components/Footer.js";
 
 
@@ -171,6 +171,7 @@ export const InvoiceStepOne = () => {
 
   return (
     <div className="invoice-step-one-page fade-in">
+      <HelmetProvider>
       <Helmet>
         <title>Ajout Entreprise | Beheall</title>
       </Helmet>
@@ -401,7 +402,7 @@ export const InvoiceStepOne = () => {
       <div className="desktop-footer">
         <Footer />
       </div>
-
+      </HelmetProvider>
     </div>
   );
 };

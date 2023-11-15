@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Footer from "../components/Footer.js";
 
 export const Dashboard = () => {
@@ -131,6 +131,7 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard-page">
+      <HelmetProvider>
       <Helmet>
         <title>Dashboard | Beheall</title>
       </Helmet>
@@ -201,6 +202,7 @@ export const Dashboard = () => {
       <div className="desktop-footer">
         <Footer />
       </div>
+      </HelmetProvider>
     </div>
   );
 };

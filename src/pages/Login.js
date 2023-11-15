@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import jwtDecode from "jwt-decode";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
 
@@ -81,6 +81,7 @@ export const Login = () => {
 
   return (
     <div className="login-page fade-in">
+      <HelmetProvider>
       <Helmet>
         <title>Connexion | Beheall</title>
         <meta
@@ -145,6 +146,7 @@ export const Login = () => {
       </div>
       {hasToken && <AccordionNav />}
       <Footer />
+      </HelmetProvider>
     </div>
   );
 };

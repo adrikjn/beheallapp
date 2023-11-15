@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
 import AccordionNav from "../components/AccordionNav";
@@ -46,6 +46,7 @@ export const ResetPassword = () => {
 
   return (
     <div className="reset-password login-page">
+      <HelmetProvider>
       <Helmet>
         <title>Mot de passe oublié ? | Beheall</title>
         <meta
@@ -87,6 +88,7 @@ export const ResetPassword = () => {
       )}
       <Footer />
       {hasToken && <AccordionNav />}
+      </HelmetProvider>
     </div>
   );
 };

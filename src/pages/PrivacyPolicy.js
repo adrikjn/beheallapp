@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
 import Account from "../components/Account";
@@ -10,6 +10,7 @@ export const PrivacyPolicy = () => {
   const hasToken = !!localStorage.getItem("Token");
   return (
     <div className={`legal-policy${hasToken ? ' avec-token' : ''}`}>
+      <HelmetProvider>
       <Helmet>
         <title>Politique de Confidentialité | Beheall</title>
         <meta
@@ -87,6 +88,7 @@ export const PrivacyPolicy = () => {
 
       {hasToken && <AccordionNav />}
       <Footer />
+      </HelmetProvider>
     </div>
   );
 };

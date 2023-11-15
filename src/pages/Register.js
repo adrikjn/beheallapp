@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import LogoAndPicture from "../components/LogoAndPicture";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Footer from "../components/Footer.js";
 import AccordionNav from "../components/AccordionNav";
 import { Link } from "react-router-dom";
@@ -85,6 +85,7 @@ export const Register = () => {
 
   return (
     <div className="login-page">
+      <HelmetProvider>
       <Helmet>
         <title>Inscription | Beheall</title>
         <meta
@@ -168,6 +169,7 @@ export const Register = () => {
       </div>
       <Footer />
       {hasToken && <AccordionNav />}
+      </HelmetProvider>
     </div>
   );
 };

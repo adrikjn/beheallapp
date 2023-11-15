@@ -4,7 +4,7 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Footer from "../components/Footer.js";
 
 export const InvoiceStepFive = () => {
@@ -461,6 +461,7 @@ export const InvoiceStepFive = () => {
 
   return (
     <div className="invoice-step-one-page fade-in">
+      <HelmetProvider>
       <Helmet>
         <title>Récapitulatif & Finalisation | Beheall</title>
       </Helmet>
@@ -632,6 +633,7 @@ export const InvoiceStepFive = () => {
       <div className="desktop-footer">
         <Footer />
       </div>
+      </HelmetProvider>
     </div>
   );
 };

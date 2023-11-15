@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Footer from "../components/Footer.js";
 
 export const Invoices = () => {
@@ -46,6 +46,7 @@ export const Invoices = () => {
   }, [token, navigate, userData, apiUrl]);
   return (
     <div className="invoice-step-one-page">
+      <HelmetProvider>
       <Helmet>
         <title>Vos Factures | Beheall</title>
       </Helmet>
@@ -97,6 +98,7 @@ export const Invoices = () => {
       <div className="desktop-footer">
         <Footer />
       </div>
+      </HelmetProvider>
     </div>
   );
 };
