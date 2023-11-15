@@ -131,7 +131,7 @@ export const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
-              type="number"
+              type="tel"
               placeholder="Numéro de téléphone"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
