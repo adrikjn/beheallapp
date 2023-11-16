@@ -36,9 +36,9 @@ export const LandingPage = () => {
         <Logo />
         <Brand />
         <div className="infos">
-          <p>scale</p>
-          <p>accurate</p>
-          <p>fast</p>
+          <p>simple</p>
+          <p>intuitif</p>
+          <p>rapide</p>
         </div>
       </div>
       </HelmetProvider>
