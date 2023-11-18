@@ -28,7 +28,7 @@ export const LandingPage = () => {
       <HelmetProvider>
         <Helmet>
           <title>
-            Beheall | Facture en Ligne - Générez des Factures Facilement & Gratuitement.
+            Beheall | Facture en Ligne - Générez des Factures Gratuitement, Rapidement & Facilement.
           </title>
           <meta
             name="description"
