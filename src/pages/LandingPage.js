@@ -29,7 +29,7 @@ export const LandingPage = () => {
         <Helmet>
           <meta
             name="description"
-            content="Notre service de facturation en ligne simplifie la création de factures. Générez rapidement des factures professionnelles. Essayez dès maintenant Beheall!"
+            content="Notre service de facturation en ligne simplifie la création de factures. Générez rapidement et gratuitement des factures professionnelles. Essayez dès maintenant Beheall!"
           />
         </Helmet>
         <div className="landing-page-height">
