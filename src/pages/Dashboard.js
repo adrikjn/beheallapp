@@ -148,7 +148,7 @@ export const Dashboard = () => {
             <Link to={`/invoice-step-four`} className="link-no-underline">
               <button>
                 Finaliser le brouillon
-                <img src="favicon.ico" alt="" />
+                <img src="favicon.ico" alt="Dessin de Facture" />
               </button>
             </Link>
           )}

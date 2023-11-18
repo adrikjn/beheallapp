@@ -140,14 +140,14 @@ export const MyAccount = () => {
               <p>
                 {userDetails.lastName.toUpperCase()}{" "}
                 {capitalizeFirstLetter(userDetails.firstName)}{" "}
-                <img src="/identity.png" alt="Profil" />
+                <img src="/identity.png" alt="Icône de Profil" />
               </p>
               <p>
-                {userDetails.email} <img src="/letter.png" alt="Email" />
+                {userDetails.email} <img src="/letter.png" alt="Icône d'E-mail" />
               </p>
               <p>
                 {userDetails.phoneNumber}{" "}
-                <img src="/phone.png" alt="Téléphone" />
+                <img src="/phone.png" alt="Icône de Téléphone" />
               </p>
             </div>
           )}

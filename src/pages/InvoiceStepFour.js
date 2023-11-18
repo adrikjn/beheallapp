@@ -350,7 +350,7 @@ export const InvoiceStepFour = () => {
                 <div className="center-plus">
                   <img
                     src="going-back.svg"
-                    alt="Revenir en arrière"
+                    alt="Rafraîchir la page"
                     onClick={handleRefreshPage}
                   />
                 </div>
