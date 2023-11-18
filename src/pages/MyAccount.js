@@ -124,6 +124,10 @@ export const MyAccount = () => {
       <HelmetProvider>
         <Helmet>
           <title>Mon Compte | Beheall</title>
+          <meta
+            name="description"
+            content="Consultez et modifiez les détails de votre compte Beheall. Effectuez des mises à jour, changez votre mot de passe, et gérez les informations associées à votre compte de facturation en ligne."
+          />
         </Helmet>
         {globalErrors.length > 0 && <div className="overlay"></div>}
         <div className="welcome-user">

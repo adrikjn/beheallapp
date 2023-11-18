@@ -159,6 +159,10 @@ export const InvoiceStepThree = () => {
       <HelmetProvider>
         <Helmet>
           <title>Création Facture | Beheall</title>
+          <meta
+            name="description"
+            content="Personnalisez et créez votre facture sur Beheall. Entrez les détails de la transaction et générez une facture professionnelle en quelques étapes simples. Simplifiez votre processus de facturation avec Beheall."
+          />
         </Helmet>
         {globalErrors.length > 0 && <div className="overlay"></div>}
         <div className="welcome-user">

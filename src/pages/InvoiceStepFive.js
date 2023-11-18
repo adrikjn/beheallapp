@@ -462,6 +462,10 @@ export const InvoiceStepFive = () => {
       <HelmetProvider>
         <Helmet>
           <title>Récapitulatif & Finalisation | Beheall</title>
+          <meta
+            name="description"
+            content="Consultez le récapitulatif de votre facture sur Beheall. Vérifiez les détails, signez électroniquement, et finalisez votre facture. Téléchargez le fichier PDF de la facture pour une documentation facile et professionnelle. Simplifiez la finalisation de vos transactions avec Beheall."
+          />
         </Helmet>
         <div className="welcome-user">
           <h1>Finalisation</h1>

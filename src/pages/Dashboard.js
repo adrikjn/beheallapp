@@ -132,6 +132,10 @@ export const Dashboard = () => {
       <HelmetProvider>
         <Helmet>
           <title>Dashboard | Beheall</title>
+          <meta
+            name="description"
+            content="Bienvenue sur votre tableau de bord Beheall. Consultez vos dernières factures, gérez votre chiffre d'affaires du mois et créez facilement des factures professionnelles, gratuitement & rapidement. Découvrez toutes les fonctionnalités de votre compte Beheall."
+          />
         </Helmet>
         {userData && (
           <div className="welcome-user">

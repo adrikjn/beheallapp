@@ -170,6 +170,10 @@ export const InvoiceStepOne = () => {
       <HelmetProvider>
         <Helmet>
           <title>Ajout Entreprise | Beheall</title>
+          <meta
+            name="description"
+            content="Ajoutez votre entreprise sur Beheall pour créer vos factures. Saisissez les informations essentielles de votre société et bénéficiez d'une expérience de facturation en ligne facile."
+          />
         </Helmet>
         {globalErrors.length > 0 && <div className="overlay"></div>}
         <div className="welcome-user">

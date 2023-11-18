@@ -263,6 +263,10 @@ export const InvoiceStepFour = () => {
       <HelmetProvider>
         <Helmet>
           <title>Ajout Produits/Services | Beheall</title>
+          <meta
+            name="description"
+            content="Ajoutez des produits et services à votre facture sur Beheall. Personnalisez les articles, spécifiez les prix, et créez une liste complète des éléments inclus dans votre facture. Simplifiez la gestion de vos produits et services avec Beheall."
+          />
         </Helmet>
         {globalErrors.length > 0 && <div className="overlay"></div>}
         <div className="welcome-user">

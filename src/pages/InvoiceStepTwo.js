@@ -179,6 +179,10 @@ export const InvoiceStepTwo = () => {
       <HelmetProvider>
         <Helmet>
           <title>Ajout Client | Beheall</title>
+          <meta
+            name="description"
+            content="Ajoutez un nouveau client sur Beheall pour créer vos factures. Enregistrez les informations de votre client et simplifiez le processus de facturation. Profitez d'une gestion efficace de vos relations clients avec Beheall."
+          />
         </Helmet>
         {globalErrors.length > 0 && <div className="overlay"></div>}
         <div className="welcome-user">

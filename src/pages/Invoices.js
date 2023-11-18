@@ -49,6 +49,10 @@ export const Invoices = () => {
       <HelmetProvider>
         <Helmet>
           <title>Vos Factures | Beheall</title>
+          <meta
+            name="description"
+            content="Consultez la liste de vos factures sur Beheall. Suivez les détails des transactions avec vos clients, y compris le numéro de facture, le prix, et la date d'émission. Gérez facilement vos factures en ligne. Découvrez toutes les fonctionnalités de la gestion de facturation sur Beheall."
+          />
         </Helmet>
         <div className="welcome-user">
           <h1>factures</h1>
