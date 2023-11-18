@@ -1434,6 +1434,7 @@ ul li {
 }
 
 .account-menu .acc-style {
+  text-transform: none;
   text-decoration: none;
   color: #fff;
   font-family: Articulat CF;
