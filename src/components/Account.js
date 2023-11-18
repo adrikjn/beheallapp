@@ -28,7 +28,7 @@ const Account = () => {
       />
       {isOpen && (
         <div className="account-menu">
-          <Link to="/my-account">
+          <Link to="/my-account" className="acc-style">
             Mon compte
           </Link>
           <button onClick={handleLogout}>Déconnexion</button>

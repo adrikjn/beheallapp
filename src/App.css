@@ -1433,7 +1433,7 @@ ul li {
   padding: 8px 20px;
 }
 
-.account-menu a {
+.account-menu .acc-style {
   text-decoration: none;
   color: #fff;
   font-family: Articulat CF;
