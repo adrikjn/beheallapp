@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 
 export const MyAccount = () => {
@@ -76,10 +76,10 @@ export const MyAccount = () => {
           "Content-Type": "application/json",
         },
       });
-  
+
       localStorage.removeItem("Token");
       localStorage.removeItem("UserData");
-  
+
       navigate("/login");
     } catch (error) {
       console.error("Error deleting account:", error);
@@ -122,95 +122,99 @@ export const MyAccount = () => {
   return (
     <div className="invoice-step-one-page">
       <HelmetProvider>
-      <Helmet>
-        <title>Mon Compte | Beheall</title>
-      </Helmet>
-      {globalErrors.length > 0 && <div className="overlay"></div>}
-      <div className="welcome-user">
-        <h1>Votre compte</h1>
-        <Account />
-      </div>
-      <div>
-        {userDetails && (
-          <div className="user-infos">
-            <p>
-              {userDetails.lastName.toUpperCase()}{" "}
-              {capitalizeFirstLetter(userDetails.firstName)}{" "}
-              <img src="/identity.png" alt="Profil" />
-            </p>
-            <p>
-              {userDetails.email} <img src="/letter.png" alt="Email" />
-            </p>
-            <p>
-              {userDetails.phoneNumber} <img src="/phone.png" alt="Téléphone" />
-            </p>
-          </div>
-        )}
-        {successMessage && (
-          <div className="success-message-password">{successMessage}</div>
-        )}
-        <div>
-          <form onSubmit={handleSubmit} className="change-password">
-            <h2>Modifier le mot de passe</h2>
-            {globalErrors.length > 0 && (
-              <div className="alert">
-                <span onClick={closeAlert} className="close-alert">
-                  &times;
-                </span>
-                {globalErrors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
-            <input
-              type="password"
-              name="plainPassword"
-              value={passwords.plainPassword}
-              onChange={handleInputChange}
-              placeholder="Nouveau mot de passe"
-              required
-            />
-            <input
-              type="password"
-              name="confirmPassword"
-              value={passwords.confirmPassword}
-              onChange={handleInputChange}
-              placeholder="Confirmer le nouveau mot de passe"
-              required
-            />
-            <div className="account-btn">
-              <button type="submit">Confirmer</button>
-            </div>
-          </form>
+        <Helmet>
+          <title>Mon Compte | Beheall</title>
+        </Helmet>
+        {globalErrors.length > 0 && <div className="overlay"></div>}
+        <div className="welcome-user">
+          <h1>Votre compte</h1>
+          <Account />
         </div>
-        <p className="delete-account-link" onClick={handleDeleteAccountLink}>
-          Supprimer le compte
-        </p>
-        {showDeleteConfirmation && (
-          <div className="delete-confirmation">
-            <p className="confirmation-message">
-              Êtes-vous sûr de vouloir supprimer votre compte de façon
-              permanente ? Cette action est irréversible et vous ne pourrez pas
-              récupérer votre compte ultérieurement.
-            </p>
-            <div className="confirmation-buttons">
-              <button
-                className="cancel-button"
-                onClick={() => setShowDeleteConfirmation(false)}
-              >
-                Non
-              </button>
-              <button className="confirm-button" onClick={handleDeleteAccount}>
-                Oui
-              </button>
+        <div>
+          {userDetails && (
+            <div className="user-infos">
+              <p>
+                {userDetails.lastName.toUpperCase()}{" "}
+                {capitalizeFirstLetter(userDetails.firstName)}{" "}
+                <img src="/identity.png" alt="Profil" />
+              </p>
+              <p>
+                {userDetails.email} <img src="/letter.png" alt="Email" />
+              </p>
+              <p>
+                {userDetails.phoneNumber}{" "}
+                <img src="/phone.png" alt="Téléphone" />
+              </p>
             </div>
+          )}
+          {successMessage && (
+            <div className="success-message-password">{successMessage}</div>
+          )}
+          <div>
+            <form onSubmit={handleSubmit} className="change-password">
+              <h2>Modifier le mot de passe</h2>
+              {globalErrors.length > 0 && (
+                <div className="alert">
+                  <span onClick={closeAlert} className="close-alert">
+                    &times;
+                  </span>
+                  {globalErrors.map((error, index) => (
+                    <p key={index}>{error}</p>
+                  ))}
+                </div>
+              )}
+              <input
+                type="password"
+                name="plainPassword"
+                value={passwords.plainPassword}
+                onChange={handleInputChange}
+                placeholder="Nouveau mot de passe"
+                required
+              />
+              <input
+                type="password"
+                name="confirmPassword"
+                value={passwords.confirmPassword}
+                onChange={handleInputChange}
+                placeholder="Confirmer le nouveau mot de passe"
+                required
+              />
+              <div className="account-btn">
+                <button type="submit">Confirmer</button>
+              </div>
+            </form>
           </div>
-        )}
-      </div>
-      <AccordionNav />
-      <div className="desktop-footer">
-        <Footer />
-      </div>
+          <p className="delete-account-link" onClick={handleDeleteAccountLink}>
+            Supprimer le compte
+          </p>
+          {showDeleteConfirmation && (
+            <div className="delete-confirmation">
+              <p className="confirmation-message">
+                Êtes-vous sûr de vouloir supprimer votre compte de façon
+                permanente ? Cette action est irréversible et vous ne pourrez
+                pas récupérer votre compte ultérieurement.
+              </p>
+              <div className="confirmation-buttons">
+                <button
+                  className="cancel-button"
+                  onClick={() => setShowDeleteConfirmation(false)}
+                >
+                  Non
+                </button>
+                <button
+                  className="confirm-button"
+                  onClick={handleDeleteAccount}
+                >
+                  Oui
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+        <AccordionNav />
+        <div className="desktop-footer">
+          <Footer />
+        </div>
       </HelmetProvider>
     </div>
   );

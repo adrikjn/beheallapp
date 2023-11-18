@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 
 export const InvoiceStepFour = () => {
@@ -103,8 +103,6 @@ export const InvoiceStepFour = () => {
       return;
     }
 
-  
-
     try {
       console.log("Form data before submission:", formData);
       const response = await Axios.post(`${apiUrl}/services`, formData, {
@@ -171,12 +169,12 @@ export const InvoiceStepFour = () => {
         addGlobalError("Le coût unitaire/journalier ne peut être vide.");
         return;
       }
-  
+
       if (!formData.quantity) {
         addGlobalError("La quantité/durée journalier ne peut être vide.");
         return;
       }
-  
+
       if (!formData.totalPrice) {
         addGlobalError("Le prix total HT ne peut être vide.");
         return;
@@ -263,161 +261,161 @@ export const InvoiceStepFour = () => {
   return (
     <div className="invoice-step-one-page fade-in">
       <HelmetProvider>
-      <Helmet>
-        <title>Ajout Produits/Services | Beheall</title>
-      </Helmet>
-      {globalErrors.length > 0 && <div className="overlay"></div>}
-      <div className="welcome-user">
-        <h1>création factures</h1>
-        <Account />
-      </div>
-      <div className="invoice-step-one-title">
-        <h2>Etape</h2>
-        <h2>N°4</h2>
-      </div>
-      <div>
-        <div
-          className={
-            isInvoiceCreateVisible
-              ? "invoice-create"
-              : "invoice-create display-none"
-          }
-        >
-          <div className="add-company">
-            {globalErrors.length > 0 && (
-              <div className="alert">
-                <span onClick={closeAlert} className="close-alert">
-                  &times;
-                </span>
-                {globalErrors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
-            <form onSubmit={handleFormSubmit}>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Nom du produit ou service"
-                value={formData.title}
-                onChange={handleInputChange}
-              ></input>
-              <textarea
-                id="description"
-                placeholder="Descriptif"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-              ></textarea>
-              <input
-                type="number"
-                name="unitCost"
-                id="unitCost"
-                placeholder="Prix unitaires / Prix journalier"
-                onChange={handleInputChange}
-                step="0.01"
-              />
-              <input
-                type="number"
-                name="quantity"
-                id="quantity"
-                placeholder="Quantité / Durée en jours"
-                onChange={handleInputChange}
-              />
-              <input
-                type="number"
-                name="totalPrice"
-                id="totalPrice"
-                placeholder="Prix HT"
-                onChange={handleInputChange}
-                value={formData.totalPrice}
-                step="0.01"
-              />
-              <input
-                type="number"
-                name="vat"
-                id="vat"
-                placeholder="TVA (Mettre 0 si le produit ou service est exempté de la TVA)"
-                onChange={handleInputChange}
-                step="0.01"
-              />
-              <div className="btn-invoice-4">
-                <button type="submit">Ajouter le produit</button>
-              </div>
-              <div className="center-plus">
-                <img
-                  src="going-back.svg"
-                  alt="Revenir en arrière"
-                  onClick={handleRefreshPage}
+        <Helmet>
+          <title>Ajout Produits/Services | Beheall</title>
+        </Helmet>
+        {globalErrors.length > 0 && <div className="overlay"></div>}
+        <div className="welcome-user">
+          <h1>création factures</h1>
+          <Account />
+        </div>
+        <div className="invoice-step-one-title">
+          <h2>Etape</h2>
+          <h2>N°4</h2>
+        </div>
+        <div>
+          <div
+            className={
+              isInvoiceCreateVisible
+                ? "invoice-create"
+                : "invoice-create display-none"
+            }
+          >
+            <div className="add-company">
+              {globalErrors.length > 0 && (
+                <div className="alert">
+                  <span onClick={closeAlert} className="close-alert">
+                    &times;
+                  </span>
+                  {globalErrors.map((error, index) => (
+                    <p key={index}>{error}</p>
+                  ))}
+                </div>
+              )}
+              <form onSubmit={handleFormSubmit}>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="Nom du produit ou service"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                ></input>
+                <textarea
+                  id="description"
+                  placeholder="Descriptif"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                ></textarea>
+                <input
+                  type="number"
+                  name="unitCost"
+                  id="unitCost"
+                  placeholder="Prix unitaires / Prix journalier"
+                  onChange={handleInputChange}
+                  step="0.01"
                 />
-              </div>
-            </form>
+                <input
+                  type="number"
+                  name="quantity"
+                  id="quantity"
+                  placeholder="Quantité / Durée en jours"
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="number"
+                  name="totalPrice"
+                  id="totalPrice"
+                  placeholder="Prix HT"
+                  onChange={handleInputChange}
+                  value={formData.totalPrice}
+                  step="0.01"
+                />
+                <input
+                  type="number"
+                  name="vat"
+                  id="vat"
+                  placeholder="TVA (Mettre 0 si le produit ou service est exempté de la TVA)"
+                  onChange={handleInputChange}
+                  step="0.01"
+                />
+                <div className="btn-invoice-4">
+                  <button type="submit">Ajouter le produit</button>
+                </div>
+                <div className="center-plus">
+                  <img
+                    src="going-back.svg"
+                    alt="Revenir en arrière"
+                    onClick={handleRefreshPage}
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div
-        className={
-          isProductListVisible ? "product-list" : "product-list display-none"
-        }
-      >
-        <ul className="product-header">
-          <li>Intitulés</li>
-          <li>Volumes</li>
-          <li>Tarifs</li>
-          <li>TVA</li>
-          <li>Prix HT</li>
-          <li>Supprimer</li>
-        </ul>
-        {productList.map((product, index) => (
-          <ul
-            className={`product-item ${
-              isSmallScreen ? "small-screen" : "large-screen"
-            }`}
-            key={index}
-          >
-            <li>
-              {product.title.length > (isSmallScreen ? 8 : 25)
-                ? `${product.title.substring(0, isSmallScreen ? 8 : 25)}...`
-                : product.title}
-            </li>
-            <li>{product.quantity}</li>
-            <li>{product.unitCost}€</li>
-            <li>{product.vat}%</li>
-            <li>{product.totalPrice}€</li>
-            <li>
-              <img
-                className="delete-icon"
-                onClick={() => handleDeleteProduct(product.id)}
-                src="delete-icon.svg"
-                alt="Supprimer le produit"
-              />
-            </li>
+        <div
+          className={
+            isProductListVisible ? "product-list" : "product-list display-none"
+          }
+        >
+          <ul className="product-header">
+            <li>Intitulés</li>
+            <li>Volumes</li>
+            <li>Tarifs</li>
+            <li>TVA</li>
+            <li>Prix HT</li>
+            <li>Supprimer</li>
           </ul>
-        ))}
-        <div className="center-plus">
-          <img
-            src="/plus.svg"
-            alt="Ajouter un produit ou un service"
-            onClick={handleToggle}
-          />
+          {productList.map((product, index) => (
+            <ul
+              className={`product-item ${
+                isSmallScreen ? "small-screen" : "large-screen"
+              }`}
+              key={index}
+            >
+              <li>
+                {product.title.length > (isSmallScreen ? 8 : 25)
+                  ? `${product.title.substring(0, isSmallScreen ? 8 : 25)}...`
+                  : product.title}
+              </li>
+              <li>{product.quantity}</li>
+              <li>{product.unitCost}€</li>
+              <li>{product.vat}%</li>
+              <li>{product.totalPrice}€</li>
+              <li>
+                <img
+                  className="delete-icon"
+                  onClick={() => handleDeleteProduct(product.id)}
+                  src="delete-icon.svg"
+                  alt="Supprimer le produit"
+                />
+              </li>
+            </ul>
+          ))}
+          <div className="center-plus">
+            <img
+              src="/plus.svg"
+              alt="Ajouter un produit ou un service"
+              onClick={handleToggle}
+            />
+          </div>
+          <div className="total-price">
+            <p>Total TTC: {totalTTC.toFixed(2)}€</p>
+          </div>
+          <div className="btn-invoice-add-ps fixed-btn-4">
+            {productList.length > 0 && (
+              <button type="submit" onClick={handleCreateInvoice}>
+                Créer votre facture
+              </button>
+            )}
+          </div>
         </div>
-        <div className="total-price">
-          <p>Total TTC: {totalTTC.toFixed(2)}€</p>
+        <AccordionNav />
+        <div className="desktop-footer">
+          <Footer />
         </div>
-        <div className="btn-invoice-add-ps fixed-btn-4">
-          {productList.length > 0 && (
-            <button type="submit" onClick={handleCreateInvoice}>
-              Créer votre facture
-            </button>
-          )}
-        </div>
-      </div>
-      <AccordionNav />
-      <div className="desktop-footer">
-        <Footer />
-      </div>
       </HelmetProvider>
     </div>
   );

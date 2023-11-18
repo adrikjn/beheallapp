@@ -4,7 +4,7 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 
 export const InvoiceStepFive = () => {
@@ -411,8 +411,6 @@ export const InvoiceStepFive = () => {
         contentY
       );
     }
-    
-    
 
     contentY += addTextWithMaxWidth(
       `Conditions générales de vente : ${invoiceData?.description}`,
@@ -462,29 +460,15 @@ export const InvoiceStepFive = () => {
   return (
     <div className="invoice-step-one-page fade-in">
       <HelmetProvider>
-      <Helmet>
-        <title>Récapitulatif & Finalisation | Beheall</title>
-      </Helmet>
-      <div className="welcome-user">
-        <h1>Finalisation</h1>
-        <Account />
-      </div>
-      <div className="pdf-mobile">
-        <h2>Télécharger le PDF :</h2>
-        <button onClick={captureSignature}>
-          <img
-            src="bill-pdf-dl.svg"
-            alt="Télécharger la facture au format PDF"
-            className="dl-pdf-img"
-          />
-        </button>
-      </div>
-      <div className="contents-try">
-        <div className="dl-pdf">
-          <h2>
-            Veuillez signer la facture puis cliquer sur l'icône PDF pour la
-            télécharger
-          </h2>
+        <Helmet>
+          <title>Récapitulatif & Finalisation | Beheall</title>
+        </Helmet>
+        <div className="welcome-user">
+          <h1>Finalisation</h1>
+          <Account />
+        </div>
+        <div className="pdf-mobile">
+          <h2>Télécharger le PDF :</h2>
           <button onClick={captureSignature}>
             <img
               src="bill-pdf-dl.svg"
@@ -493,146 +477,164 @@ export const InvoiceStepFive = () => {
             />
           </button>
         </div>
-        <div className="sign-pdf-div">
-          <canvas
-            className="canva-signature"
-            ref={signatureCanvasRef}
-            onMouseDown={startDrawing}
-            onMouseMove={draw}
-            onMouseUp={endDrawing}
-            onMouseOut={endDrawing}
-          ></canvas>
-          <img
-            src="erase-signature.svg"
-            alt="Effacer la signature"
-            className="clear-signature-button"
-            onClick={clearSignature}
-          />
-        </div>
-      </div>
-      <div className="summary">
-        <div className="company-customer-summary">
-          <div className="company-summary">
-            <h2>Expéditaire</h2>
-            <div className="company-summary-part">
-              <div className="company-info-1">
-                <p>
-                  {userData?.lastName?.toUpperCase()}{" "}
-                  {userData?.firstName
-                    ? userData.firstName.charAt(0).toUpperCase() +
-                      userData.firstName.slice(1)
-                    : ""}
-                </p>
-                <p>{invoiceData?.company?.name}</p>
-                <p> {invoiceData?.company?.sirenSiret}</p>
-                <p> {invoiceData?.company?.vatId}</p>
-              </div>
-              <div className="company-info-2">
-                <p>
-                  {invoiceData?.company?.address} {invoiceData?.company?.city}{" "}
-                  {invoiceData?.company?.postalCode}
-                </p>
-                <p>{invoiceData?.company?.email}</p>
-                <p>{invoiceData?.company?.phoneNumber}</p>
-              </div>
-            </div>
+        <div className="contents-try">
+          <div className="dl-pdf">
+            <h2>
+              Veuillez signer la facture puis cliquer sur l'icône PDF pour la
+              télécharger
+            </h2>
+            <button onClick={captureSignature}>
+              <img
+                src="bill-pdf-dl.svg"
+                alt="Télécharger la facture au format PDF"
+                className="dl-pdf-img"
+              />
+            </button>
           </div>
-
-          <div className="customer-summary">
-            <h2>Client</h2>
-            <div className="customer-summary-part">
-              <div className="customer-info-1">
-                <p>
-                  {invoiceData?.customer?.companyName} (
-                  {invoiceData?.customer?.lastName?.toUpperCase()}{" "}
-                  {invoiceData?.customer?.firstName
-                    ? invoiceData.customer.firstName.charAt(0).toUpperCase() +
-                      invoiceData.customer.firstName.slice(1)
-                    : ""}
-                  )
-                </p>
-                <p>{invoiceData?.customer?.email}</p>
-                <p>{invoiceData?.customer?.sirenSiret}</p>
-              </div>
-              <div className="customer-info-2">
-                <p>
-                  {invoiceData?.customer?.address} {invoiceData?.customer?.city}{" "}
-                  {invoiceData?.customer?.postalCode}
-                </p>
-                <p>{invoiceData?.customer?.phoneNumber}</p>
-                <p>{invoiceData?.customer?.vatId}</p>
-              </div>
-            </div>
+          <div className="sign-pdf-div">
+            <canvas
+              className="canva-signature"
+              ref={signatureCanvasRef}
+              onMouseDown={startDrawing}
+              onMouseMove={draw}
+              onMouseUp={endDrawing}
+              onMouseOut={endDrawing}
+            ></canvas>
+            <img
+              src="erase-signature.svg"
+              alt="Effacer la signature"
+              className="clear-signature-button"
+              onClick={clearSignature}
+            />
           </div>
         </div>
-
-        <div className="products-summary">
-          <h2>Produits</h2>
-          <div className="product-summary-part">
-            <ul className="product-summary-header">
-              <li>Intitulés</li>
-              <li>Volumes</li>
-              <li>Tarifs</li>
-              <li>TVA</li>
-              <li>Prix HT</li>
-            </ul>
-            {invoiceData?.services?.map((service) => (
-              <ul
-                className={`product-summary-item ${
-                  isSmallScreen ? "small-screen" : "large-screen"
-                }`}
-                key={service.id}
-              >
-                <li>
-                  {service.title.length > (isSmallScreen ? 8 : 25)
-                    ? `${service.title.substring(0, isSmallScreen ? 8 : 25)}...`
-                    : service.title}{" "}
+        <div className="summary">
+          <div className="company-customer-summary">
+            <div className="company-summary">
+              <h2>Expéditaire</h2>
+              <div className="company-summary-part">
+                <div className="company-info-1">
                   <p>
-                    -{" "}
-                    {service.description.length > (isSmallScreen ? 8 : 25)
-                      ? `${service.description.substring(
+                    {userData?.lastName?.toUpperCase()}{" "}
+                    {userData?.firstName
+                      ? userData.firstName.charAt(0).toUpperCase() +
+                        userData.firstName.slice(1)
+                      : ""}
+                  </p>
+                  <p>{invoiceData?.company?.name}</p>
+                  <p> {invoiceData?.company?.sirenSiret}</p>
+                  <p> {invoiceData?.company?.vatId}</p>
+                </div>
+                <div className="company-info-2">
+                  <p>
+                    {invoiceData?.company?.address} {invoiceData?.company?.city}{" "}
+                    {invoiceData?.company?.postalCode}
+                  </p>
+                  <p>{invoiceData?.company?.email}</p>
+                  <p>{invoiceData?.company?.phoneNumber}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="customer-summary">
+              <h2>Client</h2>
+              <div className="customer-summary-part">
+                <div className="customer-info-1">
+                  <p>
+                    {invoiceData?.customer?.companyName} (
+                    {invoiceData?.customer?.lastName?.toUpperCase()}{" "}
+                    {invoiceData?.customer?.firstName
+                      ? invoiceData.customer.firstName.charAt(0).toUpperCase() +
+                        invoiceData.customer.firstName.slice(1)
+                      : ""}
+                    )
+                  </p>
+                  <p>{invoiceData?.customer?.email}</p>
+                  <p>{invoiceData?.customer?.sirenSiret}</p>
+                </div>
+                <div className="customer-info-2">
+                  <p>
+                    {invoiceData?.customer?.address}{" "}
+                    {invoiceData?.customer?.city}{" "}
+                    {invoiceData?.customer?.postalCode}
+                  </p>
+                  <p>{invoiceData?.customer?.phoneNumber}</p>
+                  <p>{invoiceData?.customer?.vatId}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="products-summary">
+            <h2>Produits</h2>
+            <div className="product-summary-part">
+              <ul className="product-summary-header">
+                <li>Intitulés</li>
+                <li>Volumes</li>
+                <li>Tarifs</li>
+                <li>TVA</li>
+                <li>Prix HT</li>
+              </ul>
+              {invoiceData?.services?.map((service) => (
+                <ul
+                  className={`product-summary-item ${
+                    isSmallScreen ? "small-screen" : "large-screen"
+                  }`}
+                  key={service.id}
+                >
+                  <li>
+                    {service.title.length > (isSmallScreen ? 8 : 25)
+                      ? `${service.title.substring(
                           0,
                           isSmallScreen ? 8 : 25
                         )}...`
-                      : service.description}
-                  </p>
-                </li>
-                <li>{service.quantity}</li>
-                <li>{service.unitCost}€</li>
-                <li>{service.vat}%</li>
-                <li>{service.totalPrice}€</li>
-              </ul>
-            ))}
-          </div>
-          <div className="summary-details">
-            <div className="summary-total">
-              <p>Objet : {invoiceData?.title}</p>
-              <p>PRIX TTC : {invoiceData?.totalPrice.toFixed(2)}€</p>
+                      : service.title}{" "}
+                    <p>
+                      -{" "}
+                      {service.description.length > (isSmallScreen ? 8 : 25)
+                        ? `${service.description.substring(
+                            0,
+                            isSmallScreen ? 8 : 25
+                          )}...`
+                        : service.description}
+                    </p>
+                  </li>
+                  <li>{service.quantity}</li>
+                  <li>{service.unitCost}€</li>
+                  <li>{service.vat}%</li>
+                  <li>{service.totalPrice}€</li>
+                </ul>
+              ))}
             </div>
-            <p>Numéro de facture : {invoiceData?.billNumber.toUpperCase()}</p>
-            <p>
-              Date de l'opération:{" "}
-              {invoiceData?.fromDate
-                ? `${formatDate(invoiceData?.fromDate)} - ${formatDate(
-                    invoiceData?.deliveryDate
-                  )}`
-                : formatDate(invoiceData?.deliveryDate)}
-            </p>
-            <p>
-              Durée de validité de la facture :{" "}
-              {invoiceData?.billValidityDuration}
-            </p>
-            <p>Moyen de paiement : {invoiceData?.paymentMethod}</p>
-          </div>
-          <div className="btn-invoice-5">
-            <button onClick={sendInvoice}>Création de la facture</button>
+            <div className="summary-details">
+              <div className="summary-total">
+                <p>Objet : {invoiceData?.title}</p>
+                <p>PRIX TTC : {invoiceData?.totalPrice.toFixed(2)}€</p>
+              </div>
+              <p>Numéro de facture : {invoiceData?.billNumber.toUpperCase()}</p>
+              <p>
+                Date de l'opération:{" "}
+                {invoiceData?.fromDate
+                  ? `${formatDate(invoiceData?.fromDate)} - ${formatDate(
+                      invoiceData?.deliveryDate
+                    )}`
+                  : formatDate(invoiceData?.deliveryDate)}
+              </p>
+              <p>
+                Durée de validité de la facture :{" "}
+                {invoiceData?.billValidityDuration}
+              </p>
+              <p>Moyen de paiement : {invoiceData?.paymentMethod}</p>
+            </div>
+            <div className="btn-invoice-5">
+              <button onClick={sendInvoice}>Création de la facture</button>
+            </div>
           </div>
         </div>
-      </div>
-      <AccordionNav />
-      <div className="desktop-footer">
-        <Footer />
-      </div>
+        <AccordionNav />
+        <div className="desktop-footer">
+          <Footer />
+        </div>
       </HelmetProvider>
     </div>
   );

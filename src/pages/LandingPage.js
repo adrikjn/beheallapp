@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../App.css";
 import Logo from "../components/Logo";
 import Brand from "../components/Brand";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -26,21 +26,21 @@ export const LandingPage = () => {
   return (
     <div className="landing-page">
       <HelmetProvider>
-      <Helmet>
-        <meta
-          name="description"
-          content="Notre service de facturation en ligne simplifie la création de factures. Générez rapidement des factures professionnelles. Essayez dès maintenant !"
-        />
-      </Helmet>
-      <div className="landing-page-height">
-        <Logo />
-        <Brand />
-        <div className="infos">
-          <p>simple</p>
-          <p>intuitif</p>
-          <p>rapide</p>
+        <Helmet>
+          <meta
+            name="description"
+            content="Notre service de facturation en ligne simplifie la création de factures. Générez rapidement des factures professionnelles. Essayez dès maintenant !"
+          />
+        </Helmet>
+        <div className="landing-page-height">
+          <Logo />
+          <Brand />
+          <div className="infos">
+            <p>simple</p>
+            <p>intuitif</p>
+            <p>rapide</p>
+          </div>
         </div>
-      </div>
       </HelmetProvider>
     </div>
   );

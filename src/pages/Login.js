@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import jwtDecode from "jwt-decode";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
 
@@ -67,7 +67,7 @@ export const Login = () => {
   };
 
   const handleFormSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     handleLogin();
   };
 
@@ -82,70 +82,70 @@ export const Login = () => {
   return (
     <div className="login-page fade-in">
       <HelmetProvider>
-      <Helmet>
-        <title>Connexion | Beheall</title>
-        <meta
-          name="description"
-          content="Commencez à créer vos factures gratuitement dès maintenant en vous connectant à votre compte Beheall."
-        />
-      </Helmet>
-      {globalErrors.length > 0 && <div className="overlay"></div>}
-      {globalErrors.length > 0 && (
-        <div className="alert">
-          <span onClick={closeAlert} className="close-alert">
-            &times;
-          </span>
-          {globalErrors.map((error, index) => (
-            <p key={index}>{error}</p>
-          ))}
+        <Helmet>
+          <title>Connexion | Beheall</title>
+          <meta
+            name="description"
+            content="Commencez à créer vos factures gratuitement dès maintenant en vous connectant à votre compte Beheall."
+          />
+        </Helmet>
+        {globalErrors.length > 0 && <div className="overlay"></div>}
+        {globalErrors.length > 0 && (
+          <div className="alert">
+            <span onClick={closeAlert} className="close-alert">
+              &times;
+            </span>
+            {globalErrors.map((error, index) => (
+              <p key={index}>{error}</p>
+            ))}
+          </div>
+        )}
+        <div className="login-part-one">
+          <LogoAndPicture />
+          <p className="login-description">On s'occupe de tout</p>
+          <div className="login-border"></div>
         </div>
-      )}
-      <div className="login-part-one">
-        <LogoAndPicture />
-        <p className="login-description">On s'occupe de tout</p>
-        <div className="login-border"></div>
-      </div>
-      <div className="login-part-two">
-        <div className="login-space">
-          <h1>Connexion</h1>
-          {registrationSuccess && (
-            <p className="success-message">
-              Le compte a été créé avec succès. Vous pouvez dès à présent vous
-              connecter.
-            </p>
-          )}
-          <div>
-            <form onSubmit={handleFormSubmit} className="padding-form">
-              <input
-                type="text"
-                placeholder="E-MAIL"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="password"
-                placeholder="MOT DE PASSE"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <p>
-                Vous n'avez pas de compte ?&nbsp;
-                <Link to="/register" className="register-link">
-                  S'inscrire
-                </Link>
+        <div className="login-part-two">
+          <div className="login-space">
+            <h1>Connexion</h1>
+            {registrationSuccess && (
+              <p className="success-message">
+                Le compte a été créé avec succès. Vous pouvez dès à présent vous
+                connecter.
               </p>
-              <Link to="/reset-password" className="reset-password-login">
-                Mot de passe oublié ?
-              </Link>
-              <div className="center-btn">
-                <button type="submit">Se connecter</button>
-              </div>
-            </form>
+            )}
+            <div>
+              <form onSubmit={handleFormSubmit} className="padding-form">
+                <input
+                  type="text"
+                  placeholder="E-MAIL"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="MOT DE PASSE"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <p>
+                  Vous n'avez pas de compte ?&nbsp;
+                  <Link to="/register" className="register-link">
+                    S'inscrire
+                  </Link>
+                </p>
+                <Link to="/reset-password" className="reset-password-login">
+                  Mot de passe oublié ?
+                </Link>
+                <div className="center-btn">
+                  <button type="submit">Se connecter</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-      {hasToken && <AccordionNav />}
-      <Footer />
+        {hasToken && <AccordionNav />}
+        <Footer />
       </HelmetProvider>
     </div>
   );

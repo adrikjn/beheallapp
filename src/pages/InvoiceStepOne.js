@@ -4,10 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
-
-
 
 export const InvoiceStepOne = () => {
   const token = localStorage.getItem("Token");
@@ -103,9 +101,7 @@ export const InvoiceStepOne = () => {
         descriptionWork: "",
       });
 
-      const userResponse = await Axios.get(
-        `${apiUrl}/users/${userId}`
-      );
+      const userResponse = await Axios.get(`${apiUrl}/users/${userId}`);
 
       const updatedUserData = userResponse.data;
       localStorage.setItem("UserData", JSON.stringify(updatedUserData));
@@ -172,236 +168,238 @@ export const InvoiceStepOne = () => {
   return (
     <div className="invoice-step-one-page fade-in">
       <HelmetProvider>
-      <Helmet>
-        <title>Ajout Entreprise | Beheall</title>
-      </Helmet>
-      {globalErrors.length > 0 && <div className="overlay"></div>}
-      <div className="welcome-user">
-        <h1>création factures</h1>
-        <Account />
-      </div>
-      <div className="invoice-step-one-title">
-        <h2>Etape</h2>
-        <h2>N°1</h2>
-      </div>
-      <p className="invoice-step-one-p">Sélectionner un expéditeur</p>
-      <select
-        className="select-company"
-        onChange={handleSelectChange}
-        name="name"
-      >
-        <option defaultValue value="undefined">
-          Sélectionner une entreprise
-        </option>
-        {userCompanies.map((company) => (
-          <option key={company.id} value={company.id}>
-            {company.name}
-          </option>
-        ))}
-      </select>
-      <div id="newCompanieForm">
-        <div className="add-company-exp">
-          <h2>nouvel expéditeur</h2>
+        <Helmet>
+          <title>Ajout Entreprise | Beheall</title>
+        </Helmet>
+        {globalErrors.length > 0 && <div className="overlay"></div>}
+        <div className="welcome-user">
+          <h1>création factures</h1>
+          <Account />
         </div>
-        <form onSubmit={handleFormSubmit}>
-          <div className="add-company">
-            {globalErrors.length > 0 && (
-              <div className="alert">
-                <span onClick={closeAlert} className="close-alert">
-                  &times;
-                </span>
-                {globalErrors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
-            <div className="invoice-step-sizes">
-               <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Entreprise (NOM Prénom, si indépendant)"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              id="siret"
-              placeholder="SIREN/SIRET"
-              name="sirenSiret"
-              value={formData.sirenSiret}
-              onChange={handleInputChange}
-            />
-            </div>
-            <div className="invoice-step-sizes">
-            <input
-              type="email"
-              id="email"
-              placeholder="E-mail"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-            <input
-              type="tel"
-              id="tel"
-              placeholder="Téléphone"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleInputChange}
-            />
-            </div>
-            <input
-              type="text"
-              id="address"
-              placeholder="Adresse"
-              name="address"
-              value={formData.address}
-              onChange={handleInputChange}
-            />
-            <div className="input-row">
-              <input
-                type="text"
-                id="city"
-                placeholder="Ville"
-                name="city"
-                value={formData.city}
-                onChange={handleInputChange}
-              />
-              <input
-                type="text"
-                id="postalcode"
-                placeholder="Code postal"
-                name="postalCode"
-                value={formData.postalCode}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="switch-container">
-              <label htmlFor="showAdditionalFields">
-                Afficher les champs facultatifs :
-              </label>
-              <input
-                type="checkbox"
-                id="showAdditionalFields"
-                checked={showAdditionalFields}
-                onChange={() => setShowAdditionalFields(!showAdditionalFields)}
-              />
-            </div>         
-            {showAdditionalFields && (
-              <>
-                <input
-                  type="text"
-                  id="vatId"
-                  placeholder="Numéro de TVA Intracommunautaire"
-                  name="vatId"
-                  value={formData.vatId}
-                  onChange={handleInputChange}
-                />
-                <select
-                  id="legalForm"
-                  name="legalForm"
-                  className="select-legal-form"
-                  value={formData.legalForm}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Sélectionnez une forme juridique</option>
-                  <option value="Entreprise Individuelle">
-                    Entreprise individuelle (EI)
-                  </option>
-                  <option value="Entreprise unipersonnelle à responsabilité limitée">
-                    Entreprise unipersonnelle à responsabilité limitée (EURL)
-                  </option>
-                  <option value="Société à responsabilité limitée">
-                    Société à responsabilité limitée (SARL)
-                  </option>
-                  <option value="Société anonyme">Société anonyme (SA)</option>
-                  <option
-                    value="Société par actions simplifiée (SAS) ou société par actions
-                simplifiée unipersonnelle"
-                  >
-                    Société par actions simplifiée (SAS) ou société par actions
-                    simplifiée unipersonnelle (SASU)
-                  </option>
-                  <option value="Société en nom collectif">
-                    Société en nom collectif (SNC)
-                  </option>
-                  <option value="Société coopérative de production">
-                    Société coopérative de production (Scop)
-                  </option>
-                  <option
-                    value="Société en commandite par actions (SCA) et société en commandite
-                simple"
-                  >
-                    Société en commandite par actions (SCA) et société en
-                    commandite simple (SCS)
-                  </option>
-                </select>
+        <div className="invoice-step-one-title">
+          <h2>Etape</h2>
+          <h2>N°1</h2>
+        </div>
+        <p className="invoice-step-one-p">Sélectionner un expéditeur</p>
+        <select
+          className="select-company"
+          onChange={handleSelectChange}
+          name="name"
+        >
+          <option defaultValue value="undefined">
+            Sélectionner une entreprise
+          </option>
+          {userCompanies.map((company) => (
+            <option key={company.id} value={company.id}>
+              {company.name}
+            </option>
+          ))}
+        </select>
+        <div id="newCompanieForm">
+          <div className="add-company-exp">
+            <h2>nouvel expéditeur</h2>
+          </div>
+          <form onSubmit={handleFormSubmit}>
+            <div className="add-company">
+              {globalErrors.length > 0 && (
+                <div className="alert">
+                  <span onClick={closeAlert} className="close-alert">
+                    &times;
+                  </span>
+                  {globalErrors.map((error, index) => (
+                    <p key={index}>{error}</p>
+                  ))}
+                </div>
+              )}
               <div className="invoice-step-sizes">
                 <input
                   type="text"
-                  id="shareCapital"
-                  placeholder="Capital"
-                  name="shareCapital"
-                  value={formData.shareCapital}
+                  id="name"
+                  name="name"
+                  placeholder="Entreprise (NOM Prénom, si indépendant)"
+                  value={formData.name}
                   onChange={handleInputChange}
                 />
                 <input
                   type="text"
-                  id="cityRegistration"
-                  placeholder="Ville d'enregistrement"
-                  name="cityRegistration"
-                  value={formData.cityRegistration}
+                  id="siret"
+                  placeholder="SIREN/SIRET"
+                  name="sirenSiret"
+                  value={formData.sirenSiret}
                   onChange={handleInputChange}
                 />
-                </div>
-                <div className="invoice-step-sizes">
+              </div>
+              <div className="invoice-step-sizes">
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="E-mail"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="tel"
+                  id="tel"
+                  placeholder="Téléphone"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <input
+                type="text"
+                id="address"
+                placeholder="Adresse"
+                name="address"
+                value={formData.address}
+                onChange={handleInputChange}
+              />
+              <div className="input-row">
                 <input
                   type="text"
-                  id="country"
-                  placeholder="Pays"
-                  name="country"
-                  value={formData.country}
+                  id="city"
+                  placeholder="Ville"
+                  name="city"
+                  value={formData.city}
                   onChange={handleInputChange}
                 />
                 <input
                   type="text"
-                  id="website"
-                  placeholder="Site web"
-                  name="website"
-                  value={formData.website}
+                  id="postalcode"
+                  placeholder="Code postal"
+                  name="postalCode"
+                  value={formData.postalCode}
                   onChange={handleInputChange}
                 />
-                </div>
-                <textarea
-                  id="descriptionWork"
-                  placeholder="Description de votre secteur d'activité"
-                  name="descriptionWork"
-                  value={formData.descriptionWork}
-                  onChange={handleInputChange}
-                ></textarea>
-              </>
-            )}
+              </div>
+              <div className="switch-container">
+                <label htmlFor="showAdditionalFields">
+                  Afficher les champs facultatifs :
+                </label>
+                <input
+                  type="checkbox"
+                  id="showAdditionalFields"
+                  checked={showAdditionalFields}
+                  onChange={() =>
+                    setShowAdditionalFields(!showAdditionalFields)
+                  }
+                />
+              </div>
+              {showAdditionalFields && (
+                <>
+                  <input
+                    type="text"
+                    id="vatId"
+                    placeholder="Numéro de TVA Intracommunautaire"
+                    name="vatId"
+                    value={formData.vatId}
+                    onChange={handleInputChange}
+                  />
+                  <select
+                    id="legalForm"
+                    name="legalForm"
+                    className="select-legal-form"
+                    value={formData.legalForm}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Sélectionnez une forme juridique</option>
+                    <option value="Entreprise Individuelle">
+                      Entreprise individuelle (EI)
+                    </option>
+                    <option value="Entreprise unipersonnelle à responsabilité limitée">
+                      Entreprise unipersonnelle à responsabilité limitée (EURL)
+                    </option>
+                    <option value="Société à responsabilité limitée">
+                      Société à responsabilité limitée (SARL)
+                    </option>
+                    <option value="Société anonyme">
+                      Société anonyme (SA)
+                    </option>
+                    <option
+                      value="Société par actions simplifiée (SAS) ou société par actions
+                simplifiée unipersonnelle"
+                    >
+                      Société par actions simplifiée (SAS) ou société par
+                      actions simplifiée unipersonnelle (SASU)
+                    </option>
+                    <option value="Société en nom collectif">
+                      Société en nom collectif (SNC)
+                    </option>
+                    <option value="Société coopérative de production">
+                      Société coopérative de production (Scop)
+                    </option>
+                    <option
+                      value="Société en commandite par actions (SCA) et société en commandite
+                simple"
+                    >
+                      Société en commandite par actions (SCA) et société en
+                      commandite simple (SCS)
+                    </option>
+                  </select>
+                  <div className="invoice-step-sizes">
+                    <input
+                      type="text"
+                      id="shareCapital"
+                      placeholder="Capital"
+                      name="shareCapital"
+                      value={formData.shareCapital}
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="text"
+                      id="cityRegistration"
+                      placeholder="Ville d'enregistrement"
+                      name="cityRegistration"
+                      value={formData.cityRegistration}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="invoice-step-sizes">
+                    <input
+                      type="text"
+                      id="country"
+                      placeholder="Pays"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="text"
+                      id="website"
+                      placeholder="Site web"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <textarea
+                    id="descriptionWork"
+                    placeholder="Description de votre secteur d'activité"
+                    name="descriptionWork"
+                    value={formData.descriptionWork}
+                    onChange={handleInputChange}
+                  ></textarea>
+                </>
+              )}
+            </div>
 
-          
-          </div>
+            <div className="btn-invoice-2 btn-m">
+              <button>Ajouter</button>
+            </div>
+          </form>
+        </div>
 
-          <div className="btn-invoice-2 btn-m">
-            <button>Ajouter</button>
-          </div>
-        </form>
-      </div>
+        <div className="btn-invoice-2 fixed-btn">
+          {selectedCompanie !== "undefined" && selectedCompanie !== null && (
+            <button onClick={handleContinueClick}>Continuer</button>
+          )}
+        </div>
 
-      <div className="btn-invoice-2 fixed-btn">
-        {selectedCompanie !== "undefined" && selectedCompanie !== null && (
-          <button onClick={handleContinueClick}>Continuer</button>
-        )}
-      </div>
-
-      <AccordionNav />
-      <div className="desktop-footer">
-        <Footer />
-      </div>
+        <AccordionNav />
+        <div className="desktop-footer">
+          <Footer />
+        </div>
       </HelmetProvider>
     </div>
   );

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 
 export const Invoices = () => {
@@ -47,57 +47,68 @@ export const Invoices = () => {
   return (
     <div className="invoice-step-one-page">
       <HelmetProvider>
-      <Helmet>
-        <title>Vos Factures | Beheall</title>
-      </Helmet>
-      <div className="welcome-user">
-        <h1>factures</h1>
-        <Account />
-      </div>
-      <div className="invoices-list-part">
-        <ul className="invoices-id-companies-title">
-          <li>Entreprise</li>
-          <li>Client</li>
-          <li>N°Facture</li>
-          <li className="hidden-mobile-price">Prix</li>
-          <li>Date</li>
-        </ul>
-      </div>
-      <div>
-        {userCompanies.map((company) => (
-          <ul key={company?.id}>
-            {company?.invoices &&
-              Array.isArray(company.invoices) &&
-              company.invoices.map((invoice) => {
-                if (invoice?.status === "envoyé") {
-                  const formattedDate = new Date(invoice.createdAt).toLocaleDateString("fr-FR");
-                  return (
-                    <li key={invoice?.id} className="invoices-id-companies-list">
-                      <p>{company?.name}</p>
-                      <p>{invoice?.customer && invoice.customer.companyName ? invoice.customer.companyName : invoice.customer.lastName}</p>
-                      <p>{invoice?.billNumber}</p>
-                      <p className="hidden-mobile-price">{invoice?.totalPrice}€</p>
-                      <p>{formattedDate}</p>
-                    </li>
-                  );
-                } else {
-                  return null;
-                }
-              })}
+        <Helmet>
+          <title>Vos Factures | Beheall</title>
+        </Helmet>
+        <div className="welcome-user">
+          <h1>factures</h1>
+          <Account />
+        </div>
+        <div className="invoices-list-part">
+          <ul className="invoices-id-companies-title">
+            <li>Entreprise</li>
+            <li>Client</li>
+            <li>N°Facture</li>
+            <li className="hidden-mobile-price">Prix</li>
+            <li>Date</li>
           </ul>
-        ))}
-      </div>
+        </div>
+        <div>
+          {userCompanies.map((company) => (
+            <ul key={company?.id}>
+              {company?.invoices &&
+                Array.isArray(company.invoices) &&
+                company.invoices.map((invoice) => {
+                  if (invoice?.status === "envoyé") {
+                    const formattedDate = new Date(
+                      invoice.createdAt
+                    ).toLocaleDateString("fr-FR");
+                    return (
+                      <li
+                        key={invoice?.id}
+                        className="invoices-id-companies-list"
+                      >
+                        <p>{company?.name}</p>
+                        <p>
+                          {invoice?.customer && invoice.customer.companyName
+                            ? invoice.customer.companyName
+                            : invoice.customer.lastName}
+                        </p>
+                        <p>{invoice?.billNumber}</p>
+                        <p className="hidden-mobile-price">
+                          {invoice?.totalPrice}€
+                        </p>
+                        <p>{formattedDate}</p>
+                      </li>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+            </ul>
+          ))}
+        </div>
 
-      <div className="btn-invoices fixed-btn">
-        <Link to="/invoice-step-one">
-          <button>Créer une facture</button>
-        </Link>
-      </div>
+        <div className="btn-invoices fixed-btn">
+          <Link to="/invoice-step-one">
+            <button>Créer une facture</button>
+          </Link>
+        </div>
 
-      <AccordionNav />
-      <div className="desktop-footer">
-        <Footer />
-      </div>
+        <AccordionNav />
+        <div className="desktop-footer">
+          <Footer />
+        </div>
       </HelmetProvider>
     </div>
   );

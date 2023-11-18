@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 
 export const Dashboard = () => {
@@ -42,7 +42,7 @@ export const Dashboard = () => {
       fetchData();
     }
   }, [token, navigate, userData, apiUrl]);
-  
+
   const allInvoices = userCompanies.flatMap((company) => company.invoices);
 
   const sortedInvoices = allInvoices.sort(
@@ -102,7 +102,7 @@ export const Dashboard = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       if (response.ok) {
         const updatedInvoices = allInvoices.filter(
           (invoice) => invoice.id !== invoiceId
@@ -126,82 +126,87 @@ export const Dashboard = () => {
       );
     }
   };
-  
-  
 
   return (
     <div className="dashboard-page">
       <HelmetProvider>
-      <Helmet>
-        <title>Dashboard | Beheall</title>
-      </Helmet>
-      {userData && (
-        <div className="welcome-user">
-          <h1>Bonjour, {userData.firstName}</h1>
-          <Account />
-        </div>
-      )}
-      <div className="draft-button">
-        {storedDraftInvoiceId && (
-          <Link to={`/invoice-step-four`} className="link-no-underline">
-            <button>
-              Finaliser le brouillon
-              <img src="favicon.ico" alt="" />
-            </button>
-          </Link>
+        <Helmet>
+          <title>Dashboard | Beheall</title>
+        </Helmet>
+        {userData && (
+          <div className="welcome-user">
+            <h1>Bonjour, {userData.firstName}</h1>
+            <Account />
+          </div>
         )}
-      </div>
-      <div className="invoice-title">
-        <p>Dernières factures</p>
-        <p>Statut</p>
-      </div>
-
-      <div className="invoice-list">
-        {lastTwoInvoices.map((invoice) => (
-          <div key={invoice.id} className="invoice-customers">
-            <p>
-              {invoice.customer.companyName.toUpperCase()} - (
-              {invoice.customer.lastName.toUpperCase()}{" "}
-              {invoice.customer.firstName.charAt(0).toUpperCase() +
-                invoice.customer.firstName.slice(1)}
-              )
-            </p>
-          
-            <p
-              className={
-                invoice.status === "brouillon" ? "status-draft" : "status-sent"
-              }
-            >
-              {invoice.status}   {invoice.status === "brouillon" && (
-            <button onClick={() => deleteInvoice(invoice.id)} className="delete-invoice-draft"><img src="/delete-icon.svg" alt="Supprimer le brouillon" /></button>
+        <div className="draft-button">
+          {storedDraftInvoiceId && (
+            <Link to={`/invoice-step-four`} className="link-no-underline">
+              <button>
+                Finaliser le brouillon
+                <img src="favicon.ico" alt="" />
+              </button>
+            </Link>
           )}
-            </p>
-          
-          </div>
-        ))}
-      </div>
-
-      <div className="revenue-party">
-        <h2>Chiffre d'affaires du mois</h2>
-        <div className="revenue">
-          <div className="revenue-title-date">
-            <p>CA :</p>
-            <p>{formattedCurrentDate}</p>
-          </div>
-          <p className="revenue-amount">{displayTotalThisMonth}</p>
         </div>
-      </div>
+        <div className="invoice-title">
+          <p>Dernières factures</p>
+          <p>Statut</p>
+        </div>
 
-      <div className="btn-invoice">
-        <Link to="/invoice-step-one">
-          <button>Créer une facture</button>
-        </Link>
-      </div>
+        <div className="invoice-list">
+          {lastTwoInvoices.map((invoice) => (
+            <div key={invoice.id} className="invoice-customers">
+              <p>
+                {invoice.customer.companyName.toUpperCase()} - (
+                {invoice.customer.lastName.toUpperCase()}{" "}
+                {invoice.customer.firstName.charAt(0).toUpperCase() +
+                  invoice.customer.firstName.slice(1)}
+                )
+              </p>
 
-      <AccordionNav />
-      <div className="desktop-footer">
-        <Footer />
-      </div>
+              <p
+                className={
+                  invoice.status === "brouillon"
+                    ? "status-draft"
+                    : "status-sent"
+                }
+              >
+                {invoice.status}{" "}
+                {invoice.status === "brouillon" && (
+                  <button
+                    onClick={() => deleteInvoice(invoice.id)}
+                    className="delete-invoice-draft"
+                  >
+                    <img src="/delete-icon.svg" alt="Supprimer le brouillon" />
+                  </button>
+                )}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="revenue-party">
+          <h2>Chiffre d'affaires du mois</h2>
+          <div className="revenue">
+            <div className="revenue-title-date">
+              <p>CA :</p>
+              <p>{formattedCurrentDate}</p>
+            </div>
+            <p className="revenue-amount">{displayTotalThisMonth}</p>
+          </div>
+        </div>
+
+        <div className="btn-invoice">
+          <Link to="/invoice-step-one">
+            <button>Créer une facture</button>
+          </Link>
+        </div>
+
+        <AccordionNav />
+        <div className="desktop-footer">
+          <Footer />
+        </div>
       </HelmetProvider>
     </div>
   );
