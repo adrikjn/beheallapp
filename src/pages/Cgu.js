@@ -4,7 +4,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
 import Account from "../components/Account";
-import { Link } from "react-router-dom";
+import GoingBackLogin from "../components/GoingBackLogin.js";
 
 export const Cgu = () => {
   const hasToken = !!localStorage.getItem("Token");
@@ -19,11 +19,7 @@ export const Cgu = () => {
           />
         </Helmet>
         <div>
-          {!hasToken && (
-            <Link to="/login" className="back-to-login-footer-infos">
-              <img src="going-back.svg" alt="Revenir a la page de connexion" />
-            </Link>
-          )}
+        {!hasToken && <GoingBackLogin />}
           <h1>Conditions Générales d'Utilisation {hasToken && <Account />}</h1>
 
           <div className="legal-notice-rules">

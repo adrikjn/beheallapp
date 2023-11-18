@@ -77,8 +77,8 @@ const AccordionNav = () => {
           >
             <span>{currentPage}</span>
             <div className="toggle-lines">
-              <img src="/line-16.svg" alt="Ouvrir/Fermer la nav" />
-              <img src="/line-17.svg" alt="Ouvrir/Fermer la nav" />
+              <img src="/line-16.svg" alt="Ouvrir/Fermer la barre de navigation" />
+              <img src="/line-17.svg" alt="Ouvrir/Fermer la barre de navigation" />
             </div>
             <div className={`nav-links ${isLinksVisible ? "links-open" : ""}`}>
               <ul>
