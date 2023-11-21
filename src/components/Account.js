@@ -45,7 +45,6 @@ const Account = () => {
           <Link to="/my-account" className="acc-style">
             Mon compte
           </Link>
-
           {/* Bouton de déconnexion avec la fonction handleLogout associée */}
           <button onClick={handleLogout}>Déconnexion</button>
         </div>

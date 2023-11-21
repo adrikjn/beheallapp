@@ -1,5 +1,6 @@
 import React from "react";
 
+// Composant représentant le logo de Beheall
 const Brand = () => (
   <div className="brand">
     <p>
