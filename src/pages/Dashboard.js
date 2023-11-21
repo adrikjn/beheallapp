@@ -37,8 +37,10 @@ export const Dashboard = () => {
     else if (userData && userData.companies && userData.companies.length) {
       const companyIds = userData.companies.map((company) => company.id);
 
+      // Fonction pour récupérer les données d'une entreprise
       const fetchData = async () => {
         try {
+          // Utilisation de Promise.all pour effectuer les requêtes en parallèle
           const companiesData = await Promise.all(
             companyIds.map(async (companyId) => {
               const response = await fetch(`${apiUrl}/companies/${companyId}`, {
