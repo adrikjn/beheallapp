@@ -50,9 +50,6 @@ export const Login = () => {
 
       localStorage.setItem("Token", response.data.token);
 
-      const decodedToken = jwtDecode(response.data.token);
-      console.log("Decoded Token:", decodedToken);
-
       navigate("/dashboard");
     } catch (error) {
       console.error("Erreur de connexion :", error);
