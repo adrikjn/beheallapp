@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 // Composant pour la barre de navigation accordéon ou header présente sur toutes les pages de l'application web si l'utilisateur est connecté
 const AccordionNav = () => {
+  
   // État pour contrôler la visibilité des liens dans la version mobile
   const [isLinksVisible, setIsLinksVisible] = useState(true);
 
