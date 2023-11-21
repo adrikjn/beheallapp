@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import { LegalNotice } from "./pages/LegalNotice";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
@@ -19,6 +19,21 @@ import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 
 function App() {
+  useEffect(() => {
+    // Fonction de gestionnaire appelée lors de la fermeture de la page
+    const handleBeforeUnload = () => {
+      // Supprimer les données du localStorage
+      localStorage.clear();
+    };
+
+    // Ajouter un écouteur d'événements pour l'événement "beforeunload" (avant le déchargement de la page)
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Nettoyer l'écouteur d'événements lors du démontage du composant
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
   return (
     <div className="App">
       <Router>
@@ -38,7 +53,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="*" element={<h1>La page demandée n'existe pas</h1>} />
         </Routes>
       </Router>
     </div>
