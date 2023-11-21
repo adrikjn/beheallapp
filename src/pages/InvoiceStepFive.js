@@ -7,15 +7,52 @@ import "jspdf-autotable";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 
+/*
+ Page de finalisation d'une facture. Permet à l'utilisateur de signer électroniquement la facture, de générer un fichier PDF de la facture signée,
+ et de finaliser l'envoi de la facture.
+ */
 export const InvoiceStepFive = () => {
+  // Récupération du jeton JWT du localStorage
   const token = localStorage.getItem("Token");
+
+  // Récupération de l'identifiant de la facture depuis le localStorage
   const invoiceId = localStorage.getItem("invoice");
+
+  // Récupération des données utilisateur stockées localement
   const userData = JSON.parse(localStorage.getItem("UserData"));
+
+  // Utilitaire de navigation fourni par react-router-dom
   const navigate = useNavigate();
+
+  // État local pour stocker les données de la facture
   const [invoiceData, setInvoiceData] = useState(null);
+
+  // Référence pour le canvas de signature
   const signatureCanvasRef = useRef(null);
+
+  // État local pour stocker les données de signature sous forme d'URL
   const [signatureDataURL, setSignatureDataURL] = useState(null);
+
+  // URL de l'API backend
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
+  // État local pour déterminer si l'écran est de petite taille
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
+
+  useEffect(() => {
+    // Fonction de gestionnaire pour mettre à jour l'état de l'écran lors du redimensionnement
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1200);
+    };
+
+    // Ajout de l'écouteur d'événement pour le redimensionnement de la fenêtre
+    window.addEventListener("resize", handleResize);
+
+    // Nettoyage de l'écouteur d'événement lors du démontage du composant
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   function formatDate(dateString) {
     if (!dateString) return "";
@@ -27,29 +64,18 @@ export const InvoiceStepFive = () => {
     return `${day}/${month}/${year}`;
   }
 
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 1200);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
+  // Variables pour le dessin de la signature
   let isDrawing = false;
   let lastX = 0;
   let lastY = 0;
 
+  // Fonction pour démarrer le dessin lors du clic sur le canvas
   const startDrawing = (e) => {
     isDrawing = true;
     [lastX, lastY] = [e.nativeEvent.offsetX, e.nativeEvent.offsetY];
   };
 
+  // Fonction pour dessiner lors du déplacement de la souris sur le canvas
   const draw = (e) => {
     if (!isDrawing) return;
     const ctx = signatureCanvasRef.current.getContext("2d");
@@ -66,10 +92,12 @@ export const InvoiceStepFive = () => {
     [lastX, lastY] = [x, y];
   };
 
+  // Fonction pour arrêter le dessin
   const endDrawing = () => {
     isDrawing = false;
   };
 
+  // Fonction pour effacer la signature
   const clearSignature = () => {
     const canvas = signatureCanvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -78,12 +106,14 @@ export const InvoiceStepFive = () => {
   };
 
   useEffect(() => {
+    // Génération du fichier PDF lorsque l'URL de signature est mise à jour
     if (signatureDataURL) {
       generateInvoicePDF();
     }
     // eslint-disable-next-line
   }, [signatureDataURL]);
 
+  // Fonction pour capturer la signature et mettre à jour l'état
   const captureSignature = () => {
     const canvas = signatureCanvasRef.current;
     const signatureData = canvas.toDataURL("image/png");
@@ -92,6 +122,7 @@ export const InvoiceStepFive = () => {
     // generateInvoicePDF();
   };
 
+  // Vérification de l'authentification et de l'existence de l'identifiant de facture
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -100,6 +131,7 @@ export const InvoiceStepFive = () => {
     }
   }, [token, navigate, invoiceId]);
 
+  // Récupération des données de la facture lors du chargement de la page
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -114,9 +146,10 @@ export const InvoiceStepFive = () => {
         if (response.ok) {
           const data = await response.json();
           setInvoiceData(data);
-        } // } else {
-        //   navigate("/invoice-step-one");
-        // }
+        } else {
+          // Redirection vers la première étape si la facture n'est pas trouvée
+          navigate("/invoice-step-one");
+        }
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des données de la facture : ",
@@ -128,6 +161,7 @@ export const InvoiceStepFive = () => {
     fetchData();
   }, [invoiceId, navigate, token, apiUrl]);
 
+  // Fonction pour envoyer la facture (met à jour le statut de la facture à "envoyé")
   const sendInvoice = async () => {
     try {
       const response = await fetch(`${apiUrl}/invoices/${invoiceId}`, {
@@ -140,6 +174,7 @@ export const InvoiceStepFive = () => {
       });
 
       if (response.ok) {
+        // Nettoyage des données stockées localement et redirection vers le tableau de bord
         localStorage.removeItem("invoice");
         localStorage.removeItem("InvoiceData");
         localStorage.removeItem("DraftInvoice");
@@ -152,20 +187,25 @@ export const InvoiceStepFive = () => {
     }
   };
 
+  // Fonction pour générer le fichier PDF de la facture
   const generateInvoicePDF = () => {
+    // Initialisation d'un nouveau document PDF
     const pdf = new jsPDF({
       orientation: "portrait",
       unit: "mm",
       format: "a4",
     });
 
+    // Configuration du style du texte
     pdf.setFont("helvetica");
     pdf.setFontSize(12);
     pdf.setTextColor(0, 0, 0);
 
+    // Calcul de la largeur maximale du texte dans la page PDF
     const maxWidth = pdf.internal.pageSize.getWidth() * 0.9;
     const lineHeight = 5;
 
+    // Fonction pour ajouter du texte avec une largeur maximale spécifiée
     const addTextWithMaxWidth = (text, x, y) => {
       const textPieces = pdf.splitTextToSize(text, maxWidth);
       textPieces.forEach((textPiece, index) => {
@@ -174,6 +214,7 @@ export const InvoiceStepFive = () => {
       return textPieces.length * lineHeight;
     };
 
+    // Ajout du titre de la facture
     pdf.setFontSize(36);
     const headerText = "FACTURE";
     const headerTextWidth =
@@ -182,6 +223,7 @@ export const InvoiceStepFive = () => {
     const headerX = maxWidth - headerTextWidth;
     pdf.text(headerX, 15, headerText);
 
+    // Ajout de la référence de la facture
     pdf.setFontSize(10);
     const referenceText = `Référence facture : ${invoiceData?.billNumber.toUpperCase()}`;
     const referenceTextWidth =
@@ -189,9 +231,9 @@ export const InvoiceStepFive = () => {
       pdf.internal.scaleFactor;
     const referenceX = maxWidth - referenceTextWidth;
     const referenceY = 21;
-
     pdf.text(referenceX, referenceY, referenceText);
 
+    // Formatage de la date
     const rawDate = new Date(invoiceData?.createdAt);
     const day = rawDate.getDate();
     const month = String(rawDate.getMonth() + 1).padStart(2, "0");
@@ -201,6 +243,7 @@ export const InvoiceStepFive = () => {
     const dateY = referenceY + 4;
     pdf.text(dateX, dateY, `Date : ${formattedDate}`);
 
+    // Informations sur l'expéditeur (entreprise)
     pdf.setFontSize(11);
     const leftXCompany = 15;
     const textYCompany = 30;
@@ -235,6 +278,7 @@ export const InvoiceStepFive = () => {
     );
     pdf.text(leftXCompany, textYCompany + 36, `${invoiceData?.company?.vatId}`);
 
+    // Informations sur le client
     pdf.setFontSize(11);
     const rightXCustomer = 125;
     const textYCustomer = 50;
@@ -287,6 +331,7 @@ export const InvoiceStepFive = () => {
       `${invoiceData?.customer?.vatId}`
     );
 
+    // Titre de la facture et période de l'opération
     pdf.setFontSize(12);
     pdf.text(
       15,
@@ -300,6 +345,7 @@ export const InvoiceStepFive = () => {
       }`
     );
 
+    // Style de tableau zébré
     const zebraStyle = {
       startY: 104,
       theme: "striped",
@@ -321,16 +367,24 @@ export const InvoiceStepFive = () => {
       },
     };
 
+    // Configuration du tableau des produits
     const productsTable = {
       headers: ["Intitulés", "Volumes", "Tarif", "TVA", "Prix HT"],
       rows: [],
     };
 
+    // Variable pour alterner la couleur de fond des lignes
     let isGray = false;
 
+    // Ajout des lignes du tableau des produits
     invoiceData?.services?.forEach((service) => {
+      // Création d'un titre avec une description pour le service
       const titleWithDescription = `${service.title}\n - ${service.description}`;
+
+      // Définition de la couleur de fond en fonction du drapeau isGray
       const fillColor = isGray ? [192, 192, 192] : [255, 255, 255];
+
+      // Ajout des détails du service à la table des produits
       productsTable.rows.push([
         { content: titleWithDescription, fillColor },
         { content: service.quantity, fillColor },
@@ -338,28 +392,37 @@ export const InvoiceStepFive = () => {
         { content: `${service.vat}%`, fillColor },
         { content: `${service.totalPrice}€`, fillColor },
       ]);
+
+      // Basculement du drapeau isGray pour alterner les couleurs des lignes
       isGray = !isGray;
     });
 
+    // Génération d'une table de produits dans le PDF en utilisant pdfmake
     pdf.autoTable(productsTable.headers, productsTable.rows, {
       ...zebraStyle,
     });
 
+    // Calcul de la hauteur totale du contenu en dessous de la table
     const tableHeight = pdf.previousAutoTable.finalY || 0;
     const contentBelowTableHeight = 12;
     const totalContentHeight = tableHeight + contentBelowTableHeight;
 
+    // Définition de la position Y initiale pour le contenu sur la page
     let contentY = totalContentHeight;
 
+    // Obtention de la hauteur de la page
     const pageHeight = pdf.internal.pageSize.getHeight();
 
+    // Ajout d'une nouvelle page si contentY dépasse l'espace restant sur la page actuelle
     if (contentY > pageHeight - 30) {
       pdf.addPage();
       contentY = 20;
 
+      // Ajout du numéro de page
       pdf.text(10, pageHeight - 10, `Page ${pdf.internal.getNumberOfPages()}`);
     }
 
+    // Calcul des valeurs totales à partir de invoiceData.services
     const totalHT = invoiceData?.services?.reduce(
       (accumulator, service) => accumulator + service.totalPrice,
       0
@@ -375,10 +438,13 @@ export const InvoiceStepFive = () => {
 
     const totalTTC = invoiceData?.totalPrice.toFixed(2);
 
+    // Définition de la taille de police pour le PDF
     pdf.setFontSize(12);
 
+    // Positionnement pour afficher les valeurs totales
     let xResults = 145;
 
+    // Ajout de Total HT au PDF
     pdf.setFont("helvetica", "bold");
     pdf.text("Total HT:", xResults, contentY);
     const totalHTString = totalHT.toFixed(2) + " €";
@@ -386,6 +452,7 @@ export const InvoiceStepFive = () => {
 
     contentY += 9;
 
+    // Ajout de la TVA au PDF
     pdf.setFont("helvetica", "normal");
     pdf.text("TVA:", xResults, contentY);
     const averageVATRateString = averageVATRate + " %";
@@ -393,6 +460,7 @@ export const InvoiceStepFive = () => {
 
     contentY += 9;
 
+    // Ajout de Total TTC au PDF
     pdf.setFont("helvetica", "bold");
     pdf.text("Total TTC:", xResults, contentY);
     const totalTTCString = totalTTC.toString() + " €";
@@ -400,10 +468,12 @@ export const InvoiceStepFive = () => {
 
     contentY += 12;
 
+    // Ajout de texte supplémentaire au pied de page du PDF
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(11);
     const footerX = 15;
 
+    // Vérification si la TVA n'est pas applicable et ajout du texte associé
     if (averageVATRate === "0.00" || averageVATRate === null) {
       contentY += addTextWithMaxWidth(
         "TVA non applicable selon l'article 293 B du Code Général des Impôts.",
@@ -412,18 +482,21 @@ export const InvoiceStepFive = () => {
       );
     }
 
+    // Ajout des conditions générales de vente au pied de page du PDF
     contentY += addTextWithMaxWidth(
       `Conditions générales de vente : ${invoiceData?.description}`,
       footerX,
       contentY
     );
 
+    // Ajout des informations de paiement au pied de page du PDF
     contentY += addTextWithMaxWidth(
       `Le paiement doit être réalisé sous ${invoiceData?.billValidityDuration} à sa date d'émission, par ${invoiceData?.paymentMethod}.`,
       footerX,
       contentY
     );
 
+    // Ajout de la signature et de la date au PDF si signatureDataURL est disponible
     if (signatureDataURL) {
       contentY += 5;
 
@@ -449,16 +522,20 @@ export const InvoiceStepFive = () => {
       contentY += imgHeight + 10;
     }
 
+    // Génération d'un nom de fichier pour le PDF
     const fileName = `${invoiceData?.company?.name
       .replace(/\s+/g, "_")
       .toUpperCase()}_Facture_${invoiceData?.billNumber.toUpperCase()}_${formatDate(
       invoiceData?.createdAt
     )}.pdf`;
+
+    // Sauvegarde du fichier PDF avec le nom de fichier généré
     pdf.save(fileName);
   };
 
   return (
     <div className="invoice-step-one-page fade-in">
+      {/* Configuration des balises meta pour le référencement SEO */}
       <HelmetProvider>
         <Helmet>
           <title>Récapitulatif & Finalisation | Beheall</title>
@@ -467,10 +544,14 @@ export const InvoiceStepFive = () => {
             content="Consultez le récapitulatif de votre facture sur Beheall. Vérifiez les détails, signez électroniquement, et finalisez votre facture. Téléchargez le fichier PDF de la facture pour une documentation facile et professionnelle. Simplifiez la finalisation de vos transactions avec Beheall."
           />
         </Helmet>
+
+        {/* Bloc d'accueil utilisateur avec le titre et le composant Account */}
         <div className="welcome-user">
           <h1>Finalisation</h1>
           <Account />
         </div>
+
+        {/* Bloc pour le téléchargement du PDF sur les appareils mobiles */}
         <div className="pdf-mobile">
           <h2>Télécharger le PDF :</h2>
           <button onClick={captureSignature}>
@@ -481,7 +562,10 @@ export const InvoiceStepFive = () => {
             />
           </button>
         </div>
+
+        {/* Contenu principal avec deux sections pour le téléchargement du PDF et la signature */}
         <div className="contents-try">
+          {/* Section pour le téléchargement du PDF */}
           <div className="dl-pdf">
             <h2>
               Veuillez signer la facture puis cliquer sur l'icône PDF pour la
@@ -495,6 +579,8 @@ export const InvoiceStepFive = () => {
               />
             </button>
           </div>
+
+          {/* Section pour la signature avec un canevas et un bouton pour effacer la signature */}
           <div className="sign-pdf-div">
             <canvas
               className="canva-signature"
@@ -512,6 +598,8 @@ export const InvoiceStepFive = () => {
             />
           </div>
         </div>
+
+        {/* Section récapitulative avec les informations ) à l'aide de la sérialization de l'expéditeur, du client, des produits, etc. */}
         <div className="summary">
           <div className="company-customer-summary">
             <div className="company-summary">
