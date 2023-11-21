@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-/**
- * Composant représentant la gestion du compte utilisateur
- * Affiche une icône de compte qui, lorsqu'elle est cliquée, ouvre un menu déroulant
- * avec des options telles que "Mon compte" et "Déconnexion".
+/*
+  Composant représentant la gestion du compte utilisateur
+  Affiche une icône de compte qui, lorsqu'elle est cliquée, ouvre un menu déroulant
+  avec des options telles que "Mon compte" et "Déconnexion".
  */
 const Account = () => {
   // État local pour gérer l'ouverture/fermeture du menu

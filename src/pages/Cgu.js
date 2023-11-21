@@ -6,10 +6,17 @@ import Footer from "../components/Footer.js";
 import Account from "../components/Account";
 import GoingBackLogin from "../components/GoingBackLogin.js";
 
+/*
+ Page représentant les Conditions Générales d'Utilisation (CGU) de Beheall.
+ Affiche les règles d'utilisation du service, les conditions relatives aux comptes utilisateur, le traitement des données personnelles, la propriété intellectuelle, la responsabilité et les modifications des CGU.
+*/
 export const Cgu = () => {
+  // Vérifie la présence d'un jeton JWT dans le localStorage
   const hasToken = !!localStorage.getItem("Token");
+
   return (
     <div className={`legal-policy${hasToken ? " avec-token" : ""}`}>
+      {/* Configuration des balises meta pour le référencement SEO */}
       <HelmetProvider>
         <Helmet>
           <title>Conditions Générales d'Utilisation | Beheall</title>
@@ -19,7 +26,9 @@ export const Cgu = () => {
           />
         </Helmet>
         <div>
-        {!hasToken && <GoingBackLogin />}
+          {/* Bouton de retour à la page de connexion s'il n'y a pas de jeton */}
+          {!hasToken && <GoingBackLogin />}
+          {/* Titre de la page avec le logo permettant d'aller dans la partie compte ou se déconnecter, seulement s'il y a un jeton */}
           <h1>Conditions Générales d'Utilisation {hasToken && <Account />}</h1>
 
           <div className="legal-notice-rules">
@@ -77,7 +86,9 @@ export const Cgu = () => {
             </p>
           </div>
         </div>
+        {/* Affichage de la navigation accordéon ou header si l'utilisateur est connecté */}
         {hasToken && <AccordionNav />}
+        {/* Pied de page */}
         <Footer />
       </HelmetProvider>
     </div>
