@@ -15,8 +15,28 @@ import { InvoiceStepTwo } from "./pages/InvoiceStepTwo";
 import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
 import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
-
 function App() {
+  // Utilisation de l'état pour vérifier si l'utilisateur est connecté
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
+
+  // Utilisation de l'utilitaire `useNavigate` de react-router-dom pour naviguer entre les pages
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Définir une temporisation de 10 minutes après la connexion
+    const timeoutId = setTimeout(() => {
+      // Déconnecter l'utilisateur
+      localStorage.clear();
+      setIsLoggedIn(false);
+      // Naviguer vers la page de connexion après la déconnexion
+      navigate('/login');
+    }, 10 * 60 * 1000); // 10 minutes en millisecondes
+
+    // Nettoyer le timeout lors du démontage du composant ou lorsqu'il y a une déconnexion
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [navigate]);
 
   return (
     <div className="App">
