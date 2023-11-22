@@ -96,6 +96,7 @@ ul li {
 }
 /* End of landing page style */
 
+/* Le login & le register partagent à de nombreuse reprise le même CSS */
 /*? LOGIN PART */
 .login-part-two .login-space .success-message {
   background-color: #4caf50;
@@ -276,6 +277,7 @@ ul li {
 .login-part-two .login-space button:hover {
   background-color: #434344;
 }
+/* End of login part */
 
 /** Register part */
 .register-facture-image {
@@ -432,6 +434,8 @@ ul li {
     width: 50%;
   }
 }
+/* End of register part */
+
 
 /*? DASHBOARD PAGE */
 .beheall-title-style-page {
@@ -633,7 +637,9 @@ ul li {
     width: 100%;
   }
 }
+/* End of dashboard page */
 
+/* Composant de navigation/
 /*? HEADER NAV */
 .header-nav {
   padding: 20px 0px;
@@ -692,6 +698,7 @@ ul li {
 .nav-links-desktop:hover {
   color: #434344;
 }
+/* End of header nav */
 
 /*? ACCORDEON NAV */
 .accordion-nav {
@@ -780,8 +787,11 @@ ul li {
   font-size: 14px;
   font-weight: 400;
 }
+/* End of accordion nav */
+/* Fin du composant de la navigation */
 
-/*? Invoice steps présent sur toutes les étapes  */
+/*? Invoice Step One */
+/*? Invoice-steps-title est présent sur toutes les étapes et les champs champs de formulaire sur le step 2 */
 .invoice-steps-title {
   display: flex;
   justify-content: space-between;
@@ -1070,6 +1080,7 @@ ul li {
     margin: 20px 0;
   }
 }
+/* Fin du invoice-step-one */
 
 /*? INVOICE STEP THREE */
 .invoice-create {
@@ -1168,6 +1179,7 @@ ul li {
     margin: auto;
   }
 }
+/* Fin du invoice-step-3 */
 
 /*? INVOICE STEP FOUR */
 .add-product {
@@ -1314,8 +1326,9 @@ ul li {
     text-align: center;
   }
 }
+/* Fin du invoice-step-4 */
 
-/*? INVOICE STEP FIVE SUMMARY */
+/*? INVOICE STEP FIVE - SUMMARY */
 .dl-pdf h2 {
   color: #000;
   font-size: 16px;
@@ -1406,6 +1419,35 @@ ul li {
   justify-content: space-between;
 }
 
+@media (min-width: 1200px) {
+  .company-customer-summary {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .company-summary,
+  .customer-summary {
+    width: 45%;
+  }
+  .summary h2 {
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 12px 0 12px 4px;
+  }
+  .summary .company-summary-part,
+  .customer-summary-part,
+  .product-summary-part {
+    font-size: 13px;
+  }
+  .summary-details {
+    font-size: 14px;
+  }
+}
+/* Fin du invoice-step-5 / Summary */
+
+
 /*? ACCOUNT COMPONENT */
 .account-container {
   position: relative;
@@ -1462,33 +1504,8 @@ ul li {
     opacity: 1;
   }
 }
+/* Fin du account component */
 
-@media (min-width: 1200px) {
-  .company-customer-summary {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .company-summary,
-  .customer-summary {
-    width: 45%;
-  }
-  .summary h2 {
-    color: #000;
-    font-size: 14px;
-    font-weight: 600;
-    margin: 12px 0 12px 4px;
-  }
-  .summary .company-summary-part,
-  .customer-summary-part,
-  .product-summary-part {
-    font-size: 13px;
-  }
-  .summary-details {
-    font-size: 14px;
-  }
-}
 
 /*? RESET PASSWORD PAGE */
 .reset-password-div {
@@ -1583,7 +1600,10 @@ ul li {
   }
 }
 
-/*? ERROR MESSAGE ALERT */
+/* Fin du reset password page */
+
+
+/*? ERROR MESSAGE ALERT PRESENT SUR LES PAGES OU IL Y'A UN FORMULAIRE*/
 .overlay {
   position: fixed;
   top: 0;
@@ -1650,7 +1670,10 @@ ul li {
   color: #fff;
 }
 
-/*? CANVA SIGNATURE */
+/* Fin du error message */
+
+
+/*? CANVA SIGNATURE ET PDF */
 .contents-try {
   display: none;
 }
@@ -1779,6 +1802,10 @@ ul li {
   width: 80px;
 }
 
+/* Fin de la partie signature et PDF */
+
+
+
 /*? LEGAL NOTICE  & PRIVACY POLICY*/
 .back-to-login-footer-infos {
   display: flex;
@@ -1839,6 +1866,10 @@ ul li {
     margin-bottom: 10px;
   }
 }
+
+/* FIN DU LEGAL NOTICE ET PRIVACY POLICY */
+
+
 
 /*? ACCOUNT INFOS */
 .user-infos {
@@ -2036,7 +2067,10 @@ ul li {
   }
 }
 
-/*? INVOICES LIST */
+/* Fin de la partie Mon compte */
+
+
+/*? PAGE INVOICES LIST */
 .invoices-list-part {
   margin-top: 50px;
 }
@@ -2118,6 +2152,9 @@ ul li {
   }
 }
 
+/* Fin de la page Invoice list */
+
+
 /*? FOOTER */
 .footer ul {
   display: flex;
@@ -2146,3 +2183,7 @@ ul li {
     display: none;
   }
 }
+
+/* Fin du footer */
+
+/* Fin du CSS du projet Beheall */
