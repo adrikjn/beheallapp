@@ -67,6 +67,11 @@ function App() {
     const handleBeforeUnload = (event) => {
       // Vérifier si la fermeture de la fenêtre est due à une actualisation
       if (!event.persisted) {
+        // Vérifier si l'utilisateur est déjà en cours de déconnexion
+        if (!isLoggedIn) {
+          return;
+        }
+
         // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
         localStorage.clear();
       }
@@ -79,7 +84,7 @@ function App() {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, []);
+  }, [isLoggedIn]);
   return (
     <div className="App">
       <Router>
