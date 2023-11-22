@@ -20,23 +20,35 @@ import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
-
   useEffect(() => {
-    // Fonction pour déconnecter l'utilisateur
-    const logoutUser = () => {
-      localStorage.clear();
-      setIsLoggedIn(false);
+    const inactivityTimeout = 3 * 60 * 1000; // 3 minutes en millisecondes
+    let inactivityTimer;
+
+    const handleUserAction = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        // Déconnecter l'utilisateur ici
+        localStorage.clear();
+        // Rediriger vers la page de connexion, si nécessaire
+        window.location.href = '/login';
+      }, inactivityTimeout);
     };
 
-    // Définir une temporisation de 1 minutes après la connexion
-    const timeoutId = setTimeout(logoutUser, 1 * 60 * 1000); // 3 minutes en millisecondes
+    // Ajouter des écouteurs d'événements pour les actions de l'utilisateur
+    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
+      document.addEventListener(event, handleUserAction);
+    });
 
-    // Nettoyer le timeout lors du démontage du composant ou lorsqu'il y a une déconnexion
+    // Démarrer le minuteur au montage
+    handleUserAction();
+
+    // Nettoyer les écouteurs d'événements lors du démontage du composant
     return () => {
-      clearTimeout(timeoutId);
+      ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
+        document.removeEventListener(event, handleUserAction);
+      });
     };
-  }, [isLoggedIn]);
+  }, []);
   return (
     <div className="App">
       <Router>
