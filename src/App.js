@@ -23,29 +23,33 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
 
   useEffect(() => {
-    // Fonction pour déconnecter l'utilisateur
+    let inactivityTimer;
+
     const logoutUser = () => {
       localStorage.clear();
       setIsLoggedIn(false);
     };
 
-    // Définir une temporisation de 3 minutes après la connexion
-    const timeoutId = setTimeout(logoutUser, 3 * 60 * 1000); // 3 minutes en millisecondes
-
-    // Ajouter un écouteur d'événements pour l'événement "beforeunload"
-    const handleBeforeUnload = () => {
-      // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
-      logoutUser();
+    const handleUserAction = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(logoutUser, 10 * 60 * 1000); // 10 minutes en millisecondes
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    // Ajouter des écouteurs d'événements pour les actions de l'utilisateur
+    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
+      document.addEventListener(event, handleUserAction);
+    });
 
-    // Nettoyer le timeout et l'écouteur d'événements lors du démontage du composant
+    // Démarrer le minuteur au montage
+    handleUserAction();
+
+    // Nettoyer les écouteurs d'événements lors du démontage du composant
     return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
+        document.removeEventListener(event, handleUserAction);
+      });
     };
-  }, [isLoggedIn]);
+  }, []);
   return (
     <div className="App">
       <Router>
