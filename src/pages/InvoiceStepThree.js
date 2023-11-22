@@ -205,7 +205,7 @@ export const InvoiceStepThree = () => {
           <h2>N°3</h2>
         </div>
         <div className="invoice-create">
-          <div className="add-c">
+          <div className="add-create">
             {/* Affichage d'alertes en cas d'erreurs globales */}
             {globalErrors.length > 0 && (
               <div className="alert">

@@ -94,6 +94,7 @@ ul li {
   font-weight: 300;
   margin-bottom: 41px;
 }
+/* End of landing page style */
 
 /*? LOGIN PART */
 .login-part-two .login-space .success-message {
@@ -850,14 +851,14 @@ ul li {
   width: 100%;
 }
 
-.add-c {
+.add-create {
   display: flex;
   flex-direction: column;
   gap: 22px;
   margin-top: 28px;
 }
 
-.add-c textarea {
+.add-create textarea {
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 14px;
@@ -869,14 +870,14 @@ ul li {
   background-color: #e9ebe9;
 }
 
-.add-c label {
+.add-create label {
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
 }
 
-.add-c input {
+.add-create input {
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 14px;
@@ -1048,7 +1049,7 @@ ul li {
     width: 100%;
   }
 
-  .add-c input {
+  .add-create input {
     background-color: #e9ebe9;
     padding-bottom: 10px;
   }

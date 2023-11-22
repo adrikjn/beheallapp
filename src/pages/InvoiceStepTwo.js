@@ -250,7 +250,7 @@ export const InvoiceStepTwo = () => {
           </div>
           <form onSubmit={handleFormSubmit}>
             {/* Affichage des erreurs globales s'il y en a */}
-            <div className="add-c">
+            <div className="add-create">
               {globalErrors.length > 0 && (
                 <div className="alert">
                   <span onClick={closeAlert} className="close-alert">
