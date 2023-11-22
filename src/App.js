@@ -21,16 +21,16 @@ import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 function App() {
   useEffect(() => {
-    // Fonction de gestionnaire appelée lors de la fermeture de la page
-    const handleBeforeUnload = () => {
-      // Supprimer les données du localStorage
-      localStorage.clear();
+    const handleBeforeUnload = (event) => {
+      // Vérifier si la fermeture de la fenêtre est due à une actualisation
+      if (!event.persisted) {
+        // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
+        localStorage.clear();
+      }
     };
 
-    // Ajouter un écouteur d'événements pour l'événement "beforeunload" (avant le déchargement de la page)
     window.addEventListener('beforeunload', handleBeforeUnload);
 
-    // Nettoyer l'écouteur d'événements lors du démontage du composant
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
