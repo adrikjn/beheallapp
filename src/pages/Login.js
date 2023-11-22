@@ -101,7 +101,7 @@ export const Login = () => {
 
   // Rendu du composant Login
   return (
-    <div className="login-page fade-in">
+    <div className="login-r-page fade-in">
       {/* Configuration des balises meta pour le référencement SEO */}
       <HelmetProvider>
         <Helmet>

@@ -104,7 +104,7 @@ export const Register = () => {
 
   // Rendu du composant Register
   return (
-    <div className="login-page">
+    <div className="login-r-page">
       {/* Configuration des balises meta pour le référencement SEO */}
       <HelmetProvider>
         <Helmet>

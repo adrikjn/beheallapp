@@ -118,7 +118,7 @@ ul li {
   }
 }
 
-.login-page .brand-login-register {
+.login-r-page .brand-login-register {
   color: #434344;
   font-family: Montserrat;
   font-size: 32px;
@@ -129,7 +129,7 @@ ul li {
   font-weight: 700;
 }
 
-.login-page .brand-login-register span {
+.login-r-page .brand-login-register span {
   font-weight: 300;
   margin-left: -8.16px;
 }
@@ -304,7 +304,7 @@ ul li {
   padding: 0 32px;
 }
 
-.login-page .register .register-marge {
+.login-r-page .register .register-marge {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -322,23 +322,23 @@ ul li {
   font-weight: 300;
 }
 
-.login-page .register .name-inputs {
+.login-r-page .register .name-inputs {
   display: flex;
   gap: 15px;
 }
 
-.login-page .register .name-inputs input {
+.login-r-page.register .name-inputs input {
   width: 50%;
 }
 
-.login-page .register .name-inputs-size {
+.login-r-page .register .name-inputs-size {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.login-page .register .name-inputs-size input {
+.login-r-page .register .name-inputs-size input {
   width: 100%;
 }
 
@@ -402,20 +402,14 @@ ul li {
     margin: auto;
     margin-bottom: 30px;
   }
-  /* .login-page .register input {
-    padding: 10px 20px;
-    font-size: 18px;
-    font-weight: 300;
-    width: 50%;
-    margin: auto;
-  } */
-  .login-page .register .accept-cgu {
+
+  .login-r-page .register .accept-cgu {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: center;
   }
-  .login-page .register .name-inputs {
+  .login-r-page .register .name-inputs {
     width: 50%;
     display: flex;
     justify-content: center;
@@ -425,7 +419,7 @@ ul li {
   .login-page .register .name-inputs input {
     width: 50%;
   }
-  .login-page .register .name-inputs-size {
+  .login-r-page.register .name-inputs-size {
     width: 50%;
     display: flex;
     flex-direction: row;
@@ -434,7 +428,7 @@ ul li {
     margin: auto;
     gap: 15px;
   }
-  .login-page .register .name-inputs-size input {
+  .login-r-page .register .name-inputs-size input {
     width: 50%;
   }
 }
