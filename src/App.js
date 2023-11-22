@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
@@ -17,8 +17,6 @@ import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
 import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
-
-
 function App() {
   useEffect(() => {
     // Variable pour suivre l'état de la déconnexion
@@ -26,19 +24,19 @@ function App() {
 
     const handleBeforeUnload = (event) => {
       // Vérifier si la fermeture de la fenêtre est due à une actualisation
-      if (!event.persisted && !isLoggingOut) {
+      if (event.persisted === false && !isLoggingOut) {
         // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
         localStorage.clear();
       }
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
     // Nettoyer l'écouteur d'événements lors du démontage du composant
     return () => {
       // Définir la variable isLoggingOut à true avant de déconnecter
       isLoggingOut = true;
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
 
