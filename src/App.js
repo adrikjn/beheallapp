@@ -18,26 +18,37 @@ import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 
+
 function App() {
-  const [isComponentMounted, setIsComponentMounted] = useState(true);
+  const [isRefresh, setIsRefresh] = useState(false);
 
   useEffect(() => {
-    const handleUnload = (event) => {
+    const handleBeforeUnload = (event) => {
       // Vérifier si la fermeture de la fenêtre est due à une actualisation
-      if (!event.persisted && isComponentMounted) {
+      if (!event.persisted && !isRefresh) {
         // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
         localStorage.clear();
       }
     };
 
-    window.addEventListener('unload', handleUnload);
+    window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
-      setIsComponentMounted(false);
-      window.removeEventListener('unload', handleUnload);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [isComponentMounted]);
+  }, [isRefresh]);
 
+  useEffect(() => {
+    const handleRefresh = () => {
+      setIsRefresh(true);
+    };
+
+    window.addEventListener('beforeunload', handleRefresh);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleRefresh);
+    };
+  }, []);
   return (
     <div className="App">
       <Router>
