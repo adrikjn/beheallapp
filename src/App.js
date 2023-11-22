@@ -17,24 +17,32 @@ import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
 import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
-
-
 function App() {
+  // Utilisation de l'état pour vérifier si l'utilisateur est connecté
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
+  
+  // Utilisation de l'utilitaire `useNavigate` de react-router-dom pour naviguer entre les pages
+  const navigate = useNavigate();
 
+  // Effet qui gère la déconnexion après une période d'inactivité
   useEffect(() => {
     let inactivityTimer;
 
+    // Fonction pour déconnecter l'utilisateur
     const logoutUser = () => {
       localStorage.clear();
       setIsLoggedIn(false);
+      // Naviguer vers la page de connexion après la déconnexion
+      navigate('/login');
     };
 
+    // Fonction pour gérer les actions de l'utilisateur
     const handleUserAction = () => {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(logoutUser, 10 * 60 * 1000); // 10 minutes en millisecondes
     };
 
+    // Fonction pour gérer le changement de visibilité de la page
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
         // L'utilisateur est parti (la page n'est plus visible)
@@ -63,30 +71,9 @@ function App() {
       });
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []);
+  }, [navigate]);
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      // Vérifier si la fermeture de la fenêtre est due à une actualisation
-      if (!event.persisted) {
-        // Vérifier si l'utilisateur est déjà en cours de déconnexion
-        if (!isLoggedIn) {
-          return;
-        }
-
-        // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
-        localStorage.clear();
-      }
-    };
-
-    // Ajouter un écouteur d'événements pour l'événement "beforeunload" (avant le déchargement de la page)
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    // Nettoyer l'écouteur d'événements lors du démontage du composant
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [isLoggedIn]);
+  // Rendu du composant
   return (
     <div className="App">
       <Router>
