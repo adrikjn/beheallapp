@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
@@ -18,12 +18,13 @@ import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 
-
 function App() {
+  const [isComponentMounted, setIsComponentMounted] = useState(true);
+
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       // Vérifier si la fermeture de la fenêtre est due à une actualisation
-      if (!event.persisted) {
+      if (!event.persisted && isComponentMounted) {
         // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
         localStorage.clear();
       }
@@ -32,9 +33,11 @@ function App() {
     window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
+      setIsComponentMounted(false);
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, []);
+  }, [isComponentMounted]);
+
   return (
     <div className="App">
       <Router>
