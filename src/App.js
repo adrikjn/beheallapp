@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
@@ -20,33 +20,19 @@ import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 
 function App() {
-  const [isRefresh, setIsRefresh] = useState(false);
-
   useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      // Vérifier si la fermeture de la fenêtre est due à une actualisation
-      if (!event.persisted && !isRefresh) {
-        // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
-        localStorage.clear();
-      }
+    // Fonction de gestionnaire appelée lors de la fermeture de la page
+    const handleBeforeUnload = () => {
+      // Supprimer les données du localStorage
+      localStorage.clear();
     };
 
+    // Ajouter un écouteur d'événements pour l'événement "beforeunload" (avant le déchargement de la page)
     window.addEventListener('beforeunload', handleBeforeUnload);
 
+    // Nettoyer l'écouteur d'événements lors du démontage du composant
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [isRefresh]);
-
-  useEffect(() => {
-    const handleRefresh = () => {
-      setIsRefresh(true);
-    };
-
-    window.addEventListener('beforeunload', handleRefresh);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleRefresh);
     };
   }, []);
   return (
