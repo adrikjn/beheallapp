@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import { LegalNotice } from "./pages/LegalNotice";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
@@ -21,6 +21,7 @@ import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fonction pour déconnecter l'utilisateur
@@ -30,7 +31,7 @@ function App() {
     };
 
     // Définir une temporisation de 3 minutes après la connexion
-    const timeoutId = setTimeout(logoutUser, 10 * 60 * 1000); // 3 minutes en millisecondes
+    const timeoutId = setTimeout(logoutUser, 10 * 60 * 1000); // 10 minutes en millisecondes
 
     // Ajouter un écouteur d'événements pour l'événement "beforeunload"
     const handleBeforeUnload = () => {
@@ -45,7 +46,7 @@ function App() {
       clearTimeout(timeoutId);
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
   return (
     <div className="App">
       <Router>
