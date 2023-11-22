@@ -787,23 +787,23 @@ ul li {
 }
 
 /*? INVOICE STEP ONE PAGE  */
-.invoice-step-one-title {
+.invoice-steps-title {
   display: flex;
   justify-content: space-between;
   font-family: Roboto;
   margin-top: 21px;
 }
 
-.invoice-step-one-title h2:nth-child(1) {
+.invoice-steps-title h2:nth-child(1) {
   font-size: 15px;
 }
 
-.invoice-step-one-title h2:nth-child(2) {
+.invoice-steps-title h2:nth-child(2) {
   font-size: 14px;
   font-weight: 400;
 }
 
-.invoice-step-one-p {
+.invoice-steps-p {
   margin-top: 9px;
   font-family: Roboto;
   font-size: 14px;

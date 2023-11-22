@@ -200,7 +200,7 @@ export const InvoiceStepThree = () => {
           <h1>création factures</h1>
           <Account />
         </div>
-        <div className="invoice-step-one-title">
+        <div className="invoice-steps-title">
           <h2>Etape</h2>
           <h2>N°3</h2>
         </div>

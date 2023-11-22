@@ -207,13 +207,13 @@ export const InvoiceStepOne = () => {
           <Account />
         </div>
         {/* Affichage du titre de la première étape de création de facture */}
-        <div className="invoice-step-one-title">
+        <div className="invoice-steps-title">
           <h2>Etape</h2>
           <h2>N°1</h2>
         </div>
 
         {/* Paragraphe de description de la première étape */}
-        <p className="invoice-step-one-p">Sélectionner un expéditeur</p>
+        <p className="invoice-steps-p">Sélectionner un expéditeur</p>
 
         {/* Menu déroulant pour sélectionner une entreprise existante */}
         <select

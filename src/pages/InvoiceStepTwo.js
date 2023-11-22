@@ -221,11 +221,11 @@ export const InvoiceStepTwo = () => {
           <h1>création factures</h1>
           <Account />
         </div>
-        <div className="invoice-step-one-title">
+        <div className="invoice-steps-title">
           <h2>Etape</h2>
           <h2>N°2</h2>
         </div>
-        <p className="invoice-step-one-p">Sélectionner un destinataire</p>
+        <p className="invoice-steps-p">Sélectionner un destinataire</p>
 
         {/* Sélecteur pour choisir un client existant */}
         <select

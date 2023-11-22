@@ -319,7 +319,7 @@ export const InvoiceStepFour = () => {
           <Account />
         </div>
         {/* Bloc pour afficher l'étape en cours */}
-        <div className="invoice-step-one-title">
+        <div className="invoice-steps-title">
           <h2>Etape</h2>
           <h2>N°4</h2>
         </div>
