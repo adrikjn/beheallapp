@@ -18,27 +18,19 @@ import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 function App() {
-  const [isReloading, setIsReloading] = useState(false);
-
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      if (!isReloading) {
-        localStorage.clear();
-      }
-    };
-
-    const handleUnload = () => {
-      setIsReloading(true);
+      const message = "Êtes-vous sûr de vouloir quitter ? Vos données non sauvegardées seront perdues.";
+      event.returnValue = message; // Standard pour la plupart des navigateurs
+      return message; // Pour certains navigateurs plus anciens
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
-    window.addEventListener('unload', handleUnload);
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
-      window.removeEventListener('unload', handleUnload);
     };
-  }, [isReloading]);
+  }, []);
 
   useEffect(() => {
     // Assurez-vous de supprimer les données du localStorage au chargement initial de l'application
