@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
@@ -17,26 +17,26 @@ import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
 import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
+
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
+
   useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      const message = "Êtes-vous sûr de vouloir quitter ? Vos données non sauvegardées seront perdues.";
-      event.returnValue = message; // Standard pour la plupart des navigateurs
-      return message; // Pour certains navigateurs plus anciens
+    // Fonction pour déconnecter l'utilisateur
+    const logoutUser = () => {
+      localStorage.clear();
+      setIsLoggedIn(false);
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    // Définir une temporisation de 3 minutes après la connexion
+    const timeoutId = setTimeout(logoutUser, 3 * 60 * 1000); // 3 minutes en millisecondes
 
+    // Nettoyer le timeout lors du démontage du composant ou lorsqu'il y a une déconnexion
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      clearTimeout(timeoutId);
     };
-  }, []);
-
-  useEffect(() => {
-    // Assurez-vous de supprimer les données du localStorage au chargement initial de l'application
-    localStorage.clear();
-  }, []);
-
+  }, [isLoggedIn]);
   return (
     <div className="App">
       <Router>
