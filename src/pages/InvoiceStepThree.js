@@ -196,7 +196,7 @@ export const InvoiceStepThree = () => {
         {/* Affichage d'une superposition en cas d'erreurs globales */}
         {globalErrors.length > 0 && <div className="overlay"></div>}
         {/* Bloc avec le titre et le composant Account */}
-        <div className="welcome-user">
+        <div className="beheall-title-style-page">
           <h1>création factures</h1>
           <Account />
         </div>

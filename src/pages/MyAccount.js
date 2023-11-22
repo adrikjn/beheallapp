@@ -163,7 +163,7 @@ export const MyAccount = () => {
         {globalErrors.length > 0 && <div className="overlay"></div>}
 
         {/* Titre de la page et composant Accounnt */}
-        <div className="welcome-user">
+        <div className="beheall-title-style-page">
           <h1>Votre compte</h1>
           <Account />
         </div>

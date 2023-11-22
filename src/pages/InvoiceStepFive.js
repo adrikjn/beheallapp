@@ -558,7 +558,7 @@ export const InvoiceStepFive = () => {
         </Helmet>
 
         {/* Bloc avec le titre et le composant Account */}
-        <div className="welcome-user">
+        <div className="beheall-title-style-page">
           <h1>Finalisation</h1>
           <Account />
         </div>

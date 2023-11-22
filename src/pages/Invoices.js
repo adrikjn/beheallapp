@@ -77,8 +77,8 @@ export const Invoices = () => {
             content="Consultez la liste de vos factures sur Beheall. Suivez les détails des transactions avec vos clients, y compris le numéro de facture, le prix, et la date d'émission. Gérez facilement vos factures en ligne. Découvrez toutes les fonctionnalités de la gestion de facturation sur Beheall."
           />
         </Helmet>
-        {/* Affichage du message de bienvenue et du bouton de création de facture */}
-        <div className="welcome-user">
+        {/* Affichage du titre et du bouton de création de facture */}
+        <div className="beheall-title-style-page">
           <h1>factures</h1>
           <Account />
         </div>

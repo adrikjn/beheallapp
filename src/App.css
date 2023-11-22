@@ -1,15 +1,19 @@
+/* Font Awesome exporté */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+/* Mini Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Background Color sur toutes les pages */
 body {
   background-color: #e9ebe9;
 }
 
+/* Désactivation des puces au début des listes */
 ul li {
   list-style-type: none;
 }
@@ -435,7 +439,7 @@ ul li {
 }
 
 /*? DASHBOARD PAGE */
-.welcome-user {
+.beheall-title-style-page {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -444,7 +448,7 @@ ul li {
   padding-bottom: 19px;
 }
 
-.welcome-user h1 {
+.beheall-title-style-page h1 {
   text-align: center;
   font-size: 20px;
   font-weight: 500;
@@ -1791,8 +1795,6 @@ ul li {
 .legal-policy.avec-token h1 {
   margin-top: 82px;
 }
-
-
 
 .legal-policy h1 {
   font-weight: 600;

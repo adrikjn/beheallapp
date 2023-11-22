@@ -175,7 +175,7 @@ export const Dashboard = () => {
 
         {/* Affichage du message de bienvenue et du bouton de création de facture */}
         {userData && (
-          <div className="welcome-user">
+          <div className="beheall-title-style-page">
             <h1>Bonjour, {userData.firstName}</h1>
             <Account />
           </div>
