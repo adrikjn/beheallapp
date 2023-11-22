@@ -31,11 +31,9 @@ export const Dashboard = () => {
 
   useEffect(() => {
     // Redirige vers la page de connexion si aucun jeton n'est présent en LocalStorage
-    if (!token) {
-      navigate("/login");
-    }
+   
     // Effectue une requête pour obtenir les données des entreprises associées à l'utilisateur
-    else if (userData && userData.companies && userData.companies.length) {
+     if (userData && userData.companies && userData.companies.length) {
       const companyIds = userData.companies.map((company) => company.id);
 
       // Fonction pour récupérer les données d'une entreprise
