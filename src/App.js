@@ -21,20 +21,27 @@ import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 function App() {
   useEffect(() => {
-    // Fonction de gestionnaire appelée lors de la fermeture de la page
-    const handleBeforeUnload = () => {
-      // Supprimer les données du localStorage
-      localStorage.clear();
+    // Variable pour suivre l'état de la déconnexion
+    let isLoggingOut = false;
+
+    const handleBeforeUnload = (event) => {
+      // Vérifier si la fermeture de la fenêtre est due à une actualisation
+      if (!event.persisted && !isLoggingOut) {
+        // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
+        localStorage.clear();
+      }
     };
 
-    // Ajouter un écouteur d'événements pour l'événement "beforeunload" (avant le déchargement de la page)
     window.addEventListener('beforeunload', handleBeforeUnload);
 
     // Nettoyer l'écouteur d'événements lors du démontage du composant
     return () => {
+      // Définir la variable isLoggingOut à true avant de déconnecter
+      isLoggingOut = true;
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, []);
+
   return (
     <div className="App">
       <Router>
