@@ -17,6 +17,8 @@ import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
 import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
+
+
 function App() {
   // Utilisation de l'état pour vérifier si l'utilisateur est connecté
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
@@ -72,8 +74,6 @@ function App() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [navigate]);
-
-  // Rendu du composant
   return (
     <div className="App">
       <Router>
