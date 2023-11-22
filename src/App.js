@@ -20,57 +20,32 @@ import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
+
   useEffect(() => {
-    const inactivityTimeout = 3 * 60 * 1000; // 3 minutes en millisecondes
-    let inactivityTimer;
-    
-    // Créer un worker
-    const timerWorker = new Worker("data:text/javascript," + encodeURIComponent(`
-      let inactivityTimer;
-
-      self.addEventListener('message', (event) => {
-        if (event.data === 'start') {
-          clearTimeout(inactivityTimer);
-          inactivityTimer = setTimeout(() => {
-            self.postMessage('timeout');
-          }, ${inactivityTimeout});
-        }
-      });
-    `));
-
-    // Ajouter des écouteurs d'événements pour les actions de l'utilisateur
-    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
-      document.addEventListener(event, () => {
-        // Envoyer un message au worker pour démarrer le minuteur
-        timerWorker.postMessage('start');
-      });
-    });
-
-    // Démarrer le minuteur au montage
-    timerWorker.postMessage('start');
-
-    // Écouter les messages du worker
-    timerWorker.addEventListener('message', (event) => {
-      if (event.data === 'timeout') {
-        // Déconnecter l'utilisateur ici
-        localStorage.clear();
-        // Rediriger vers la page de connexion, si nécessaire
-        window.location.href = '/login';
-      }
-    });
-
-    // Nettoyer les écouteurs d'événements lors du démontage du composant
-    return () => {
-      ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
-        document.removeEventListener(event, () => {
-          timerWorker.postMessage('start');
-        });
-      });
-
-      // Terminer le worker lors du démontage du composant
-      timerWorker.terminate();
+    // Fonction pour déconnecter l'utilisateur
+    const logoutUser = () => {
+      localStorage.clear();
+      setIsLoggedIn(false);
     };
-  }, []);
+
+    // Définir une temporisation de 3 minutes après la connexion
+    const timeoutId = setTimeout(logoutUser, 3 * 60 * 1000); // 3 minutes en millisecondes
+
+    // Ajouter un écouteur d'événements pour l'événement "beforeunload"
+    const handleBeforeUnload = () => {
+      // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
+      logoutUser();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Nettoyer le timeout et l'écouteur d'événements lors du démontage du composant
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isLoggedIn]);
   return (
     <div className="App">
       <Router>
