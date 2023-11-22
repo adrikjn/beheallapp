@@ -23,30 +23,52 @@ function App() {
   useEffect(() => {
     const inactivityTimeout = 3 * 60 * 1000; // 3 minutes en millisecondes
     let inactivityTimer;
+    
+    // Créer un worker
+    const timerWorker = new Worker("data:text/javascript," + encodeURIComponent(`
+      let inactivityTimer;
 
-    const handleUserAction = () => {
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(() => {
+      self.addEventListener('message', (event) => {
+        if (event.data === 'start') {
+          clearTimeout(inactivityTimer);
+          inactivityTimer = setTimeout(() => {
+            self.postMessage('timeout');
+          }, ${inactivityTimeout});
+        }
+      });
+    `));
+
+    // Ajouter des écouteurs d'événements pour les actions de l'utilisateur
+    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
+      document.addEventListener(event, () => {
+        // Envoyer un message au worker pour démarrer le minuteur
+        timerWorker.postMessage('start');
+      });
+    });
+
+    // Démarrer le minuteur au montage
+    timerWorker.postMessage('start');
+
+    // Écouter les messages du worker
+    timerWorker.addEventListener('message', (event) => {
+      if (event.data === 'timeout') {
         // Déconnecter l'utilisateur ici
         localStorage.clear();
         // Rediriger vers la page de connexion, si nécessaire
         window.location.href = '/login';
-      }, inactivityTimeout);
-    };
-
-    // Ajouter des écouteurs d'événements pour les actions de l'utilisateur
-    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
-      document.addEventListener(event, handleUserAction);
+      }
     });
-
-    // Démarrer le minuteur au montage
-    handleUserAction();
 
     // Nettoyer les écouteurs d'événements lors du démontage du composant
     return () => {
       ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
-        document.removeEventListener(event, handleUserAction);
+        document.removeEventListener(event, () => {
+          timerWorker.postMessage('start');
+        });
       });
+
+      // Terminer le worker lors du démontage du composant
+      timerWorker.terminate();
     };
   }, []);
   return (
