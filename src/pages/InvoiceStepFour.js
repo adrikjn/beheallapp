@@ -332,7 +332,7 @@ export const InvoiceStepFour = () => {
                 : "invoice-create display-none"
             }
           >
-            <div className="add-company">
+            <div className="add-c">
               {/* Affichage d'alertes en cas d'erreurs globales */}
               {globalErrors.length > 0 && (
                 <div className="alert">
