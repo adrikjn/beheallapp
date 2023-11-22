@@ -231,7 +231,7 @@ export const InvoiceStepTwo = () => {
         <select
           onChange={handleSelectChange}
           name="name"
-          className="select-company"
+          className="select-option"
         >
           <option defaultValue value="undefined">
             Sélectionner un client
@@ -245,12 +245,12 @@ export const InvoiceStepTwo = () => {
 
         {/* Formulaire pour ajouter un nouveau client */}
         <div id="newCompanieForm">
-          <div className="add-company-exp">
+          <div className="add-user-c">
             <h2>nouveau client</h2>
           </div>
           <form onSubmit={handleFormSubmit}>
             {/* Affichage des erreurs globales s'il y en a */}
-            <div className="add-company">
+            <div className="add-c">
               {globalErrors.length > 0 && (
                 <div className="alert">
                   <span onClick={closeAlert} className="close-alert">

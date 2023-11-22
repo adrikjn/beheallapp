@@ -217,7 +217,7 @@ export const InvoiceStepOne = () => {
 
         {/* Menu déroulant pour sélectionner une entreprise existante */}
         <select
-          className="select-company"
+          className="select-option"
           onChange={handleSelectChange}
           name="name"
         >
@@ -233,11 +233,11 @@ export const InvoiceStepOne = () => {
 
         {/* Formulaire pour ajouter une nouvelle entreprise */}
         <div id="newCompanieForm">
-          <div className="add-company-exp">
+          <div className="add-user-c">
             <h2>nouvel expéditeur</h2>
           </div>
           <form onSubmit={handleFormSubmit}>
-            <div className="add-company">
+            <div className="add-c">
               {/* Affichage d'alertes en cas d'erreurs globales */}
               {globalErrors.length > 0 && (
                 <div className="alert">

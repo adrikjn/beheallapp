@@ -786,7 +786,7 @@ ul li {
   font-weight: 400;
 }
 
-/*? INVOICE STEP ONE PAGE  */
+/*? Invoice steps présent sur toutes les étapes  */
 .invoice-steps-title {
   display: flex;
   justify-content: space-between;
@@ -810,7 +810,7 @@ ul li {
   font-weight: 600;
 }
 
-.select-company {
+.select-option {
   margin-top: 25px;
   padding: 9px 20px;
   border-radius: 5px;
@@ -829,14 +829,14 @@ ul li {
   cursor: pointer;
 }
 
-.add-company-exp {
+.add-user-c {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 34px;
 }
 
-.add-company-exp h2 {
+.add-user-c h2 {
   background: #1b1b1b;
   color: #fff;
   font-family: Roboto;
@@ -850,14 +850,14 @@ ul li {
   width: 100%;
 }
 
-.add-company {
+.add-c {
   display: flex;
   flex-direction: column;
   gap: 22px;
   margin-top: 28px;
 }
 
-.add-company textarea {
+.add-c textarea {
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 14px;
@@ -869,14 +869,14 @@ ul li {
   background-color: #e9ebe9;
 }
 
-.add-company label {
+.add-c label {
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
 }
 
-.add-company input {
+.add-c input {
   color: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 14px;
@@ -1032,7 +1032,7 @@ ul li {
 }
 
 @media (min-width: 1200px) {
-  .add-company-exp h2 {
+  .add-user-c h2 {
     width: 20%;
   }
   .invoice-step-sizes {
@@ -1048,7 +1048,7 @@ ul li {
     width: 100%;
   }
 
-  .add-company input {
+  .add-c input {
     background-color: #e9ebe9;
     padding-bottom: 10px;
   }
