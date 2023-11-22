@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import "./App.css";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import { LegalNotice } from "./pages/LegalNotice";
@@ -16,8 +15,6 @@ import { InvoiceStepTwo } from "./pages/InvoiceStepTwo";
 import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
 import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
-
-
 
 function App() {
   // Utilisation de l'état pour vérifier si l'utilisateur est connecté
@@ -74,6 +71,8 @@ function App() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [navigate]);
+
+  // Rendu du composant
   return (
     <div className="App">
       <Router>
