@@ -1,3 +1,4 @@
+// Importation des modules nécessaires depuis React et d'autres bibliothèques
 import React from "react";
 import "../App.css";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -6,11 +7,18 @@ import Footer from "../components/Footer.js";
 import Account from "../components/Account";
 import GoingBackLogin from "../components/GoingBackLogin.js";
 
-
+/*
+ Page représentant la Politique de Confidentialité de Beheall.
+ Explique comment les données personnelles sont collectées, utilisées et protégées lors de l'utilisation du service de génération de factures en ligne.
+*/
 export const PrivacyPolicy = () => {
+  // Vérifie la présence d'un jeton JWT dans le localStorage
   const hasToken = !!localStorage.getItem("Token");
+
+  // Rendu du composant PrivacyPolicy
   return (
     <div className={`legal-policy${hasToken ? " avec-token" : ""}`}>
+      {/* Configuration des balises meta pour le référencement SEO */}
       <HelmetProvider>
         <Helmet>
           <title>Politique de Confidentialité | Beheall</title>
@@ -19,9 +27,12 @@ export const PrivacyPolicy = () => {
             content="Découvrez notre politique de confidentialité pour comprendre comment nous collectons, utilisons et protégeons vos données personnelles lorsque vous utilisez notre service de génération de factures en ligne. Nous nous engageons à garantir la sécurité et la confidentialité de vos informations."
           />
         </Helmet>
+        {/* Affichage du bouton de retour à la page de connexion s'il n'y a pas de jeton */}
         {!hasToken && <GoingBackLogin />}
+        {/* Titre de la page avec le logo permettant d'aller dans la partie compte ou se déconnecter, seulement s'il y a un jeton */}
         <h1>Politique de Confidentialité {hasToken && <Account />}</h1>
 
+        {/* Contenu de la politique de confidentialité */}
         <div className="privacy-policy-rules">
           <p>Date de dernière mise à jour : 30/09/2023</p>
           <h2>Collecte des Données Personnelles</h2>
@@ -83,8 +94,9 @@ export const PrivacyPolicy = () => {
             en France.
           </p>
         </div>
-
+        {/* Affichage de la navigation accordéon ou header si l'utilisateur est connecté */}
         {hasToken && <AccordionNav />}
+        {/* Pied de page */}
         <Footer />
       </HelmetProvider>
     </div>
