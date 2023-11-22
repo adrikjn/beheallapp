@@ -128,7 +128,7 @@ export const Login = () => {
         <div className="login-part-one">
           <LogoAndPicture />
           <p className="login-description">On s'occupe de tout</p>
-          <div className="login-border"></div>
+          <div className="border-line"></div>
         </div>
         <div className="login-part-two">
           <div className="login-space">

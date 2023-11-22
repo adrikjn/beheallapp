@@ -118,7 +118,7 @@ export const Register = () => {
         {globalErrors.length > 0 && <div className="overlay"></div>}
         {/* Affichage du logo et de l'image associée à la page d'inscription */}
         <LogoAndPicture />
-        <div className="login-border"></div>
+        <div className="border-line"></div>
         {/* Titre de la page d'inscription */}
         <h1 className="register-title">Inscription</h1>
         <div>

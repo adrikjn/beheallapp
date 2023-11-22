@@ -69,7 +69,7 @@ export const ResetPassword = () => {
         </Helmet>
         {/* Affichage du logo et de l'image associée à la page de réinitialisation de mot de passe */}
         <LogoAndPicture />
-        <div className="login-border"></div>
+        <div className="border-line"></div>
         {/* Titre de la page de réinitialisation de mot de passe */}
         <div className="reset-password-div">
           <h1>Réinitialisation du mot de passe</h1>
