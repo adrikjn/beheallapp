@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import { LegalNotice } from "./pages/LegalNotice";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
@@ -17,20 +22,24 @@ import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("Token"));
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
+    // Fonction pour déconnecter l'utilisateur
+    const logoutUser = () => {
       localStorage.clear();
       setIsLoggedIn(false);
-      // Redirection vers la page de connexion
-      window.location.href = '/login';
-    }, 10 * 60 * 1000);
+    };
 
+    // Définir une temporisation de 3 minutes après la connexion
+    const timeoutId = setTimeout(logoutUser, 10 * 60 * 1000); // 3 minutes en millisecondes
+
+    // Nettoyer le timeout lors du démontage du composant ou lorsqu'il y a une déconnexion
     return () => {
       clearTimeout(timeoutId);
     };
-  }, []);
+  }, [isLoggedIn]);
+
   return (
     <div className="App">
       <Router>
