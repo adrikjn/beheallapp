@@ -17,62 +17,7 @@ import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 function App() {
-  // Utilisation de l'état pour vérifier si l'utilisateur est connecté
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
-  
-  // Utilisation de l'utilitaire `useNavigate` de react-router-dom pour naviguer entre les pages
-  const navigate = useNavigate();
 
-  // Effet qui gère la déconnexion après une période d'inactivité
-  useEffect(() => {
-    let inactivityTimer;
-
-    // Fonction pour déconnecter l'utilisateur
-    const logoutUser = () => {
-      localStorage.clear();
-      setIsLoggedIn(false);
-      // Naviguer vers la page de connexion après la déconnexion
-      navigate('/login');
-    };
-
-    // Fonction pour gérer les actions de l'utilisateur
-    const handleUserAction = () => {
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(logoutUser, 10 * 60 * 1000); // 10 minutes en millisecondes
-    };
-
-    // Fonction pour gérer le changement de visibilité de la page
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        // L'utilisateur est parti (la page n'est plus visible)
-        logoutUser();
-      } else {
-        // L'utilisateur est de retour (la page est visible)
-        handleUserAction();
-      }
-    };
-
-    // Ajouter des écouteurs d'événements pour les actions de l'utilisateur
-    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
-      document.addEventListener(event, handleUserAction);
-    });
-
-    // Ajouter un écouteur d'événements pour la visibilité de la page
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    // Démarrer le minuteur au montage
-    handleUserAction();
-
-    // Nettoyer les écouteurs d'événements lors du démontage du composant
-    return () => {
-      ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
-        document.removeEventListener(event, handleUserAction);
-      });
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, [navigate]);
-
-  // Rendu du composant
   return (
     <div className="App">
       <Router>
