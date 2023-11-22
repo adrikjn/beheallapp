@@ -1,3 +1,4 @@
+// Importation des modules nécessaires depuis React et d'autres bibliothèques
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";

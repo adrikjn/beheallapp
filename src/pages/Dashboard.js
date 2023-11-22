@@ -1,3 +1,4 @@
+// Importation des modules nécessaires depuis React et d'autres bibliothèques
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";

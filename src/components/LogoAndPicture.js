@@ -1,3 +1,4 @@
+// Importation des modules nécessaires depuis React
 import React from "react";
 
 // Composant représentant le logo de l'application avec une image de facture

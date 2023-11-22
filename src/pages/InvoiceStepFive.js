@@ -1,3 +1,4 @@
+// Importation des modules nécessaires depuis React et d'autres bibliothèques
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 import AccordionNav from "../components/AccordionNav";
@@ -54,13 +55,24 @@ export const InvoiceStepFive = () => {
     };
   }, []);
 
+  // Cette fonction prend une chaîne de caractères représentant une date en entrée
   function formatDate(dateString) {
+    // Vérifie si la chaîne de caractères est vide ou indéfinie, si c'est le cas, retourne une chaîne vide
     if (!dateString) return "";
+
+    // Crée une nouvelle instance de l'objet Date en utilisant la chaîne de caractères de la date en entrée
     const date = new Date(dateString);
+
+    // Récupère le jour du mois (1-31) et le convertit en une chaîne de caractères avec un zéro devant si nécessaire
     const day = date.getDate().toString().padStart(2, "0");
+
+    // Récupère le mois (0-11) et l'incrémente de 1 pour obtenir le mois réel (1-12), puis le convertit en une chaîne de caractères avec un zéro devant si nécessaire
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
+
+    // Récupère l'année à quatre chiffres
     const year = date.getFullYear();
 
+    // Récupère l'année à quatre chiffres
     return `${day}/${month}/${year}`;
   }
 
@@ -605,6 +617,7 @@ export const InvoiceStepFive = () => {
             <div className="company-summary">
               <h2>Expéditaire</h2>
               <div className="company-summary-part">
+                {/* Informations sur l'expéditeur */}
                 <div className="company-info-1">
                   <p>
                     {userData?.lastName?.toUpperCase()}{" "}
@@ -617,6 +630,7 @@ export const InvoiceStepFive = () => {
                   <p> {invoiceData?.company?.sirenSiret}</p>
                   <p> {invoiceData?.company?.vatId}</p>
                 </div>
+                {/* Autres informations sur l'expéditeur. */}
                 <div className="company-info-2">
                   <p>
                     {invoiceData?.company?.address} {invoiceData?.company?.city}{" "}
@@ -631,6 +645,7 @@ export const InvoiceStepFive = () => {
             <div className="customer-summary">
               <h2>Client</h2>
               <div className="customer-summary-part">
+                {/* Informations sur le client */}
                 <div className="customer-info-1">
                   <p>
                     {invoiceData?.customer?.companyName} (
@@ -644,6 +659,7 @@ export const InvoiceStepFive = () => {
                   <p>{invoiceData?.customer?.email}</p>
                   <p>{invoiceData?.customer?.sirenSiret}</p>
                 </div>
+                {/* Autres informations sur le client */}
                 <div className="customer-info-2">
                   <p>
                     {invoiceData?.customer?.address}{" "}
@@ -657,9 +673,11 @@ export const InvoiceStepFive = () => {
             </div>
           </div>
 
+          {/* Bloc récapitulatif des produits/services de la facture */}
           <div className="products-summary">
             <h2>Produits</h2>
             <div className="product-summary-part">
+              {/* En-tête de la liste des produits */}
               <ul className="product-summary-header">
                 <li>Intitulés</li>
                 <li>Volumes</li>
@@ -667,6 +685,7 @@ export const InvoiceStepFive = () => {
                 <li>TVA</li>
                 <li>Prix HT</li>
               </ul>
+              {/* Boucle sur les services de la facture pour afficher les détails de chaque service */}
               {invoiceData?.services?.map((service) => (
                 <ul
                   className={`product-summary-item ${
@@ -674,6 +693,7 @@ export const InvoiceStepFive = () => {
                   }`}
                   key={service.id}
                 >
+                  {/* Détails du service (intitulé, description, quantité, coût unitaire, TVA, prix total) */}
                   <li>
                     {service.title.length > (isSmallScreen ? 8 : 25)
                       ? `${service.title.substring(
@@ -698,6 +718,7 @@ export const InvoiceStepFive = () => {
                 </ul>
               ))}
             </div>
+            {/* Détails supplémentaires sur la facture (objet, prix total TTC, numéro de facture, dates, durée de validité, moyen de paiement) */}
             <div className="summary-details">
               <div className="summary-total">
                 <p>Objet : {invoiceData?.title}</p>
@@ -723,7 +744,9 @@ export const InvoiceStepFive = () => {
             </div>
           </div>
         </div>
+        {/* Affichage de la navigation par onglets */}
         <AccordionNav />
+        {/* Pied de page pour les écrans de bureau */}
         <div className="desktop-footer">
           <Footer />
         </div>
