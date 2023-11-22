@@ -18,7 +18,7 @@ import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("Token"));
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('Token'));
 
   useEffect(() => {
     let inactivityTimer;
@@ -34,7 +34,7 @@ function App() {
     };
 
     const handleVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
+      if (document.visibilityState === 'hidden') {
         // L'utilisateur est parti (la page n'est plus visible)
         logoutUser();
       } else {
@@ -44,26 +44,40 @@ function App() {
     };
 
     // Ajouter des écouteurs d'événements pour les actions de l'utilisateur
-    ["mousedown", "mousemove", "keypress", "scroll", "touchstart"].forEach(
-      (event) => {
-        document.addEventListener(event, handleUserAction);
-      }
-    );
+    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
+      document.addEventListener(event, handleUserAction);
+    });
 
     // Ajouter un écouteur d'événements pour la visibilité de la page
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // Démarrer le minuteur au montage
     handleUserAction();
 
     // Nettoyer les écouteurs d'événements lors du démontage du composant
     return () => {
-      ["mousedown", "mousemove", "keypress", "scroll", "touchstart"].forEach(
-        (event) => {
-          document.removeEventListener(event, handleUserAction);
-        }
-      );
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach((event) => {
+        document.removeEventListener(event, handleUserAction);
+      });
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      // Vérifier si la fermeture de la fenêtre est due à une actualisation
+      if (!event.persisted) {
+        // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
+        localStorage.clear();
+      }
+    };
+
+    // Ajouter un écouteur d'événements pour l'événement "beforeunload" (avant le déchargement de la page)
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Nettoyer l'écouteur d'événements lors du démontage du composant
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, []);
   return (
