@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
@@ -18,30 +18,30 @@ import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
 function App() {
-  useEffect(() => {
-    // Variable pour suivre l'état de la déconnexion
-    let isLoggingOut = false;
+  const [isReloading, setIsReloading] = useState(false);
 
+  useEffect(() => {
     const handleBeforeUnload = (event) => {
-      // Vérifier si la fermeture de la fenêtre est due à une actualisation
-      if (event.persisted === false && !isLoggingOut) {
-        // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
+      if (!isReloading) {
         localStorage.clear();
       }
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    // Nettoyer l'écouteur d'événements lors du démontage du composant
-    return () => {
-      // Définir la variable isLoggingOut à true avant de déconnecter
-      isLoggingOut = true;
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+    const handleUnload = () => {
+      setIsReloading(true);
     };
-  }, []);
 
-  // Assurez-vous de supprimer les données du localStorage au chargement initial de l'application
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('unload', handleUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('unload', handleUnload);
+    };
+  }, [isReloading]);
+
   useEffect(() => {
+    // Assurez-vous de supprimer les données du localStorage au chargement initial de l'application
     localStorage.clear();
   }, []);
 
