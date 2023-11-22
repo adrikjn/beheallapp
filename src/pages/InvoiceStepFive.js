@@ -557,7 +557,7 @@ export const InvoiceStepFive = () => {
           />
         </Helmet>
 
-        {/* Bloc d'accueil utilisateur avec le titre et le composant Account */}
+        {/* Bloc avec le titre et le composant Account */}
         <div className="welcome-user">
           <h1>Finalisation</h1>
           <Account />

@@ -1,3 +1,4 @@
+// Importation des modules nécessaires depuis React et d'autres bibliothèques
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
@@ -6,16 +7,25 @@ import Account from "../components/Account";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 
+/*
+  Page représentant l'ajout du client de l'entreprise.
+  Permet de passer au step 3 de la création de la facture
+ */
 export const InvoiceStepTwo = () => {
+  // Récupération du token, de l'ID utilisateur, l'ID de l'entreprise de l'utilisateur depuis le stockage local
   const token = localStorage.getItem("Token");
-  const navigate = useNavigate();
   const invoiceData = JSON.parse(localStorage.getItem("InvoiceData"));
   const selectedCompanyId = invoiceData ? invoiceData.company : null;
+
+  // Utilitaire de navigation fourni par react-router-dom
+  const navigate = useNavigate();
+
+  // États pour gérer les clients de l'utilisateur, le client sélectionnée,
+  // les erreurs globales et l'affichage des champs facultatifs
   const [companyOptions, setCompanyOptions] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState("undefined");
   const [globalErrors, setGlobalErrors] = useState([]);
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
-  const apiUrl = process.env.REACT_APP_API_BASE_URL;
   const [formData, setFormData] = useState({
     company: `/api/companies/${selectedCompanyId}`,
     lastName: "",
@@ -34,6 +44,10 @@ export const InvoiceStepTwo = () => {
     sirenSiret: "",
   });
 
+  // URL de l'API
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
+  // Effet pour gérer la redirection en cas d'absence d'authentification ou de données de facture
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -46,8 +60,8 @@ export const InvoiceStepTwo = () => {
     }
   }, [token, navigate, invoiceData]);
 
+  // Effet pour ajuster l'affichage des champs en fonction du choix du client
   useEffect(() => {
-    console.log(selectedCustomer);
     if (selectedCustomer !== "undefined") {
       document.getElementById("newCompanieForm").classList.add("display-none");
     } else {
@@ -57,6 +71,7 @@ export const InvoiceStepTwo = () => {
     }
   }, [selectedCustomer]);
 
+  // Effet pour récupérer les détails de l'entreprise sélectionnée
   useEffect(() => {
     if (selectedCompanyId) {
       Axios.get(`${apiUrl}/companies/${selectedCompanyId}`, {
@@ -84,23 +99,26 @@ export const InvoiceStepTwo = () => {
     }
   }, [selectedCompanyId, token]);
 
+  // Fonction pour gérer la soumission du formulaire
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      // Soumission des données du formulaire pour créer un nouveau client
       const response = await Axios.post(`${apiUrl}/customers`, formData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Customer data submitted:", response.data);
 
       const newCustomerId = response.data.id;
 
+      // Mise à jour des données de facture avec le nouvel identifiant du client
       invoiceData.customer = newCustomerId;
       localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
 
+      // Récupération des options de clients après l'ajout du nouveau client
       Axios.get(`${apiUrl}/companies/${selectedCompanyId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -123,9 +141,11 @@ export const InvoiceStepTwo = () => {
         .catch((error) => {
           console.error("Error fetching selected company details:", error);
         });
+
+      // Redirection vers la prochaine étape du processus de création de facture
       navigate("/invoice-step-three");
     } catch (error) {
-      console.error("Error submitting customer data:", error);
+      // Gestion des erreurs de validation
       if (
         error.response &&
         error.response.data &&
@@ -142,10 +162,12 @@ export const InvoiceStepTwo = () => {
     }
   };
 
+  // Fonction pour gérer le changement de sélection du client
   const handleSelectChange = async (e) => {
     setSelectedCustomer(e.target.value);
   };
 
+  // Fonction pour gérer les changements dans le formulaire
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
     const newValue = type === "checkbox" ? e.target.checked : value;
@@ -156,11 +178,15 @@ export const InvoiceStepTwo = () => {
     }));
   };
 
+  // Fonction pour gérer le clic sur le bouton "Continuer"
   const handleContinueClick = async () => {
     if (selectedCustomer !== "undefined" && selectedCustomer !== null) {
       try {
+        // Mise à jour des données de facture avec l'identifiant du client sélectionné
         invoiceData.customer = selectedCustomer;
         localStorage.setItem("InvoiceData", JSON.stringify(invoiceData));
+
+        // Redirection vers la prochaine étape du processus de création de facture
         navigate("/invoice-step-three");
       } catch (error) {
         console.error("Error navigating:", error);
@@ -170,12 +196,14 @@ export const InvoiceStepTwo = () => {
     }
   };
 
+  // Fonction pour fermer l'alerte des erreurs globales
   const closeAlert = () => {
     setGlobalErrors([]);
   };
 
   return (
     <div className="invoice-step-one-page fade-in">
+      {/* Configuration des balises meta pour le référencement SEO */}
       <HelmetProvider>
         <Helmet>
           <title>Ajout Client | Beheall</title>
@@ -184,7 +212,11 @@ export const InvoiceStepTwo = () => {
             content="Ajoutez un nouveau client sur Beheall pour créer vos factures. Enregistrez les informations de votre client et simplifiez le processus de facturation. Profitez d'une gestion efficace de vos relations clients avec Beheall."
           />
         </Helmet>
+
+        {/* Affichage d'une superposition en cas d'erreurs globales */}
         {globalErrors.length > 0 && <div className="overlay"></div>}
+
+        {/* Bloc avec le titre et le composant Account */}
         <div className="welcome-user">
           <h1>création factures</h1>
           <Account />
@@ -195,6 +227,7 @@ export const InvoiceStepTwo = () => {
         </div>
         <p className="invoice-step-one-p">Sélectionner un destinataire</p>
 
+        {/* Sélecteur pour choisir un client existant */}
         <select
           onChange={handleSelectChange}
           name="name"
@@ -209,11 +242,14 @@ export const InvoiceStepTwo = () => {
             </option>
           ))}
         </select>
+
+        {/* Formulaire pour ajouter un nouveau client */}
         <div id="newCompanieForm">
           <div className="add-company-exp">
             <h2>nouveau client</h2>
           </div>
           <form onSubmit={handleFormSubmit}>
+            {/* Affichage des erreurs globales s'il y en a */}
             <div className="add-company">
               {globalErrors.length > 0 && (
                 <div className="alert">
@@ -225,6 +261,7 @@ export const InvoiceStepTwo = () => {
                   ))}
                 </div>
               )}
+              {/* Champs du formulaire pour ajouter un nouveau client */}
               <div className="input-row">
                 <input
                   type="text"
@@ -308,6 +345,8 @@ export const InvoiceStepTwo = () => {
                   }
                 />
               </div>
+
+              {/* Affichage des champs facultatifs en fonction de la sélection */}
               {showAdditionalFields && (
                 <>
                   <div className="invoice-step-sizes">
@@ -364,18 +403,24 @@ export const InvoiceStepTwo = () => {
                 </>
               )}
             </div>
+            {/* Bouton pour soumettre le formulaire */}
             <div className="btn-invoice-2 btn-m">
               <button>Ajouter</button>
             </div>
           </form>
         </div>
 
+        {/* Bouton pour continuer vers la prochaine étape */}
         <div className="btn-invoice-2 fixed-btn">
           {selectedCustomer !== "undefined" && selectedCustomer !== null && (
             <button onClick={handleContinueClick}>Continuer</button>
           )}
         </div>
+
+        {/* Composant de navigation par accordéon */}
         <AccordionNav />
+
+        {/* Pied de page pour les écrans de bureau */}
         <div className="desktop-footer">
           <Footer />
         </div>
