@@ -22,7 +22,7 @@ function App() {
   const [isComponentMounted, setIsComponentMounted] = useState(true);
 
   useEffect(() => {
-    const handleBeforeUnload = (event) => {
+    const handleUnload = (event) => {
       // Vérifier si la fermeture de la fenêtre est due à une actualisation
       if (!event.persisted && isComponentMounted) {
         // Supprimer les données du localStorage uniquement si la fenêtre se ferme réellement
@@ -30,11 +30,11 @@ function App() {
       }
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('unload', handleUnload);
 
     return () => {
       setIsComponentMounted(false);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('unload', handleUnload);
     };
   }, [isComponentMounted]);
 
