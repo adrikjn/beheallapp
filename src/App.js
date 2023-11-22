@@ -29,8 +29,8 @@ function App() {
       setIsLoggedIn(false);
     };
 
-    // Définir une temporisation de 3 minutes après la connexion
-    const timeoutId = setTimeout(logoutUser, 3 * 60 * 1000); // 3 minutes en millisecondes
+    // Définir une temporisation de 1 minutes après la connexion
+    const timeoutId = setTimeout(logoutUser, 1 * 60 * 1000); // 3 minutes en millisecondes
 
     // Nettoyer le timeout lors du démontage du composant ou lorsqu'il y a une déconnexion
     return () => {
