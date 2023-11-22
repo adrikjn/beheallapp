@@ -30,14 +30,19 @@ function App() {
       }
     };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener('beforeunload', handleBeforeUnload);
 
     // Nettoyer l'écouteur d'événements lors du démontage du composant
     return () => {
       // Définir la variable isLoggingOut à true avant de déconnecter
       isLoggingOut = true;
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
+  }, []);
+
+  // Assurez-vous de supprimer les données du localStorage au chargement initial de l'application
+  useEffect(() => {
+    localStorage.clear();
   }, []);
 
   return (
