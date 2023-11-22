@@ -149,7 +149,7 @@ export const MyAccount = () => {
   };
 
   return (
-    <div className="invoice-step-one-page">
+    <div className="invoice-page">
       {/* Configuration des balises meta pour le référencement SEO */}
       <HelmetProvider>
         <Helmet>

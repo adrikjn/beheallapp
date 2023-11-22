@@ -182,7 +182,7 @@ export const InvoiceStepThree = () => {
   }
 
   return (
-    <div className="invoice-step-one-page fade-in">
+    <div className="invoice-page fade-in">
       {/* Configuration des balises meta pour le référencement SEO */}
       <HelmetProvider>
         <Helmet>
