@@ -299,7 +299,7 @@ ul li {
   width: 100%;
 }
 
-.login-page .register {
+.login-r-page .register {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -313,7 +313,7 @@ ul li {
   padding: 0 32px;
 }
 
-.login-page .register input {
+.login-r-page .register input {
   padding: 10px 20px;
   border-radius: 2px;
   border: 1px solid #a2aebb;
