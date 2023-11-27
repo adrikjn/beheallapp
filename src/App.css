@@ -421,7 +421,7 @@ ul li {
   .login-r-page .register .name-inputs input {
     width: 50%;
   }
-  .login-r-page.register .name-inputs-size {
+  .login-r-page .register .name-inputs-size {
     width: 50%;
     display: flex;
     flex-direction: row;
