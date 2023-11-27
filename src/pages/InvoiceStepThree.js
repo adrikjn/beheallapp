@@ -234,14 +234,14 @@ export const InvoiceStepThree = () => {
                   type="text"
                   id="title"
                   name="title"
-                  placeholder="Objet (ex: Prestation de Marchandise)"
+                  placeholder="Objet (ex : Prestation de Marchandise)"
                   value={formData.title}
                   onChange={handleInputChange}
                 ></input>
               </div>
               <textarea
                 id="description"
-                placeholder="Conditions générales de vente (si nécessaire)"
+                placeholder="Conditions générales de vente (si applicables)"
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
@@ -249,10 +249,11 @@ export const InvoiceStepThree = () => {
               <label htmlFor="fromDate">
                 Date de début de l'opération{" "}
                 <span className="label-span-red">
-                  (Laisser le champ vide si l'opération dure moins d'une
-                  journée){" "}
+                  (Si l'opération dure moins d'une journée, laissez le champ
+                  vide)
                 </span>
               </label>
+
               <input
                 type="date"
                 id="fromDate"

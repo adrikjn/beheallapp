@@ -256,7 +256,7 @@ export const InvoiceStepOne = () => {
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Entreprise (NOM Prénom, si indépendant)"
+                  placeholder="Nom de l'entreprise (ou NOM et Prénom si indépendant)"
                   value={formData.name}
                   onChange={handleInputChange}
                 />
