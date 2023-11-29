@@ -41,12 +41,12 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    let unloadTime;
+    let logoutTime;
   
     // Fonction pour gérer le déchargement de la page
     const handleBeforeUnload = () => {
       // Stocker le timestamp actuel dans le localStorage
-      localStorage.setItem("unloadTime", new Date().getTime());
+      localStorage.setItem("logoutTime", new Date().getTime());
     };
   
     // Ajouter l'événement beforeunload
@@ -55,22 +55,25 @@ function App() {
     // Nettoyer l'événement lors du démontage du composant
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-  
-      // Récupérer le timestamp au moment du déchargement
-      unloadTime = localStorage.getItem("unloadTime");
-  
-      // Si le timestamp existe et le délai de 5 secondes n'a pas été dépassé
-      if (unloadTime && new Date().getTime() - parseInt(unloadTime) < 5000) {
-        // Annuler la suppression du token
-        return;
-      }
-  
-      // Supprimer le token après 5 secondes
-      setTimeout(() => {
-        localStorage.removeItem("Token");
-      }, 5000);
     };
   }, []);
+  
+  useEffect(() => {
+    // Récupérer le timestamp de déconnexion du localStorage
+    const storedLogoutTime = localStorage.getItem("logoutTime");
+  
+    // Si le timestamp existe et le délai de 5 secondes n'a pas été dépassé
+    if (storedLogoutTime && new Date().getTime() - parseInt(storedLogoutTime) < 5000) {
+      // Annuler la suppression du token
+      return;
+    }
+  
+    // Supprimer le token après 5 secondes
+    setTimeout(() => {
+      localStorage.removeItem("Token");
+    }, 5000);
+  }, []);
+  
   
 
   return (
