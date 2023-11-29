@@ -42,20 +42,19 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    // Action à exécuter avant le déchargement de la page
     const handleBeforeUnload = () => {
-      // Nettoyer le localStorage lors de la fermeture de la page
-      localStorage.removeItem("Token");
+      // Vérifier si l'utilisateur est connecté avant de supprimer le token
+      if (isLoggedIn) {
+        localStorage.removeItem("Token");
+      }
     };
-
-    // Ajouter l'événement beforeunload
+  
     window.addEventListener("beforeunload", handleBeforeUnload);
-
-    // Nettoyer l'événement lors du démontage du composant
+  
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <div className="App">
