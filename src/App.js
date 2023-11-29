@@ -64,7 +64,7 @@ function App() {
       return;
     }
 
-    // Supprimer le token après 1 seconde
+    // Supprimer le token après 1 (4 millisecondes) seconde
     setTimeout(() => {
       localStorage.removeItem("Token");
     }, 1);
