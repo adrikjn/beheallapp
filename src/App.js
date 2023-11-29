@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  useNavigate,
+  Route
 } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import { LegalNotice } from "./pages/LegalNotice";
@@ -26,16 +25,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("Token"));
 
   useEffect(() => {
-    // Fonction pour déconnecter l'utilisateur
     const logoutUser = () => {
       localStorage.clear();
       setIsLoggedIn(false);
     };
 
-    // Définir une temporisation de 3 minutes après la connexion
-    const timeoutId = setTimeout(logoutUser, 10 * 60 * 1000); // 3 minutes en millisecondes
+    const timeoutId = setTimeout(logoutUser, 10 * 60 * 1000);
 
-    // Nettoyer le timeout lors du démontage du composant ou lorsqu'il y a une déconnexion
     return () => {
       clearTimeout(timeoutId);
     };
@@ -43,14 +39,15 @@ function App() {
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      // Vérifier si l'utilisateur est connecté avant de supprimer le token
+      // Vérifier si l'utilisateur est connecté avant de déclencher la déconnexion
       if (isLoggedIn) {
         localStorage.removeItem("Token");
+        setIsLoggedIn(false);
       }
     };
-  
+
     window.addEventListener("beforeunload", handleBeforeUnload);
-  
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
