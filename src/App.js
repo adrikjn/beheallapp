@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import { LegalNotice } from "./pages/LegalNotice";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
@@ -15,6 +19,7 @@ import { InvoiceStepTwo } from "./pages/InvoiceStepTwo";
 import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
 import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("Token"));
@@ -36,32 +41,15 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    // Récupérer le token du localStorage
-    const token = localStorage.getItem("Token");
-  
-    // Vérifier si la page est actualisée (rafraîchissement)
-    const isPageRefreshed = localStorage.getItem("isPageRefreshed");
-  
-    // Si la page est actualisée, ne pas supprimer le token du localStorage
-    if (!isPageRefreshed) {
-      // Stocker le token dans le localStorage lors du rafraîchissement de la page
-      localStorage.setItem("Token", token);
-    } else {
-      // Supprimer le token du localStorage lors de la fermeture de la page
-      localStorage.removeItem("Token");
-      // Supprimer la clé indiquant que la page a été actualisée
-      localStorage.removeItem("isPageRefreshed");
-    }
-  
     // Action à exécuter avant le déchargement de la page
     const handleBeforeUnload = () => {
-      // Indiquer que la page est en cours de fermeture
-      localStorage.setItem("isPageRefreshed", "true");
+      // Nettoyer le localStorage lors de la fermeture de la page
+      localStorage.removeItem("Token");
     };
-  
+
     // Ajouter l'événement beforeunload
     window.addEventListener("beforeunload", handleBeforeUnload);
-  
+
     // Nettoyer l'événement lors du démontage du composant
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
