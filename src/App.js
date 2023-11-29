@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import { LegalNotice } from "./pages/LegalNotice";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
@@ -20,42 +16,40 @@ import { InvoiceStepThree } from "./pages/InvoiceStepThree.js";
 import { InvoiceStepFour } from "./pages/InvoiceStepFour.js";
 import { InvoiceStepFive } from "./pages/InvoiceStepFive.js";
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("Token"));
 
   useEffect(() => {
+    // Fonction pour déconnecter l'utilisateur
     const logoutUser = () => {
       localStorage.clear();
       setIsLoggedIn(false);
     };
 
-    const timeoutId = setTimeout(logoutUser, 10 * 60 * 1000);
+    // Définir une temporisation de 3 minutes après la connexion
+    const timeoutId = setTimeout(logoutUser, 10 * 60 * 1000); // 3 minutes en millisecondes
 
+    // Nettoyer le timeout lors du démontage du composant ou lorsqu'il y a une déconnexion
     return () => {
       clearTimeout(timeoutId);
     };
   }, [isLoggedIn]);
 
   useEffect(() => {
-    const handleBeforeUnload = async () => {
-      // Utiliser une promesse pour garantir la synchronicité
-      await new Promise((resolve) => setTimeout(resolve, 0));
-
-      // Vérifier si l'utilisateur est connecté avant de déclencher la déconnexion
-      if (isLoggedIn) {
-        localStorage.removeItem("Token");
-        setIsLoggedIn(false);
-      }
+    // Action à exécuter avant le déchargement de la page
+    const handleBeforeUnload = () => {
+      // Nettoyer le localStorage lors de la fermeture de la page
+      localStorage.removeItem("Token");
     };
 
+    // Ajouter l'événement beforeunload
     window.addEventListener("beforeunload", handleBeforeUnload);
 
+    // Nettoyer l'événement lors du démontage du composant
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [isLoggedIn]);
-
+  }, []);
 
   return (
     <div className="App">
