@@ -41,37 +41,20 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    let timeoutId;
-  
     // Action à exécuter avant le déchargement de la page
     const handleBeforeUnload = () => {
-      // Stocker le timestamp actuel dans le localStorage
-      localStorage.setItem("unloadTime", new Date().getTime());
+      // Nettoyer le localStorage lors de la fermeture de la page
+      localStorage.removeItem("Token");
     };
-  
+
     // Ajouter l'événement beforeunload
     window.addEventListener("beforeunload", handleBeforeUnload);
-  
+
     // Nettoyer l'événement lors du démontage du composant
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-  
-      // Récupérer le timestamp au moment du déchargement
-      const unloadTime = localStorage.getItem("unloadTime");
-  
-      // Si le timestamp existe et le délai de 5 secondes n'a pas été dépassé
-      if (unloadTime && new Date().getTime() - parseInt(unloadTime) < 5000) {
-        // Annuler le timeout pour supprimer le token
-        clearTimeout(timeoutId);
-      } else {
-        // Supprimer le token après 5 secondes
-        timeoutId = setTimeout(() => {
-          localStorage.removeItem("Token");
-        }, 5000);
-      }
     };
   }, []);
-  
 
   return (
     <div className="App">
