@@ -42,19 +42,20 @@ function App() {
 
   useEffect(() => {
     // Action à exécuter avant le déchargement de la page
-    const handleBeforeUnload = () => {
+    const handleUnload = () => {
       // Nettoyer le localStorage lors de la fermeture de la page
       localStorage.removeItem("Token");
     };
-
-    // Ajouter l'événement beforeunload
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
+  
+    // Ajouter l'événement unload
+    window.addEventListener("unload", handleUnload);
+  
     // Nettoyer l'événement lors du démontage du composant
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleUnload);
     };
   }, []);
+  
 
   return (
     <div className="App">
