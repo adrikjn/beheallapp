@@ -31,8 +31,8 @@ function App() {
       setIsLoggedIn(false);
     };
 
-    // Définir une temporisation de 3 minutes après la connexion
-    const timeoutId = setTimeout(logoutUser, 10 * 60 * 1000); // 3 minutes en millisecondes
+    // Définir une temporisation de 15 minutes après la connexion
+    const timeoutId = setTimeout(logoutUser, 15 * 60 * 1000); // 3 minutes en millisecondes
 
     // Nettoyer le timeout lors du démontage du composant ou lorsqu'il y a une déconnexion
     return () => {
@@ -40,9 +40,7 @@ function App() {
     };
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    let logoutTime;
-  
+  useEffect(() => {  
     // Fonction pour gérer le déchargement de la page
     const handleBeforeUnload = () => {
       // Stocker le timestamp actuel dans le localStorage
@@ -68,7 +66,7 @@ function App() {
       return;
     }
   
-    // Supprimer le token après 5 secondes
+    // Supprimer le token après 1 seconde
     setTimeout(() => {
       localStorage.removeItem("Token");
     }, 1);
