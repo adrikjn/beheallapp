@@ -45,11 +45,8 @@ function App() {
   
     // Action à exécuter avant le déchargement de la page
     const handleBeforeUnload = () => {
-      // Retarder la suppression du token après 3 secondes
-      timeoutId = setTimeout(() => {
-        // Nettoyer le localStorage lors de la fermeture de la page
-        localStorage.removeItem("Token");
-      }, 3000); // 3 secondes en millisecondes
+      // Stocker le timestamp actuel dans le localStorage
+      localStorage.setItem("unloadTime", new Date().getTime());
     };
   
     // Ajouter l'événement beforeunload
@@ -59,8 +56,19 @@ function App() {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
   
-      // Annuler le timeout si la page est fermée avant le délai de 3 secondes
-      clearTimeout(timeoutId);
+      // Récupérer le timestamp au moment du déchargement
+      const unloadTime = localStorage.getItem("unloadTime");
+  
+      // Si le timestamp existe et le délai de 5 secondes n'a pas été dépassé
+      if (unloadTime && new Date().getTime() - parseInt(unloadTime) < 5000) {
+        // Annuler le timeout pour supprimer le token
+        clearTimeout(timeoutId);
+      } else {
+        // Supprimer le token après 5 secondes
+        timeoutId = setTimeout(() => {
+          localStorage.removeItem("Token");
+        }, 5000);
+      }
     };
   }, []);
   
