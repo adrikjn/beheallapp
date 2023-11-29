@@ -59,8 +59,24 @@ function App() {
   }, []);
   
   useEffect(() => {
-    // Récupérer le timestamp de déconnexion du localStorage
-    const storedLogoutTime = localStorage.getItem("logoutTime");
+    // Fonction pour gérer le déchargement de la page
+    const handleBeforeUnload = () => {
+      // Stocker le timestamp actuel dans le sessionStorage
+      sessionStorage.setItem("logoutTime", new Date().getTime());
+    };
+  
+    // Ajouter l'événement beforeunload
+    window.addEventListener("beforeunload", handleBeforeUnload);
+  
+    // Nettoyer l'événement lors du démontage du composant
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+  
+  useEffect(() => {
+    // Récupérer le timestamp de déconnexion du sessionStorage
+    const storedLogoutTime = sessionStorage.getItem("logoutTime");
   
     // Si le timestamp existe et le délai de 5 secondes n'a pas été dépassé
     if (storedLogoutTime && new Date().getTime() - parseInt(storedLogoutTime) < 5000) {
@@ -73,7 +89,6 @@ function App() {
       localStorage.removeItem("Token");
     }, 5000);
   }, []);
-  
   
 
   return (
