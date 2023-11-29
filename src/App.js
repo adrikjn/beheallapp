@@ -36,11 +36,11 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    // Récupérer le token du sessionStorage
-    const token = sessionStorage.getItem("Token");
+    // Récupérer le token du localStorage
+    const token = localStorage.getItem("Token");
   
     // Vérifier si la page est actualisée (rafraîchissement)
-    const isPageRefreshed = sessionStorage.getItem("isPageRefreshed");
+    const isPageRefreshed = localStorage.getItem("isPageRefreshed");
   
     // Si la page est actualisée, ne pas supprimer le token du localStorage
     if (!isPageRefreshed) {
@@ -50,13 +50,13 @@ function App() {
       // Supprimer le token du localStorage lors de la fermeture de la page
       localStorage.removeItem("Token");
       // Supprimer la clé indiquant que la page a été actualisée
-      sessionStorage.removeItem("isPageRefreshed");
+      localStorage.removeItem("isPageRefreshed");
     }
   
     // Action à exécuter avant le déchargement de la page
     const handleBeforeUnload = () => {
       // Indiquer que la page est en cours de fermeture
-      sessionStorage.setItem("isPageRefreshed", "true");
+      localStorage.setItem("isPageRefreshed", "true");
     };
   
     // Ajouter l'événement beforeunload
