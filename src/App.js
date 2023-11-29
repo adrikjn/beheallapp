@@ -38,7 +38,10 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    const handleBeforeUnload = () => {
+    const handleBeforeUnload = async () => {
+      // Utiliser une promesse pour garantir la synchronicité
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
       // Vérifier si l'utilisateur est connecté avant de déclencher la déconnexion
       if (isLoggedIn) {
         localStorage.removeItem("Token");
@@ -52,6 +55,7 @@ function App() {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [isLoggedIn]);
+
 
   return (
     <div className="App">
