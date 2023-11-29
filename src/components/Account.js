@@ -26,6 +26,7 @@ const Account = () => {
     localStorage.removeItem("invoice");
     localStorage.removeItem("UserData");
     localStorage.removeItem("InvoiceData");
+    localStorage.removeItem("logoutTime");
 
     // Rediriger l'utilisateur vers la page de connexion après la déconnexion
     navigate("/login");
