@@ -41,20 +41,29 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
+    let timeoutId;
+  
     // Action à exécuter avant le déchargement de la page
     const handleBeforeUnload = () => {
-      // Nettoyer le localStorage lors de la fermeture de la page
-      localStorage.removeItem("Token");
+      // Retarder la suppression du token après 3 secondes
+      timeoutId = setTimeout(() => {
+        // Nettoyer le localStorage lors de la fermeture de la page
+        localStorage.removeItem("Token");
+      }, 3000); // 3 secondes en millisecondes
     };
-
+  
     // Ajouter l'événement beforeunload
     window.addEventListener("beforeunload", handleBeforeUnload);
-
+  
     // Nettoyer l'événement lors du démontage du composant
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
+  
+      // Annuler le timeout si la page est fermée avant le délai de 3 secondes
+      clearTimeout(timeoutId);
     };
   }, []);
+  
 
   return (
     <div className="App">
