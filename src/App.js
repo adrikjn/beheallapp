@@ -36,27 +36,21 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    // Récupérer le token du sessionStorage
-    const token = sessionStorage.getItem("Token");
-  
     // Action à exécuter avant le déchargement de la page
     const handleBeforeUnload = () => {
-      // Supprimer le token du localStorage lors de la fermeture de la page
+      // Nettoyer le localStorage lors de la fermeture de la page
       localStorage.removeItem("Token");
     };
-  
+
     // Ajouter l'événement beforeunload
     window.addEventListener("beforeunload", handleBeforeUnload);
-  
-    // Stocker le token dans le localStorage lors du rafraîchissement de la page
-    localStorage.setItem("Token", token);
-  
+
     // Nettoyer l'événement lors du démontage du composant
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
-  
+
   return (
     <div className="App">
       <Router>
