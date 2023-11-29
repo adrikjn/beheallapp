@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
-  Route
 } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import { LegalNotice } from "./pages/LegalNotice";
@@ -41,27 +40,15 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    // Récupérer le token du localStorage
-    const token = localStorage.getItem("Token");
-  
-    // Vérifier si la page est actualisée (rafraîchissement)
-    const isPageRefreshed = performance.navigation.type === 1;
-  
-    // Si la page est actualisée, ne pas supprimer le token du localStorage
-    if (!isPageRefreshed) {
-      // Stocker le token dans le localStorage lors du rafraîchissement de la page
-      localStorage.setItem("Token", token);
-    }
-  
     // Action à exécuter avant le déchargement de la page
     const handleBeforeUnload = () => {
-      // Supprimer le token du localStorage lors de la fermeture de la page
+      // Nettoyer le localStorage lors de la fermeture de la page
       localStorage.removeItem("Token");
     };
-  
+
     // Ajouter l'événement beforeunload
     window.addEventListener("beforeunload", handleBeforeUnload);
-  
+
     // Nettoyer l'événement lors du démontage du composant
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
