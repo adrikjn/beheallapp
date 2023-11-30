@@ -1,12 +1,12 @@
 // Importation des modules nécessaires depuis React et d'autres bibliothèques
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../App.css";
-import { Link, useNavigate } from "react-router-dom";
-import Axios from "axios";
+import { Link } from "react-router-dom";
 import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
+import InvoiceLogic from "../utils/InvoiceLogic";
 
 /*
   Page affichant la liste des factures de l'utilisateur.
@@ -14,57 +14,9 @@ import Footer from "../components/Footer.js";
   Fournit également un lien pour créer une nouvelle facture.
  */
 export const Invoices = () => {
-  // Récupère le jeton JWT du localStorage
-  const token = localStorage.getItem("Token");
-
-  // Utilitaire de navigation fourni par react-router-dom
-  const navigate = useNavigate();
-
-  // Données utilisateur stockées localement
-  const userData = JSON.parse(localStorage.getItem("UserData"));
-
-  // État local pour stocker les informations sur les entreprises de l'utilisateur
-  const [userCompanies, setUserCompanies] = useState([]);
-
-  // URL de l'API backend
-  const apiUrl = process.env.REACT_APP_API_BASE_URL;
-
-  useEffect(() => {
-    // Redirige vers la page de connexion si aucun jeton n'est présent
-    if (!token) {
-      navigate("/login");
-    }
-    // Effectue une requête pour obtenir les données des entreprises associées à l'utilisateur
-    else if (userData && userData.companies && userData.companies.length) {
-      const companyIds = userData.companies.map((company) => company.id);
-
-      // En-têtes pour l'autorisation
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-
-      // Fonction pour récupérer les données d'une entreprise
-      const fetchCompanyData = async (companyId) => {
-        try {
-          const response = await Axios.get(`${apiUrl}/companies/${companyId}`, {
-            headers,
-          });
-          return response.data;
-        } catch (error) {
-          console.error("Error fetching company data:", error);
-        }
-      };
-
-      // Utilisation de Promise.all pour effectuer les requêtes en parallèle
-      Promise.all(companyIds.map((companyId) => fetchCompanyData(companyId)))
-        .then((companies) => {
-          setUserCompanies(companies);
-        })
-        .catch((error) => {
-          console.error("Error fetching company data:", error);
-        });
-    }
-  }, [token, navigate, userData, apiUrl]);
+  const {
+    userCompanies,
+  } = InvoiceLogic();
 
   return (
     <div className="invoice-page">
