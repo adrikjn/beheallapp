@@ -32,8 +32,8 @@ export const Login = () => {
   // URL de l'API
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
+  // Gérer les erreurs
   const { globalErrors, addGlobalError, closeAlert } = useGlobalErrors();
-
 
   // Fonction de gestion de la connexion
   const handleLogin = async () => {
