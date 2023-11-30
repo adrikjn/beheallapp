@@ -6,6 +6,7 @@ import Account from "../components/Account";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 import DashboardLogic from "../utils/DashboardLogic";
+
 /*
   Page représentant le tableau de bord utilisateur.
   Affiche les dernières factures, le chiffre d'affaires du mois, et permet de créer de nouvelles factures.
