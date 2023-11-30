@@ -7,7 +7,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 import AccordionNav from "../components/AccordionNav";
 import { Link } from "react-router-dom";
-import useGlobalErrors from "../utils/useGlobalErrors";
 
 // Composant représentant la page d'inscription de l'application Beheall
 export const Register = () => {
@@ -22,8 +21,8 @@ export const Register = () => {
   const [plainPassword, setPlainPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // Gérer les erreurs
-  const { globalErrors, addGlobalError, closeAlert } = useGlobalErrors();
+  // État local pour les erreurs globales
+  const [globalErrors, setGlobalErrors] = useState([]);
 
   // URL de l'API
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
@@ -31,6 +30,10 @@ export const Register = () => {
   // Utilisation du hook useNavigate pour gérer la navigation
   const navigate = useNavigate();
 
+  // Fonction pour ajouter une erreur globale
+  const addGlobalError = (error) => {
+    setGlobalErrors([...globalErrors, error]);
+  };
 
   // Effet useEffect pour rediriger l'utilisateur vers le tableau de bord s'il est déjà connecté
   useEffect(() => {
@@ -89,9 +92,14 @@ export const Register = () => {
           validationErrors.push(violation.message);
         });
 
-        addGlobalError([...validationErrors]);
+        setGlobalErrors([...globalErrors, ...validationErrors]);
       }
     }
+  };
+
+  // Fonction pour fermer les alertes globales
+  const closeAlert = () => {
+    setGlobalErrors([]);
   };
 
   // Rendu du composant Register
