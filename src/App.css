@@ -1668,7 +1668,7 @@ ul li {
   background-color: #c9302c;
 }
 
-.close-alert {
+/* .close-alert {
   color: #a94442;
   position: absolute;
   top: 3px;
@@ -1684,7 +1684,7 @@ ul li {
 .close-alert:hover {
   background-color: #d9534f;
   color: #fff;
-}
+} */
 
 /* Fin du error message */
 
