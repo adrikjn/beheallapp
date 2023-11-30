@@ -6,6 +6,7 @@ import Axios from "axios";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
+import useGlobalErrors from "../utils/useGlobalErrors";
 
 /*
  Page de connexion à l'application Beheall.
@@ -27,16 +28,12 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // État local pour les erreurs globales
-  const [globalErrors, setGlobalErrors] = useState([]);
 
   // URL de l'API
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
-  // Fonction pour ajouter une erreur globale
-  const addGlobalError = (error) => {
-    setGlobalErrors([...globalErrors, error]);
-  };
+  const { globalErrors, addGlobalError, closeAlert } = useGlobalErrors();
+
 
   // Fonction de gestion de la connexion
   const handleLogin = async () => {
@@ -77,11 +74,6 @@ export const Login = () => {
         "Erreur de connexion. Veuillez vérifier vos informations d'identification."
       );
     }
-  };
-
-  // Fonction pour fermer les alertes globales
-  const closeAlert = () => {
-    setGlobalErrors([]);
   };
 
   // Fonction pour gérer la soumission du formulaire
