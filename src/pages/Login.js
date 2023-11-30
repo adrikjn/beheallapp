@@ -6,6 +6,7 @@ import Axios from "axios";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import AccordionNav from "../components/AccordionNav";
 import Footer from "../components/Footer.js";
+import GlobalErrorAlert from "../components/GlobalErrorAlert";
 
 /*
  Page de connexion à l'application Beheall.
@@ -114,17 +115,7 @@ export const Login = () => {
         {/* Affichage d'une superposition en cas d'erreurs globales */}
         {globalErrors.length > 0 && <div className="overlay"></div>}
 
-        {/* Affichage d'alertes en cas d'erreurs globales */}
-        {globalErrors.length > 0 && (
-          <div className="alert">
-            <span onClick={closeAlert} className="close-alert">
-              &times;
-            </span>
-            {globalErrors.map((error, index) => (
-              <p key={index}>{error}</p>
-            ))}
-          </div>
-        )}
+        <GlobalErrorAlert errors={globalErrors} onClose={closeAlert} />
         <div className="login-part-one">
           <LogoAndPicture />
           <p className="login-description">On s'occupe de tout</p>

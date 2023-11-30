@@ -7,6 +7,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
 import AccordionNav from "../components/AccordionNav";
 import { Link } from "react-router-dom";
+import GlobalErrorAlert from "../components/GlobalErrorAlert";
 
 // Composant représentant la page d'inscription de l'application Beheall
 export const Register = () => {
@@ -125,16 +126,7 @@ export const Register = () => {
           {/* Formulaire d'inscription */}
           <form onSubmit={handleRegister} className="register">
             {/* Affichage des erreurs globales */}
-            {globalErrors.length > 0 && (
-              <div className="alert">
-                <span onClick={closeAlert} className="close-alert">
-                  &times;
-                </span>
-                {globalErrors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
+            <GlobalErrorAlert errors={globalErrors} onClose={closeAlert} />
 
             {/* Saisie du prénom, nom, e-mail, numéro de téléphone, mot de passe et confirmation du mot de passe */}
             <div className="name-inputs">
