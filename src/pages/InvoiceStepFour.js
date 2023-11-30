@@ -6,6 +6,7 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
+import GlobalErrorAlert from "../components/GlobalErrorAlert";
 
 /*
   Page représentant l'ajout de produits et services pour la facture'.
@@ -312,7 +313,7 @@ export const InvoiceStepFour = () => {
         </Helmet>
         {/* Affichage d'une superposition d'erreur si des erreurs globales sont présentes */}
         {globalErrors.length > 0 && <div className="overlay"></div>}
-        
+
         {/* Bloc avec le titre et le composant Account */}
         <div className="beheall-title-style-page">
           <h1>création factures</h1>
@@ -333,17 +334,7 @@ export const InvoiceStepFour = () => {
             }
           >
             <div className="add-create">
-              {/* Affichage d'alertes en cas d'erreurs globales */}
-              {globalErrors.length > 0 && (
-                <div className="alert">
-                  <span onClick={closeAlert} className="close-alert">
-                    &times;
-                  </span>
-                  {globalErrors.map((error, index) => (
-                    <p key={index}>{error}</p>
-                  ))}
-                </div>
-              )}
+              <GlobalErrorAlert errors={globalErrors} onClose={closeAlert} />
               <form onSubmit={handleFormSubmit}>
                 <input
                   type="text"

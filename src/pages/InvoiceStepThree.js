@@ -6,6 +6,7 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
+import GlobalErrorAlert from "../components/GlobalErrorAlert";
 
 /*
   Page permettant de créer la base de la facture et d'obtenir des informations dont le bill number'.
@@ -206,18 +207,7 @@ export const InvoiceStepThree = () => {
         </div>
         <div className="invoice-create">
           <div className="add-create">
-            {/* Affichage d'alertes en cas d'erreurs globales */}
-            {globalErrors.length > 0 && (
-              <div className="alert">
-                <span onClick={closeAlert} className="close-alert">
-                  &times;
-                </span>
-                {globalErrors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
-
+            <GlobalErrorAlert errors={globalErrors} onClose={closeAlert} />
             {/* Formulaire de création de facture */}
             <form onSubmit={handleFormSubmit} id="submit-invoice">
               <div className="invoice-step-sizes">

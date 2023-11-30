@@ -7,6 +7,7 @@ import AccordionNav from "../components/AccordionNav";
 import Account from "../components/Account";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Footer from "../components/Footer.js";
+import GlobalErrorAlert from "../components/GlobalErrorAlert";
 
 /*
   Page représentant l'ajout d'entreprise de l'utilisateur.
@@ -238,17 +239,7 @@ export const InvoiceStepOne = () => {
           </div>
           <form onSubmit={handleFormSubmit}>
             <div className="add-create">
-              {/* Affichage d'alertes en cas d'erreurs globales */}
-              {globalErrors.length > 0 && (
-                <div className="alert">
-                  <span onClick={closeAlert} className="close-alert">
-                    &times;
-                  </span>
-                  {globalErrors.map((error, index) => (
-                    <p key={index}>{error}</p>
-                  ))}
-                </div>
-              )}
+              <GlobalErrorAlert errors={globalErrors} onClose={closeAlert} />
 
               {/* Champs de formulaire pour les informations de la nouvelle entreprise */}
               <div className="invoice-step-sizes">
