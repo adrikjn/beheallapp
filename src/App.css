@@ -1791,7 +1791,7 @@ ul li {
   border: 0;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-bottom: 80px;
+  margin-bottom: 100px;
 }
 
 .btn-invoice-5 button:hover {
@@ -1818,7 +1818,10 @@ ul li {
   .btn-invoice-5 {
     width: 25%;
     margin: auto;
+  }
+  .btn-invoice-5 button {
     padding: 15px 5px;
+    margin-bottom: 0px;
   }
 
   .canva-signature {
