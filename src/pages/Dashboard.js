@@ -92,7 +92,7 @@ export const Dashboard = () => {
             </div>
           ))}
         </div>
-
+        <div className="border-line"></div>
         <div className="revenue-create-invoice">
           {/* Affichage du chiffre d'affaires du mois */}
           <div className="revenue-party">
