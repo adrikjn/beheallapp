@@ -1107,6 +1107,11 @@ ul li {
   .btn-m {
     margin: 20px 0;
   }
+  .select-option {
+    margin-top: 25px;
+    padding: 15px 20px;
+    width: 33%;
+  }
 }
 /* Fin du invoice-step-one */
 
