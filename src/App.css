@@ -1354,6 +1354,7 @@ ul li {
   .btn-invoice-4 button {
     margin: auto;
     width: 25%;
+    padding: 15px 5px;
   }
   .btn-invoice-add-ps.fixed-btn-4 {
     width: 25%;
