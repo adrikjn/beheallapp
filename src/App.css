@@ -617,7 +617,7 @@ ul li {
 }
 
 @media (min-width: 1200px) {
-  .draft-button {
+  /* .draft-button {
     display: flex;
     justify-content: flex-end;
     gap: 15px;
@@ -632,10 +632,31 @@ ul li {
     width: 100%;
     display: flex;
     justify-content: center;
-  }
+  } */
 
   .btn-invoice button {
     width: 100%;
+  }
+
+  .revenue-create-invoice {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .revenue-party {
+    width: 50%;
+  }
+
+  .revenue {
+    width: 100%;
+  }
+
+  .revenue .revenue-amount {
+    margin: 110px 0;
+    color: #000;
+    font-size: 48px;
+    font-weight: 700;
   }
 }
 /* End of dashboard page */
@@ -1565,7 +1586,7 @@ ul li {
   z-index: 1000;
 }
 
-.mt-reset-password-btn button{
+.mt-reset-password-btn button {
   margin-top: 30px;
 }
 

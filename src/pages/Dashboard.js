@@ -19,7 +19,7 @@ export const Dashboard = () => {
     formattedCurrentDate,
     displayTotalThisMonth,
     storedDraftInvoiceId,
-    deleteInvoice
+    deleteInvoice,
   } = DashboardLogic();
 
   return (
@@ -93,23 +93,25 @@ export const Dashboard = () => {
           ))}
         </div>
 
-        {/* Affichage du chiffre d'affaires du mois */}
-        <div className="revenue-party">
-          <h2>Chiffre d'affaires du mois</h2>
-          <div className="revenue">
-            <div className="revenue-title-date">
-              <p>CA :</p>
-              <p>{formattedCurrentDate}</p>
+        <div className="revenue-create-invoice">
+          {/* Affichage du chiffre d'affaires du mois */}
+          <div className="revenue-party">
+            <h2>Chiffre d'affaires du mois</h2>
+            <div className="revenue">
+              <div className="revenue-title-date">
+                <p>CA :</p>
+                <p>{formattedCurrentDate}</p>
+              </div>
+              <p className="revenue-amount">{displayTotalThisMonth}</p>
             </div>
-            <p className="revenue-amount">{displayTotalThisMonth}</p>
           </div>
-        </div>
 
-        {/* Bouton pour créer une nouvelle facture */}
-        <div className="btn-invoice">
-          <Link to="/invoice-step-one">
-            <button>Créer une facture</button>
-          </Link>
+          {/* Bouton pour créer une nouvelle facture */}
+          <div className="btn-invoice">
+            <Link to="/invoice-step-one">
+              <button>Créer une facture</button>
+            </Link>
+          </div>
         </div>
 
         {/* Affichage de la navigation accordéon */}
