@@ -1603,6 +1603,13 @@ ul li {
   margin-top: 200px;
 }
 
+.mt-going-back-to-login {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 1200px) {
   .reset-password-div input {
     width: 50%;
@@ -1618,7 +1625,7 @@ ul li {
     margin-top: 15px;
   }
   .mt-reset-password-btn {
-    margin-top: 30px;
+    margin-top: 0px;
   }
 }
 

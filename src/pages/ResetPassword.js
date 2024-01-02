@@ -85,7 +85,7 @@ export const ResetPassword = () => {
               <button type="submit">Envoyer</button>
             </div>
             {/* Lien pour revenir à la page de connexion */}
-            <Link to="/login" className="going-back-to-login">
+            <Link to="/login" className="going-back-to-login mt-going-back-to-login">
               <img src="going-back.svg" alt="Revenir a la page de connexion" />
             </Link>
           </form>
