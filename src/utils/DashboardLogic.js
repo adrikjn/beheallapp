@@ -21,39 +21,39 @@ const DashboardLogic = () => {
   // URL de l'API backend
   const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
-  useEffect(() => {
-    // Redirige vers la page de connexion si aucun jeton n'est présent en LocalStorage
-    if (!token) {
-      navigate("/login");
-    }
-    // Effectue une requête pour obtenir les données des entreprises associées à l'utilisateur
-    else if (userData && userData.companies && userData.companies.length) {
-      const companyIds = userData.companies.map((company) => company.id);
+  // useEffect(() => {
+  //   // Redirige vers la page de connexion si aucun jeton n'est présent en LocalStorage
+  //   if (!token) {
+  //     navigate("/login");
+  //   }
+  //   // Effectue une requête pour obtenir les données des entreprises associées à l'utilisateur
+  //   else if (userData && userData.companies && userData.companies.length) {
+  //     const companyIds = userData.companies.map((company) => company.id);
 
-      // Fonction pour récupérer les données d'une entreprise
-      const fetchData = async () => {
-        try {
-          // Utilisation de Promise.all pour effectuer les requêtes en parallèle
-          const companiesData = await Promise.all(
-            companyIds.map(async (companyId) => {
-              const response = await fetch(`${apiUrl}/companies/${companyId}`, {
-                method: "GET",
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              });
-              const companyData = await response.json();
-              return companyData;
-            })
-          );
-          setUserCompanies(companiesData);
-        } catch (error) {
-          console.error("Error fetching company data:", error);
-        }
-      };
-      fetchData();
-    }
-  }, [token, navigate, userData, apiUrl]);
+  //     // Fonction pour récupérer les données d'une entreprise
+  //     const fetchData = async () => {
+  //       try {
+  //         // Utilisation de Promise.all pour effectuer les requêtes en parallèle
+  //         const companiesData = await Promise.all(
+  //           companyIds.map(async (companyId) => {
+  //             const response = await fetch(`${apiUrl}/companies/${companyId}`, {
+  //               method: "GET",
+  //               headers: {
+  //                 Authorization: `Bearer ${token}`,
+  //               },
+  //             });
+  //             const companyData = await response.json();
+  //             return companyData;
+  //           })
+  //         );
+  //         setUserCompanies(companiesData);
+  //       } catch (error) {
+  //         console.error("Error fetching company data:", error);
+  //       }
+  //     };
+  //     fetchData();
+  //   }
+  // }, [token, navigate, userData, apiUrl]);
 
   // Rassemble toutes les factures des entreprises de l'utilisateur
   const allInvoices = userCompanies.flatMap((company) => company.invoices);

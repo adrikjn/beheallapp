@@ -617,7 +617,7 @@ ul li {
 }
 
 @media (min-width: 1200px) {
-  /* .draft-button {
+  .draft-button {
     display: flex;
     justify-content: flex-end;
     gap: 15px;
@@ -629,10 +629,11 @@ ul li {
   }
 
   .btn-invoice {
-    width: 100%;
     display: flex;
     justify-content: center;
-  } */
+    align-items: center;
+    width: 50%;
+  }
 
   .btn-invoice button {
     width: 100%;
@@ -640,7 +641,7 @@ ul li {
 
   .revenue-create-invoice {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
   }
 
