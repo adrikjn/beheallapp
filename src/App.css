@@ -513,6 +513,11 @@ ul li {
   font-weight: 400;
 }
 
+.invoice-list {
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  padding-bottom: 8px;
+}
+
 .invoice-customers {
   display: flex;
   justify-content: space-between;
