@@ -1349,6 +1349,7 @@ ul li {
 @media (min-width: 1200px) {
   .btn-invoice-add-ps button {
     margin-bottom: 0px;
+    padding: 15px 5px;
   }
   .btn-invoice-4 button {
     margin: auto;
