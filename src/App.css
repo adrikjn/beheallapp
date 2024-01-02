@@ -1099,10 +1099,12 @@ ul li {
   .btn-invoice-2 button {
     margin: auto;
     width: 25%;
+    padding: 10px 5px;
   }
   .btn-invoice-2.fixed-btn button {
     margin: auto;
     width: 20%;
+    padding: 10px 5px;
   }
   .btn-m {
     margin: 20px 0;
