@@ -1189,7 +1189,7 @@ ul li {
   border: 0;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-bottom: 80px;
+  margin-bottom: 120px;
 }
 
 .btn-invoice-3 button:hover {
@@ -1210,6 +1210,7 @@ ul li {
     width: 20%;
     margin-bottom: 0px;
     margin: auto;
+    padding: 15px 5px;
   }
 }
 /* Fin du invoice-step-3 */
