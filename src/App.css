@@ -1463,6 +1463,11 @@ ul li {
   justify-content: space-between;
 }
 
+.summary-total p:last-child {
+  font-weight: bold;
+  font-size: 14px;
+}
+
 @media (min-width: 1200px) {
   .company-customer-summary {
     display: flex;
