@@ -264,6 +264,7 @@ ul li {
     width: 20%;
     margin: auto;
     margin-bottom: 30px;
+    padding: 10px 15px;
   }
   .login-part-two .login-space p {
     justify-content: center;
@@ -369,13 +370,13 @@ ul li {
 .align-btn {
   width: 98%;
   margin: auto;
-  margin-top: 15px;
+  margin-top: 5px;
   margin-bottom: 12px;
 }
 
 .align-btn button {
   width: 100%;
-  height: 72px;
+  padding: 20px;
   border-radius: 2px;
   background-color: #252525;
   color: #fff;
@@ -403,6 +404,7 @@ ul li {
     width: 20%;
     margin: auto;
     margin-bottom: 30px;
+    padding: 10px 15px;
   }
 
   .login-r-page .register .accept-cgu {
@@ -435,7 +437,6 @@ ul li {
   }
 }
 /* End of register part */
-
 
 /*? DASHBOARD PAGE */
 .beheall-title-style-page {
@@ -1447,7 +1448,6 @@ ul li {
 }
 /* Fin du invoice-step-5 / Summary */
 
-
 /*? ACCOUNT COMPONENT */
 .account-container {
   position: relative;
@@ -1505,7 +1505,6 @@ ul li {
   }
 }
 /* Fin du account component */
-
 
 /*? RESET PASSWORD PAGE */
 .reset-password-div {
@@ -1618,7 +1617,6 @@ ul li {
 
 /* Fin du reset password page */
 
-
 /*? ERROR MESSAGE ALERT PRESENT SUR LES PAGES OU IL Y'A UN FORMULAIRE*/
 .overlay {
   position: fixed;
@@ -1669,7 +1667,6 @@ ul li {
 }
 
 /* Fin du error message */
-
 
 /*? CANVA SIGNATURE ET PDF */
 .contents-try {
@@ -1802,8 +1799,6 @@ ul li {
 
 /* Fin de la partie signature et PDF */
 
-
-
 /*? LEGAL NOTICE  & PRIVACY POLICY*/
 .back-to-login-footer-infos {
   display: flex;
@@ -1866,8 +1861,6 @@ ul li {
 }
 
 /* FIN DU LEGAL NOTICE ET PRIVACY POLICY */
-
-
 
 /*? ACCOUNT INFOS */
 .user-infos {
@@ -2067,7 +2060,6 @@ ul li {
 
 /* Fin de la partie Mon compte */
 
-
 /*? PAGE INVOICES LIST */
 .invoices-list-part {
   margin-top: 50px;
@@ -2151,7 +2143,6 @@ ul li {
 }
 
 /* Fin de la page Invoice list */
-
 
 /*? FOOTER */
 .footer ul {
