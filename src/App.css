@@ -1231,7 +1231,7 @@ ul li {
   font-weight: 400;
 }
 
-.product-header li{
+.product-header li {
   font-weight: bold;
 }
 
@@ -1818,6 +1818,9 @@ ul li {
   .btn-invoice-5 {
     width: 25%;
     margin: auto;
+  }
+  .btn-invoice-5 button {
+    padding: 15px 5px;
   }
   .canva-signature {
     margin-top: 20px;
