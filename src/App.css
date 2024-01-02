@@ -1427,6 +1427,10 @@ ul li {
   gap: 10px;
 }
 
+.product-summary-header {
+  font-weight: bold;
+}
+
 .product-summary-header,
 .product-summary-item {
   display: flex;
