@@ -81,7 +81,7 @@ export const ResetPassword = () => {
               onChange={handleEmailChange}
             />
             {/* Bouton pour envoyer l'e-mail */}
-            <div className="align-btn">
+            <div className="align-btn mt-reset-password-btn">
               <button type="submit">Envoyer</button>
             </div>
             {/* Lien pour revenir à la page de connexion */}

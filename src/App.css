@@ -1565,6 +1565,10 @@ ul li {
   z-index: 1000;
 }
 
+.mt-reset-password-btn button{
+  margin-top: 50px;
+}
+
 .overlay-content {
   background-color: #fff;
   padding: 20px;
@@ -1612,6 +1616,9 @@ ul li {
     display: flex;
     justify-content: center;
     margin-top: 15px;
+  }
+  .mt-reset-password-btn {
+    margin-top: 30px;
   }
 }
 
