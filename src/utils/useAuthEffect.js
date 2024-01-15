@@ -50,7 +50,7 @@ function useAuthEffect() {
 
     // Supprimer le token après 1 (4 millisecondes) seconde
     setTimeout(() => {
-      localStorage.removeItem("Token");
+      localStorage.clear();
     }, 1);
   }, []);
 
